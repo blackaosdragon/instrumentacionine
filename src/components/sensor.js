@@ -47,6 +47,7 @@ class Sensor extends Component{
                     new Notification('Paso semi completo');
                     if (permission === 'granted'){
                         navigator.serviceWorker.ready.then(registro=>{
+                            console.log("Service worker preparado")
                             registro.showNotification('Cellphone notify',{
                                 body: 'Ya acepta notificaciones por celular!',
                                 icon: '../../public/favicon.ico',
@@ -68,11 +69,18 @@ class Sensor extends Component{
         console.log('imprimir: ', this.state.usuario)
     }
     notificacion = () => {
-        const notifi = {
-            body: 'Instrumentacion y electromecanica',
-            icon: '../../public/favicon.ico'
-        }             
-        new Notification('Sensor 1', notifi);        
+        console.log("anza una notificacion");
+        navigator.serviceWorker.ready.then(regis=>{
+            //console.log(regis);
+            regis.showNotification(
+                'Cellphone notify',{
+                    body: 'Ya acepta notificaciones por celular!',
+                    icon: '../../public/favicon.ico',
+                    vibrate: [200,50,200]
+                }
+                
+            )
+        })
     }
     detener = () => {
         this.tiempo = setInterval(this.notificacion,3000);
