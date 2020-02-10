@@ -45,6 +45,16 @@ class Sensor extends Component{
             if(Notification.permission==='default'){
                 Notification.requestPermission((permission)=>{
                     new Notification('Paso semi completo');
+                    if (permission === 'granted'){
+                        navigator.serviceWorker.ready.then(registro=>{
+                            registro.showNotification('Cellphone notify',{
+                                body: 'Ya acepta notificaciones por celular!',
+                                icon: '../../public/favicon.ico',
+                                vibrate: [200,50,200]
+                            })
+                        })
+                    }
+
                 })
             }
         }

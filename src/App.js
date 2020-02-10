@@ -24,6 +24,7 @@ class App extends Component{
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
     }
+    this.handleListener = this.handleListener.bind(this);
   }
   handleListener(){
     this.setState({width: window.innerWidth});
@@ -33,7 +34,9 @@ class App extends Component{
     window.addEventListener("resize",this.handleListener);
     //este es elevento que "escucha" el cambio del tamaño de la ventana
   }
+  
   render(){
+    
     return(
       <div className="App">
         <Router>
