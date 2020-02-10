@@ -41,6 +41,22 @@ export function register(config) {
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
+          if (window.Notification){
+            if (Notification.permission === 'default'){
+              Notification.requestPermission((result)=>{
+                if (result === 'granted'){
+                  navigator.serviceWorker.ready.then(registration=>{
+                    registration.showNotification('Test',{
+                      body: 'Preparando...',
+                      vibrate:[200,50,200],
+                      tag: 'Test'
+                    })
+                  })
+                }
+              })
+            }
+          }
+          console.info("Service worker preparado");
           console.log(
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://bit.ly/CRA-PWA'

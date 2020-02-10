@@ -1,38 +1,420 @@
+@font-face{
+  font-family: 'Znric-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url(./fuentes/zrnic.woff) format('woff');
+}
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  background-color: #99ccff;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-intro {
+  font-size: large;
+}
+.BarraPrincipal {
+  margin: 0px 50px 50px 0px;
+}
+.botonIcono {
+  border-radius: 15px;
+}
+.boton-link{
+  background-color: #ffffff;
+  margin: 1% 10% 1% 1%;
+  padding: 0 5% 0 5%;
+  border-radius: 8px;
+  color: #000000; 
+  transition: background-color 0.8s;
+}
+.boton-link:hover{
+  background-color: #0059b3;
+  transition: background-color 0.8s;
+}
+.boton-link:hover .principalButton{
+  color: #ffffff
+}
+.butonCarrusel {
+  padding: 2% 3% 2% 3%;
+  margin: 0 0 0 4%;
+  border-radius: 50%;
+  border-style: outset;
+  
+  /*cursor: wait; progress not-allowed*/
+}
+.butonCarrusel:hover {
+  cursor: pointer;
+}
+.butonCarrusel:active {
+  border-style: inset;
+}
+.botonTemporal{
+  display: none;
+}
+.carrusel{
+  margin: 0 0 0 5%;
+}
+.contenedorCard{
+  background-color: #ffffff;
+  margin: 5% 25% 5% 25%;
+  padding: 1% 0 1% 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px #222;
+  transition: background-color 0.3s;
+}
+.contenedorCard:hover{
+  transition: background-color 0.3s;
+  background-color: #0059b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.contenedorCard:hover .titulos{
+  transition: color 0.5s;
+  color: #ffffff;
+}
+.contenedorCardMovil {
+  margin: 30% 10% 5% 10%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1% 0 1% 0;
+  box-shadow: 0 3px 15px #222;
+  transition: 0.5s;
+  word-wrap: break-word;
+}
+.contenedorCardMovilCentral {
+  margin: 10% 10% 5% 10%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1% 0 1% 0;
+  box-shadow: 0 3px 15px #222;
+  transition: 0.5s;
+  word-wrap: break-word;
+}
+.contenedorCardMovilContacto {
+  margin: 30% 5% 5% 5%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1% 0 1% 0;
+  box-shadow: 0 3px 15px #222;
+  transition: 0.5s;
+  word-wrap: break-word;
+}
+.carrusel {
+  margin: 0% 5% 10% 0%;
+}
+.Contorno1 {
+  margin: 30px 30px 30px 30px;
+}
+.Contenedor1 {
+  margin: 30px 10px 10px 10px;
+}
+.contenedorImagen{
+  margin-left: auto;
+  margin-right: auto;
+  margin-block-end: auto;
+  width: 100%;
+}
+.contenedorImagenMovil{
+  
+  width: 100%;
+}
+.contacto{
+  margin: 2% 35% 0% 35%; 
+}
+.cuadro {
+  transition: opacity 0.5s;
+}
+.cuadro:hover {
+  opacity: 0.5;
+}
+.cuadriculaImagen{
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+.cuadriculaImagen:hover .letrasHome{
+  transition: margin 0.5s;
+  margin: 0% 0% 0% 0%;
+  
+}
+.description{
+  color: #ffffff;
+  font-family: 'Znric-Regular';
+}
+.detras{
+  z-index: 1;
+  position: relative;
+  height: 500px;  
+  width: 100px;
+  opacity: 1;
+}
+.dialogImage {
+  height: 50%;
+  width: 50%;
+  margin: 0% 0% 0% 25%;
+}
+.enlace{
+  text-decoration: none;
+}
+.fondoBlanco{
+  background-color: #ffffff;
+  padding: 1% 0 2% 0;
+}
+.footer {
+  margin: 2% 5% 2% 2%;
+}
+.hospitalIzq {
+  background-color: #00ff00;
+  margin: 2% 0% 0% 5%;
+}
+.hospitalIzq:hover {
+  background-color: #80e5ff;
+}
+.hospitalMed {
+  margin: 2% 0% 0% 5%;
+  transition: 3s;
+  background-color: white;
+}
+.hospitalMed:hover {
+  transition: 0.3s;
+  background-color: #d9d9d9;
+}
+.hospitalDer {
+  background-color: blue;
+  transition: background-color 2s;
+  margin: 2% 0% 0% 5%;
+}
+.hospitalDer:hover {
+  transition: background-color 0.3s;
+  background-color: #d9d9d9;
+}
+.hospitalSurface {
+  padding: 0px;
+  margin: 30px 10px 25px 80px;
+  transition: 1s;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px gray;
+  text-align: center;
+  cursor: pointer;
+}
+.hospitalSurface:hover {
+  padding: 0px;
+  transition: 1s;
+  background-color: #d9d9d9;
+}
+.instalacionLamparas{
+  background-image: url(./images/KLSMartinDes.jpeg);
+}
+.inicio {
+  padding: 0 0 0 0;
+}
+.Imagen1 {
+  margin: 10px 10px 10px 10px;
+  width: 640px;
+  height: 450px;
+}
+.Imagen2 {
+  margin: 10px 10px 10px 10px;
+}
+.Lampara {
+  width: 50%;
+  height: 50%;
+  margin: 0 0 0 5%;
+  box-shadow: 0 3px 15px #222;
+  cursor: none;
+}
+.Lampara2 {
+  height: 50%;
+  width: 50%;
+  margin: 0 0 0 3%;
+  box-shadow: 0 3px 15px #222;
+  cursor: none;
+}
+.Lampara2Movil {
+  width: 80%;
+  margin: 5% 0 0 5%;
+  box-shadow: 0 3px 15px #222;
+  cursor: none;
+}
+.Lampara3 {
+  height: 30%;
+  width: 30%;
+  margin: 0 0 0 3%;
+  box-shadow: 0 3px 15px #222;
+  cursor: none;
+}
+.letrasHome{
+  transition: margin 2s;
+  margin: 0% 0% -25% 0%;
+}
+.limites {
+  margin: 0% 15% 2% 15%;
+}
+.link{
+  text-decoration: none;
+}
+.logo{
+  width: 55%;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.logoMovil{
+  width: 80%;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.logo:hover{
+  transition: opacity 0.5s;
+  opacity: 0.5;
+}
+.logoMovil {
+  transition: opacity 0.1s;
+  width: 100%;
+  margin: 0 0 0 15%;
+}
+.mainBar{
+  background-color: #ffffff;
+  z-index: 1;
+  position: fixed;
+  margin: 0 0 0 0;
+}
+.perimetro2 {
+  margin: 0px 30px 30px 30px;
+}
+.Principal {
+  background-color: #cce6ff;
+}
+.principalButton{
+  font-family: 'Znric-Regular';
+  font-size: 150%;
+  color: #000000;
+  padding: 10px 10px 10px 10px;
+}
+.principalButton:hover {
+  
+}
+.reparacion {
+  height: 300px;
+  width: 300px;
+}
+.Secundary {
+  background-color: #595959;
+}
+.subtitleCuadricula{
+  font-family: 'Znric-Regular';  
+  font-size: 115%;
+}
+.sendButton {
+  border-radius: 5px;
+  background-color: #ffffff;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+.textoCampo {
+  margin: 5% 5% 5% 5%;
+  padding: 5% 5% 5% 5%;
+}
+.tituloCuadricula{
+  margin: 0 0 0 0;
+  font-family: 'Znric-Regular';
+  font-size: 130%;
+}
+.title{
+  color: #ffffff;
+  font-family: 'Znric-Regular';
+  margin: 0 0 8px 0;
+
+}
+
+.titulos{
+  font-family: 'Znric-Regular';
+  color: #000000;
+  transition: 0.5s;
+}
+.titulosBlancos {
+  font-family: "Znric-Regular";
+  color: #ffffff;
+  margin: 5px;
+}
+.titulosBlancosMovil {
+  font-family: "Znric-Regular";
+  color: #ffffff;
+  margin: 5px;
+  font-size: 180%;
+}
+.textosBlancos {
+  font-family: "Znric-Regular";
+  color: #ffffff;
+  margin: 0;
+  font-size: 170%;
+}
+.textosBlancosMovil {
+  font-family: "Znric-Regular";
+  color: #ffffff;
+  margin: 0;
+  font-size: 170%;
+}
+.claseInicial{
+  width: 50%;
+  animation-name: llegada;
+  animation-duration: 2s;
+  position: relative;
+}
+.claseSiguiente{
+  width: 50%;
+  animation-name: siguiente;
+  animation-duration: 2s;
+  position: relative;  
+}
+.claseAtras{
+  width: 50%;
+  animation-name: atras;
+  animation-duration: 2s;
+  position: relative;  
+
+}
+.claseLlegada{
+  width: 50%;
+  animation-name: recepcion;
+  animation-duration: 2s;
+  position: relative;  
+  
+}
+@keyframes llegada{
+  0% {
+    left: -80%;
   }
-  to {
-    transform: rotate(360deg);
+  100%{
+    left: 0%;
   }
 }
+@keyframes siguiente{
+  0%{
+    left: 0%;
+  }
+  100%{
+    left: 80%;
+  }
+}
+@keyframes atras{
+  0%{
+    left: 0%;
+  }
+  100%{
+    left: -80%;
+  }
+}
+@keyframes recepcion{
+  0%{ 
+    left: 80%;
+  }
+  100%{
+    left: 0%;
+  }
+}
+
