@@ -59,6 +59,13 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      /*
+      const subscribeOptions = {
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(
+          'clave'
+        )
+      };*/
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
@@ -93,6 +100,9 @@ function registerValidSW(swUrl, config) {
           }
         };
       };
+      //return registration.pushManager.subscribe(subscribeOptions);
+    }).then(()=>{
+      
     })
     .catch(error => {
       console.error('Error during service worker registration:', error);

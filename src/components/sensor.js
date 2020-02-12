@@ -3,9 +3,11 @@ import React, {Component} from "react";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
 import theme from "../theme/theme.js";
 import { Container,/*, Avatar, Typography, Grid, Button*/ 
-Button} from '@material-ui/core'
+         Button} from '@material-ui/core'
 //import TextField from '@material-ui/core/TextField';
 //import Crono from "@material-ui/icons/Storage";
+
+import Data from '../api.js';
 
 
 
@@ -35,88 +37,66 @@ class Sensor extends Component{
     constructor(){
         super();
         this.state = {
-            endPoint: "http://201.103.130.28:4000",
-            value: 0,
+            
         }
     }
+    
     componentDidMount = () => {
-        if(window.Notification)        {
-            console.log("Soporta notificaciones");
-            if(Notification.permission==='default'){
-                Notification.requestPermission((permission)=>{
-                    new Notification('Paso semi completo');
-                    if (permission === 'granted'){
-                        navigator.serviceWorker.ready.then(registro=>{
-                            console.log("Service worker preparado")
-                            registro.showNotification('Cellphone notify',{
-                                body: 'Ya acepta notificaciones por celular!',
-                                icon: '../../public/favicon.ico',
-                                vibrate: [200,50,200]
-                            })
-                        })
-                    }
-
-                })
-            }
+        //window notification pregunta si las notificaciones son compatibles en este navegador
+        if(window.Notification){ 
+            // va a retornar una promesa resuelta o rechazada
+            return new Promise ((resolve,reject)=>{
+                //permiso va a guardar "result" de la funcion requestPermision que es el
+                //permiso de las notificaciones
+                const permiso = Notification.requestPermission((result)=>{
+                    //la promesa resuelve con el resulado del permiso
+                    resolve(result);
+                });
+                //si existe permiso enteonces...
+                if (permiso){
+                    // dependiendo del resultado resuelve o rechaza, siemprey cuando exista
+                    // será resolve, si por alguna razon no existe o es null reject es la respuesta
+                    permiso.then(resolve,reject);
+                }
+            // na vez resuelta la promesa lo que haya en permiso osea la respuesta de la promesa
+            }).then((permiso)=>{
+                //si es diferente a que acepto manda un alert de que no se otorgaron permisos
+                if (permiso !== 'granted'){
+                    alert("No hay permiso para notificaciones");
+                }
+            });            
         }
-    }
-    onChange
-   onChange = e =>{
+        else {
+            alert("No estan disponibles las notificaciones en este dispositivo");
+        }
         
-    } 
-    registrarUsuario = e => {
-        e.preventDefault();
-        console.log('imprimir: ', this.state.usuario)
     }
     notificacion = () => {
-        console.log("anza una notificacion");
+        console.log("Lanza una notificacion");
         navigator.serviceWorker.ready.then(regis=>{
-            //console.log(regis);
             regis.showNotification(
                 'Cellphone notify',{
                     body: 'Ya acepta notificaciones por celular!',
-                    icon: '../../public/favicon.ico',
-                    vibrate: [200,50,200]
+                    icon: '../images/iconos.png',
+                    vibrate: [500,200,500],
+                    requireInteraction: true,
+                    silent: false,
                 }
-                
             )
         })
     }
-    detener = () => {
-        this.tiempo = setInterval(this.notificacion,3000);
-        clearInterval(this.tiempo);
-    }
-    /*
-    pintar  = () => {
-        const {endPoint} = this.state
-        const socket = socketIOClient(endPoint);
-        socket.on('temp', data => {
-            //console.log(data);
-            setInterval(()=>{
-                this.setState({value: data})
-            },1000);
-            
-        }) 
-    }*/
-    
     render(){
                //this.pintar();
-
         return (
             <MuiThemeProvider theme={theme} >
-                
             <Container maxWidth="sm">
                 <div style={style.paper}>
                     <h1 style={style.titulo}> LM35 </h1>
-                    <h3>{this.state.value}</h3>
+                    <Data />
                     <Button onClick={this.notificacion} variant="contained" color="primary">
                         Enviar notificación
-                    </Button>
-                    
+                    </Button>  
                 </div>
-                
-                
-            
             </Container>
             </MuiThemeProvider>
             
