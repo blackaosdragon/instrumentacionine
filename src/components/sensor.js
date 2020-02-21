@@ -91,7 +91,7 @@ class Sensor extends Component{
             <MuiThemeProvider theme={theme} >
             <Container maxWidth="sm">
                 <div style={style.paper}>
-                    <h1 style={style.titulo}> LM35 </h1>
+                    <h1 style={style.titulo}> Monitor de temperaturas </h1>
                     <Data />
                     <Button onClick={this.notificacion} variant="contained" color="primary">
                         Enviar notificación
