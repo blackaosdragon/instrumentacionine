@@ -65,7 +65,7 @@ class Data extends Component{
        
         return(
             <div>
-                <h1>Cocina. Temperatura: {this.state.sensor2}°C</h1>
+                {/*<h1>Cocina. Temperatura: {this.state.sensor2}°C</h1>*/}
                 <h1>Taller. Temperatura:  {this.state.sensor1}°C</h1>
             </div>
         )
