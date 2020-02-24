@@ -2,6 +2,7 @@ if ("function" === typeof importScripts){
     importScripts(
         'https://storage.googleapis.com/workbox-cdn/releases/3.5.0/workbox-sw.js'
     )
+    console.log("Service worker bien?")
     if (workbox){
         console.log("WorkBox is loaded");
         workbox.setConfig({debug: false });
