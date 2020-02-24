@@ -10,8 +10,8 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
-import serverSocket from 'socket.io-client';
-const endPoint = "https://instrumentacionline.ddns.net";
+//import serverSocket from 'socket.io-client';
+//const endPoint = "https://instrumentacionline.ddns.net";
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -151,10 +151,11 @@ export function unregister() {
 }
 
 
-
+/*
 function comparar(){
   const socket = serverSocket(endPoint);
   socket.on('temp',temp=>{
     console.log(temp);
   })
 }
+*/
