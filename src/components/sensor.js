@@ -85,6 +85,13 @@ class Sensor extends Component{
             )
         })
     }
+    /*
+    comparar = () => {
+        navigator.serviceWorker.ready.then(data, () => {
+            
+        })
+    }
+    */
     render(){
                //this.pintar();
         return (

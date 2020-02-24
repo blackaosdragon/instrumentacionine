@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import serverSocket from 'socket.io-client'
 const endPoint = 'https://instrumentacionline.ddns.net/'
-const testSocket = 'https://localhost'
+//const testSocket = 'https://localhost'
 
-const localEndPoint = 'http://192.168.1.92:4000'
+//const localEndPoint = 'http://192.168.1.92:4000'
 
 
-const muestreo = 10000;
-let muestreo1 = "";
+//const muestreo = 10000;
+//let muestreo1 = "";
 
 
 
