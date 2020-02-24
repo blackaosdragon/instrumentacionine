@@ -152,7 +152,7 @@ export function unregister() {
 
 
 
-export function comparar(){
+function comparar(){
   const socket = serverSocket(endPoint);
   socket.on('temp',temp=>{
     console.log(temp);
