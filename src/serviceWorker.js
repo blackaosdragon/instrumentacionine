@@ -38,7 +38,8 @@ export function register(config) {
       //const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
       // esa es la configuracion predeterminada anterior
       //esta sera la nueva configuracion para mi service worker personalizado
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      //const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      const swUrl = `${process.env.PUBLIC_URL}/custome-service-worker.js`;
 
 
       if (isLocalhost) {
