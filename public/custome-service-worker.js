@@ -10,6 +10,7 @@ socket.on('temp',(temp)=>{
 */
 fetch('https://instrumentacionline.ddns.net',{mode: 'cors'}).then(function(response){
     console.log(response);
+    console.log("Los cors ya estan acptados");
 }).catch(function(err){
     console.log(err);
 })
