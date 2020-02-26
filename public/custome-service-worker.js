@@ -1,4 +1,17 @@
-self.addEventListener('load',()=>{
-    console.log("Escucho el evento load");
+import serverSocket from 'socket.io-client';
+const endPoint = 'https://instrumentacionline.ddns.net/';
+let temp = "";
+
+const socket = serverSocket(endPoint);
+socket.on('temp',(temp)=>{
+    console.log(temp);
 })
-console.log("Service worwer listo")
+
+
+
+
+self.addEventListener('load',()=>{
+    console.log("!!!!!!!");
+})
+
+console.log("Service worwer listo");
