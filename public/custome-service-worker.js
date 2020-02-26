@@ -8,7 +8,7 @@ socket.on('temp',(temp)=>{
     console.log(temp);
 })
 */
-fetch('https://instrumentacionline.ddns.net').then(function(response){
+fetch('https://instrumentacionline.ddns.net',{mode: 'cors'}).then(function(response){
     console.log(response);
 }).catch(function(err){
     console.log(err);
