@@ -8,12 +8,17 @@ socket.on('temp',(temp)=>{
     console.log(temp);
 })
 */
-fetch('https://instrumentacionline.ddns.net',{mode: 'cors'}).then(function(response){
-    console.log(response);
-    console.log("Los cors ya estan acptados");
-}).catch(function(err){
-    console.log(err);
-})
+
+setInterval(()=>{
+    fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
+      console.log(response);
+      console.log("Los cors ya estan acptados");
+    }).catch(function(err){
+      console.log(err);
+    })
+},5000)
+
+
 
 
 self.addEventListener('load',()=>{
