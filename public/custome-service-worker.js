@@ -11,9 +11,12 @@ socket.on('temp',(temp)=>{
 
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
-      console.log(response);
-      console.log("Los cors ya estan acptados");
-    }).catch(function(err){
+        console.log(response);
+        return response.json();
+    }).then(respuesta=>{
+        console.log(respuesta)
+    })
+    .catch(function(err){
       console.log(err);
     })
 },5000)
