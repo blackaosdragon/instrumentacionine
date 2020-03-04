@@ -25,7 +25,7 @@ setInterval(()=>{
             console.log(navigator);
             console.log(self);
             //Notification.requestPermission().then(()=>{})
-            self.registration.showNotifcation('Alerta',{
+            self.registration.showNotification('Alerta',{
                 body: `${respuesta.temperatura} ${respuesta.info.sensor} ${respuesta.info.ubicacion}`,
                 vibrate: [500,200,500],
                 requireInteraction: true                
