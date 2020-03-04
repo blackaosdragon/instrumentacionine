@@ -39,9 +39,11 @@ class Sensor extends Component{
         this.state = {
             
         }
+        let activador = new Event('lectura');
     }
     
     componentDidMount = () => {
+        
         //window notification pregunta si las notificaciones son compatibles en este navegador
         if(window.Notification){ 
             // va a retornar una promesa resuelta o rechazada

@@ -11,10 +11,24 @@ socket.on('temp',(temp)=>{
 
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
-        console.log(response);
+      //el response es que si respodndio pero la pagina    
+      //console.log(response);
         return response.json();
+        // esta si manda la respuesta 
     }).then(respuesta=>{
-        console.log(respuesta)
+        console.log(respuesta.temperatura);
+        console.log(respuesta.info.sensor);
+        let temperatura = respuesta.temperatura;
+        if (temperatura > 20){
+            console.warn("Alerta de notificacion");
+            /*
+            navigator.serviceWorker.ready.then( alerta => {
+                alerta.showNotification(
+                                        
+                )
+            })
+            */
+        }
     })
     .catch(function(err){
       console.log(err);
@@ -26,6 +40,9 @@ setInterval(()=>{
 
 self.addEventListener('load',()=>{
     console.log("!!!!!!!");
+})
+self.addEventListener('lectura',()=>{
+    console.log('Evento disparado');
 })
 
 console.log("Service worwer listo");

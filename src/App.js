@@ -25,7 +25,10 @@ class App extends Component{
       //para mandarlo a los componentes que lo necesiten
     }
     this.handleListener = this.handleListener.bind(this);
+
+    
   }
+
   handleListener(){
     this.setState({width: window.innerWidth});
     //actualiza el tamaño de la ventana
@@ -33,9 +36,26 @@ class App extends Component{
   componentDidMount(){
     window.addEventListener("resize",this.handleListener);
     //este es elevento que "escucha" el cambio del tamaño de la ventana
+    if (window.Notification){
+      return new Promise((resolve,reject)=>{
+          const permiso = Notification.requestPermission(result=>{
+              resolve(result);
+          });
+          if (permiso){
+            permiso.then(resolve,reject);
+          }
+      }).then(permiso=>{
+        if (permiso !== 'granted'){
+          alert("no hay permiso para lanzar las notificaciones");
+        }
+      })
+  } else {
+    alert("No se pueden utilizar notificaciones en este dispositivo");
+  }
   }
   
   render(){
+    
     
     return(
       <div className="App">
