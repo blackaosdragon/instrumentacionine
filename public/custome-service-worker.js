@@ -16,24 +16,27 @@ setInterval(()=>{
         return response.json();
         // esta si manda la respuesta 
     }).then(respuesta=>{
-        console.log(respuesta.temperatura);
-        console.log(respuesta.info.sensor);
+        console.error(`Sensor: ${respuesta.info.sensor} Temperatura: ${respuesta.temperatura}°C Ubicación: ${respuesta.info.ubicacion}`);
+        //console.log(respuesta.temperatura);
+        //console.log(respuesta.info.sensor);
         let temperatura = respuesta.temperatura;
-        if (temperatura > 20){
+        if (temperatura > 25){
             console.warn("Alerta de notificacion");
-            /*
             navigator.serviceWorker.ready.then( alerta => {
                 alerta.showNotification(
-                                        
+                    'Alerta! Temperatura muy alta',{
+                        body: `${respuesta.temperatura} ${respuesta.info.sensor} ${respuesta.info.ubicacion}`,
+                        vibrate: [500,200,500],
+                        requireInteraction: true,
+                    }
                 )
             })
-            */
         }
     })
     .catch(function(err){
       console.log(err);
     })
-},5000)
+},10000)
 
 
 
