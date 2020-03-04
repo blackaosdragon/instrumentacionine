@@ -29,6 +29,14 @@ class Data extends Component{
                 data: temp
             })           
         })
+        fetch('https://instrumentacionline.ddns.net/sensor').then((respuesta)=>{
+            return respuesta.json();
+        }).then(data=>{
+            console.warn(`${data.info.sensor} a ${data.temperatura}°C ubicado en ${data.info.ubicacion}`)
+            this.setState()
+        }).catch((error)=>{
+            console.log(error);
+        })
     }
     handleData = (id) => {
         let temp = "";
@@ -59,6 +67,10 @@ class Data extends Component{
     }
     lectura = () => {
         this.intervalo = setInterval(this.takeData,10000);
+    }
+
+    asignaData = () => {
+        fetch()
     }
     
     render(){

@@ -22,9 +22,25 @@ setInterval(()=>{
         let temperatura = respuesta.temperatura;
         if (temperatura > 25){
             console.warn("Alerta de notificacion");
+            console.log(navigator.serviceWorker);
+            Notification.requestPermission((result)=>{
+                if (result === 'granted'){
+                    navigator.serviceWorker.ready.then((alerta)=>{
+                        alerta.showNotification(
+                            'Alerta! Temperatura muy alta',{
+                                body: `${respuesta.temperatura} ${respuesta.info.sensor} ${respuesta.info.ubicacion}`,
+                                vibrate: [500,200,500],
+                                requireInteraction: true,
+                            }
+                        )
+                    })
+                }
+            })
+            /*
             navigator.serviceWorker.ready.then(alerta => {
                 console.warn("Serviceworker ready")
             })
+            */
             /*
             navigator.serviceWorker.ready.then( alerta => {
                 alerta.showNotification(
