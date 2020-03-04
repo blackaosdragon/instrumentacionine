@@ -22,7 +22,8 @@ setInterval(()=>{
         let temperatura = respuesta.temperatura;
         if (temperatura > 25){
             console.warn("Alerta de notificacion");
-            console.log(navigator.serviceWorker);
+            console.log(navigator);
+            console.log(self);
             Notification.requestPermission().then(()=>{})
             
             /*
