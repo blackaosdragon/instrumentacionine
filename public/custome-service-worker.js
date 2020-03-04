@@ -16,7 +16,7 @@ setInterval(()=>{
         return response.json();
         // esta si manda la respuesta 
     }).then(respuesta=>{
-        console.error(`Sensor: ${respuesta.info.sensor} Temperatura: ${respuesta.temperatura}°C Ubicación: ${respuesta.info.ubicacion}`);
+        console.log(`Sensor: ${respuesta.info.sensor} Temperatura: ${respuesta.temperatura}°C Ubicación: ${respuesta.info.ubicacion}`);
         //console.log(respuesta.temperatura);
         //console.log(respuesta.info.sensor);
         let temperatura = respuesta.temperatura;

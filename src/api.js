@@ -44,6 +44,11 @@ class Data extends Component{
             }
             this.setState({sensor2: temp});
             //console.log(temp);
+        } else if (id[4] === '3'){
+            for(let i = 15; i <= 19; i++){
+                temp = temp + id[i];
+            }
+            this.setState({sensor3 : temp});
         }
         //console.log(id);
     }
@@ -67,6 +72,7 @@ class Data extends Component{
             <div>
                 {/*<h1>Cocina. Temperatura: {this.state.sensor2}°C</h1>*/}
                 <h1>Taller. Temperatura:  {this.state.sensor1}°C</h1>
+                <h1>Bodega. Temperatura:  {this.state.sensor3}°C</h1>
             </div>
         )
     }
