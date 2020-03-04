@@ -75,6 +75,7 @@ class Sensor extends Component{
     }
     notificacion = () => {
         console.log("Lanza una notificacion");
+        console.log(navigator);
         navigator.serviceWorker.ready.then(regis=>{
             regis.showNotification(
                 'Cellphone notify',{
