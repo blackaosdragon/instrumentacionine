@@ -21,12 +21,12 @@ setInterval(()=>{
         //console.log(respuesta.info.sensor);
         let temperatura = respuesta.temperatura;
         if (temperatura > 25){
-            console.warn("Alerta de notificacion");
-            console.log(navigator);
-            console.log(self);
+            //console.warn("Alerta de notificacion");
+            //console.log(navigator);
+            //console.log(self);
             //Notification.requestPermission().then(()=>{})
             self.registration.showNotification('Alerta',{
-                body: `${respuesta.temperatura} ${respuesta.info.sensor} ${respuesta.info.ubicacion}`,
+                body: `${respuesta.temperatura}°C ${respuesta.info.sensor} ${respuesta.info.ubicacion}`,
                 vibrate: [500,200,500],
                 requireInteraction: true                
             })
