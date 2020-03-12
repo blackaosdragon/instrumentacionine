@@ -8,6 +8,7 @@ socket.on('temp',(temp)=>{
     console.log(temp);
 })
 */
+const inst_cache = 'cache-instrumentacion';
 const offlineSoporte = [
     './index.html',
     '/static/css/2.18f57b05.chunk.css',
@@ -96,6 +97,36 @@ self.addEventListener('install',(e)=>{
 
 })
 
+self.addEventListener('activate', e => {
+    e.waitUntil(self.clients.claim());
+    e.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map( cacheName => {
+                    if (inst_cache !== cacheName) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            )
+        })
+    )
+});
+self.addEventListener('fetch', e => {
+    e.respondWith(
+        caches.open(inst_cache).then( cache => {
+            return fetch(e.request).then(fetchResponse => {
+                if (e.request.method === 'GET'){
+                    cache.put(e.request, fetchResponse.clone());
+                }
+                return fetchResponse;
+            }).catch( () => {
+                return cache.match(e.request).then(cacheResponse => cacheResponse)
+
+            })
+
+        })
+    )
+})
 
 
 setInterval(()=>{
