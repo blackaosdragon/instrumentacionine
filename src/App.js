@@ -36,13 +36,13 @@ class App extends Component{
   componentDidMount(){
     //let deferredPromt;
     window.addEventListener("resize",this.handleListener);
-    /*
-    window.addEventListener('beforeinstallprompt', event => {
-      deferredPromt = e;
-      showInstallPromotion();
+    
+    window.addEventListener('beforeinstallprompt', e => {
 
+      e.userChoice.then((eleccion)=>{
+        console.log(eleccion);
+      })
     })
-    */
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     if (window.Notification){
       return new Promise((resolve,reject)=>{
