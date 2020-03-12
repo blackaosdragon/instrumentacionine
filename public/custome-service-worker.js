@@ -87,7 +87,7 @@ const offlineSoporte = [
 
 self.addEventListener('install',(e)=>{
     e.waitUntil(
-        caches.open('instrumentacion')
+        caches.open(inst_cache)
         .then((cache)=>{
             return cache.addAll(offlineSoporte)
         }).then(()=>{
