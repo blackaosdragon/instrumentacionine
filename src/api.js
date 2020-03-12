@@ -8,6 +8,7 @@ const endPoint = 'https://instrumentacionline.ddns.net/'
 
 //const muestreo = 10000;
 //let muestreo1 = "";
+let reloj = new Date
 
 
 
@@ -32,7 +33,7 @@ class Data extends Component{
         fetch('https://instrumentacionline.ddns.net/sensor').then((respuesta)=>{
             return respuesta.json();
         }).then(data=>{
-            console.warn(`${data.info.sensor} a ${data.temperatura}°C ubicado en ${data.info.ubicacion}`)
+            console.warn(`${data.info.sensor} a ${data.temperatura}°C ubicado en ${data.info.ubicacion} ${reloj.getSe}`)
             this.setState()
         }).catch((error)=>{
             console.log(error);
@@ -67,10 +68,6 @@ class Data extends Component{
     }
     lectura = () => {
         this.intervalo = setInterval(this.takeData,10000);
-    }
-
-    asignaData = () => {
-        fetch()
     }
     
     render(){

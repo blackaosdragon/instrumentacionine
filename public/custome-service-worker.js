@@ -8,6 +8,27 @@ socket.on('temp',(temp)=>{
     console.log(temp);
 })
 */
+const offlineSoporte = [
+    './index.html',
+    '/static/css/2.18f57b05.chunk.css',
+    '/static/css/main.4fef6e22.chunk.css',
+    '/static/media/zrnic.f2c56e62.woff'
+
+];
+
+self.addEventListener('install',(e)=>{
+    e.waitUntil(
+        caches.open('instrumentacion')
+        .then((cache)=>{
+            return cache.addAll(offlineSoporte)
+        }).then(()=>{
+            return self.skipWaiting();
+        })
+    )
+
+})
+
+
 
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
