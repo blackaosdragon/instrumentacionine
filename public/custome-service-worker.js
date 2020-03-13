@@ -145,6 +145,7 @@ self.addEventListener('activate', e => {
     )
 });
 */
+/*
 self.addEventListener('fetch', e => {
     e.respondWith(
         caches.open(inst_cache).then( cache => {
@@ -161,8 +162,16 @@ self.addEventListener('fetch', e => {
         })
     )
 })
+*/
 
-
+setInterval(()=>{
+    fetch('https://instrumentacionline.ddns.net/sensor').then((response)=>{
+        console.log(response);
+        return response.json();
+    }).catch(err=>{
+        console.log(err);
+    })
+},60000)
 
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
