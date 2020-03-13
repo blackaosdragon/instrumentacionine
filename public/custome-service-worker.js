@@ -15,6 +15,8 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 let result = false;
+async notiPermiso(){
+
 
 if (Notification.permission !== 'granted'){
     await messaging.requestPermission();
@@ -26,6 +28,7 @@ if (localStorage.getItem(INSTANCE_TOKEN)!== null){
     console.log(token);
     localStorage.setItem(INSTANCE_TOKEN, token);
 
+}
 }
 
 
