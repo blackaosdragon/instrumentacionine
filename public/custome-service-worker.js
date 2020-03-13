@@ -14,9 +14,9 @@ firebase.initializeApp({
 });
 const messaging = firebase.messaging();
 
-let result = false;
-async notiPermiso(){
 
+async notiPermiso(){
+    let result = false;
 
 if (Notification.permission !== 'granted'){
     await messaging.requestPermission();

@@ -61,6 +61,7 @@ class App extends Component{
   } else {
     alert("No se pueden utilizar notificaciones en este dispositivo");
   }*/
+  /*
   window.onload = (e) => { 
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -82,6 +83,7 @@ class App extends Component{
         deferredPrompt = null;
       });
   }
+  */
   }
   
   render(){
