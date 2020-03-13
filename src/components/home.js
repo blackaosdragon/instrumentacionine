@@ -26,6 +26,12 @@ class Home extends Component{
       carrusel: LamparaLimpiesa
     }
   }
+  /*
+  a2hs = (e) => {
+    deferredPrompt = e;
+    
+  }
+  */
 
   render(){
 
@@ -54,6 +60,7 @@ class Home extends Component{
           <div className="contenedorCard">
           <h1 className="titulos">Instrumentación y Electromecánica</h1>
           <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
+          <div onClick={this.a2hs}></div>
           </div>
           <div className="fondoBlanco">
             <h2 className="titulos">Estos son algunos de los equipos que nos dedicamos: </h2>
