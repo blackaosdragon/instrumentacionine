@@ -14,6 +14,29 @@ firebase.initializeApp({
 });
 const messaging = firebase.messaging();
 
+let result = false;
+
+if (Notification.permission !== 'granted'){
+    await messaging.requestPermission();
+}
+if (localStorage.getItem(INSTANCE_TOKEN)!== null){
+    result = true;
+} else {
+    const token = await messaging.getToken();
+    console.log(token);
+    localStorage.setItem(INSTANCE_TOKEN, token);
+
+}
+
+
+
+self.addEventListener('notificationclick',(e)=>{
+    if (e.action){
+        clients.openWindow(e.action);
+    }
+    e.notification.close();
+})
+
 const inst_cache = 'cache-instrumentacion';
 const offlineSoporte = [
     './index.html',
@@ -90,7 +113,7 @@ const offlineSoporte = [
     '/static/media/zrnic.f2c56e62.woff'
 
 ];
-
+/*
 self.addEventListener('install',(e)=>{
     e.waitUntil(
         caches.open(inst_cache)
@@ -102,7 +125,8 @@ self.addEventListener('install',(e)=>{
     )
 
 })
-
+*/
+/*
 self.addEventListener('activate', e => {
     e.waitUntil(self.clients.claim());
     e.waitUntil(
@@ -117,6 +141,7 @@ self.addEventListener('activate', e => {
         })
     )
 });
+*/
 self.addEventListener('fetch', e => {
     e.respondWith(
         caches.open(inst_cache).then( cache => {
@@ -133,6 +158,7 @@ self.addEventListener('fetch', e => {
         })
     )
 })
+
 
 
 setInterval(()=>{

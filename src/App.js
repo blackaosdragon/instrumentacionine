@@ -44,6 +44,7 @@ class App extends Component{
       })
     })
     //este es elevento que "escucha" el cambio del tamaño de la ventana
+    /*
     if (window.Notification){
       return new Promise((resolve,reject)=>{
           const permiso = Notification.requestPermission(result=>{
@@ -59,7 +60,7 @@ class App extends Component{
       })
   } else {
     alert("No se pueden utilizar notificaciones en este dispositivo");
-  }
+  }*/
   window.onload = (e) => { 
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
