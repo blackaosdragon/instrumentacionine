@@ -1,4 +1,4 @@
-
+/*
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 
@@ -29,10 +29,11 @@ if (localStorage.getItem(INSTANCE_TOKEN)!== null){
     localStorage.setItem(INSTANCE_TOKEN, token);
 
 }
+*/
 
 
 
-
+/*
 self.addEventListener('notificationclick',(e)=>{
     if (e.action){
         clients.openWindow(e.action);
@@ -116,6 +117,7 @@ const offlineSoporte = [
     '/static/media/zrnic.f2c56e62.woff'
 
 ];
+*/
 /*
 self.addEventListener('install',(e)=>{
     e.waitUntil(
@@ -164,6 +166,7 @@ self.addEventListener('fetch', e => {
 })
 */
 
+
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor').then((response)=>{
         console.log(response);
@@ -172,6 +175,7 @@ setInterval(()=>{
         console.log(err);
     })
 },60000)
+
 
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
