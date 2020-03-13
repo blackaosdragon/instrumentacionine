@@ -15,21 +15,21 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 
-async notiPermiso(){
+
     let result = false;
 
 if (Notification.permission !== 'granted'){
-    await messaging.requestPermission();
+    messaging.requestPermission();
 }
 if (localStorage.getItem(INSTANCE_TOKEN)!== null){
     result = true;
 } else {
-    const token = await messaging.getToken();
+    const token = messaging.getToken();
     console.log(token);
     localStorage.setItem(INSTANCE_TOKEN, token);
 
 }
-}
+
 
 
 
