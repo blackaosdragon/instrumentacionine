@@ -14,23 +14,26 @@ firebase.initializeApp({
 });
 const messaging = firebase.messaging();
 //messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
-
-Notification.requestPermission((result)=>{
-    if (result === 'granted'){
-        console.log("notificaciones aceptadas");
+Notification.requestPermission().then(result=>{
+    if(result==='granted'){
+        console.log("Notificaciones aceptadas");
     } else {
-        alert("No se han aceptado las notificaciones");
+        alert("No ha aceptado notificaciones");
     }
 })
 
+
+
 messaging.getToken().then(actualToken => {
     if (actualToken){
+        console.log(actualToken);
         sendTokenToServer(actualToken);
         updateUIForPushEnabled(actualToken);
     } else {
         console.log("No hay id de un token disponible, Se requiere pedir permiso para generar uno");
         updateUIForPushPermissionRequired();
         setTokenSentToServer(false);
+        console.log("No existe token")
     }
 }).catch( err =>{
     console.log("Ha ocurrido un error al recibir/leer el token",err);
