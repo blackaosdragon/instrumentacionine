@@ -1,4 +1,4 @@
-/*
+
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 
@@ -13,7 +13,32 @@ firebase.initializeApp({
         measurementId: "G-10C166HQ2R"
 });
 const messaging = firebase.messaging();
+messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
 
+Notification.requestPermission((result)=>{
+    if (result === 'granted'){
+        console.log("notificaciones aceptadas");
+    } else {
+        alert("No se han aceptado las notificaciones");
+    }
+})
+
+messaging.getToken().then(actualToken => {
+    if (actualToken){
+        sendTokenToServer(actualToken);
+        updateUIForPushEnabled(actualToken);
+    } else {
+        console.log("No hay id de un token disponible, Se requiere pedir permiso para generar uno");
+        updateUIForPushPermissionRequired();
+        setTokenSentToServer(false);
+    }
+}).catch( err =>{
+    console.log("Ha ocurrido un error al recibir/leer el token",err);
+    showToken("Error de token", err);
+    setTokenSentToServer(false);
+})
+
+/*
 
 
     let result = false;
@@ -180,8 +205,17 @@ setInterval(()=>{
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
       //el response es que si respodndio pero la pagina    
-      //console.log(response);
+      console.log(response);
+      return response.json();
+      /*
+      if(response.json().status == "200"){
         return response.json();
+      } else if(){
+          console.warn()
+      }
+      */
+        
+        
         // esta si manda la respuesta 
     }).then(respuesta=>{
         console.log(`Sensor: ${respuesta.info.sensor} Temperatura: ${respuesta.temperatura}°C Ubicación: ${respuesta.info.ubicacion}`);
@@ -200,19 +234,7 @@ setInterval(()=>{
             })
             
             /*
-            Notification.requestPermission((result)=>{
-                if (result === 'granted'){
-                    navigator.serviceWorker.ready.then((alerta)=>{
-                        alerta.showNotification(
-                            'Alerta! Temperatura muy alta',{
-                                body: `${respuesta.temperatura} ${respuesta.info.sensor} ${respuesta.info.ubicacion}`,
-                                vibrate: [500,200,500],
-                                requireInteraction: true,
-                            }
-                        )
-                    })
-                }
-            })/*
+            /*
             /*
             navigator.serviceWorker.ready.then(alerta => {
                 console.warn("Serviceworker ready")
