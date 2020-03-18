@@ -13,7 +13,7 @@ firebase.initializeApp({
         measurementId: "G-10C166HQ2R"
 });
 const messaging = firebase.messaging();
-messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
+//messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
 
 Notification.requestPermission((result)=>{
     if (result === 'granted'){
