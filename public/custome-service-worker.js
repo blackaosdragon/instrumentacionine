@@ -15,15 +15,7 @@ firebase.initializeApp({
 
 
 const messaging = firebase.messaging();
-Notification.requestPermission().then(permiso=>{
-    //if (permiso)
-    console.log(permiso)
-    //return messaging.getToken();
-})/*.then((myToken)=>{
-    console.log(myToken); 
-})*/.catch(err=>{
-    console.log(err);
-})
+
 //messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
 /*messaging.requestPermission().then(()=>{
     console.log("Hay permiso para las notificaciones");
