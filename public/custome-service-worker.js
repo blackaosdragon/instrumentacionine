@@ -14,7 +14,17 @@ firebase.initializeApp({
 });
 const messaging = firebase.messaging();
 //messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
-
+messaging.requestPermission().then(()=>{
+    console.log("Hay permiso para las notificaciones");
+    return messaging.getToken()
+}).then( myToken => {
+    console.log(myToken);
+})
+.catch(err => {
+    console.log("Ocurrio un error");
+    alert("No concedio u ocurrio un errar al autorizar las notificaciones");
+})
+/*
 Notification.requestPermission().then(result=>{
     if(result==='granted'){
         console.log("Notificaciones aceptadas");
@@ -22,11 +32,12 @@ Notification.requestPermission().then(result=>{
         alert("No ha aceptado notificaciones");
     }
 })
+*/
 
 
 
 
-messaging.getToken().then(actualToken => {
+/*messaging.getToken().then(actualToken => {
     if (actualToken){
         console.log(actualToken);
         sendTokenToServer(actualToken);
@@ -41,7 +52,7 @@ messaging.getToken().then(actualToken => {
     console.log("Ha ocurrido un error al recibir/leer el token",err);
     showToken("Error de token", err);
     setTokenSentToServer(false);
-})
+})*/
 
 /*
 
