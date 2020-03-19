@@ -15,6 +15,17 @@ import Aires from "./components/aires.js";
 
 import Sensor from './components/sensor.js';
 
+/*
+firebase.initializeApp({
+  apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
+  authDomain: "home-8bea3.firebaseapp.com",
+  databaseURL: "https://home-8bea3.firebaseio.com",
+  projectId: "home-8bea3",
+  storageBucket: "home-8bea3.appspot.com",
+  messagingSenderId: "441591788565",
+  appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
+  measurementId: "G-10C166HQ2R"
+});*/
 
 class App extends Component{
   constructor(){
@@ -35,16 +46,15 @@ class App extends Component{
   }
   componentDidMount(){
     //let deferredPromt;
+    //const messaging
     window.addEventListener("resize",this.handleListener);
-    
     window.addEventListener('beforeinstallprompt', e => {
-
       e.userChoice.then((eleccion)=>{
         console.log(eleccion);
       })
     })
+    //const messaging = firebase.messaging();
     //este es elevento que "escucha" el cambio del tamaño de la ventana
-    
     if (window.Notification){
       return new Promise((resolve,reject)=>{
           const permiso = Notification.requestPermission(result=>{

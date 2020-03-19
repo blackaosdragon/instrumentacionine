@@ -12,9 +12,20 @@ firebase.initializeApp({
         appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
         measurementId: "G-10C166HQ2R"
 });
+
+
 const messaging = firebase.messaging();
+Notification.requestPermission().then(permiso=>{
+    //if (permiso)
+    console.log(permiso)
+    //return messaging.getToken();
+})/*.then((myToken)=>{
+    console.log(myToken); 
+})*/.catch(err=>{
+    console.log(err);
+})
 //messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
-messaging.requestPermission().then(()=>{
+/*messaging.requestPermission().then(()=>{
     console.log("Hay permiso para las notificaciones");
     return messaging.getToken()
 }).then( myToken => {
@@ -24,6 +35,11 @@ messaging.requestPermission().then(()=>{
     console.log("Ocurrio un error");
     alert("No concedio u ocurrio un errar al autorizar las notificaciones");
 })
+
+messaging.onMessage( payload => {
+    console.log('onMessage: ',payload);
+})
+*/
 /*
 Notification.requestPermission().then(result=>{
     if(result==='granted'){
