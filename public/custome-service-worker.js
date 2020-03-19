@@ -14,6 +14,7 @@ firebase.initializeApp({
 });
 const messaging = firebase.messaging();
 //messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
+/*
 Notification.requestPermission().then(result=>{
     if(result==='granted'){
         console.log("Notificaciones aceptadas");
@@ -21,6 +22,7 @@ Notification.requestPermission().then(result=>{
         alert("No ha aceptado notificaciones");
     }
 })
+*/
 
 
 
