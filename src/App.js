@@ -12,10 +12,10 @@ import Footer from "./components/footer.js"
 import Lamparas from "./components/lamparas.js";
 import Mesas from "./components/mesas.js";
 import Aires from "./components/aires.js";
+import * as firebase from 'firebase'
 
 import Sensor from './components/sensor.js';
 
-/*
 firebase.initializeApp({
   apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
   authDomain: "home-8bea3.firebaseapp.com",
@@ -25,7 +25,7 @@ firebase.initializeApp({
   messagingSenderId: "441591788565",
   appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
   measurementId: "G-10C166HQ2R"
-});*/
+});
 
 class App extends Component{
   constructor(){
@@ -53,7 +53,7 @@ class App extends Component{
         console.log(eleccion);
       })
     })
-    //const messaging = firebase.messaging();
+    const messaging = firebase.messaging();
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     if (window.Notification){
       Notification.requestPermission().then(permiso=>{
