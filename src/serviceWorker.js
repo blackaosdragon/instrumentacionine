@@ -39,7 +39,7 @@ export function register(config) {
       // esa es la configuracion predeterminada anterior
       //esta sera la nueva configuracion para mi service worker personalizado
       //const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-      const swUrl = `${process.env.PUBLIC_URL}/custome-service-worker.js`;
+      const swUrl = `${process.env.PUBLIC_URL}/firebase-messaging-sw.js`;
 
 
       if (isLocalhost) {
