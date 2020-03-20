@@ -57,15 +57,24 @@ class App extends Component{
     const messaging = firebase.messaging();
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     if (window.Notification){
+      messaging.requestPermission().then(()=>{
+        console.log("Tenemos permiso");
+        return messaging.getToken()
+      }).then( token => {
+        console.log(token);
+      }).catch( err => {
+        console.log("Error: ",err);
+      })
+      /*
       Notification.requestPermission().then(permiso=>{
         //if (permiso)
         console.log(permiso)
         return messaging.getToken();
     })/*.then((myToken)=>{
         console.log(myToken); 
-    })*/.catch(err=>{
+    }).catch(err=>{
         console.log(err);
-    })
+    })*/
       return new Promise((resolve,reject)=>{
           const permiso = Notification.requestPermission(result=>{
               resolve(result);
