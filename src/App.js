@@ -55,6 +55,9 @@ class App extends Component{
       })
     })
     const messaging = firebase.messaging();
+    messaging.onMessage( payload => {
+      console.log(payload);
+    })
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     if (window.Notification){
       messaging.requestPermission().then(()=>{
@@ -113,6 +116,7 @@ class App extends Component{
       });
   }
   */
+ 
   }
   
   render(){
