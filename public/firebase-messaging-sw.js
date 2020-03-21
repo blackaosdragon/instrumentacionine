@@ -16,6 +16,10 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
+messaging.setBackgroundMessageHandler( payload => {
+    console.log(payload);
+})
+
 //messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo");
 /*messaging.requestPermission().then(()=>{
     console.log("Hay permiso para las notificaciones");
