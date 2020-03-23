@@ -68,7 +68,7 @@ class App extends Component{
       messaging.requestPermission().then(()=>{
         console.log("Tenemos permiso");
         messaging.getToken().then( token => {
-          let data = `{token: ${token}}`;
+          let data = token;
           if (token){
             fetch(url,{
               method: 'POST',
