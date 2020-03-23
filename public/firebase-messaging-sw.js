@@ -28,6 +28,7 @@ messaging.setBackgroundMessageHandler(function(payload){
     const options = {
         body: 'Llego la notifi segun'
     }
+    return self.registration.showNotification(title,options);
 })
 messaging.onMessage(function(payload){
     console.log('onMessage: ',payload);
