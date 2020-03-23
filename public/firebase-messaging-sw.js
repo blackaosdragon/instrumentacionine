@@ -19,6 +19,9 @@ const messaging = firebase.messaging();
 messaging.setBackgroundMessageHandler( payload => {
     console.log(payload);
 })
+messaging.setBackgroundMessageHandler( function(payload){
+    console.log("Service worker recibio un mensaje", payload);
+})
 /*
 messaging.onMessage( payload => {
     console.log(payload);
@@ -224,7 +227,7 @@ self.addEventListener('fetch', e => {
 })
 */
 
-
+/*
 setInterval(()=>{
     fetch('https://instrumentacionline.ddns.net/sensor').then((response)=>{
         console.log(response);
@@ -289,6 +292,10 @@ setInterval(()=>{
       console.log(err);
     })
 },10000)
+
+
+*/
+/////////////////////
 
 
 self.addEventListener('load',()=>{
