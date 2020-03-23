@@ -15,12 +15,19 @@ firebase.initializeApp({
 
 
 const messaging = firebase.messaging();
-
+/*
 messaging.setBackgroundMessageHandler( payload => {
     console.log(payload);
 })
 messaging.setBackgroundMessageHandler( function(payload){
     console.log("Service worker recibio un mensaje", payload);
+})
+*/
+messaging.setBackgroundMessageHandler(function(payload){
+    const title = 'Hola mundo';
+    const options = {
+        body: 'Llego la notifi segun'
+    }
 })
 messaging.onMessage(function(payload){
     console.log('onMessage: ',payload);
