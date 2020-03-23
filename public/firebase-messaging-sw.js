@@ -15,6 +15,7 @@ firebase.initializeApp({
 
 
 const messaging = firebase.messaging();
+messaging.usePublicVapidKey("BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo"); 
 /*
 messaging.setBackgroundMessageHandler( payload => {
     console.log(payload);
@@ -30,9 +31,11 @@ messaging.setBackgroundMessageHandler(function(payload){
     }
     return self.registration.showNotification(title,options);
 })
+/*
 messaging.onMessage(function(payload){
     console.log('onMessage: ',payload);
 })
+*/
 /*
 messaging.onMessage( payload => {
     console.log(payload);
