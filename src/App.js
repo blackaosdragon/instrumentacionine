@@ -63,10 +63,28 @@ class App extends Component{
       console.log(notifi);
     })
     //este es elevento que "escucha" el cambio del tamaño de la ventana
+    let url = "https://instrumentacionline.ddns.net/token";
     if (window.Notification){
       messaging.requestPermission().then(()=>{
         console.log("Tenemos permiso");
-        return messaging.getToken()
+        messaging.getToken().then( token => {
+          let data = `{token: ${token}}`;
+          if (token){
+            fetch(url,{
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers:{
+                'Content-Type': 'application/json' 
+              }
+            }).then(res => res.json()).catch( err => {
+              console.war("Error: ",err);
+            }).then( respuesta => {
+              console.log('Terminado',respuesta);
+            });
+            
+          }
+        })
+        return messaging.getToken();
       }).then( token => {
         console.log(token);
       }).catch( err => {
