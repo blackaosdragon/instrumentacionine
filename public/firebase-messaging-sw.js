@@ -22,6 +22,9 @@ messaging.setBackgroundMessageHandler( payload => {
 messaging.setBackgroundMessageHandler( function(payload){
     console.log("Service worker recibio un mensaje", payload);
 })
+messaging.onMessage(function(payload){
+    console.log('onMessage: ',payload);
+})
 /*
 messaging.onMessage( payload => {
     console.log(payload);
@@ -239,6 +242,7 @@ setInterval(()=>{
 
 
 setInterval(()=>{
+    /*
     fetch('https://instrumentacionline.ddns.net/sensor',{mode: 'cors'}).then(function(response){
       //el response es que si respodndio pero la pagina    
       console.log(response);
@@ -251,7 +255,7 @@ setInterval(()=>{
       }
       */
         
-        
+      /*  
         // esta si manda la respuesta 
     }).then(respuesta=>{
         console.log(`Sensor: ${respuesta.info.sensor} Temperatura: ${respuesta.temperatura}°C Ubicación: ${respuesta.info.ubicacion}`);
@@ -285,7 +289,7 @@ setInterval(()=>{
                         requireInteraction: true,
                     }
                 )
-            })*/
+            })*//*
         }
     })
     .catch(function(err){
