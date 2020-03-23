@@ -55,6 +55,7 @@ class App extends Component{
       })
     })
     const messaging = firebase.messaging();
+    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
     messaging.onMessage( payload => {
       console.log(payload);
     })
