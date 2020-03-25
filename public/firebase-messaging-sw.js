@@ -25,9 +25,10 @@ messaging.setBackgroundMessageHandler( function(payload){
 })
 */
 messaging.setBackgroundMessageHandler(function(payload){
-    const title = 'Hola mundo';
+    console.log(payload);
+    const title = 'Iniciado el servidor';
     const options = {
-        body: 'Llego la notifi segun'
+        body: 'Notificaciones funcionando'
     }
     return self.registration.showNotification(title,options);
 })
