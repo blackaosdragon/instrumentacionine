@@ -25,18 +25,19 @@ messaging.setBackgroundMessageHandler( function(payload){
 })
 */
 messaging.setBackgroundMessageHandler(function(payload){
-    console.log(payload);/*
+    console.log(payload);
     if(payload.data.tipo==="Bienvenida"){
         self.registration.showNotification(payload.data.titulo,{
             body: payload.data.contenido,
             vibrate: [500,200,500],
             requireInteraction: true                
-        })*/
+        })
+    }/*
     const title = 'Iniciado el servidor';
     const options = {
         body: 'Notificaciones funcionando'
     }
-    return self.registration.showNotification(title,options);
+    return self.registration.showNotification(title,options);*/
 })
 /*
 messaging.onMessage(function(payload){

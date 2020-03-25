@@ -81,7 +81,7 @@ class App extends Component{
                 'Content-Type': 'application/json' 
               }
             }).then(res => res.json()).catch( err => {
-              console.war("Error: ",err);
+              console.warn("Error: ",err);
             }).then( respuesta => {
               console.log('Terminado',respuesta);
             });
