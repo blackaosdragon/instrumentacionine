@@ -30,13 +30,13 @@ messaging.setBackgroundMessageHandler(function(payload){
         self.registration.showNotification(payload.data.titulo,{
             body: payload.data.contenido,
             vibrate: [500,200,500],
-            requireInteraction: true                
+            requireInteraction: true,
+            badge: `/termometro192.png`,
+            icon: 'public/logo.png',             
         })
     }else{
         self.registration.showNotification(payload.notification.title,{
             body: 'Testeando prioridad',
-            badge: `/termometro192.png`,
-            icon: '/logo.png',
         })  
     }
     /*
