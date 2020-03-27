@@ -32,7 +32,13 @@ messaging.setBackgroundMessageHandler(function(payload){
             vibrate: [500,200,500],
             requireInteraction: true                
         })
-    }/*
+    }else{
+        self.registration.showNotification(payload.notification.title,{
+            body: payload.notification.body,
+            badge: `${process.env.PUBLIC_URL}/termometro192.png`
+        })
+    }
+    /*
     const title = 'Iniciado el servidor';
     const options = {
         body: 'Notificaciones funcionando'
