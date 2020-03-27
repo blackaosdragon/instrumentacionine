@@ -34,7 +34,7 @@ messaging.setBackgroundMessageHandler(function(payload){
         })
     }else{
         self.registration.showNotification(payload.notification.title,{
-            body: payload.notification.body,
+            body: 'Testeando prioridad',
             badge: `/termometro192.png`,
             icon: '/logo.png',
         })  
