@@ -35,7 +35,8 @@ messaging.setBackgroundMessageHandler(function(payload){
     }else{
         self.registration.showNotification(payload.notification.title,{
             body: payload.notification.body,
-            badge: `termometro192.png`,
+            badge: `/termometro192.png`,
+            icon: '/logo.png',
         })  
     }
     /*
