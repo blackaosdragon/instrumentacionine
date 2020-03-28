@@ -31,8 +31,8 @@ messaging.setBackgroundMessageHandler(function(payload){
             body: payload.data.contenido,
             vibrate: [500,200,500],
             requireInteraction: true,
-            badge: `/termometro192.png`,
-            icon: '/logo.png',             
+            badge: '/termometro192x192.png',
+            icon: '/logo.png',
         })
     }else{
         self.registration.showNotification(payload.notification.title,{
