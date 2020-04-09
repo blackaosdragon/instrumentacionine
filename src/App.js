@@ -71,12 +71,14 @@ class App extends Component{
     //let center = UNUserNotificationCenter.current()
     if('safari' in window){
       console.log("Usando Chrome");
-      alert("Usando Safari como navegador")
+      //alert("Usando Safari como navegador")
     } else {
       console.log("Se está usando otro navegador que no es safari")
-      alert("No se esta usando safari como navegador")
+      //alert("No se esta usando safari como navegador")
     }
     console.log(window);
+
+/*
 
     if (window.Notification){
       messaging.requestPermission().then(()=>{
@@ -98,6 +100,7 @@ class App extends Component{
             });
             
           }
+          
         })
         return messaging.getToken();
       }).then( token => {
@@ -114,7 +117,7 @@ class App extends Component{
         console.log(myToken); 
     }).catch(err=>{
         console.log(err);
-    })*/
+    })//
       return new Promise((resolve,reject)=>{
           const permiso = Notification.requestPermission(result=>{
               resolve(result);
@@ -129,7 +132,7 @@ class App extends Component{
       })
   } else {
     alert("No se pueden utilizar notificaciones en este dispositivo");
-  }
+  }*/
   /*
   window.onload = (e) => { 
     let deferredPrompt;

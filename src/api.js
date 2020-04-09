@@ -8,7 +8,7 @@ const endPoint = 'https://instrumentacionline.ddns.net/'
 
 //const muestreo = 10000;
 //let muestreo1 = "";
-let reloj = new Date
+let reloj = new Date();
 
 
 
@@ -18,7 +18,7 @@ class Data extends Component{
         this.state = {
             data: "",
             sensor1: "",
-            sensor2: ""
+            sensor2: "",
         }
     }
     componentDidMount(){
@@ -86,4 +86,4 @@ class Data extends Component{
         )
     }
 }
-export default Data
+export default Data;
