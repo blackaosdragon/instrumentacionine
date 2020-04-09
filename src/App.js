@@ -12,10 +12,11 @@ import Footer from "./components/footer.js"
 import Lamparas from "./components/lamparas.js";
 import Mesas from "./components/mesas.js";
 import Aires from "./components/aires.js";
-import * as firebase from 'firebase/app'
-import 'firebase/messaging'
+//import * as firebase from 'firebase/app'
+//import 'firebase/messaging'
 
 import Sensor from './components/sensor.js';
+/*
 
 firebase.initializeApp({
   apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
@@ -27,6 +28,7 @@ firebase.initializeApp({
   appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
   measurementId: "G-10C166HQ2R"
 });
+*/
 
 class App extends Component{
   constructor(){
@@ -54,6 +56,7 @@ class App extends Component{
         console.log(eleccion);
       })
     })
+/*
     const messaging = firebase.messaging();
     messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
     messaging.onMessage( (payload) => {
@@ -65,6 +68,7 @@ class App extends Component{
     firebase.messaging().onMessage( notifi => {
       console.log(notifi);
     })
+    */
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     let url = "https://instrumentacionline.ddns.net/token";
     
