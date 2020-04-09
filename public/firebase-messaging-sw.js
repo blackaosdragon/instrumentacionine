@@ -1,4 +1,5 @@
 
+/*
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 
@@ -24,6 +25,7 @@ messaging.setBackgroundMessageHandler( function(payload){
     console.log("Service worker recibio un mensaje", payload);
 })
 */
+/*
 messaging.setBackgroundMessageHandler(function(payload){
     console.log(payload);
     if(payload.data.tipo==="Bienvenida"){
@@ -45,6 +47,7 @@ messaging.setBackgroundMessageHandler(function(payload){
         body: 'Notificaciones funcionando'
     }
     return self.registration.showNotification(title,options);*/
+    /*
 })
 /*
 messaging.onMessage(function(payload){
@@ -326,7 +329,7 @@ setInterval(()=>{
 
 */
 /////////////////////
-
+/*
 
 self.addEventListener('load',()=>{
     console.log("!!!!!!!");
@@ -336,3 +339,4 @@ self.addEventListener('lectura',()=>{
 })
 
 console.log("Service worwer listo");
+*/
