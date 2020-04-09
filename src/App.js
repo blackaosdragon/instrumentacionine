@@ -67,6 +67,17 @@ class App extends Component{
     })
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     let url = "https://instrumentacionline.ddns.net/token";
+    
+    //let center = UNUserNotificationCenter.current()
+    if('safari' in window){
+      console.log("Usando Chrome");
+      alert("Usando Safari como navegador")
+    } else {
+      console.log("Se está usando otro navegador que no es safari")
+      alert("No se esta usando safari como navegador")
+    }
+    console.log(window);
+
     if (window.Notification){
       messaging.requestPermission().then(()=>{
         console.log("Tenemos permiso");
