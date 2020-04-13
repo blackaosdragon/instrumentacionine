@@ -12,11 +12,11 @@ import Footer from "./components/footer.js"
 import Lamparas from "./components/lamparas.js";
 import Mesas from "./components/mesas.js";
 import Aires from "./components/aires.js";
-//import * as firebase from 'firebase/app'
-//import 'firebase/messaging'
+import * as firebase from 'firebase/app'
+import 'firebase/messaging'
 
 import Sensor from './components/sensor.js';
-/*
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
@@ -28,15 +28,16 @@ firebase.initializeApp({
   appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
   measurementId: "G-10C166HQ2R"
 });
-*/
+
 
 class App extends Component{
   constructor(){
     super();
     this.state = {
-      width: window.innerWidth
+      width: window.innerWidth,
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
+      token: ""
     }
     this.handleListener = this.handleListener.bind(this);
 
@@ -48,8 +49,6 @@ class App extends Component{
     //actualiza el tamaño de la ventana
   }
   componentDidMount(){
-    //let deferredPromt;
-    //const messaging
     window.addEventListener("resize",this.handleListener);
     /*
     window.addEventListener('beforeinstallprompt', e => {
@@ -58,7 +57,6 @@ class App extends Component{
       })
     })
     */
-/*
     const messaging = firebase.messaging();
     messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
     messaging.onMessage( (payload) => {
@@ -70,7 +68,7 @@ class App extends Component{
     firebase.messaging().onMessage( notifi => {
       console.log(notifi);
     })
-    */
+    
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     let url = "https://instrumentacionline.ddns.net/token";
     
@@ -82,10 +80,16 @@ class App extends Component{
       console.log("Se está usando otro navegador que no es safari")
       //alert("No se esta usando safari como navegador")
     }
-    console.log(window);
+    console.log(navigator.appName);
+
+    /*messaging.requestPermission().then(()=>{
+
+    })*/
+    messaging.getToken().then( token => {
+      this.setState({token: token});
+    })
 
 /*
-
     if (window.Notification){
       messaging.requestPermission().then(()=>{
         console.log("Tenemos permiso");
@@ -139,29 +143,7 @@ class App extends Component{
   } else {
     alert("No se pueden utilizar notificaciones en este dispositivo");
   }*/
-  /*
-  window.onload = (e) => { 
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
-      e.preventDefault();
-      // Stash the event so it can be triggered later.
-      deferredPrompt = e;
-    });
-    // Show the prompt
-    deferredPrompt.prompt();
-    // Wait for the user to respond to the prompt
-    deferredPrompt.userChoice
-      .then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-        deferredPrompt = null;
-      });
-  }
-  */
+
  
   }
   
@@ -172,7 +154,7 @@ class App extends Component{
       <div className="App">
         <Router>
         <div >
-          <div >.</div>
+        <div>{this.state.token}</div>
           <div>
             <MainBar className="MainBar" anchura={this.state.width}/>
           </div>
