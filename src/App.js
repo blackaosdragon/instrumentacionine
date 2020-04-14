@@ -36,6 +36,8 @@ messaging.onMessage( payload => {
 
 
 
+
+
 class App extends Component{
   constructor(){
     super();
@@ -143,6 +145,9 @@ class App extends Component{
   
   
   render(){
+    navigator.serviceWorker.addEventListener("message", mensaje => {
+      console.log("mMnsaje recibido: ",mensaje);
+    })
     return(
       <div className="App">
         <Router>
