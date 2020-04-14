@@ -34,10 +34,6 @@ messaging.setBackgroundMessageHandler(function(payload){
             badge: '/termometro192x192.png',
             icon: '/logo.png',
         })
-    }else{
-        self.registration.showNotification(payload.notification.title,{
-            body: 'Testeando prioridad',
-        })  
     }
     /*
     const title = 'Iniciado el servidor';

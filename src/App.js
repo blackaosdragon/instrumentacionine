@@ -57,16 +57,8 @@ class App extends Component{
       })
     })
     */
-    const messaging = firebase.messaging();
-    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
     messaging.onMessage( (payload) => {
       console.log("Mensaje recibido: ",payload);
-    })
-    window.addEventListener("onmessage",payload => {
-      console.log(payload);
-    })
-    firebase.messaging().onMessage( notifi => {
-      console.log(notifi);
     })
     
     //este es elevento que "escucha" el cambio del tamaño de la ventana
@@ -147,7 +139,22 @@ class App extends Component{
  
   }
   
+  
   render(){
+    const messaging = firebase.messaging();
+    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
+    messaging.onMessage( (payload) => {
+      console.log("Mensaje recibido: ",payload);
+      navigator.serviceWorker.ready.then( notifi => {
+        notifi.showNotification(
+          'Notificacion en primer plano',{
+            badge: '/termometro192x192.png',
+            icon: '/logo.png',
+            vibrate: [500,200,500]
+          }
+        )
+      })
+    })
     
     
     return(
