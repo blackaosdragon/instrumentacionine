@@ -30,13 +30,6 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-messaging.onMessage( payload => {
-  console.log("Mensaje recibido: ",payload);
-})
-
-
-
-
 
 class App extends Component{
   constructor(){
@@ -59,6 +52,17 @@ class App extends Component{
   }
   componentDidMount(){
     window.addEventListener("resize",this.handleListener);
+    navigator.serviceWorker.addEventListener("message", data => {
+      navigator.serviceWorker.ready.then( mensaje => {
+        mensaje.showNotification(
+          'Alerta',{
+            body: 'Notificacion en primer plano',
+            badge: '/termometro192x192.png',
+            icon: '/logo.png',
+          }
+        )
+      })
+    })
     messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
     messaging.getToken().then( token => {
       this.setState({token: token});
@@ -145,9 +149,7 @@ class App extends Component{
   
   
   render(){
-    navigator.serviceWorker.addEventListener("message", mensaje => {
-      console.log("mMnsaje recibido: ",mensaje);
-    })
+    
     return(
       <div className="App">
         <Router>
