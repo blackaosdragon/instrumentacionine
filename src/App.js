@@ -57,9 +57,6 @@ class App extends Component{
       })
     })
     */
-    messaging.onMessage( (payload) => {
-      console.log("Mensaje recibido: ",payload);
-    })
     
     //este es elevento que "escucha" el cambio del tamaño de la ventana
     let url = "https://instrumentacionline.ddns.net/token";
@@ -77,6 +74,7 @@ class App extends Component{
     /*messaging.requestPermission().then(()=>{
 
     })*/
+    const messaging = firebase.messaging();
     messaging.getToken().then( token => {
       this.setState({token: token});
     })
