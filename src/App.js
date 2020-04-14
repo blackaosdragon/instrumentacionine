@@ -75,9 +75,11 @@ class App extends Component{
 
     })*/
     const messaging = firebase.messaging();
+    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
     messaging.getToken().then( token => {
       this.setState({token: token});
     })
+    
 
 /*
     if (window.Notification){
@@ -140,7 +142,7 @@ class App extends Component{
   
   render(){
     const messaging = firebase.messaging();
-    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
+    
     messaging.onMessage( (payload) => {
       console.log("Mensaje recibido: ",payload);
       navigator.serviceWorker.ready.then( notifi => {
