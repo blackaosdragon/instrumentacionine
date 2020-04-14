@@ -29,6 +29,12 @@ firebase.initializeApp({
   measurementId: "G-10C166HQ2R"
 });
 
+const messaging = firebase.messaging();
+messaging.onMessage( payload => {
+  console.log("Mensaje recibido: ",payload);
+})
+
+
 
 class App extends Component{
   constructor(){
@@ -43,6 +49,7 @@ class App extends Component{
 
     
   }
+  
 
   handleListener(){
     this.setState({width: window.innerWidth});
@@ -50,6 +57,10 @@ class App extends Component{
   }
   componentDidMount(){
     window.addEventListener("resize",this.handleListener);
+    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
+    messaging.getToken().then( token => {
+      this.setState({token: token});
+    })
     /*
     window.addEventListener('beforeinstallprompt', e => {
       e.userChoice.then((eleccion)=>{
@@ -74,13 +85,6 @@ class App extends Component{
     /*messaging.requestPermission().then(()=>{
 
     })*/
-    const messaging = firebase.messaging();
-    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
-    messaging.getToken().then( token => {
-      this.setState({token: token});
-    })
-    
-
 /*
     if (window.Notification){
       messaging.requestPermission().then(()=>{
@@ -135,28 +139,10 @@ class App extends Component{
   } else {
     alert("No se pueden utilizar notificaciones en este dispositivo");
   }*/
-
- 
   }
   
   
   render(){
-    const messaging = firebase.messaging();
-    
-    messaging.onMessage( (payload) => {
-      console.log("Mensaje recibido: ",payload);
-      navigator.serviceWorker.ready.then( notifi => {
-        notifi.showNotification(
-          'Notificacion en primer plano',{
-            badge: '/termometro192x192.png',
-            icon: '/logo.png',
-            vibrate: [500,200,500]
-          }
-        )
-      })
-    })
-    
-    
     return(
       <div className="App">
         <Router>
@@ -166,7 +152,6 @@ class App extends Component{
             <MainBar className="MainBar" anchura={this.state.width}/>
           </div>
           <Switch>
-          
           <Route exact path="/" component={()=> <Home anchura={this.state.width} />} />
           <Route path="/empresa" component={() => <Empresa anchura={this.state.width} />} />
           <Route path="/contacto" component={() => <Contacto anchura={this.state.width} />} />
