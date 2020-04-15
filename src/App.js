@@ -52,8 +52,8 @@ class App extends Component{
   }
   componentDidMount(){
     window.addEventListener("resize",this.handleListener);
-    navigator.serviceWorker.addEventListener("message", data => {3
-      console.log("Datos recibidos: ",data);
+    navigator.serviceWorker.addEventListener("message", data => {
+      console.log("Datos recibidos: ",data)
       navigator.serviceWorker.ready.then( mensaje => {
         mensaje.showNotification(
           'Alerta',{
