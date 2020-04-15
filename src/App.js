@@ -14,23 +14,7 @@ import Mesas from "./components/mesas.js";
 import Aires from "./components/aires.js";
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
-
 import Sensor from './components/sensor.js';
-
-
-firebase.initializeApp({
-  apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
-  authDomain: "home-8bea3.firebaseapp.com",
-  databaseURL: "https://home-8bea3.firebaseio.com",
-  projectId: "home-8bea3",
-  storageBucket: "home-8bea3.appspot.com",
-  messagingSenderId: "441591788565",
-  appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
-  measurementId: "G-10C166HQ2R"
-});
-
-
-const messaging = firebase.messaging();
 
 class App extends Component{
   constructor(){
@@ -41,17 +25,35 @@ class App extends Component{
       //para mandarlo a los componentes que lo necesiten
       token: ""
     }
-    this.handleListener = this.handleListener.bind(this);
-
-    
+    this.handleListener = this.handleListener.bind(this); 
   }
-  
-
   handleListener(){
     this.setState({width: window.innerWidth});
     //actualiza el tamaño de la ventana
   }
   componentDidMount(){
+    if('chrome' in window){
+      console.log("Usando Chrome");
+      firebase.initializeApp({
+        apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
+        authDomain: "home-8bea3.firebaseapp.com",
+        databaseURL: "https://home-8bea3.firebaseio.com",
+        projectId: "home-8bea3",
+        storageBucket: "home-8bea3.appspot.com",
+        messagingSenderId: "441591788565",
+        appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
+        measurementId: "G-10C166HQ2R"
+      });
+      const messaging = firebase.messaging();
+      messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo');
+      messaging.getToken().then( token => {
+        this.setState({token: token});
+      })
+      //alert("Usando Safari como navegador")
+    } else {
+      console.log("Se está usando otro navegador que no es safari")
+      //alert("No se esta usando safari como navegador")
+    }
     window.addEventListener("resize",this.handleListener);
     navigator.serviceWorker.addEventListener("message", data => {
       console.log("Datos recibidos: ",data)
@@ -65,12 +67,6 @@ class App extends Component{
         )
       })
     })
-    
-    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
-    messaging.getToken().then( token => {
-      this.setState({token: token});
-    })
-    
     /*
     window.addEventListener('beforeinstallprompt', e => {
       e.userChoice.then((eleccion)=>{
@@ -83,15 +79,7 @@ class App extends Component{
     //let url = "https://instrumentacionline.ddns.net/token";
     
     //let center = UNUserNotificationCenter.current()
-    if('safari' in window){
-      console.log("Usando Chrome");
-      //alert("Usando Safari como navegador")
-    } else {
-      console.log("Se está usando otro navegador que no es safari")
-      //alert("No se esta usando safari como navegador")
-    }
     console.log(navigator.appName);
-
     /*messaging.requestPermission().then(()=>{
 
     })*/
