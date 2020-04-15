@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import serverSocket from 'socket.io-client'
-const endPoint = 'https://instrumentacionline.ddns.net/'
+//import serverSocket from 'socket.io-client'
+//const endPoint = 'https://instrumentacionline.ddns.net/'
 //const testSocket = 'https://localhost'
 
 //const localEndPoint = 'http://192.168.1.92:4000'
@@ -8,7 +8,7 @@ const endPoint = 'https://instrumentacionline.ddns.net/'
 
 //const muestreo = 10000;
 //let muestreo1 = "";
-let reloj = new Date();
+//let reloj = new Date();
 
 
 
@@ -42,6 +42,8 @@ class Data extends Component{
         })
         */
     }
+    /*
+    
     handleData = (id) => {
         let temp = "";
         if (id[4]==='1'){
@@ -64,22 +66,9 @@ class Data extends Component{
         }
         //console.log(id);
     }
+    */
     
-    takeData = () => {
-        
-        clearInterval(this.intervalo);
-    }
-    lectura = () => {
-        this.intervalo = setInterval(this.takeData,10000);
-    }
-    
-    render(){
-        /*
-        socket.on('temp',temp=>{
-            //muestreo1.innerHTML = `${temp}`
-        })
-        */
-       
+    render(){       
         return(
             <div>
                 {/*<h1>Cocina. Temperatura: {this.state.sensor2}°C</h1>*/}
