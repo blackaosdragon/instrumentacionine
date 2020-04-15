@@ -50,7 +50,13 @@ class App extends Component{
         this.setState({token: token});
       })
       //alert("Usando Safari como navegador")
-    } else {
+    }  else if ('safari' in window){
+      if ('safari' in window && 'pushNotification' in window.safari){
+        alert('Soporta notificaciones');
+      }
+      //window.safari.pushNotification
+    }
+    else {
       console.log("Se está usando otro navegador que no es safari")
       //alert("No se esta usando safari como navegador")
     }
