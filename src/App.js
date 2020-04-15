@@ -12,12 +12,12 @@ import Footer from "./components/footer.js"
 import Lamparas from "./components/lamparas.js";
 import Mesas from "./components/mesas.js";
 import Aires from "./components/aires.js";
-//import * as firebase from 'firebase/app'
-//import 'firebase/messaging'
+import * as firebase from 'firebase/app'
+import 'firebase/messaging'
 
 import Sensor from './components/sensor.js';
 
-/*
+
 firebase.initializeApp({
   apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
   authDomain: "home-8bea3.firebaseapp.com",
@@ -28,9 +28,9 @@ firebase.initializeApp({
   appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
   measurementId: "G-10C166HQ2R"
 });
-*/
 
-//const messaging = firebase.messaging();
+
+const messaging = firebase.messaging();
 
 class App extends Component{
   constructor(){
@@ -65,12 +65,12 @@ class App extends Component{
         )
       })
     })
-    /*
+    
     messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo'); 
     messaging.getToken().then( token => {
       this.setState({token: token});
     })
-    */
+    
     /*
     window.addEventListener('beforeinstallprompt', e => {
       e.userChoice.then((eleccion)=>{
