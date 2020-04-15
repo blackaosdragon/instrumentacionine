@@ -39,7 +39,7 @@ class Sensor extends Component{
         this.state = {
             
         }
-        let activador = new Event('lectura');
+        //let activador = new Event('lectura');
     }
     
     componentDidMount = () => {

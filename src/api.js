@@ -22,6 +22,7 @@ class Data extends Component{
         }
     }
     componentDidMount(){
+        /*
         const socket = serverSocket(endPoint);
         socket.on('temp',(temp)=>{
             //console.log(temp);
@@ -30,6 +31,7 @@ class Data extends Component{
                 data: temp
             })           
         })
+        /*
         fetch('https://instrumentacionline.ddns.net/sensor').then((respuesta)=>{
             return respuesta.json();
         }).then(data=>{
@@ -38,6 +40,7 @@ class Data extends Component{
         }).catch((error)=>{
             console.log(error);
         })
+        */
     }
     handleData = (id) => {
         let temp = "";
