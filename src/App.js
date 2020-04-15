@@ -71,9 +71,6 @@ class App extends Component{
       this.setState({token: token});
     })
     */
-
-
-    
     /*
     window.addEventListener('beforeinstallprompt', e => {
       e.userChoice.then((eleccion)=>{
@@ -86,7 +83,6 @@ class App extends Component{
     //let url = "https://instrumentacionline.ddns.net/token";
     
     //let center = UNUserNotificationCenter.current()
-    /*
     if('safari' in window){
       console.log("Usando Chrome");
       //alert("Usando Safari como navegador")
@@ -95,7 +91,6 @@ class App extends Component{
       //alert("No se esta usando safari como navegador")
     }
     console.log(navigator.appName);
-    */
 
     /*messaging.requestPermission().then(()=>{
 
