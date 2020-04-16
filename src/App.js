@@ -52,7 +52,7 @@ class App extends Component{
       //alert("Usando Safari como navegador")
     }  else if ('safari' in window){
       if ('safari' in window && 'pushNotification' in window.safari){
-        alert('Soporta notificaciones');
+        //alert('Soporta notificaciones');
       }
       //window.safari.pushNotification
     }
