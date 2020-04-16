@@ -43,7 +43,7 @@ class Sensor extends Component{
     }
     
     componentDidMount = () => {
-        
+        /*
         //window notification pregunta si las notificaciones son compatibles en este navegador
         if(window.Notification){ 
             // va a retornar una promesa resuelta o rechazada
@@ -70,10 +70,12 @@ class Sensor extends Component{
         }
         else {
             alert("No estan disponibles las notificaciones en este dispositivo");
-        }
+        }*/
+        Notification.requestPermission();
         
     }
     notificacion = () => {
+        new Notification("Notificacion en IOs")
         console.log("Lanza una notificacion");
         console.log(navigator);
         navigator.serviceWorker.ready.then(regis=>{
