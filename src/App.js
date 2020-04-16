@@ -34,6 +34,7 @@ class App extends Component{
   componentDidMount(){
     if('chrome' in window){
       console.log("Usando Chrome");
+      /*
       firebase.initializeApp({
         apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
         authDomain: "home-8bea3.firebaseapp.com",
@@ -49,6 +50,7 @@ class App extends Component{
       messaging.getToken().then( token => {
         this.setState({token: token});
       })
+      */
       //alert("Usando Safari como navegador")
     }  else if ('safari' in window){
       if ('safari' in window && 'pushNotification' in window.safari){
