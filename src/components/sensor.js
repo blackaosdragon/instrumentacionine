@@ -76,7 +76,7 @@ class Sensor extends Component{
     }
     notificacion = () => {
 
-        new Notification("Notificacion en IOs")
+        //new Notification("Notificacion en IOs")
         /*
         console.log("Lanza una notificacion");
         console.log(navigator);
