@@ -71,12 +71,12 @@ class Sensor extends Component{
         else {
             alert("No estan disponibles las notificaciones en este dispositivo");
         }*/
-        //Notification.requestPermission();
+        window.Notification.requestPermission();
         
     }
     notificacion = () => {
 
-        //new Notification("Notificacion en IOs")
+        new Notification("Notificacion en IOs")
         /*
         console.log("Lanza una notificacion");
         console.log(navigator);
