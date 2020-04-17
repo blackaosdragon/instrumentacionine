@@ -65,8 +65,9 @@ class App extends Component{
     }
     window.addEventListener("resize",this.handleListener);
     navigator.serviceWorker.addEventListener("message", data => {
-      console.log("Datos recibidos: ",data)
-      navigator.serviceWorker.ready.then( mensaje => {
+      console.log("Datos recibidos: ",data);
+
+      /*navigator.serviceWorker.ready.then( mensaje => {
         mensaje.showNotification(
           'Alerta',{
             body: 'Notificacion en primer plano',
@@ -74,7 +75,7 @@ class App extends Component{
             icon: '/logo.png',
           }
         )
-      })
+      })*/
     })
     /*
     window.addEventListener('beforeinstallprompt', e => {
@@ -155,7 +156,7 @@ class App extends Component{
       <div className="App">
         <Router>
         <div >
-        <div>{this.state.token}</div>
+        {/*<div>{this.state.token}</div>*/}
           <div>
             <MainBar className="MainBar" anchura={this.state.width}/>
           </div>
