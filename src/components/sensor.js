@@ -71,7 +71,7 @@ class Sensor extends Component{
         else {
             alert("No estan disponibles las notificaciones en este dispositivo");
         }*/
-        window.Notification.requestPermission();
+        Promise.resolve(window.Notification.requestPermission()).then().catch(err => alert(err));
         
     }
     notificacion = () => {
