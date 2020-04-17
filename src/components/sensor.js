@@ -71,10 +71,11 @@ class Sensor extends Component{
         else {
             alert("No estan disponibles las notificaciones en este dispositivo");
         }*/
-        Notification.requestPermission();
+        //Notification.requestPermission();
         
     }
     notificacion = () => {
+        /*
         //new Notification("Notificacion en IOs")
         console.log("Lanza una notificacion");
         console.log(navigator);
@@ -89,7 +90,7 @@ class Sensor extends Component{
                 }
             )
         })
-    }
+    }*/
     /*
     comparar = () => {
         navigator.serviceWorker.ready.then(data, () => {
@@ -97,6 +98,7 @@ class Sensor extends Component{
         })
     }
     */
+}
     render(){
                //this.pintar();
         return (

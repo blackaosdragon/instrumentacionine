@@ -32,6 +32,7 @@ class App extends Component{
     //actualiza el tamaño de la ventana
   }
   componentDidMount(){
+    /*
     if('chrome' in window){
       console.log("Usando Chrome");
       /*
@@ -50,7 +51,7 @@ class App extends Component{
       messaging.getToken().then( token => {
         this.setState({token: token});
       })
-      */
+      
       //alert("Usando Safari como navegador")
     }  else if ('safari' in window){
       if ('safari' in window && 'pushNotification' in window.safari){
@@ -62,8 +63,10 @@ class App extends Component{
     else {
       console.log("Se está usando otro navegador que no es safari")
       //alert("No se esta usando safari como navegador")
-    }
+    }*/
     window.addEventListener("resize",this.handleListener);
+
+/*
     navigator.serviceWorker.addEventListener("message", data => {
       console.log("Datos recibidos: ",data);
 
@@ -75,8 +78,8 @@ class App extends Component{
             icon: '/logo.png',
           }
         )
-      })*/
-    })
+      })
+    })*/
     /*
     window.addEventListener('beforeinstallprompt', e => {
       e.userChoice.then((eleccion)=>{
@@ -89,7 +92,7 @@ class App extends Component{
     //let url = "https://instrumentacionline.ddns.net/token";
     
     //let center = UNUserNotificationCenter.current()
-    console.log(navigator.appName);
+    //console.log(navigator.appName);
     /*messaging.requestPermission().then(()=>{
 
     })*/

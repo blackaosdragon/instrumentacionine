@@ -12,11 +12,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
 
-//serviceWorker.register();
+serviceWorker.register();
 
 
-/*
-if (navigator.serviceWorker){
-    navigator.serviceWorker.register('/sw.js');
-}
-*/
+
