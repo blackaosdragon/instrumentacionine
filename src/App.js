@@ -12,8 +12,8 @@ import Footer from "./components/footer.js"
 import Lamparas from "./components/lamparas.js";
 import Mesas from "./components/mesas.js";
 import Aires from "./components/aires.js";
-import * as firebase from 'firebase/app'
-import 'firebase/messaging'
+//import * as firebase from 'firebase/app'
+//import 'firebase/messaging'
 import Sensor from './components/sensor.js';
 
 class App extends Component{
