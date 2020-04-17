@@ -55,7 +55,7 @@ class App extends Component{
     }  else if ('safari' in window){
       if ('safari' in window && 'pushNotification' in window.safari){
         //alert('Soporta notificaciones');
-        window.safari.pushNotification.permision()
+        //window.safari.pushNotification.permision()
       }
       //window.safari.pushNotification
     }
