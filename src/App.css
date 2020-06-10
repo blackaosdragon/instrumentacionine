@@ -207,6 +207,9 @@
   transition: 1s;
   background-color: #d9d9d9;
 }
+.imgHome{
+  margin: -400px 0px 0px 0px;
+}
 .instalacionLamparas{
   background-image: url(./images/KLSMartinDes.jpeg);
 }

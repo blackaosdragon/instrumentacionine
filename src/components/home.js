@@ -118,13 +118,23 @@ class Home extends Component{
             </GridListTile>
             
             <GridListTile className="cuadriculaImagen" key="TarjetaLog.jpg">
+            <Link to="/monitor">
+            <div className="imgHome">
               <img src={TarjetaLog} alt="Tarjetas" />
+              
+                
               <GridListTileBar
                 className="letrasHome"
                 title={<h1 className="title">Tarjetas electrónicas</h1>}
-                subtitle={<h2 className="textosBlancos">Limpieza y mantemiento</h2>}
+                subtitle={<h2 className="textosBlancos">Diseño de tarjetas programables</h2>}
               />
+              
+              
+              </div>  
+              </Link>
             </GridListTile>
+            
+            
             <GridListTile className="cuadriculaImagen" key="TarjetaChec.jpg">
               <img src={TarjetaChec} alt="Tarjetas" />
               <GridListTileBar
@@ -142,12 +152,14 @@ class Home extends Component{
               />
             </GridListTile>
             <GridListTile className="cuadriculaImagen" key="lcd.jpg">
+              
               <img src={ControlAutoclave} alt="Autoclaves" />
               <GridListTileBar
                 className="letrasHome"
                 title={<h1 className="title">Autoclaves</h1>}
                 subtitle={<h2 className="textosBlancos">Uso de microcontroladores programables y sensores</h2>}
               />
+              
             </GridListTile>
             <GridListTile className="cuadriculaImagen" key="lcd.jpg">
             <Link to="/aires" >
@@ -251,12 +263,14 @@ class Home extends Component{
               />
             </GridListTile>
             <GridListTile className="cuadriculaImagen" key="TarjetaChec.jpg">
+            <Link to="/monitor">
               <img src={TarjetaChec} alt="Tarjetas" />
               <GridListTileBar
                 
                 title={<h1 className="title"> electrónicas</h1>}
                 subtitle={<h2 className="textosBlancos"> </h2>}
               />
+              </Link>
             </GridListTile>
             <GridListTile className="cuadriculaImagen" key="Autoclave.jpg">
               <img src={Autoclave} alt="Autoclaves" />
