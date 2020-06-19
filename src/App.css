@@ -22,6 +22,25 @@
 .BarraPrincipal {
   margin: 0px 50px 50px 0px;
 }
+.boton{
+  color: #000000;
+  border-radius: 5px;
+  margin: 5% 44% 5% 44%;
+  padding: 1% 0% 1% 0%;
+  background-color: #ffffff;
+  box-shadow: 0px 15px 25px #222;
+  transition: 0.3s;
+  
+}
+.boton:hover{
+  background-color: #d9d9d9;
+  cursor: pointer;
+  box-shadow: 0 30px 40px #222;
+  transition: 0.3s;
+}
+.boton:active{
+  box-shadow: 0 5px 10px #222;
+}
 .botonIcono {
   border-radius: 15px;
 }
@@ -33,6 +52,7 @@
   color: #000000; 
   transition: background-color 0.8s;
 }
+
 .boton-link:hover{
   background-color: #0059b3;
   transition: background-color 0.8s;
@@ -57,6 +77,38 @@
 .botonTemporal{
   display: none;
 }
+.cargando{
+  margin: 5% 0% 5% 110%;
+  border: 15px solid #0059b3;
+  border-radius: 50%;
+  border-top: 15px solid #fff;
+  width: 100px;
+  height: 100px;
+  animation-name: rotacion;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.carga{
+  position: absolute;
+  margin: 5% 0% 5% 110%;
+  border: 30px solid #0059b3;
+  border-radius: 50%;
+  border-top: 30px solid #99ccff;
+  width: 100px;
+  height: 100px;
+  animation-name: rotacion;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+  visibility: visible; 
+}
+.cargaInvisible{
+  background-color: #ffffff;
+  position: absolute;
+  top: 35%;
+  left: 40%;  
+}
 .carrusel{
   margin: 0 0 0 5%;
 }
@@ -68,6 +120,7 @@
   box-shadow: 0 3px 15px #222;
   transition: background-color 0.3s;
 }
+/*
 .contenedorCard:hover{
   transition: background-color 0.3s;
   background-color: #0059b3;
@@ -76,7 +129,7 @@
 .contenedorCard:hover .titulos{
   transition: color 0.5s;
   color: #ffffff;
-}
+}*/
 .contenedorCardMovil {
   margin: 30% 10% 5% 10%;
   background-color: #ffffff;
@@ -103,6 +156,14 @@
   box-shadow: 0 3px 15px #222;
   transition: 0.5s;
   word-wrap: break-word;
+}
+.contenedorCardTabla{
+  background-color: #ffffff;
+  margin: 5% 5% 5% 5%;
+  padding: 1% 0 1% 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px #222;
+  transition: background-color 0.3s;
 }
 .carrusel {
   margin: 0% 5% 10% 0%;
@@ -318,6 +379,14 @@
   cursor: pointer;
   padding: 10px 30px;
 }
+.tabla{
+  background-color: #cccccc;
+
+}
+.tablaTitulos{
+  font-family: 'Znric-Regular';
+  font-size: 180%;
+}
 .textoCampo {
   margin: 5% 5% 5% 5%;
   padding: 5% 5% 5% 5%;
@@ -419,5 +488,25 @@
   100%{
     left: 0%;
   }
+}
+@keyframes rotacion {
+  from {
+      otate: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.opciones{
+  visibility: collapse;
+}
+.opcionesvisible{
+  visibility: visible;
+}
+
+.formulariOpciones{
+  margin: 0% 0% 0% 0%;
+  width: 10%;
 }
 

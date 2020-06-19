@@ -16,6 +16,7 @@ import Aires from "./components/aires.js";
 //import 'firebase/messaging'
 import Sensor from './components/sensor.js';
 import Temperature from './components/temperatura.js';
+import Consulta from './components/consultaBase.js'
 
 class App extends Component{
   constructor(){
@@ -172,6 +173,7 @@ class App extends Component{
           <Route path="/aires" component={() => <Aires anchura={this.state.width} />} />
           <Route path="/sensor" component={() => <Sensor anchura={this.state.width} />} />
           <Route path="/monitor" component={()=> <Temperature anchura={this.state.width}/> }/>
+          <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
 
                     
           </Switch>
