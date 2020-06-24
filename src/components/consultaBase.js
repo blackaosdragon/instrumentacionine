@@ -51,20 +51,7 @@ class Consulta extends Component{
                 <div className="contenedorCard">
                     <h6 className="subtitleCuadricula"> Porfavor seleccione los datos que se solicitan a continuacion </h6>
                 </div>
-                
-                {/*
-                <FormControl className="formulariOpciones">
-                <InputLabel>Sensor</InputLabel>
-                <Select value={this.state.value} onChange={this.handleChange}>
-                    
-                {this.state.ubicaciones.map( element => (
-                        <MenuItem value={element} name={element.name} code={element} key={element}>{element}</MenuItem>
-                        
-                ))}
-                </Select>
-                </FormControl>
-                */}
-                <Opciones  ubicaciones={end_point_ubicaciones}/>
+                <Opciones ubicaciones={end_point_ubicaciones}/>
             </div>
         )
     }

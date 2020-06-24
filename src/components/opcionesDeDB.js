@@ -5,13 +5,18 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Modal from '@material-ui/core/Modal';
 import Consulta from './consultaBase';
+import Tabla from './tabladeDatos.js';
 
 import ModalDeCarga from "./carga.js";
-const server = "192.168.1.65";
-const puerto = "5000";
+//const server = "192.168.1.65"; server para probar desde red local
+const server = "instrumentacionline.ddns.net"
+//const puerto = "5000"; puerto de prueba
+const puerto = "443";
+const protocolo = "https";
 const end_point_años = 'years';
 const end_point_meses = 'mes';
 const end_point_dias = 'days';
+const end_point_consulta = 'buscar';
 let estilos = ["carga","cargaInvisible"];
 
 
@@ -26,12 +31,14 @@ class Opciones extends Component{
             años: [],
             meses: [],
             dias: [],
+            consulta: [],
             value:"",
             ubicaciones: "collapse",
             cargando: true,
             years: "collapse",
             month: "collapse",
             days: "collapse",
+            boton: "collapse",
             ubicacion: "",
             año: "",
             mes:"",
@@ -41,6 +48,10 @@ class Opciones extends Component{
             horaFinal: "",
             minutoFinal: "",
 
+        }
+    }
+    componentDidUpdate = (prevProps, prevState) => {
+        if(this.state!==prevState){
         }
     }
     handleChange = (event) =>{
@@ -54,7 +65,7 @@ class Opciones extends Component{
         }
         console.log(consulta);
         
-        fetch(`http://${server}:${puerto}/${end_point_años}`,{
+        fetch(`https://${server}:${puerto}/${end_point_años}`,{
             method: 'POST',
             body: JSON.stringify(consulta),
             headers:{
@@ -68,7 +79,7 @@ class Opciones extends Component{
                 years: "visible",
                 cargando: false,
             })
-            console.log(this.state);
+            //console.log(this.state);
         })
         .catch( err => {
             console.log(err);
@@ -88,7 +99,7 @@ class Opciones extends Component{
         let meses = {
             year: event.target.value
         }
-        fetch(`http://${server}:${puerto}/${end_point_meses}`,{
+        fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
             method: 'POST',
             body: JSON.stringify(meses),
             headers:{
@@ -123,7 +134,7 @@ class Opciones extends Component{
             mes: event.target.value,
             ubicacion: this.state.ubicacion
         }
-        fetch(`http://${server}:${puerto}/${end_point_dias}`,{
+        fetch(`${protocolo}://${server}:${puerto}/${end_point_dias}`,{
             method: 'POST',
             body: JSON.stringify(dias),
             headers:{
@@ -136,6 +147,7 @@ class Opciones extends Component{
                 dias: data,
                 days: "visible",
                 cargando: false,
+                boton: "visible"
             })
         })
         .catch( err => {
@@ -153,8 +165,10 @@ class Opciones extends Component{
         })
     }
     consultar_datos = () => {
-        console.log(`Ubicacion ${this.state.ubicacion} Año: ${this.state.año}, Mes: ${this.state.mes}, Dia: ${this.state.dia}, Desde: ${this.state.horaInicio}:${this.state.minutoInicio}, hasta: ${this.state.horaFinal}:${this.state.minutoFinal}`)
-
+        //console.log(`Ubicacion ${this.state.ubicacion} Año: ${this.state.año}, Mes: ${this.state.mes}, Dia: ${this.state.dia}, Desde: ${this.state.horaInicio}:${this.state.minutoInicio}, hasta: ${this.state.horaFinal}:${this.state.minutoFinal}`)
+        this.setState({
+            cargando: true
+        })
         let payload = {
             minutos: this.state.minutoInicio,
             horas: this.state.horaInicio,
@@ -162,13 +176,45 @@ class Opciones extends Component{
             horaFinal: this.state.horaFinal,
             year: this.state.año,
             mes: this.state.mes,
-        dia: this.state.dia,
-        lugar: this.state.ubicacion
+            dia: this.state.dia,
+            lugar: this.state.ubicacion
+        }
+        
+        if(
+            this.state.minutoInicio ==="" || 
+            this.state.horaInicio === "" ||
+            this.state.minutoFinal === "" ||
+            this.state.horaFinal === "" ||
+            this.state.año === "" ||
+            this.state.mes === ""||
+            this.state.dia === ""||
+            this.state.ubicacion === ""
+        ) {
+            alert("Falta completar algunos datos");
+        } else{
+            console.log(payload);
+            fetch(`${protocolo}://${server}/${end_point_consulta}`,{
+                method: 'POST',
+                body: JSON.stringify(payload),
+                headers:{
+                    'Content-Type': 'application/json' 
+                  }
+            }).then( response => {
+                return response.json();
+            }).then( data => {
+                console.log(data);
+                this.setState({
+                    consulta: data,
+                    cargando: false
+                })
+            }).catch( err => {
+                alert("Error al comunicarse ocn la base de datos");
+            })
         }
     }
     
     componentDidMount(){
-        fetch(`http://${server}:${puerto}/${this.props.ubicaciones}`)
+        fetch(`${protocolo}://${server}:${puerto}/${this.props.ubicaciones}`)
         .then( response => {
             this.setState({
                 cargando: false
@@ -177,14 +223,12 @@ class Opciones extends Component{
 
         })
         .then( data => {
-            //console.log(data);
             this.setState({
                 localizaciones: data,
                 ubicaciones: "visible",
                 cargando: false,
 
             })
-            //console.log("state: ",this.state);
         })
         .catch( err => {
             console.log(err);
@@ -272,9 +316,10 @@ class Opciones extends Component{
                 </Select>
                 <FormHelperText>Seleccione el minuto</FormHelperText>
             </FormControl>
-            <div style={{visibility: this.state.days}}>
+            <div style={{visibility: this.state.boton}}>
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
             </div>
+            <Tabla data={this.state.consulta} />
             
         </div>
     )

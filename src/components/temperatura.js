@@ -8,10 +8,11 @@ import { TableBody } from '@material-ui/core';
 import socketIOClient from "socket.io-client"
 import { Link } from "react-router-dom";
 
-const ioSocket="http://192.168.0.10:5000"
+//const ioSocket="http://192.168.0.10:5000"
+const ioSocket = "https://instrumentacionline.ddns.net"
 const dominio = "192.168.0.10";
 const port = "5001";
-let socket = new WebSocket(`ws://${dominio}:${port}`);
+//let socket = new WebSocket(`ws://${dominio}:${port}`);
 
 let ubicaciones = ["Oficina","Estatico","Manual"];
 let cargando = 1;
@@ -45,6 +46,7 @@ class Temperature extends Component{
 
     componentWillMount(){
         data.forEach( element =>{
+            console.log(element)
             this.setState({
                 [element.name]: element
             })
@@ -54,7 +56,24 @@ class Temperature extends Component{
             return response.json();
         })
         .then(data=>{
+            /*
             console.log(data);
+            this.setState({
+                ubicaciones: data
+            })
+            data.forEach( element => {
+                this.setState({
+                    ...this.state,
+                    data: [{
+                        name: element,
+                        valor: "",
+                        actualizacion: ""
+                    }]
+                    
+                })                
+            })
+            console.log(this.state);*/
+
             cargando = 0;
         })
         .catch(err=>{
@@ -64,10 +83,10 @@ class Temperature extends Component{
     
     componentDidMount(){
         let hora = new Date();
-        const socket = socketIOClient(ioSocket)
+        const socket = socketIOClient(ioSocket);
+        
 
         socket.on('temp', data => {
-            //console.log(data);
             let float_temp = 0;
             let string_temp = "";
             for( let i = 1 ; i < data.length ; i++){
@@ -99,9 +118,9 @@ class Temperature extends Component{
             }
             if(data[0]=='3'){
                 this.setState({
-                    ...this.state,
-                    Variable: {
-                        ...this.state.Variable,
+                    
+                    [ubicaciones[2]]: {
+                        
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
@@ -112,28 +131,7 @@ class Temperature extends Component{
         socket.onopen = () => {
             console.log('Conection');
         }
-        socket.onmessage = (mensaje) => {
-            //console.log(mensaje.data);
-            /*
-            this.setState({
-                mensaje: mensaje.data
-            })
-            */
-        }
     }
-    /*
-    traerdata = () => {
-        fetch('http://192.168.0.13:5000/ubicaciones')
-        .then(response=>{
-            return response.json();
-        })
-        .then(data=>{
-            console.log(data);
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-    }*/
 
     render(){
         //console.log(this.state);
@@ -142,7 +140,7 @@ class Temperature extends Component{
             carga = <div className="cargando"></div>
         } else {
             carga = data.map((element,id)=>(
-                <TableRow>
+                <TableRow key={element.name}>
                     <TableCell> <p className="tablaTitulos"> {element.name} </p></TableCell>
                     <TableCell> <p className="tablaTitulos">{this.state[element.name].valor}°C</p></TableCell>
                     <TableCell> <p className="tablaTitulos"> {element.ubicacion} </p></TableCell>
@@ -181,5 +179,3 @@ class Temperature extends Component{
     }
 };
 export default Temperature;
-
-let sensores = ["Oficina","Manual","Estatico"]

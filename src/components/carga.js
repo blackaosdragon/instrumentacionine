@@ -25,7 +25,7 @@ class ModalDeCarga extends Component{
         }
     }
     render(){
-        console.log(this.props);
+        //console.log(this.props);
         
         return (
             <Modal open={this.state.modalOpen} >
