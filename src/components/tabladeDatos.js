@@ -13,7 +13,7 @@ class TableFromDataBase extends Component{
         }
     }
     componentDidMount(){
-        console.log(this.props);
+        //console.log(this.props);
         this.setState((state,props)=>{
             return{data: props.data}
         })
@@ -23,7 +23,7 @@ class TableFromDataBase extends Component{
     }
     componentDidUpdate(prevProps,prevState){
         if(this.props.data!==prevProps.data){
-            console.log("Las props de dato han cambiado");
+            //console.log("Las props de dato han cambiado");
             this.setState({
                 visible: "visible"
             })

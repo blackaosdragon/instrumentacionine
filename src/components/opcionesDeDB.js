@@ -59,11 +59,11 @@ class Opciones extends Component{
            [event.target.name]: event.target.value,
            cargando: true,
        })
-        console.log(this.state);
+        //console.log(this.state);
         let consulta = {
             ubicacion: event.target.value,
         }
-        console.log(consulta);
+        //console.log(consulta);
         
         fetch(`https://${server}:${puerto}/${end_point_años}`,{
             method: 'POST',
@@ -73,7 +73,7 @@ class Opciones extends Component{
               },
         }).then( response => {return response.json()})
         .then( data => {
-            console.log(data);
+            //console.log(data);
             this.setState({
                 años: data,
                 years: "visible",
@@ -107,7 +107,7 @@ class Opciones extends Component{
               },
         }).then( response => {return response.json()})
         .then( data => {
-            console.log(data);
+            //console.log(data);
             this.setState({
                 meses: data,
                 month: "visible",
@@ -122,7 +122,7 @@ class Opciones extends Component{
             alert("Error al comunicarse a la base de datos")
         })
 
-        console.log(meses);
+        //console.log(meses);
     }
     selection_month = (event) => {
         this.setState({
@@ -142,7 +142,7 @@ class Opciones extends Component{
               },
         }).then( response => {return response.json()})
         .then( data => {
-            console.log(data);
+            //console.log(data);
             this.setState({
                 dias: data,
                 days: "visible",
@@ -157,7 +157,7 @@ class Opciones extends Component{
             })
             alert("Error al comunicarse a la base de datos")
         })
-        console.log(dias);
+        //console.log(dias);
     }
     slection_day = (event) => {
         this.setState({
@@ -192,7 +192,7 @@ class Opciones extends Component{
         ) {
             alert("Falta completar algunos datos");
         } else{
-            console.log(payload);
+            //console.log(payload);
             fetch(`${protocolo}://${server}/${end_point_consulta}`,{
                 method: 'POST',
                 body: JSON.stringify(payload),
@@ -202,13 +202,17 @@ class Opciones extends Component{
             }).then( response => {
                 return response.json();
             }).then( data => {
-                console.log(data);
+                //console.log(data);
                 this.setState({
                     consulta: data,
                     cargando: false
                 })
             }).catch( err => {
                 alert("Error al comunicarse ocn la base de datos");
+                console.log(err);
+                this.setState({
+                   cargando: false
+                })
             })
         }
     }

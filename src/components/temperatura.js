@@ -46,7 +46,7 @@ class Temperature extends Component{
 
     componentWillMount(){
         data.forEach( element =>{
-            console.log(element)
+            //console.log(element)
             this.setState({
                 [element.name]: element
             })
