@@ -169,6 +169,7 @@ class Opciones extends Component{
         this.setState({
             cargando: true
         })
+        console.log(`Lugar: ${this.state.ubicacion} ${this.state.dia}/${this.state.mes}/${this.state.año} ${this.state.horaInicio}:${this.state.minutoInicio} - ${this.state.horaFinal}:${this.state.minutoInicio}`)
         let payload = {
             minutos: this.state.minutoInicio,
             horas: this.state.horaInicio,

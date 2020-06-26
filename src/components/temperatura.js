@@ -87,6 +87,7 @@ class Temperature extends Component{
         
 
         socket.on('temp', data => {
+            console.log(data);
             let float_temp = 0;
             let string_temp = "";
             for( let i = 1 ; i < data.length ; i++){
