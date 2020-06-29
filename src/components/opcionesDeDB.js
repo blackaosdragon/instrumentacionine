@@ -171,10 +171,10 @@ class Opciones extends Component{
         })
         console.log(`Lugar: ${this.state.ubicacion} ${this.state.dia}/${this.state.mes}/${this.state.año} ${this.state.horaInicio}:${this.state.minutoInicio} - ${this.state.horaFinal}:${this.state.minutoInicio}`)
         let payload = {
-            minutos: this.state.minutoInicio,
-            horas: this.state.horaInicio,
-            minutoFinal: this.state.minutoFinal,
-            horaFinal: this.state.horaFinal,
+            
+            
+            
+            
             year: this.state.año,
             mes: this.state.mes,
             dia: this.state.dia,
@@ -182,10 +182,6 @@ class Opciones extends Component{
         }
         
         if(
-            this.state.minutoInicio ==="" || 
-            this.state.horaInicio === "" ||
-            this.state.minutoFinal === "" ||
-            this.state.horaFinal === "" ||
             this.state.año === "" ||
             this.state.mes === ""||
             this.state.dia === ""||
@@ -246,7 +242,6 @@ class Opciones extends Component{
     render(){
         return(
         <div>
-
             <ModalDeCarga cargando={this.state.cargando}/>
             <FormControl style={{visibility: this.state.ubicaciones, margin: "0% 1% 0% 2%"}}>
             
@@ -286,41 +281,7 @@ class Opciones extends Component{
                 <FormHelperText>Seleccione el dia</FormHelperText>
             </FormControl>
 
-            <FormControl style={{visibility: this.state.days, margin: "0% 1% 0% 1%"}}>
-                <Select value={this.state.horaInicio} name="horaInicio" onChange={this.slection_day}>
-                    {horas_dia.map( option => (
-                        <MenuItem key={option} value={option}> {option}</MenuItem>
-                    ))}
-                </Select>
-                <FormHelperText>Seleccione la hora inicial</FormHelperText>
-            </FormControl>
-
-            <FormControl style={{visibility: this.state.days, margin: "0% 1% 0% 1%"}}>
-                <Select value={this.state.minutoInicio} name="minutoInicio" onChange={this.slection_day}>
-                    {arreglo_0_60.map( option => (
-                        <MenuItem key={option} value={option}> {option}</MenuItem>
-                    ))}
-                </Select>
-                <FormHelperText>Seleccione el minuto</FormHelperText>
-            </FormControl>
-
-            <FormControl style={{visibility: this.state.days, margin: "0% 1% 0% 1%"}}>
-                <Select value={this.state.horaFinal} name="horaFinal" onChange={this.slection_day}>
-                    {horas_dia.map( option => (
-                        <MenuItem key={option} value={option}> {option}</MenuItem>
-                    ))}
-                </Select>
-                <FormHelperText>Seleccione la hora final</FormHelperText>
-            </FormControl>
-
-            <FormControl style={{visibility: this.state.days, margin: "0% 1% 0% 1%"}}>
-                <Select value={this.state.minutoFinal} name="minutoFinal" onChange={this.slection_day}>
-                    {arreglo_0_60.map( option => (
-                        <MenuItem key={option} value={option}> {option}</MenuItem>
-                    ))}
-                </Select>
-                <FormHelperText>Seleccione el minuto</FormHelperText>
-            </FormControl>
+            
             <div style={{visibility: this.state.boton}}>
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
             </div>

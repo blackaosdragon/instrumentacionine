@@ -44,7 +44,7 @@ class TableFromDataBase extends Component{
                 <TableCell><p className="tablaTitulos">{element.ubicacion}</p></TableCell>
                 <TableCell><p className="tablaTitulos">{element.temperatura}°C</p></TableCell>
                 <TableCell><p className="tablaTitulos">
-                {element.fecha}
+                {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
                 </p></TableCell>
             </TableRow>                    
             ))  
