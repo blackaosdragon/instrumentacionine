@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import {Table, TableRow, TableCell, TableHead, TableBody} from '@material-ui/core'
+import { green } from '@material-ui/core/colors';
 let datos = ''
 let fecha = ''
 
@@ -37,17 +38,29 @@ class TableFromDataBase extends Component{
     }
 
     render(){
-        datos = this.props.data.map( element => 
-            (
-                
-            <TableRow >
-                <TableCell><p className="tablaTitulos">{element.ubicacion}</p></TableCell>
-                <TableCell><p className="tablaTitulos">{element.temperatura}°C</p></TableCell>
-                <TableCell><p className="tablaTitulos">
-                {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
-                </p></TableCell>
-            </TableRow>                    
-            ))  
+        datos = this.props.data.map( (element,id) => {
+            if(id%2==0){
+                return(
+                    <TableRow >
+                        <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
+                        <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                        <TableCell><p className="tablaDatos">
+                            {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
+                        </p></TableCell>
+                    </TableRow>
+                )
+            } else{
+                return(
+                    <TableRow style={{backgroundColor: '#cccccc'}}>
+                        <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
+                        <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                        <TableCell><p className="tablaDatos">
+                            {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
+                        </p></TableCell>
+                    </TableRow> 
+                )
+            }
+        })  
 
         return (
         <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
