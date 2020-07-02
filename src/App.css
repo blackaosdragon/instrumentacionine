@@ -7,6 +7,7 @@
 .App {
   text-align: center;
   background-color: #99ccff;
+  margin: 0% 0% 0% 0%;
 }
 
 .App-header {
@@ -114,7 +115,7 @@
 }
 .contenedorCard{
   background-color: #ffffff;
-  margin: 5% 25% 5% 25%;
+  margin: 0% 25% 5% 25%;
   padding: 1% 0 1% 0;
   border-radius: 10px;
   box-shadow: 0 3px 15px #222;
@@ -131,7 +132,7 @@
   color: #ffffff;
 }*/
 .contenedorCardMovil {
-  margin: 30% 10% 5% 10%;
+  margin: 0% 10% 5% 10%;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 1% 0 1% 0;
@@ -345,7 +346,7 @@
   background-color: #ffffff;
   z-index: 1;
   position: fixed;
-  margin: 0 0 0 0;
+  margin: 0% 0% 0% 0%;
 }
 .perimetro2 {
   margin: 0px 30px 30px 30px;
@@ -381,6 +382,12 @@
 }
 .tabla{
   background-color: #000000;
+  font-family: 'Znric-Regular';
+  font-size: 180%;
+}
+.tablaDatos2{
+  font-family: 'Znric-Regular';
+  font-size: 180%;
   color: #ffffff;
 
 }

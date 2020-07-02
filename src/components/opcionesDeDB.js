@@ -147,7 +147,6 @@ class Opciones extends Component{
                 dias: data,
                 days: "visible",
                 cargando: false,
-                boton: "visible"
             })
         })
         .catch( err => {
@@ -162,7 +161,9 @@ class Opciones extends Component{
     slection_day = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
+            boton: "visible"
         })
+        
     }
     consultar_datos = () => {
         //console.log(`Ubicacion ${this.state.ubicacion} Año: ${this.state.año}, Mes: ${this.state.mes}, Dia: ${this.state.dia}, Desde: ${this.state.horaInicio}:${this.state.minutoInicio}, hasta: ${this.state.horaFinal}:${this.state.minutoFinal}`)

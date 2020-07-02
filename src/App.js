@@ -25,7 +25,7 @@ class App extends Component{
       width: window.innerWidth,
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
-      token: ""
+      //token: ""
     }
     this.handleListener = this.handleListener.bind(this); 
   }
@@ -156,7 +156,6 @@ class App extends Component{
   
   
   render(){
-    
     return(
       <div className="App">
         <Router>

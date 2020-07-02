@@ -82,11 +82,10 @@ class Temperature extends Component{
     }
     
     componentDidMount(){
-        let hora = new Date();
-        const socket = socketIOClient(ioSocket);
         
-
+        const socket = socketIOClient(ioSocket);
         socket.on('temp', data => {
+            let hora = new Date();
             console.log(data);
             let float_temp = 0;
             let string_temp = "";
@@ -128,55 +127,88 @@ class Temperature extends Component{
                 })
             }
         })
-
-        socket.onopen = () => {
-            console.log('Conection');
-        }
+        console.log('ComponentDidMount:');
+        console.log(this.state);
     }
 
     render(){
-        //console.log(this.state);
+        //console.log(`Estado en el render:`);
+        //console.log(this.state)
         let carga = '';
         if(cargando){
             carga = <div className="cargando"></div>
         } else {
-            carga = data.map((element,id)=>(
-                <TableRow key={element.name}>
-                    <TableCell> <p className="tablaTitulos"> {element.name} </p></TableCell>
-                    <TableCell> <p className="tablaTitulos">{this.state[element.name].valor}°C</p></TableCell>
-                    <TableCell> <p className="tablaTitulos"> {element.ubicacion} </p></TableCell>
-                </TableRow>
-            ))            
+            carga = data.map((element,id)=>{
+                let temp = parseFloat(this.state[element.name].valor);
+                if(temp>0 && temp<=24.9){
+                    return (
+                        <TableRow style={{backgroundColor: "#00284d"}} key={element.name}>
+                            <TableCell> <p className="tablaDatos2"> {element.name} </p></TableCell>
+                            <TableCell> <p className="tablaDatos2">{this.state[element.name].valor}°C</p></TableCell>
+                            <TableCell> <p className="tablaDatos2"> {element.ubicacion} </p></TableCell>
+                            <TableCell> <p className="tablaDatos2"> {this.state[element.name].actualizacion} </p></TableCell>
+                        </TableRow>
+                    )
+                } else if(temp>=25.0 && temp<=29.9){
+                    return (
+                        <TableRow style={{backgroundColor: "#ffff1a"}} key={element.name}>
+                            <TableCell> <p className="tablaDatos"> {element.name} </p></TableCell>
+                            <TableCell> <p className="tablaDatos">{this.state[element.name].valor}°C</p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {element.ubicacion} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state[element.name].actualizacion} </p></TableCell>
+                        </TableRow>
+                    )
+                } else if(temp>=30.0){
+                    return (
+                        <TableRow style={{backgroundColor: "#ff3300"}} key={element.name}>
+                            <TableCell> <p className="tablaDatos"> {element.name} </p></TableCell>
+                            <TableCell> <p className="tablaDatos">{this.state[element.name].valor}°C</p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {element.ubicacion} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state[element.name].actualizacion} </p></TableCell>
+                        </TableRow>
+                    )
+                }
+            })            
         }
-        return(
-            <div>
-                <div className="contenedorCard">
-                    <h1 className="titulos">Monitor de temperaturas</h1>
+        console.log(this.props.anchura);
+        if(this.props.anchura>970){
+            return(
+                <div>
+                    <div className="contenedorCard">
+                        <h1 className="titulos">Monitor de temperaturas</h1>
+                    </div>
+                    <div className="contenedorCard">
+                        <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicacion y la ultima hora que se registró su lectura</p>                    
+                    </div>
+                    <div className="contenedorCardTabla">
+    
+                        <TableContainer>
+                            <Table className="monitorTemperaturas">
+                                <TableHead>
+                                    <TableRow className="tabla">
+                                        <TableCell ><p className="tablaTitulos">Sensor</p></TableCell>                                
+                                        <TableCell ><p className="tablaTitulos"> Temperatura</p></TableCell>                                
+                                        <TableCell ><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                        <TableCell ><p className="tablaTitulos">Ultima actualización</p></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {carga}
+                                </TableBody>
+                            </Table>
+    
+                        </TableContainer>
+                    </div>
+                    <Link to="./consulta" className="enlace"><div className="boton">Consultar Base</div> </Link>
                 </div>
-                <div className="contenedorCard">
-                    <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicacion y la ultima hora que se registró su lectura</p>                    
-                </div>
-                <div className="contenedorCardTabla">
+            );
 
-                    <TableContainer>
-                        <Table className="monitorTemperaturas">
-                            <TableHead>
-                                <TableRow className="tabla">
-                                    <TableCell ><p className="tablaTitulos">Sensor</p></TableCell>                                
-                                    <TableCell ><p className="tablaTitulos"> Temperatura</p></TableCell>                                
-                                    <TableCell ><p className="tablaTitulos">Ubicacion</p></TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {carga}
-                            </TableBody>
-                        </Table>
-
-                    </TableContainer>
-                </div>
-                <Link to="./consulta" className="enlace"><div className="boton">Consultar Base</div> </Link>
-            </div>
-        );
+        } else {
+            return(
+                <div>Movil</div>
+            )
+        }
+        
     }
 };
 export default Temperature;
