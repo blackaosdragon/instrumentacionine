@@ -12,9 +12,10 @@ import { Link } from "react-router-dom";
 const ioSocket = "https://instrumentacionline.ddns.net"
 const dominio = "192.168.0.10";
 const port = "5001";
+const ubicaciones_endPoint = "ubicaciones";
 //let socket = new WebSocket(`ws://${dominio}:${port}`);
 
-let ubicaciones = ["Oficina","Estatico","Manual"];
+let ubicaciones = ["Oficina","Taller","Refrigerador"];
 let cargando = 1;
 
 let data = [
@@ -41,7 +42,9 @@ let data = [
 class Temperature extends Component{
     constructor(){
         super();
-        this.state = {}
+        this.state = {
+            estuctura_De_tabla: []
+        }
     }
 
     componentWillMount(){
@@ -56,6 +59,7 @@ class Temperature extends Component{
             return response.json();
         })
         .then(data=>{
+            
             /*
             console.log(data);
             this.setState({
@@ -74,7 +78,7 @@ class Temperature extends Component{
             })
             console.log(this.state);*/
 
-            cargando = 0;
+            
         })
         .catch(err=>{
             console.log(err);
@@ -82,11 +86,44 @@ class Temperature extends Component{
     }
     
     componentDidMount(){
+        fetch(`${ioSocket}/${ubicaciones_endPoint}`)
+        .then(response=>{
+            return response.json()
+        })
+        .then(data=>{
+            data.forEach(element=>{
+                console.log(element);
+                this.setState({
+                    [element]:{
+                        name: element
+                    }
+                })
+                /*
+                this.setState(()=>({
+                    estuctura_De_tabla: [
+                        ...this.state.estuctura_De_tabla,
+                        {
+                            name: element
+                        }
+                    ]
+
+                }))*/
+
+            })
+            console.log(this.state);
+
+            cargando = 0;
+        })
+        .catch(err=>{
+            alert("Error al cominucarse a la base de datos");
+            console.log(err);
+            cargando = 0;
+        })
         
         const socket = socketIOClient(ioSocket);
         socket.on('temp', data => {
             let hora = new Date();
-            console.log(data);
+            //console.log(data);
             let float_temp = 0;
             let string_temp = "";
             for( let i = 1 ; i < data.length ; i++){
@@ -105,11 +142,20 @@ class Temperature extends Component{
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
                 })
+                
+                this.setState({
+                    ...this.state,
+                    oficina: {
+                        ...this.state.oficina,
+                        valor: float_temp,
+                        actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
+                    }
+                })
             }
             if(data[0]=='2'){
                 this.setState({
                     ...this.state,
-                    Estatico: {
+                    [ubicaciones[1]]: {
                         ...this.state.Estatico,
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
@@ -127,13 +173,14 @@ class Temperature extends Component{
                 })
             }
         })
-        console.log('ComponentDidMount:');
-        console.log(this.state);
+        //console.log('ComponentDidMount:');
+        //console.log(this.state);
+
     }
 
     render(){
-        //console.log(`Estado en el render:`);
-        //console.log(this.state)
+        console.log(`Estado en el render:`);
+        console.log(this.state)
         let carga = '';
         if(cargando){
             carga = <div className="cargando"></div>
