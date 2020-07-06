@@ -194,7 +194,8 @@ class Home extends Component{
 
     } else {
       return(
-        <div>
+        <div >
+          <div className="margenSup">.</div>
           <div className="contenedorCardMovil">
           <h1 className="titulos">Instrumentación y Electromecánica</h1>
           <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
