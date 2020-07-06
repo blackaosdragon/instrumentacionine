@@ -256,12 +256,14 @@ class Home extends Component{
             </GridListTile>
             
             <GridListTile className="cuadriculaImagen" key="TarjetaLog.jpg">
+            <Link to="/monitor">
               <img src={TarjetaLog} alt="Tarjetas" />
               <GridListTileBar
                 
                 title={<h1 className="title">Tarjetas </h1>}
                 subtitle={<h2 className="textosBlancos"></h2>}
               />
+              </Link>
             </GridListTile>
             <GridListTile className="cuadriculaImagen" key="TarjetaChec.jpg">
             <Link to="/monitor">

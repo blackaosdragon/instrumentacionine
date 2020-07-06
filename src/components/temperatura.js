@@ -252,7 +252,32 @@ class Temperature extends Component{
 
         } else {
             return(
-                <div>Movil</div>
+                <div>
+                    <div className="margenSup">.</div>
+                    <div className="contenedorCardMovil">
+                        <h1 className="titulos">Monitor de temperaturas</h1>
+                        <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicacion y la ultima hora que se registró su lectura</p>                    
+                    </div>
+                    <div className="contenedorCardTabla">
+    
+                        <TableContainer>
+                            <Table className="monitorTemperaturas">
+                                <TableHead>
+                                    <TableRow className="tabla">
+                                        <TableCell ><p className="tablaTitulos">Sensor</p></TableCell>                                
+                                        <TableCell ><p className="tablaTitulos"> Temperatura</p></TableCell>                                
+                                        <TableCell ><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                        <TableCell ><p className="tablaTitulos">Ultima actualización</p></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {carga}
+                                </TableBody>
+                            </Table>
+    
+                        </TableContainer>
+                    </div>
+                </div>
             )
         }
         
