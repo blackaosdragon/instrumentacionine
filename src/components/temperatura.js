@@ -187,7 +187,7 @@ class Temperature extends Component{
         } else {
             carga = data.map((element,id)=>{
                 let temp = parseFloat(this.state[element.name].valor);
-                if(temp>0 && temp<=24.9){
+                if(temp>=0 && temp<=24.9){
                     return (
                         <TableRow style={{backgroundColor: "#00284d"}} key={element.name}>
                             <TableCell> <p className="tablaDatos2"> {element.name} </p></TableCell>
