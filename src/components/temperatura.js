@@ -214,6 +214,15 @@ class Temperature extends Component{
                             <TableCell> <p className="tablaDatos"> {this.state[element.name].actualizacion} </p></TableCell>
                         </TableRow>
                     )
+                } else if(temp>-10 && temp<0){
+                    return (
+                        <TableRow style={{backgroundColor: "#80e5ff"}} key={element.name}>
+                            <TableCell> <p className="tablaDatos"> {element.name} </p></TableCell>
+                            <TableCell> <p className="tablaDatos">{this.state[element.name].valor}°C</p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {element.ubicacion} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state[element.name].actualizacion} </p></TableCell>
+                        </TableRow>
+                    )
                 }
             })            
         }
