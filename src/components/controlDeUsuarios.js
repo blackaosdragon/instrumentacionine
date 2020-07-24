@@ -94,14 +94,10 @@ class ControlUsers extends Component{
             })
         }
         let cadena = [];
-        for(let i = 0; event.target.value.length>i;i++){
-            console.log(event.target.value.length);
-            
-            if(i==0){
-                i=i+1;
-            }
-            
+        for(let i = 0; event.target.value.length>=i;i++){
+            //console.log(event.target.value.length);
             cadena[i] = event.target.value[event.target.value.length-i]
+            console.log(event.target.value[event.target.value.length-(i+1)])
             
             /*this.setState({
 
