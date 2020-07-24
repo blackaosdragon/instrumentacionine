@@ -16,24 +16,40 @@ import Aires from "./components/aires.js";
 //import 'firebase/messaging'
 import Sensor from './components/sensor.js';
 import Temperature from './components/temperatura.js';
-import Consulta from './components/consultaBase.js'
+import Consulta from './components/consultaBase.js';
+import Usuarios from './components/controlDeUsuarios.js';
 
 class App extends Component{
   constructor(){
     super();
     this.state = {
-      width: window.innerWidth,
+      width: 1,
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
       //token: ""
     }
-    this.handleListener = this.handleListener.bind(this); 
+    //this.handleListener = this.handleListener.bind(this); 
   }
+  /*
   handleListener(){
     this.setState({width: window.innerWidth});
     //actualiza el tamaño de la ventana
+  }*/
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.width!==prevState.width){
+      console.log("Cambio de dimensiones");
+      console.log(this.state);
+    }
+
   }
   componentDidMount(){
+    this.setState(
+      {
+        width: window.innerWidth
+      }
+    );
+    console.log(this.state);
+
     /*
     if('chrome' in window){
       console.log("Usando Chrome");
@@ -66,7 +82,7 @@ class App extends Component{
       console.log("Se está usando otro navegador que no es safari")
       //alert("No se esta usando safari como navegador")
     }*/
-    window.addEventListener("resize",this.handleListener);
+    //window.addEventListener("resize",this.handleListener);
 
 /*
     navigator.serviceWorker.addEventListener("message", data => {
@@ -173,6 +189,8 @@ class App extends Component{
           <Route path="/sensor" component={() => <Sensor anchura={this.state.width} />} />
           <Route path="/monitor" component={()=> <Temperature anchura={this.state.width}/> }/>
           <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
+
+          <Route path="/login" component={()=> <Usuarios anchura={this.state.width} />} />
 
                     
           </Switch>

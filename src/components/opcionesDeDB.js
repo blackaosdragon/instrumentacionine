@@ -217,14 +217,20 @@ class Opciones extends Component{
             })
         }
     }
-    descargar_consulta = () =>{
-        fetch(`${protocolo}//${server}/${end_point_descarga}`)
+    descargar_consulta = async () =>{
+
+        fetch(`${protocolo}://${server}/${end_point_descarga}`)
         .then(response=>{
-            console.log("Archivo descargado");
+            return response;
+        })
+        .then(data=>{
+
+            console.log("Archivo descargado(?")
         })
         .catch(()=>{
             console.log("Fallo la descarga");
         })
+        
     }
     
     componentDidMount(){
@@ -300,7 +306,7 @@ class Opciones extends Component{
             
             </div>
             <div style={{visibility: this.state.boton_descarga}}>
-                <div className="boton" onClick={this.descargar_consulta}>Descargar Resultado</div>
+                <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.descargar_consulta}>Descargar Resultado</a>
             </div>
             
             <Tabla data={this.state.consulta} />

@@ -16,6 +16,7 @@ const ubicaciones_endPoint = "ubicaciones";
 //let socket = new WebSocket(`ws://${dominio}:${port}`);
 
 let cargando = 1;
+const socket = socketIOClient(ioSocket);
 
 class Temperature extends Component{
     constructor(){
@@ -25,7 +26,10 @@ class Temperature extends Component{
         }
     }
     componentWillUnmount(){
-        cargando=1;
+        cargando = 1;
+        //socket.close();
+        //socket.disconnect();
+        console.log("Cerrando conexion");
     }
     componentWillMount(){
         
@@ -61,7 +65,7 @@ class Temperature extends Component{
             //cargando = 0;
         })
         
-        const socket = socketIOClient(ioSocket);
+        
         socket.on('temp', data => {
             let hora = new Date();
             let float_temp = 0;
