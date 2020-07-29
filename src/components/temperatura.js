@@ -79,13 +79,14 @@ class Temperature extends Component{
             if(data[0]=='1'){                
                 this.setState({
                     ...this.state,
-                    [this.state.estuctura_De_tabla[0]]:{
-                        ...[this.state.estuctura_De_tabla[0]],
+                    [this.state.estuctura_De_tabla[4]]:{
+                        ...[this.state.estuctura_De_tabla[4]],
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
                 })
             }
+            console.log(this.state.estuctura_De_tabla);
             if(data[0]=='2'){
                 this.setState({
                     ...this.state,
