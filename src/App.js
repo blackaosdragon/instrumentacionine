@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter as Router,
   Switch,
-  Route} from "react-router-dom";
+  Route,
+  PrivateRoute} from "react-router-dom";
 
 import MainBar from "./components/mainBar.js"
 import Home from "./components/home.js"
@@ -18,6 +19,7 @@ import Sensor from './components/sensor.js';
 import Temperature from './components/temperatura.js';
 import Consulta from './components/consultaBase.js';
 import Usuarios from './components/controlDeUsuarios.js';
+import ConsolaDeControl from './components/panelDeCOntrol.js';
 
 class App extends Component{
   constructor(){
@@ -189,8 +191,11 @@ class App extends Component{
           <Route path="/sensor" component={() => <Sensor anchura={this.state.width} />} />
           <Route path="/monitor" component={()=> <Temperature anchura={this.state.width}/> }/>
           <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
+          <Route path="/panelDeControl" component={()=> <ConsolaDeControl anchura={this.state.width} />} />
 
           <Route path="/login" component={()=> <Usuarios anchura={this.state.width} />} />
+
+          
 
                     
           </Switch>

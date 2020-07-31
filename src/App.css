@@ -35,13 +35,15 @@
   
 }
 .boton:hover{
-  background-color: #d9d9d9;
+  
   cursor: pointer;
   box-shadow: 0 30px 40px #222;
   transition: 0.3s;
+  text-decoration: none;
 }
 .boton:active{
   box-shadow: 0 5px 10px #222;
+  text-decoration: none;
 }
 .botonIcono {
   border-radius: 15px;
@@ -53,9 +55,11 @@
   border-radius: 8px;
   color: #000000; 
   transition: background-color 0.8s;
+  text-decoration: none;
 }
 
 .boton-link:hover{
+  text-decoration: none;
   background-color: #0059b3;
   transition: background-color 0.8s;
 }

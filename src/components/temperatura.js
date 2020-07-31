@@ -86,7 +86,7 @@ class Temperature extends Component{
                     }
                 })
             }
-            console.log(this.state.estuctura_De_tabla);
+            //console.log(this.state.estuctura_De_tabla);
             if(data[0]=='2'){
                 this.setState({
                     ...this.state,

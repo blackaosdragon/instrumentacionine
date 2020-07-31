@@ -57,7 +57,7 @@ class Home extends Component{
     if (this.props.anchura>970){
       return(
         <div>
-          <Link className="enlace" to="/login">
+          <Link className="enlace" to="/panel">
             <div className="contenedorCardPrincipal">
               <h1 className="titulos">Instrumentación y Electromecánica</h1>
               <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>

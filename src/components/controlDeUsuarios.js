@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Link } from '@material-ui/core';
 import CryptoJS from 'crypto-js';
 import styled from 'styled-components'
 import {withStyles,createMuiTheme} from '@material-ui/core/styles';
+import { Route,Redirect } from 'react-router-dom';
+
 
 let estado_campo = 'blue'
 
@@ -176,6 +178,7 @@ class ControlUsers extends Component{
     
 
     render(){
+        
 
         let carga = ''
         if (this.state.cargando){
@@ -186,7 +189,7 @@ class ControlUsers extends Component{
 
         if(this.props.anchura>970){
             return(
-                <div>
+                <div>                        
                     <div className="contenedorCard">
                         <div className="grid-login">
                         Login
@@ -212,28 +215,12 @@ class ControlUsers extends Component{
                              type='password'
                              fullWidth
                            />
-                           {/*
-                           <PersonalTextoField
-                             fullWidth
-                             label="Prueba"
-                             helperText={this.state.leyenda_usuario}
-                             onBlur={this.onBlurHandle}
-                             error={this.state.error_personal}
-                             />
-                             <TextPersonal
-                             fullWidth
-                             label="Segunda prueba"
-                             helperText={this.state.leyenda_usuario}
-                             onBlur={this.onBlurHandle}
-                             
-                             //error={this.state.error_personal}
-                             />
-                             */}
                         </div>
                         
                          </div>
                          
                     </div>
+                    
                     <div className="boton" onClick={this.enviar}>Enviar</div>
                     
                 </div>
