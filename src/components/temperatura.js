@@ -67,20 +67,26 @@ class Temperature extends Component{
         
         
         socket.on('temp', data => {
+            console.log(data);
             let hora = new Date();
             let float_temp = 0;
             let string_temp = "";
             for( let i = 1 ; i < data.length ; i++){
                 string_temp = string_temp+data[i];
             }
+            console.log(string_temp);
             if(parseFloat(string_temp)){
                 float_temp = parseFloat(string_temp);
-            } else {}
-            if(data[0]=='1'){                
+                console.log(`Se convirtio a ${float_temp}`);
+            } else {
+                console.log(`No se convirtio ${string_temp}`);
+            }
+            if(data[0]=='1'){ 
+                console.log(this.state.estuctura_De_tabla[1]);
                 this.setState({
                     ...this.state,
-                    [this.state.estuctura_De_tabla[4]]:{
-                        ...[this.state.estuctura_De_tabla[4]],
+                    [this.state.estuctura_De_tabla[1]]:{
+                        ...[this.state.estuctura_De_tabla[1]],
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
@@ -90,8 +96,8 @@ class Temperature extends Component{
             if(data[0]=='2'){
                 this.setState({
                     ...this.state,
-                    [this.state.estuctura_De_tabla[1]]:{
-                        ...[this.state.estuctura_De_tabla[1]],
+                    [this.state.estuctura_De_tabla[0]]:{
+                        ...[this.state.estuctura_De_tabla[0]],
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
@@ -101,8 +107,8 @@ class Temperature extends Component{
             if(data[0]=='3'){
                 this.setState({
                     ...this.state,
-                    [this.state.estuctura_De_tabla[3]]:{
-                        ...[this.state.estuctura_De_tabla[3]],
+                    [this.state.estuctura_De_tabla[2]]:{
+                        ...[this.state.estuctura_De_tabla[2]],
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
@@ -159,6 +165,15 @@ class Temperature extends Component{
                             <TableCell> <p className="tablaDatos"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow>
                     )                    
+                } else if(temp===-127){
+                    return(
+                        <TableRow className="Alert" key={element}>
+                            <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
+                            <TableCell > <p className="tablaDatos"> ¡Error! Revisar el sensor</p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state[element].actualizacion} </p></TableCell>
+                        </TableRow> 
+                    )                                       
                 }
 
             })            
@@ -166,7 +181,7 @@ class Temperature extends Component{
         //console.log(this.props.anchura);
         if(this.props.anchura>970){
             return(
-                <div>
+                <div className="contenedorCard2">
                     <div className="contenedorCard">
                         <h1 className="titulos">Monitor de temperaturas</h1>
                     </div>
@@ -199,7 +214,7 @@ class Temperature extends Component{
         } else {
             return(
                 <div>
-                    <div className="margenSup">.</div>
+                    {/*<div className="margenSup">.</div>*/}
                     <div className="contenedorCardMovil">
                         <h1 className="titulos">Monitor de temperaturas</h1>
                         <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicacion y la ultima hora que se registró su lectura</p>                    

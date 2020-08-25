@@ -4,6 +4,20 @@
   font-weight: normal;
   src: url(./fuentes/zrnic.woff) format('woff');
 }
+.Alert{
+  background-color: red;
+  animation-name: revisar;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  color: white;
+}
+@keyframes revisar{
+  from {
+    background-color: red;
+
+  }
+  to {background-color: blue;}
+}
 .App {
   text-align: center;
   background-color: #99ccff;
@@ -118,6 +132,29 @@
 .carrusel{
   margin: 0 0 0 5%;
 }
+.contenedor{
+  display: grid;
+  grid-gap: 10px;
+  background-color: #ff0000;
+  padding: 10px;
+}
+.contenedor-item{
+  background-color: #ffffff;
+  text-align: center;
+  padding: 10px;
+}
+.item1{
+  grid-column: 1 / span 3;
+  grid-row: 1;
+}
+.item2{
+  grid-column: 3;
+  grid-row: 1 / span 2;
+}
+.item5 {
+  grid-column: 1 / span 3;
+  grid-row: 3;
+}
 .contenedorCardPrincipal{
   background-color: #ffffff;
   margin: 0% 25% 5% 25%;
@@ -133,6 +170,11 @@
   border-radius: 10px;
   box-shadow: 0 3px 15px #222;
   transition: background-color 0.3s;
+}
+.contenedorCard2{
+ 
+  margin: -50% 25% 5% 25%;
+
 }
 
 .contenedorCardPrincipal:hover{
@@ -150,7 +192,7 @@
   margin: 0% 0% 25% 0%;  
 }
 .contenedorCardMovil {  
-  margin: 20% 10% 5% 10%;
+  margin: 0% 10% 5% 10%;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 1% 0 1% 0;
@@ -547,4 +589,7 @@
 }
 .textos{
   margin: 5% 18% 0% 28%;
+}
+.margenMovilSuperior{
+  margin: 0% 0% 20% 0%
 }

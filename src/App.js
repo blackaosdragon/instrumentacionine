@@ -18,14 +18,18 @@ import Aires from "./components/aires.js";
 import Sensor from './components/sensor.js';
 import Temperature from './components/temperatura.js';
 import Consulta from './components/consultaBase.js';
-import Usuarios from './components/controlDeUsuarios.js';
+import Login from './components/controlDeUsuarios.js';
 import ConsolaDeControl from './components/panelDeCOntrol.js';
+import Panel from './autenticacion.js';
 
 class App extends Component{
   constructor(){
     super();
     this.state = {
       width: 1,
+      name: "",
+      logeado: 0,
+      notificaciones: 1,
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
       //token: ""
@@ -38,11 +42,27 @@ class App extends Component{
     //actualiza el tamaño de la ventana
   }*/
   componentDidUpdate(prevProps, prevState){
+    console.log("Movido")
     if(this.state.width!==prevState.width){
       console.log("Cambio de dimensiones");
       console.log(this.state);
     }
 
+  }
+  handleName = (name) => {
+    this.setState({
+      name: name
+    })
+  }
+  handleStatus = (status) => {
+    this.setState({
+      logeado: status
+    })
+  }
+  handleNotifis = (active) => {
+    this.setState({
+      notificaciones: active
+    })
   }
   componentDidMount(){
     this.setState(
@@ -191,9 +211,9 @@ class App extends Component{
           <Route path="/sensor" component={() => <Sensor anchura={this.state.width} />} />
           <Route path="/monitor" component={()=> <Temperature anchura={this.state.width}/> }/>
           <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
-          <Route path="/panelDeControl" component={()=> <ConsolaDeControl anchura={this.state.width} />} />
-
-          <Route path="/login" component={()=> <Usuarios anchura={this.state.width} />} />
+          <Route path="/panelDeControl" component={()=> <ConsolaDeControl notifis={this.state.notificaciones}handleNotifis={this.handleNotifis} handleStatus={this.handleStatus} name={this.state.name} anchura={this.state.width} />} />
+          <Route path="/panel" component={()=> <Panel logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
+          <Route path="/login" component={()=> <Login  anchura={this.state.width} />} />
 
           
 

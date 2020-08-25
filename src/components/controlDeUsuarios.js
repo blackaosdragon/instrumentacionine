@@ -68,13 +68,22 @@ class ControlUsers extends Component{
             
         }
     }
-    componentDidMount(){
-        console.log(this.props);
-        window.addEventListener("keyup",this.handleListener)
+    componentDidUpdate = (prevProps, prevState) => {
+        const {onChange} = this.props;
+//        console.log(handleName)
+        ///console.log(onChange);
+        //console.log(anchura);
+        if(prevState.key!==this.state.key){
+            onChange(this.state.key);
+            //handleName(this.state.name);
+            //console.log(this.state.usuario);
+        }
     }
-    componentWillUnmount(){
-        window.removeEventListener("keyup",this.handleListener);
-    }
+    // componentWillUnmount = () => {
+    //     this.setState({
+    //         key: 0
+    //     })
+    // }
     onChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -82,24 +91,25 @@ class ControlUsers extends Component{
         //console.log(event.target.name);
         //console.log(event.target.value.length);
     }
-    onBlur = (event) => {        
+    onBlur = (event) => {    
+        //console.log(this.props);    
         let cadena = [];
         for(let i = 0; event.target.value.length>i;i++){
             cadena[i] = event.target.value[event.target.value.length-(i+1)]
-            console.log(event.target.value.length)
+            //console.log(event.target.value.length)
         }
         let segundaCadena = cadena.join('');
         if(event.target.name==="usuario"){
             this.setState({
                 oirausu: CryptoJS.SHA3(segundaCadena).toString(CryptoJS.enc.Base64)
             })
-            console.log(this.state);
+            //console.log(this.state);
         }
         if(event.target.name==="contraseña"){
             this.setState({
                 hasch: CryptoJS.SHA3(segundaCadena).toString(CryptoJS.enc.Base64)
             })
-            console.log(this.state);
+            //console.log(this.state);
         }
         
         //console.log(segundaCadena);
@@ -120,17 +130,18 @@ class ControlUsers extends Component{
         
     }
     onBlurHandle = (event) => {
-        console.log(event.target.value.length);
+        //console.log(this.props);
+        //console.log(event.target.value.length);
         if (event.target.value.length<=6){
-            console.log(estado_campo);
+            //console.log(estado_campo);
             this.setState({
                 leyenda_usuario: 'Usuario muy corto',
                 error_personal: true
             })
             estado_campo = 'red';
-            console.log(estado_campo);
+            //console.log(estado_campo);
         } else if (event.target.value.length>6){
-            console.log("Usuario correcto");
+            //console.log("Usuario correcto");
             this.setState({
                 leyenda_usuario: 'Campo correcto',
                 error_personal: false
@@ -138,20 +149,62 @@ class ControlUsers extends Component{
             
         }
     }
-    enviar = () => {
-        this.setState({
-            usuario: '',
-            contraseña: '',
-            cargando: 1
+    test = () => {
+        let datos = {
+            temperatura: 25.5,
+            id: 2.0,
+        }
+        /*
+        fetch('https://instrumentacionline.ddns.net/test')
+        .then(response=>{
+            return response.json();
         })
-        console.log(this.state.oirausu);
-        console.log(this.state.hasch);
+        .then(data=>{
+            console.log(data);
+        })
+        .catch( error => {
+            console.log("Error: ");
+            console.log(error);
+        })
+        fetch('https://instrumentacionline.ddns.net/temperatura',{
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers:{
+                'Content-Type': 'application/json' 
+              },            
+        }).then(response => {
+            return response.json();
+        }).then( data => {
+            console.log(data);
+        }).catch( error => {
+            console.log(error);
+        })
+        */
+        console.log("Fetch hacia socket");
+        fetch('https://instrumentacionline.ddns.net/socket')
+        .then( response => {
+            return response.json();
+        }).then( data=> {
+            console.log(data);
+        }).catch( err => {
+            console.log(err);
+        })
+        console.log("Terminado el fetch a socket");
+
+    }
+    enviar = () => {
+        const { handleLogin, handleName } = this.props;  
+            
+        //console.log(this.state.oirausu);
+        //console.log(this.state.hasch);
         //console.log(this.state.oirausu.length);
         //console.log(this.state.hasch.length);
         let data = {
             user: this.state.oirausu,
             pass: this.state.hasch
-        }        
+        
+        }
+        handleName(this.state.usuario);        
         fetch(`${login}`,{
             method: 'POST',
             body: JSON.stringify(data),
@@ -159,13 +212,20 @@ class ControlUsers extends Component{
                 'Content-Type': 'application/json' 
               },
         }).then(response=>{
+                      
             return response.json();
         }).then(data=>{
-            console.log("La respuesta es: ");            
-            console.log(data);
-            if(data==1){
-                alert("Loggin exitoso");
-            } else if (data==0){
+            //console.log("La respuesta es: ");            
+            //console.log(data);
+            if(data.data==1){
+                
+                handleLogin(1);
+                
+
+                this.setState({
+                    key: 1                    
+                })
+            } else if (data.data==0){
                 alert("Verifique su usuario y contraseña");
             }
 
@@ -173,12 +233,17 @@ class ControlUsers extends Component{
             console.log("Error:");
             console.log(err);
         })
+        this.setState({
+            usuario: '',
+            contraseña: '',
+            cargando: 1
+        })
     }
 
     
 
     render(){
-        
+        //this.props.onChange();
 
         let carga = ''
         if (this.state.cargando){
@@ -212,6 +277,7 @@ class ControlUsers extends Component{
                              helperText="Ingrese su contraseña"
                              value={this.state.contraseña}
                              onChange={this.onChange}
+                             
                              type='password'
                              fullWidth
                            />
@@ -222,12 +288,38 @@ class ControlUsers extends Component{
                     </div>
                     
                     <div className="boton" onClick={this.enviar}>Enviar</div>
+                    <div className="boton" onClick={this.test}>Enviar</div>
                     
                 </div>
             )
         } else {
             return(
-                <div>Control de ususarios movil</div>
+                <div>
+                    <div className="margenMovilSuperior">.</div>
+                    <div className="contenedorCardMovil">
+                        <p className="titulos"> Login </p>
+                        <TextField                                                     
+                           name="usuario"
+                           label="Usuario"
+                           helperText="Ingrese su e-mail/usuario"
+                           value={this.state.usuario}
+                           onChange={this.onChange}
+                           onBlur={this.onBlur}
+                           
+                           />
+                           <TextField
+                           onBlur={this.onBlur}
+                            name="contraseña"
+                             label="Contraseña"
+                             helperText="Ingrese su contraseña"
+                             value={this.state.contraseña}
+                             onChange={this.onChange}
+                             type='password'
+                           />
+                           
+                    </div>
+                    <div className="boton" onClick={this.enviar}> Entrar </div>
+                </div>
             )
         }
         

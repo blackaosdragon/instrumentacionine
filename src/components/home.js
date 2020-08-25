@@ -199,10 +199,12 @@ class Home extends Component{
       return(
         <div >
           <div className="margenSup">.</div>
+          <Link className="enlace" to="/panel">
           <div className="contenedorCardMovil">
           <h1 className="titulos">Instrumentación y Electromecánica</h1>
           <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
           </div>
+          </Link>
           <div className="fondoBlanco">
             <h2 className="titulos">Estos son algunos de los equipos que nos dedicamos: </h2>
             <GridList  cellHeight={420}>

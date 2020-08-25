@@ -3,16 +3,27 @@ import {Route, Redirect} from 'react-router-dom';
 import Login from './components/controlDeUsuarios'
 
 class Auth  extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            logeado: 1
+            logeado: 0
         }
     }
+
+    change = data => {
+        this.setState({
+            logeado: data
+        })
+    }
+    componentDidUpdate = (prevProps,prevState) => {
+        console.log(this.props.handleName);
+    }
+    
     render(){
+        //console.log(this.props.logeado);
         return(
             <Route>
-                {this.state.logeado ? <Redirect to="/panelDeControl" /> : <Login />}
+                {this.props.logeado ? <Redirect to="/panelDeControl" /> : <Login handleLogin={this.props.handleLogin} handleName={this.props.handleName} onChange={this.change} anchura={this.props.anchura} />}
             </Route>
         )
     }
