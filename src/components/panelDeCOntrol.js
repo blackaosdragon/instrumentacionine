@@ -75,6 +75,7 @@ class PanelDeControl extends Component{
                 <div>
                     <div className="margenMovilSuperior">.</div>
                     <Monitor />
+                    <Link className="link" to="/panel"><div className="boton" onClick={this.session}>Cerrar sesión</div></Link> 
                 </div>
             )
         }
