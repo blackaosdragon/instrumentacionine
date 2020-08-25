@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter as Router,
   Switch,
-  Route} from "react-router-dom";
+  Route,
+  PrivateRoute} from "react-router-dom";
 
 import MainBar from "./components/mainBar.js"
 import Home from "./components/home.js"
@@ -16,24 +17,61 @@ import Aires from "./components/aires.js";
 //import 'firebase/messaging'
 import Sensor from './components/sensor.js';
 import Temperature from './components/temperatura.js';
-import Consulta from './components/consultaBase.js'
+import Consulta from './components/consultaBase.js';
+import Login from './components/controlDeUsuarios.js';
+import ConsolaDeControl from './components/panelDeCOntrol.js';
+import Panel from './autenticacion.js';
 
 class App extends Component{
   constructor(){
     super();
     this.state = {
-      width: window.innerWidth,
+      width: 1,
+      name: "",
+      logeado: 0,
+      notificaciones: 1,
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
       //token: ""
     }
-    this.handleListener = this.handleListener.bind(this); 
+    //this.handleListener = this.handleListener.bind(this); 
   }
+  /*
   handleListener(){
     this.setState({width: window.innerWidth});
     //actualiza el tamaño de la ventana
+  }*/
+  componentDidUpdate(prevProps, prevState){
+    console.log("Movido")
+    if(this.state.width!==prevState.width){
+      console.log("Cambio de dimensiones");
+      console.log(this.state);
+    }
+
+  }
+  handleName = (name) => {
+    this.setState({
+      name: name
+    })
+  }
+  handleStatus = (status) => {
+    this.setState({
+      logeado: status
+    })
+  }
+  handleNotifis = (active) => {
+    this.setState({
+      notificaciones: active
+    })
   }
   componentDidMount(){
+    this.setState(
+      {
+        width: window.innerWidth
+      }
+    );
+    console.log(this.state);
+
     /*
     if('chrome' in window){
       console.log("Usando Chrome");
@@ -66,7 +104,7 @@ class App extends Component{
       console.log("Se está usando otro navegador que no es safari")
       //alert("No se esta usando safari como navegador")
     }*/
-    window.addEventListener("resize",this.handleListener);
+    //window.addEventListener("resize",this.handleListener);
 
 /*
     navigator.serviceWorker.addEventListener("message", data => {
@@ -173,6 +211,11 @@ class App extends Component{
           <Route path="/sensor" component={() => <Sensor anchura={this.state.width} />} />
           <Route path="/monitor" component={()=> <Temperature anchura={this.state.width}/> }/>
           <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
+          <Route path="/panelDeControl" component={()=> <ConsolaDeControl notifis={this.state.notificaciones}handleNotifis={this.handleNotifis} handleStatus={this.handleStatus} name={this.state.name} anchura={this.state.width} />} />
+          <Route path="/panel" component={()=> <Panel logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
+          <Route path="/login" component={()=> <Login  anchura={this.state.width} />} />
+
+          
 
                     
           </Switch>

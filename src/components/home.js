@@ -57,11 +57,14 @@ class Home extends Component{
     if (this.props.anchura>970){
       return(
         <div>
-          <div className="contenedorCard">
-          <h1 className="titulos">Instrumentación y Electromecánica</h1>
-          <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
-          <div onClick={this.a2hs}></div>
-          </div>
+          <Link className="enlace" to="/panel">
+            <div className="contenedorCardPrincipal">
+              <h1 className="titulos">Instrumentación y Electromecánica</h1>
+              <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
+              <div onClick={this.a2hs}></div>
+            </div>
+          </Link>
+
           <div className="fondoBlanco">
             <h2 className="titulos">Estos son algunos de los equipos que nos dedicamos: </h2>
             <GridList  cellHeight={420}>
@@ -196,10 +199,12 @@ class Home extends Component{
       return(
         <div >
           <div className="margenSup">.</div>
+          <Link className="enlace" to="/panel">
           <div className="contenedorCardMovil">
           <h1 className="titulos">Instrumentación y Electromecánica</h1>
           <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
           </div>
+          </Link>
           <div className="fondoBlanco">
             <h2 className="titulos">Estos son algunos de los equipos que nos dedicamos: </h2>
             <GridList  cellHeight={420}>

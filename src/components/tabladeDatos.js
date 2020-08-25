@@ -64,6 +64,7 @@ class TableFromDataBase extends Component{
 
         return (
         <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
+            
             <TableContainer>
                 <Table>
                     <TableHead>

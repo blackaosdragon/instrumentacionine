@@ -17,6 +17,7 @@ const end_point_años = 'years';
 const end_point_meses = 'mes';
 const end_point_dias = 'days';
 const end_point_consulta = 'buscar';
+const end_point_descarga = 'descarga_consulta'
 let estilos = ["carga","cargaInvisible"];
 
 
@@ -39,6 +40,7 @@ class Opciones extends Component{
             month: "collapse",
             days: "collapse",
             boton: "collapse",
+            boton_descarga: "collapse",
             ubicacion: "",
             año: "",
             mes:"",
@@ -203,7 +205,8 @@ class Opciones extends Component{
                 //console.log(data);
                 this.setState({
                     consulta: data,
-                    cargando: false
+                    cargando: false,
+                    boton_descarga: true
                 })
             }).catch( err => {
                 alert("Error al comunicarse ocn la base de datos");
@@ -213,6 +216,21 @@ class Opciones extends Component{
                 })
             })
         }
+    }
+    descargar_consulta = async () =>{
+
+        fetch(`${protocolo}://${server}/${end_point_descarga}`)
+        .then(response=>{
+            return response;
+        })
+        .then(data=>{
+
+            console.log("Archivo descargado(?")
+        })
+        .catch(()=>{
+            console.log("Fallo la descarga");
+        })
+        
     }
     
     componentDidMount(){
@@ -285,7 +303,12 @@ class Opciones extends Component{
             
             <div style={{visibility: this.state.boton}}>
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
+            
             </div>
+            <div style={{visibility: this.state.boton_descarga}}>
+                <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.descargar_consulta}>Descargar Resultado</a>
+            </div>
+            
             <Tabla data={this.state.consulta} />
             
         </div>
