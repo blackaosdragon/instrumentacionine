@@ -230,7 +230,7 @@ class Temperature extends Component{
                         <h1 className="titulos">Monitor de temperaturas</h1>
                     </div>
                     <div className="contenedorCard">
-                        <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicacion y la ultima hora que se registró su lectura</p>                    
+                        <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicación y la última hora que se registró su lectura</p>                    
                     </div>
                     <div className="contenedorCardTabla">
     
