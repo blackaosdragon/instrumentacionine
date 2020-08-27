@@ -13,6 +13,7 @@ const ioSocket = "https://instrumentacionline.ddns.net"
 //const dominio = "192.168.0.10";
 //const port = "5001";
 const ubicaciones_endPoint = "ubicaciones";
+const ubicaciones_endPoint2 = "ubicaciones2";
 //let socket = new WebSocket(`ws://${dominio}:${port}`);
 
 let cargando = 1;
@@ -29,17 +30,18 @@ class Temperature extends Component{
         cargando = 1;
         //socket.close();
         //socket.disconnect();
-        console.log("Cerrando conexion");
+        //console.log("Cerrando conexion");
     }
-    componentWillMount(){
-        
+    componentWillMount(){    
     }
     componentDidMount(){
+        /*
         fetch(`${ioSocket}/${ubicaciones_endPoint}`)
         .then(response=>{
             return response.json()
         })
         .then(data=>{
+            //console.log(data);
             data.forEach(element=>{
                 this.setState({
                     ...this.state,
@@ -64,25 +66,66 @@ class Temperature extends Component{
             console.log(err);
             //cargando = 0;
         })
+        */
+        fetch(`${ioSocket}/${ubicaciones_endPoint2}`)
+        .then( response => {return response.json()})
+        .then ( data => {
+            console.log(data);
+            data.forEach( element => {
+                console.log(element);
+                this.setState({
+                    ubicaciones: element.Ubicacion
+                })
+                this.setState({
+                    ...this.state,
+                    estuctura_De_tabla: [
+                        ...this.state.estuctura_De_tabla,
+                        element.lugar
+                    ]
+                })
+                console.log(this.state.estuctura_De_tabla)
+                this.setState({
+                    ...this.state,
+                    [element.lugar]:{
+                        lugar: element.lugar,
+                        ubicacion: element.Ubicacion,
+                        valor: "",
+                        actualizacion: ""
+                    }
+                })
+            })
+            console.log(this.state.estuctura_De_tabla);
+            cargando=0;
+        })
+        .catch( error => {
+            console.log(error);
+        })
         
         
         socket.on('temp', data => {
-            console.log(data);
+            console.log("A partir de aqui se actualiza el estado");
             let hora = new Date();
             let float_temp = 0;
             let string_temp = "";
             for( let i = 1 ; i < data.length ; i++){
                 string_temp = string_temp+data[i];
             }
-            console.log(string_temp);
             if(parseFloat(string_temp)){
                 float_temp = parseFloat(string_temp);
-                console.log(`Se convirtio a ${float_temp}`);
-            } else {
-                console.log(`No se convirtio ${string_temp}`);
-            }
+            } else {}
             if(data[0]=='1'){ 
-                console.log(this.state.estuctura_De_tabla[1]);
+                //console.log(this.state.estuctura_De_tabla[1]);
+                
+                this.setState({
+                    ...this.state,
+                    [this.state.estuctura_De_tabla[1]]:{
+                        ...this.state.estuctura_De_tabla,
+                        lugar: this.state.estuctura_De_tabla[1],
+                        valor: float_temp,
+                        actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
+                    }
+
+                })/*
                 this.setState({
                     ...this.state,
                     [this.state.estuctura_De_tabla[1]]:{
@@ -90,7 +133,7 @@ class Temperature extends Component{
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
-                })
+                })*/
             }
             //console.log(this.state.estuctura_De_tabla);
             if(data[0]=='2'){
@@ -120,21 +163,22 @@ class Temperature extends Component{
     }
 
     render(){
-        //console.log(this.state);
+        console.log("Estado: ")
+        console.log(this.state);        
         let carga = '';
         if(cargando){
             carga = <div className="cargando"></div>
         } else {
             carga = this.state.estuctura_De_tabla.map((element,id)=>{
-                console.log(element);
-                console.log(this.state);
+                //console.log(element);
+                //console.log(this.state);
                 let temp = parseFloat(this.state[element].valor);
                 if(temp>=0 && temp<=24.9){
                     return (
                         <TableRow id={id} style={{backgroundColor: "#00284d"}} key={element}>
                             <TableCell> <p className="tablaDatos2"> {element} </p></TableCell>
                             <TableCell> <p className="tablaDatos2">{this.state[element].valor}°C</p></TableCell>
-                            <TableCell> <p className="tablaDatos2"> {element} </p></TableCell>
+                            <TableCell> <p className="tablaDatos2"> {this.state.ubicaciones} </p></TableCell>
                             <TableCell> <p className="tablaDatos2"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow>
                     )
@@ -143,7 +187,7 @@ class Temperature extends Component{
                         <TableRow style={{backgroundColor: "#ffff1a"}} key={element}>
                             <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
                             <TableCell> <p className="tablaDatos">{this.state[element].valor}°C</p></TableCell>
-                            <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state.ubicaciones} </p></TableCell>
                             <TableCell> <p className="tablaDatos"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow>
                     )
@@ -152,7 +196,7 @@ class Temperature extends Component{
                         <TableRow style={{backgroundColor: "#ff3300"}} key={element}>
                             <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
                             <TableCell> <p className="tablaDatos">{this.state[element].valor}°C</p></TableCell>
-                            <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state.ubicaciones} </p></TableCell>
                             <TableCell> <p className="tablaDatos"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow>
                     )
@@ -161,7 +205,7 @@ class Temperature extends Component{
                         <TableRow style={{backgroundColor: "#80e5ff"}} key={element}>
                             <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
                             <TableCell> <p className="tablaDatos">{this.state[element].valor}°C</p></TableCell>
-                            <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state.ubicaciones} </p></TableCell>
                             <TableCell> <p className="tablaDatos"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow>
                     )                    
@@ -170,7 +214,7 @@ class Temperature extends Component{
                         <TableRow className="Alert" key={element}>
                             <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
                             <TableCell > <p className="tablaDatos"> ¡Error! Revisar el sensor</p></TableCell>
-                            <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
+                            <TableCell> <p className="tablaDatos"> {this.state.ubicaciones} </p></TableCell>
                             <TableCell> <p className="tablaDatos"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow> 
                     )                                       
