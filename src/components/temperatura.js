@@ -240,8 +240,8 @@ class Temperature extends Component{
                                     <TableRow className="tabla">
                                         <TableCell ><p className="tablaTitulos">Sensor</p></TableCell>                                
                                         <TableCell ><p className="tablaTitulos"> Temperatura</p></TableCell>                                
-                                        <TableCell ><p className="tablaTitulos">Ubicacion</p></TableCell>
-                                        <TableCell ><p className="tablaTitulos">Ultima actualización</p></TableCell>
+                                        <TableCell ><p className="tablaTitulos">Ubicación</p></TableCell>
+                                        <TableCell ><p className="tablaTitulos">Última actualización</p></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
