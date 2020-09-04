@@ -4,6 +4,7 @@ import CryptoJS from 'crypto-js';
 import styled from 'styled-components'
 import {withStyles,createMuiTheme} from '@material-ui/core/styles';
 import { Route,Redirect } from 'react-router-dom';
+import ModalDeCarga from "./carga.js"
 
 
 let estado_campo = 'blue'
@@ -50,7 +51,8 @@ class ControlUsers extends Component{
     constructor(props){
         super(props);
         this.state = {
-            cargando: 0,
+            esperando_respuesta: false,
+            cargando: true,
             usuario: '',
             oirausu: '',
             contraseña: '',
@@ -67,6 +69,11 @@ class ControlUsers extends Component{
             }
             
         }
+    }
+    componentDidMount = () => {
+        this.setState({
+            cargando: false
+        })
     }
     componentDidUpdate = (prevProps, prevState) => {
         const {onChange} = this.props;
@@ -193,7 +200,10 @@ class ControlUsers extends Component{
 
     }
     enviar = () => {
-        const { handleLogin, handleName } = this.props;  
+        const { handleLogin, handleName } = this.props;
+        this.setState({
+            cargando: true
+        })
             
         //console.log(this.state.oirausu);
         //console.log(this.state.hasch);
@@ -211,22 +221,21 @@ class ControlUsers extends Component{
             headers:{
                 'Content-Type': 'application/json' 
               },
-        }).then(response=>{
-                      
-            return response.json();
-        }).then(data=>{
+        }).then(response=>{return response.json();
+        }).then( data => {
             //console.log("La respuesta es: ");            
             //console.log(data);
             if(data.data==1){
-                
                 handleLogin(1);
-                
-
                 this.setState({
-                    key: 1                    
+                    key: 1,
+                    cargando: false                   
                 })
             } else if (data.data==0){
                 alert("Verifique su usuario y contraseña");
+                this.setState({
+                    cargando: false
+                })
             }
 
         }).catch((err)=>{
@@ -244,17 +253,10 @@ class ControlUsers extends Component{
 
     render(){
         //this.props.onChange();
-
-        let carga = ''
-        if (this.state.cargando){
-            carga = <div className="cargando"></div>
-        } else {
-
-        }
-
         if(this.props.anchura>970){
             return(
-                <div>                        
+                <div>
+                    <ModalDeCarga cargando={this.state.cargando}/>                                       
                     <div className="contenedorCard">
                         <div className="grid-login">
                         Login
@@ -288,13 +290,14 @@ class ControlUsers extends Component{
                     </div>
                     
                     <div className="boton" onClick={this.enviar}>Enviar</div>
-                    <div className="boton" onClick={this.test}>Enviar</div>
+                    {/*<div className="boton" onClick={this.test}>Enviar</div>*/}
                     
                 </div>
             )
         } else {
             return(
                 <div>
+                    <ModalDeCarga cargando={this.state.cargando}/> 
                     <div className="margenMovilSuperior">.</div>
                     <div className="contenedorCardMovil">
                         <p className="titulos"> Login </p>
@@ -318,7 +321,7 @@ class ControlUsers extends Component{
                            />
                            
                     </div>
-                    <div className="boton" onClick={this.enviar}> Entrar </div>
+                    <div className="boton-movile" onClick={this.enviar}> Entrar </div>
                 </div>
             )
         }

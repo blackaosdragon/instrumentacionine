@@ -62,8 +62,7 @@ class PanelDeControl extends Component{
                     */}
                     
                 </FormControl>
-                <br />
-                <Monitor />
+                <Monitor anchura={this.props.anchura} />
                 
                 <Link className="link" to="/panel"><div className="boton" onClick={this.session}>Cerrar sesión</div></Link> 
                 
@@ -74,7 +73,7 @@ class PanelDeControl extends Component{
             return(
                 <div>
                     <div className="margenMovilSuperior">.</div>
-                    <Monitor />
+                    <Monitor anchura={this.props.anchura}/>
                     <Link className="link" to="/panel"><div className="boton" onClick={this.session}>Cerrar sesión</div></Link> 
                 </div>
             )

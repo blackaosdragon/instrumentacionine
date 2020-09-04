@@ -42,18 +42,36 @@ class Consulta extends Component{
     }
     render(){
 
-        //console.log(this.state);
-        return(
-            <div>
-                <div className="contenedorCard">
-                    <h1 className="Titulos"> Consultas </h1>
+        console.log(this.props.anchura);
+        if(this.props.anchura>970){
+            return(
+                <div>
+                    <div className="contenedorCard">
+                        <h1 className="Titulos"> Consultas </h1>
+                    </div>
+                    <div className="contenedorCard">
+                        <h6 className="subtitleCuadricula"> Porfavor seleccione los datos que se solicitan a continuacion </h6>
+                    </div>
+                    <Opciones anchura={this.props.anchura} ubicaciones={end_point_ubicaciones}/>
                 </div>
-                <div className="contenedorCard">
-                    <h6 className="subtitleCuadricula"> Porfavor seleccione los datos que se solicitan a continuacion </h6>
+            )
+
+        } else {
+            
+            return(
+                <div>
+                    <div className="margenMovilSuperior"> . </div>
+                    <div className="contenedorCard">
+                        <h1 className="Titulos"> Consultas </h1>
+                    </div>
+                    <div className="contenedorCard">
+                        <h6 className="subtitleCuadricula"> Porfavor seleccione los datos que se solicitan a continuacion </h6>
+                    </div>
+                    <Opciones anchura={this.props.anchura} ubicaciones={end_point_ubicaciones}/>
                 </div>
-                <Opciones ubicaciones={end_point_ubicaciones}/>
-            </div>
-        )
+            )
+        }
+        
     }
 }
 export default Consulta

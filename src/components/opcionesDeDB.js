@@ -18,6 +18,7 @@ const end_point_meses = 'mes';
 const end_point_dias = 'days';
 const end_point_consulta = 'buscar';
 const end_point_descarga = 'descarga_consulta'
+const end_point_consulta_y_descarga = 'csv'
 let estilos = ["carga","cargaInvisible"];
 
 
@@ -174,10 +175,6 @@ class Opciones extends Component{
         })
         console.log(`Lugar: ${this.state.ubicacion} ${this.state.dia}/${this.state.mes}/${this.state.año} ${this.state.horaInicio}:${this.state.minutoInicio} - ${this.state.horaFinal}:${this.state.minutoInicio}`)
         let payload = {
-            
-            
-            
-            
             year: this.state.año,
             mes: this.state.mes,
             dia: this.state.dia,
@@ -217,20 +214,51 @@ class Opciones extends Component{
             })
         }
     }
-    descargar_consulta = async () =>{
-
-        fetch(`${protocolo}://${server}/${end_point_descarga}`)
-        .then(response=>{
-            return response;
-        })
-        .then(data=>{
-
-            console.log("Archivo descargado(?")
-        })
-        .catch(()=>{
-            console.log("Fallo la descarga");
-        })
+    descargar_consulta = (e) =>{
         
+        this.setState({
+            cargando: true
+        })
+        console.log(e);
+        this.setState({
+            cargando: false
+        })
+
+    }
+    descargar_csv = async () => {
+        let payload = {
+            year: this.state.año,
+            mes: this.state.mes,
+            dia: this.state.dia,
+            lugar: this.state.ubicacion
+        }
+        if(
+            this.state.año === "" ||
+            this.state.mes === ""||
+            this.state.dia === ""||
+            this.state.ubicacion === ""
+        ) {
+            alert("Falta completar algunos datos");
+        } else (
+            fetch(`${protocolo}://${server}/${end_point_consulta_y_descarga}`,{
+              method: 'POST',
+                  body: JSON.stringify(payload),
+                  headers:{
+                      'Content-Type': 'application/json' 
+                    }            
+            }).then( response => {return response.json()})
+            .then( data => {
+                this.setState({
+                    cargando: false,
+                    boton_descarga: true
+                })
+            }).catch(error=>{
+                alert('Problema con el servidor, intente más tarde o contacte a soporte técnico')
+            })
+          )
+    }
+    decarga = (e) => {
+        console.log(e)
     }
     
     componentDidMount(){
@@ -259,7 +287,9 @@ class Opciones extends Component{
         })
     }
     render(){
-        return(
+        
+        if(this.props.anchura>970){
+            return(
         <div>
             <ModalDeCarga cargando={this.state.cargando}/>
             <FormControl style={{visibility: this.state.ubicaciones, margin: "0% 1% 0% 2%"}}>
@@ -300,19 +330,72 @@ class Opciones extends Component{
                 <FormHelperText>Seleccione el dia</FormHelperText>
             </FormControl>
 
-            
-            <div style={{visibility: this.state.boton}}>
+            <div className="boton" > Volver al monitor de temperaturas </div>    
+        <div style={{visibility: this.state.boton}}>
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
-            
             </div>
-            <div style={{visibility: this.state.boton_descarga}}>
-                <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.descargar_consulta}>Descargar Resultado</a>
-            </div>
+              <div style={{visibility: this.state.boton_descarga}}>
+                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" >Descargar Resultado</a>
+              </div>
+              
             
-            <Tabla data={this.state.consulta} />
-            
+            <Tabla anchura={this.props.anchura} data={this.state.consulta} />
         </div>
-    )
+    )} else {
+        return(
+            <div>
+                
+            <ModalDeCarga cargando={this.state.cargando}/>
+            <FormControl style={{visibility: this.state.ubicaciones, margin: "0% 1% 0% 2%"}}>
+            
+            <Select value={this.state.ubicacion} name="ubicacion" onChange={this.handleChange}>
+            {this.state.localizaciones.map( option => (
+                <MenuItem key={option} value={option}> {option}</MenuItem>
+            ))}
+            </Select>
+            <FormHelperText>Seleccione la ubicacion</FormHelperText>
+            </FormControl>
+            <br />
+
+            <FormControl style={{visibility: this.state.years,margin: "0% 1% 0% 1%"}}>
+                <Select value={this.state.año} name="año" onChange={this.seleccionYear}>
+                    {this.state.años.map( option => (
+                        <MenuItem key={option} value={option}> {option}</MenuItem>
+                    ))}
+                </Select>
+                <FormHelperText>Seleccione el año</FormHelperText>
+            </FormControl>
+            <br />
+            <FormControl style={{visibility: this.state.month, margin: "0% 1% 0% 1%"}}>
+                <Select value={this.state.mes} name="mes" onChange={this.selection_month}>
+                    {this.state.meses.map( option => (
+                        <MenuItem key={option} value={option}> {option}</MenuItem>
+                    ))}
+                </Select>
+                <FormHelperText>Seleccione el mes</FormHelperText>
+            </FormControl>
+            <br />
+            <FormControl style={{visibility: this.state.days, margin: "0% 1% 0% 1%"}}>
+                <Select value={this.state.dia} name="dia" onChange={this.slection_day}>
+                    {this.state.dias.map( option => (
+                        <MenuItem key={option} value={option}> {option}</MenuItem>
+                    ))}
+                </Select>
+                <FormHelperText>Seleccione el dia</FormHelperText>
+            </FormControl>
+
+            <div className="boton-movile" > Volver al monitor de temperaturas </div>    
+        <div style={{visibility: this.state.boton}}>
+            <div className="boton-movile" onClick={this.consultar_datos}> Realizar consulta </div>
+            </div>
+              <Tabla anchura={this.props.anchura} data={this.state.consulta} />
+              <div className="boton-movile" style={{visibility: this.state.boton_descarga}}>
+                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="noSub" onClick={this.desca}>Descargar consulta</a>
+              </div>
+        </div>
+        )
+
+    }
 }
 }
 

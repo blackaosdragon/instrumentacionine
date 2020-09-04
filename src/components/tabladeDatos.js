@@ -39,49 +39,101 @@ class TableFromDataBase extends Component{
 
     render(){
         datos = this.props.data.map( (element,id) => {
-            if(id%2==0){
-                return(
-                    <TableRow >
-                        <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
-                        <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
-                        <TableCell><p className="tablaDatos">
-                            {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
-                        </p></TableCell>
-                    </TableRow>
-                )
-            } else{
-                return(
-                    <TableRow style={{backgroundColor: '#cccccc'}}>
-                        <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
-                        <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
-                        <TableCell><p className="tablaDatos">
-                            {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
-                        </p></TableCell>
-                    </TableRow> 
-                )
-            }
-        })  
+            if(this.props.anchura>970){
+                if(id%2==0){
+                    return(
+                        <TableRow >
+                            <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
+                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                            <TableCell><p className="tablaDatos">
+                                {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
+                            </p></TableCell>
+                        </TableRow>
+                    )
+                } else{
+                    return(
+                        <TableRow style={{backgroundColor: '#cccccc'}}>
+                            <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
+                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                            <TableCell><p className="tablaDatos">
+                                {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
+                            </p></TableCell>
+                        </TableRow> 
+                    )
+                }
+ 
+            } else {
+                if(id%2==0){
+                    return(
+                        <TableRow >
+                            
+                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                            <TableCell><p className="tablaDatos">
+                                {element.hora} : {element.minuto} hrs
+                            </p></TableCell>
+                        </TableRow>
+                    )
+                } else{
+                    return(
+                        <TableRow style={{backgroundColor: '#cccccc'}}>
+                            
+                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                            <TableCell><p className="tablaDatos">
+                                {element.hora} : {element.minuto} hrs
+                            </p></TableCell>
+                        </TableRow> 
+                    )
+                }
 
-        return (
-        <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
+            }
             
-            <TableContainer>
-                <Table>
-                    <TableHead>
-                    <TableRow className="tabla">
-                        <TableCell><p className="tablaTitulos">Sensor</p></TableCell>
-                        <TableCell><p className="tablaTitulos">Temperatura</p></TableCell>
-                        <TableCell><p className="tablaTitulos">Fecha</p></TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {datos}
-                    </TableBody>
-                </Table>
-                
-            </TableContainer>
-        </div>
-        )
+        })  
+        console.log(this.props.anchura);
+        if(this.props.anchura>970){
+            return (
+                <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
+                    
+                    
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                            <TableRow className="tabla">
+                                <TableCell><p className="tablaTitulos">Sensor</p></TableCell>
+                                <TableCell><p className="tablaTitulos">Temperatura</p></TableCell>
+                                <TableCell><p className="tablaTitulos">Fecha</p></TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {datos}
+                            </TableBody>
+                        </Table>
+                        
+                    </TableContainer>
+                </div>
+                )
+        } else {
+            return (
+                <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
+                    
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                            <TableRow className="tabla">
+                                
+                                <TableCell><p className="tablaTitulos">Temperatura</p></TableCell>
+                                <TableCell><p className="tablaTitulos">Fecha</p></TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {datos}
+                            </TableBody>
+                        </Table>
+                        
+                    </TableContainer>
+                </div>
+                )            
+        }
+        
     }
 }
 export default TableFromDataBase

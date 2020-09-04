@@ -251,17 +251,17 @@ class Temperature extends Component{
     
                         </TableContainer>
                     </div>
-                    <Link to="./consulta" className="enlace"><div className="boton">Consultar Base</div> </Link>
+                    <Link to="./consulta" className="enlace"><div className="boton-movile">Consultar Base</div> </Link>
                 </div>
             );
 
         } else {
             return(
                 <div>
-                    {/*<div className="margenSup">.</div>*/}
+                    
                     <div className="contenedorCardMovil">
                         <h1 className="titulos">Monitor de temperaturas</h1>
-                        <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicacion y la ultima hora que se registró su lectura</p>                    
+                        <p className="subtitleCuadricula"> A continuación se muestran los sensores registrados, ubicación y la última hora que se registró su lectura</p>                    
                     </div>
                     <div className="contenedorCardTabla">
     
@@ -271,8 +271,8 @@ class Temperature extends Component{
                                     <TableRow className="tabla">
                                         <TableCell ><p className="tablaTitulos">Sensor</p></TableCell>                                
                                         <TableCell ><p className="tablaTitulos"> Temperatura</p></TableCell>                                
-                                        <TableCell ><p className="tablaTitulos">Ubicacion</p></TableCell>
-                                        <TableCell ><p className="tablaTitulos">Ultima actualización</p></TableCell>
+                                        <TableCell ><p className="tablaTitulos">Ubicación</p></TableCell>
+                                        <TableCell ><p className="tablaTitulos">Última actualización</p></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -282,6 +282,7 @@ class Temperature extends Component{
     
                         </TableContainer>
                     </div>
+                    <Link to="./consulta" className="enlace"><div className="boton">Consultar Base</div> </Link>
                 </div>
             )
         }
