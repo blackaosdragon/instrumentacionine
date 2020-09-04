@@ -10,14 +10,25 @@ class PanelDeControl extends Component{
             notificaciones: 0
         }
     }
-    componentDidUpdate = () => {
-        
+    componentDidUpdate = (prevProps,prevState) => {
+        if(prevState.notificaciones!=this.state.notificaciones){
+            
+        }
     }
     componentDidMount = () => {
+        console.log(Notification.permission);
+        if(Notification.permission==='default'){
+            this.setState({
+                notificaciones: false
+            })
+        } else if(Notification.permission==='granted'){
+            this.setState({
+                notificaciones: true
+            })
+        }
         this.setState({
             notifis: this.props.notifis
         })
-        console.log(this.props)
     }
     session = () => {
         const { handleStatus } = this.props;
@@ -30,6 +41,11 @@ class PanelDeControl extends Component{
     }
     handleNotificaciones = () => {
 
+    }
+    botonNotifis = () => {
+        this.setState({
+            notificaciones: !this.state.notificaciones
+        })
     }
     render(){
         
@@ -64,7 +80,19 @@ class PanelDeControl extends Component{
                 </FormControl>
                 <Monitor anchura={this.props.anchura} />
                 
-                <Link className="link" to="/panel"><div className="boton" onClick={this.session}>Cerrar sesión</div></Link> 
+                <Link className="link" to="./panel"><div className="boton" onClick={this.session}>Cerrar sesión</div></Link> 
+                {/*
+                <FormGroup className="switchFirebase">
+                        <FormControlLabel 
+                          value="bottom"
+                          control={<Switch onClick={this.botonNotifis} color="primary" checked={this.state.notificaciones}/>}
+                          label="Notificaciones"
+                          labelPlacement="bottom"
+
+                        />
+                        
+                    </FormGroup>
+                */}
                 
 
                 </div>
@@ -74,7 +102,15 @@ class PanelDeControl extends Component{
                 <div>
                     <div className="margenMovilSuperior">.</div>
                     <Monitor anchura={this.props.anchura}/>
-                    <Link className="link" to="/panel"><div className="boton" onClick={this.session}>Cerrar sesión</div></Link> 
+                    <Link className="link" to="./panel"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></Link> 
+                    <div className="boton-movile">
+                      <FormControlLabel 
+                          value="bottom"
+                          control={<Switch onClick={this.botonNotifis} color="primary" checked={this.props.notificaciones}/>}
+                          label="Notificaciones"
+                          labelPlacement="bottom"
+                      />
+                    </div>
                 </div>
             )
         }

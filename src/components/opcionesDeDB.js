@@ -7,6 +7,8 @@ import Modal from '@material-ui/core/Modal';
 import Consulta from './consultaBase';
 import Tabla from './tabladeDatos.js';
 
+import {Link} from 'react-router-dom'
+
 import ModalDeCarga from "./carga.js";
 //const server = "192.168.1.65"; server para probar desde red local
 const server = "instrumentacionline.ddns.net"
@@ -257,8 +259,13 @@ class Opciones extends Component{
             })
           )
     }
-    decarga = (e) => {
+    decarga = e => {
         console.log(e)
+    }
+    ocultar = () => {
+        this.setState({
+            boton_descarga: "collapse"
+        })
     }
     
     componentDidMount(){
@@ -329,13 +336,14 @@ class Opciones extends Component{
                 </Select>
                 <FormHelperText>Seleccione el dia</FormHelperText>
             </FormControl>
-
+            <Link to="/panelDeControl" className="enlace">
             <div className="boton" > Volver al monitor de temperaturas </div>    
+            </Link>
         <div style={{visibility: this.state.boton}}>
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
             </div>
               <div style={{visibility: this.state.boton_descarga}}>
-                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" >Descargar Resultado</a>
+                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>
               </div>
               
             
@@ -383,14 +391,15 @@ class Opciones extends Component{
                 </Select>
                 <FormHelperText>Seleccione el dia</FormHelperText>
             </FormControl>
-
-            <div className="boton-movile" > Volver al monitor de temperaturas </div>    
+            <Link to="/panelDeControl" className="enlace">
+            <div className="boton-movile" > Volver al monitor de temperaturas </div>  
+            </Link>  
         <div style={{visibility: this.state.boton}}>
             <div className="boton-movile" onClick={this.consultar_datos}> Realizar consulta </div>
             </div>
               <Tabla anchura={this.props.anchura} data={this.state.consulta} />
               <div className="boton-movile" style={{visibility: this.state.boton_descarga}}>
-                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="noSub" onClick={this.desca}>Descargar consulta</a>
+                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="noSub">Descargar consulta</a>
               </div>
         </div>
         )
