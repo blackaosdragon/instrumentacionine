@@ -4,7 +4,10 @@ import Monitor from './temperatura.js';
 import { FormControl, FormControlLabel,FormGroup,Switch } from '@material-ui/core';
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
-firebase.initializeApp({
+
+
+let messaging = null;
+const inicializarFirebase = firebase.initializeApp({
     apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
     authDomain: "home-8bea3.firebaseapp.com",
     databaseURL: "https://home-8bea3.firebaseio.com",
@@ -14,8 +17,12 @@ firebase.initializeApp({
     appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
     measurementId: "G-10C166HQ2R"
 });
-const messaging = firebase.messaging();
-messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo');
+
+if(firebase.messaging.isSupported()){
+    messaging = inicializarFirebase.messaging();
+    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo');
+}
+
 
 class PanelDeControl extends Component{
     constructor(props){
@@ -68,11 +75,12 @@ class PanelDeControl extends Component{
     }
     componentDidMount = () => {
         //console.log(Notification.permission);
-        if(Notification.permission=='default'){
+        if(Notification.permission==='default'){
             this.setState({
                 notificaciones: false
             })
-        } else if(Notification.permission=='granted'){
+        } else if(Notification.permission==='granted'){
+            alert(`Notificaciones: ${Notification.permission}, `)
             this.setState({
                 notificaciones: true
             })
@@ -171,12 +179,13 @@ class PanelDeControl extends Component{
                     <Monitor anchura={this.props.anchura}/>
                     <Link className="link" to="./panel"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></Link> 
                     <div className="boton-movile">
-                      <FormControlLabel 
+                      {/*<FormControlLabel 
                           value="bottom"
                           control={<Switch onClick={this.botonNotifis} color="primary" checked={this.props.notificaciones}/>}
                           label="Notificaciones"
                           labelPlacement="bottom"
-                      />
+                      />*/}
+                      {interruptor}
                     </div>
                 </div>
             )
