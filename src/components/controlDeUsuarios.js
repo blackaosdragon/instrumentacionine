@@ -187,23 +187,65 @@ class ControlUsers extends Component{
             console.log(error);
         })
         */
-        console.log("Fetch hacia socket");
+        //console.log("Fetch hacia socket");
         fetch('https://instrumentacionline.ddns.net/socket')
         .then( response => {
             return response.json();
         }).then( data=> {
-            console.log(data);
+            //console.log(data);
         }).catch( err => {
             console.log(err);
-        })
-        console.log("Terminado el fetch a socket");
 
+        })
+        //console.log("Terminado el fetch a socket");
+
+    }
+    carga_de_Data = () => {
+        const { handleLogin, handleName } = this.props;
+        this.setState({
+            cargando: true
+        })
+        let data = {
+            user: this.state.oirausu,
+            pass: this.state.hasch
+        }
+        //console.log(data);
+        fetch(`${login}`,{
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers:{
+                'Content-Type': 'application/json' 
+              },
+        }).then(response=>{return response.json();})
+        .then( response => {
+            if(response.data==1){
+                handleLogin(1);
+                this.setState({
+                    key: 1,
+                })
+                //console.log(this.state.cargando);
+                this.setState({
+                    cargando: false
+                })
+            } else if (response.data==0){
+                alert("Verifique su usuario y/o contraseña");
+                this.setState({
+                    cargando: false
+                })
+            }
+        }).catch( error => {
+            this.setState({
+                cargando: false
+            })
+            alert("Error de comunicacion con el servidor, intente mas tarde");
+        })
     }
     enviar = () => {
         const { handleLogin, handleName } = this.props;
         this.setState({
             cargando: true
         })
+        //console.log(this.state.cargando);
             
         //console.log(this.state.oirausu);
         //console.log(this.state.hasch);
@@ -221,8 +263,8 @@ class ControlUsers extends Component{
             headers:{
                 'Content-Type': 'application/json' 
               },
-        }).then(response=>{return response.json();
-        }).then( data => {
+        }).then(response=>{return response.json();})
+        .then( data => {
             //console.log("La respuesta es: ");            
             //console.log(data);
             if(data.data==1){
@@ -231,16 +273,22 @@ class ControlUsers extends Component{
                     key: 1,
                     cargando: false                   
                 })
+                //console.log(this.state.cargando);
             } else if (data.data==0){
-                alert("Verifique su usuario y contraseña");
+                
                 this.setState({
                     cargando: false
                 })
+                //console.log(this.state.cargando);
+
+                alert("Verifique su usuario y contraseña");
             }
 
         }).catch((err)=>{
-            console.log("Error:");
-            console.log(err);
+            //console.log("Error:");
+            //console.log(err);
+            alert("Problemas de comunicación con el servidor, intente más tarde");
+            //console.log(this.state.cargando);
         })
         this.setState({
             usuario: '',
@@ -253,6 +301,7 @@ class ControlUsers extends Component{
 
     render(){
         //this.props.onChange();
+        
         if(this.props.anchura>970){
             return(
                 <div>
@@ -289,7 +338,7 @@ class ControlUsers extends Component{
                          
                     </div>
                     
-                    <div className="boton" onClick={this.enviar}>Enviar</div>
+                    <div className="boton" onClick={this.carga_de_Data}>Enviar</div>
                     {/*<div className="boton" onClick={this.test}>Enviar</div>*/}
                     
                 </div>

@@ -70,9 +70,9 @@ class Temperature extends Component{
         fetch(`${ioSocket}/${ubicaciones_endPoint2}`)
         .then( response => {return response.json()})
         .then ( data => {
-            console.log(data);
+            //console.log(data);
             data.forEach( element => {
-                console.log(element);
+                //console.log(element);
                 this.setState({
                     ubicaciones: element.Ubicacion
                 })
@@ -83,7 +83,7 @@ class Temperature extends Component{
                         element.lugar
                     ]
                 })
-                console.log(this.state.estuctura_De_tabla)
+                //console.log(this.state.estuctura_De_tabla)
                 this.setState({
                     ...this.state,
                     [element.lugar]:{
@@ -94,7 +94,7 @@ class Temperature extends Component{
                     }
                 })
             })
-            console.log(this.state.estuctura_De_tabla);
+            //console.log(this.state.estuctura_De_tabla);
             cargando=0;
         })
         .catch( error => {
@@ -103,7 +103,7 @@ class Temperature extends Component{
         
         
         socket.on('temp', data => {
-            console.log("A partir de aqui se actualiza el estado");
+            //console.log("A partir de aqui se actualiza el estado");
             let hora = new Date();
             let float_temp = 0;
             let string_temp = "";
@@ -163,8 +163,8 @@ class Temperature extends Component{
     }
 
     render(){
-        console.log("Estado: ")
-        console.log(this.state);        
+        //console.log("Estado: ")
+        //console.log(this.state);        
         let carga = '';
         if(cargando){
             carga = <div className="cargando"></div>

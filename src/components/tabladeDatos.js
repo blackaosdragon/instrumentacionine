@@ -31,7 +31,7 @@ class TableFromDataBase extends Component{
         }
     }
     asignarFecha = (data) => {
-        console.log(data);
+        //console.log(data);
         for(let i=0; data.length>i;i++){
             fecha = fecha + data[i];
         }
@@ -88,7 +88,7 @@ class TableFromDataBase extends Component{
             }
             
         })  
-        console.log(this.props.anchura);
+        //console.log(this.props.anchura);
         if(this.props.anchura>970){
             return (
                 <div style={{visibility: this.state.visible}} className="contenedorCardTabla">

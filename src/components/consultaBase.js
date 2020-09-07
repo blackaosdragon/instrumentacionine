@@ -34,15 +34,15 @@ class Consulta extends Component{
         */
     }
     handleChange = e => {
-        console.log(e.target);
+        //console.log(e.target);
         this.setState({
             value: e.target.value
         })
-        console.log(this.state);
+        //console.log(this.state);
     }
     render(){
 
-        console.log(this.props.anchura);
+        //console.log(this.props.anchura);
         if(this.props.anchura>970){
             return(
                 <div>

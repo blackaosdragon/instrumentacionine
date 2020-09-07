@@ -42,10 +42,10 @@ class App extends Component{
     //actualiza el tamaño de la ventana
   }*/
   componentDidUpdate(prevProps, prevState){
-    console.log("Movido")
+    //console.log("Movido")
     if(this.state.width!==prevState.width){
-      console.log("Cambio de dimensiones");
-      console.log(this.state);
+      //console.log("Cambio de dimensiones");
+      //console.log(this.state);
     }
 
   }
@@ -70,8 +70,7 @@ class App extends Component{
         width: window.innerWidth
       }
     );
-    console.log(this.state);
-
+    //console.log(this.state);
     /*
     if('chrome' in window){
       console.log("Usando Chrome");

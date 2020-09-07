@@ -26,7 +26,7 @@ class Mesas extends Component {
     };
   }
   dataNavigator = () => {
-    console.log(navigator.userAgent);
+    //console.log(navigator.userAgent);
   };
   tamanio = () => {
     if (this.props.anchura > 970) {

@@ -175,7 +175,7 @@ class Opciones extends Component{
         this.setState({
             cargando: true
         })
-        console.log(`Lugar: ${this.state.ubicacion} ${this.state.dia}/${this.state.mes}/${this.state.año} ${this.state.horaInicio}:${this.state.minutoInicio} - ${this.state.horaFinal}:${this.state.minutoInicio}`)
+        //console.log(`Lugar: ${this.state.ubicacion} ${this.state.dia}/${this.state.mes}/${this.state.año} ${this.state.horaInicio}:${this.state.minutoInicio} - ${this.state.horaFinal}:${this.state.minutoInicio}`)
         let payload = {
             year: this.state.año,
             mes: this.state.mes,
@@ -221,7 +221,7 @@ class Opciones extends Component{
         this.setState({
             cargando: true
         })
-        console.log(e);
+        //console.log(e);
         this.setState({
             cargando: false
         })
@@ -260,7 +260,7 @@ class Opciones extends Component{
           )
     }
     decarga = e => {
-        console.log(e)
+        //console.log(e)
     }
     ocultar = () => {
         this.setState({

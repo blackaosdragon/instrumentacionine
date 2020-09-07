@@ -16,7 +16,7 @@ class Auth  extends Component{
         })
     }
     componentDidUpdate = (prevProps,prevState) => {
-        console.log(this.props.handleName);
+        //console.log(this.props.handleName);
     }
     
     render(){
