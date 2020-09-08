@@ -237,7 +237,7 @@ class ControlUsers extends Component{
             this.setState({
                 cargando: false
             })
-            alert("Error de comunicacion con el servidor, intente mas tarde");
+            alert(error);
         })
     }
     enviar = () => {
@@ -370,7 +370,7 @@ class ControlUsers extends Component{
                            />
                            
                     </div>
-                    <div className="boton-movile" onClick={this.enviar}> Entrar </div>
+                    <div className="boton-movile" onClick={this.carga_de_Data}> Entrar </div>
                 </div>
             )
         }

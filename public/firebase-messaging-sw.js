@@ -29,4 +29,16 @@ messaging.setBackgroundMessageHandler(function(payload){
         })
     }
 })
+messaging.onMessage( payload => {
+    console.log(payload);
+    if(payload.data.tipo==="Bienvenida"){
+        self.registration.showNotification(payload.data.titulo,{
+            body: payload.data.contenido,
+            vibrate: [500,200,500],
+            requireInteraction: true,
+            badge: '/termometro192x192.png',
+            icon: '/logo.png',
+        })
+    }    
+})
 

@@ -4,7 +4,11 @@ import Monitor from './temperatura.js';
 import { FormControl, FormControlLabel,FormGroup,Switch } from '@material-ui/core';
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
+import Cargando from './carga.js';
 
+const end_point = 'https://instrumentacionline.ddns.net/insertar_token';
+const end_point_notifis = 'https://instrumentacionline.ddns.net/consultar_notifis';
+const end_point_send_test_notifi = 'https://instrumentacionline.ddns.net/test_notificacion'
 
 let messaging = null;
 const inicializarFirebase = firebase.initializeApp({
@@ -28,7 +32,9 @@ class PanelDeControl extends Component{
     constructor(props){
         super(props);
         this.state = {
-            notificaciones: false
+            notificaciones: false,
+            cargando: true,
+            visible: "collapse"
         }
     }
     obtener_token = () => {
@@ -36,19 +42,37 @@ class PanelDeControl extends Component{
         messaging.getToken().then( token => {
             let payload = {
                 token: token,
-                activo: this.state.notificaciones
+                activo: this.state.notificaciones,
+                
             }
-            fetch('https://instrumentacionline.ddns.net/insertar_token',{
+            fetch(`${end_point}`,{
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers:{
                     'Content-Type': 'application/json' 
                 },
-            }).then( response => {response.json();})
+            }).then( response => {return response.json();})
             .then( response => {
+                if(response.actualizado === false){
+                    
+                    this.setState({
+                        cargando: false,
+                        visible: "collapse"
+                    });
+                    
+                } else if (response.actualizado === true){
+                    this.setState({
+                        cargando: false,
+                        visible: "visible"
+                    });
+                    
+                } else {
+                    alert("Problema al conectarse con el servidor, intente más tarde");
+                }
                 console.log(response);
             }).catch( error => {
                 console.log(error);
+                alert("Problema al conectarse con el servidor, intente más tarde");
             })
         })
         .catch( error => {
@@ -57,11 +81,22 @@ class PanelDeControl extends Component{
     }
     componentDidUpdate = (prevProps,prevState) => {
         if(prevState.notificaciones!=this.state.notificaciones){
+            if(this.state.notificaciones==true){
+                console.log("Mostrar");
+                this.setState({
+                    visible: "visible"
+                })
+            } else if(this.state.notificaciones==false){
+                console.log("ocultar");
+                this.setState({
+                    visible: "collapse"
+                })
+            }
             if( Notification.permission === 'default' && this.state.notificaciones===true){
                 //console.log("Se pedira permiso de notificaciones");
                 Notification.requestPermission().then( respuesta => {
                     if(respuesta=='denied'){
-                        alert('No se ha otorgado notificaciones, contacte con el administrador');
+                        //alert('No se ha otorgado notificaciones, contacte con el administrador');
                     } else if ( respuesta == 'granted'){
                         this.obtener_token();
                         //console.log("Respuesta granted")
@@ -70,27 +105,111 @@ class PanelDeControl extends Component{
                 .catch( error => {
                     console.log(error);
                 })
+            } else if(Notification.permission==='granted' && this.state.notificaciones===false){
+                //console.log("Se van a desactivar las notificaciones");
+                this.obtener_token();
+                this.setState({
+                    cargando: false,
+                    visible: "collapse"
+                })
+            } else if(Notification.permission==='granted' && this.state.notificaciones===true){
+                this.obtener_token();
+                this.setState({
+                    cargando: false,
+                    visible: "visible"
+                })
+                //console.log("Se van a activar las notificaciones");
             }
         }
     }
     componentDidMount = () => {
+        /*
+        this.setState({
+            cargando: false
+        })
+        */
         //console.log(Notification.permission);
+        if(this.state.notificaciones==true){
+            this.setState({
+                visible: "visible"
+            })
+        } else if (this.state.notificaciones==false){
+            this.setState({
+                visible: "collapse"
+            })
+        }
         if(Notification.permission==='default'){
             this.setState({
-                notificaciones: false
+                notificaciones: false,
+                visible: "collapse"
+            })
+            this.setState({
+                cargando: false
             })
         } else if(Notification.permission==='granted'){
-            alert(`Notificaciones: ${Notification.permission}, `)
+            messaging.getToken().then( token => {
+                console.log(token);
+                let payload = {
+                    activo: 2,
+                    token: token
+                }
+                fetch(`${end_point}`,{
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers:{
+                        'Content-Type': 'application/json' 
+                    },
+                }).then( respuesta => {return respuesta.json()})
+                .then( respuesta => {
+                    if(respuesta[0].activo===0){
+                        this.setState({
+                            visible: "collapse"
+                        })
+                    } else if(respuesta[0].activo===1){
+                        this.setState({
+                            visible: "visible"
+                        })
+                    }
+                    this.setState({
+                        notificaciones: respuesta[0].activo,
+                    })
+                    //console.log(respuesta[0].activo);
+                    this.setState({
+                        cargando: false
+                    })
+                }).catch( err => {console.log(err)});
+
+            }).catch( error => {
+                console.log(error);
+            })
+            /*
+            let payload = {}
+            
+            */
+
+            //alert(`Notificaciones: ${Notification.permission}, `)
+            /*
+            fetch(`${end_point_notifis}`).then( respuesta => { return respuesta.json()})
+            .then( respuesta => {
+               console.log(respuesta);
+            }).catch( err => {
+                console.log(err);
+            })
+            */
+            /*
             this.setState({
                 notificaciones: true
             })
+            */
             //console.log("Respuesta granted")
-            this.obtener_token();
+            //this.obtener_token();
 
+        } else if(Notification.permission==='denied'){
+            this.setState({
+                cargando: false,
+                visible: "collapse"
+            })
         }
-        this.setState({
-            notifis: this.props.notifis
-        })
     }
     session = () => {
         const { handleStatus } = this.props;
@@ -101,24 +220,26 @@ class PanelDeControl extends Component{
         handleNotifis(!notifis);
         
     }
-    handleNotificaciones = () => {
-
+    test_notifi = () => {
+        fetch(`${end_point_send_test_notifi}`).then( response => {return response.json()})
+        .then( response => {
+            console.log(response)
+        }).catch( err => {console.log(err)});
     }
     botonNotifis = () => {
         this.setState({
+            cargando: true
+        })
+        this.setState({
             notificaciones: !this.state.notificaciones
         })
-        //console.log(this.state.notificaciones)
-        if(Notification.permission==='granted'){
-        } else if( Notification.permission === 'default' && this.state.notificaciones===true){
-        } else {
-        }
+        
     }
     
     render(){
         let interruptor = ''
         if (Notification.permission==='denied'){
-            interruptor = <FormControlLabel disabled control={<Switch />} label="No se otorgo permiso" />
+            interruptor = <FormControlLabel onClick={()=>{alert("Para activar las notificaciones borre el caché y los permisos de la página y al solicitar el permiso acepte el recibir notificaciones")}} disabled control={<Switch />} label="No se otorgo permiso" />
         } else if( Notification.permission === 'granted' ){
             interruptor = <FormControlLabel control={<Switch onClick={this.botonNotifis} color="primary" checked={this.state.notificaciones}/>} label="Notificaciones" />
         } else if ( Notification.permission === 'default'){
@@ -140,6 +261,7 @@ class PanelDeControl extends Component{
                     <div className="contenedor-item item5"> 5 </div>
                     
                 </div> */}
+                <Cargando cargando={this.state.cargando}/>
                 <FormControl className="contenedorCard">
                     {/*
                     <FormGroup>
@@ -166,15 +288,14 @@ class PanelDeControl extends Component{
                           labelPlacement="bottom"
                         />*/}
                         {interruptor}
-                    </FormGroup>
-                
-                
-
+                </FormGroup>
+                <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>
                 </div>
             )
         } else {
             return(
                 <div>
+                    <Cargando cargando={this.state.cargando}/>
                     <div className="margenMovilSuperior">.</div>
                     <Monitor anchura={this.props.anchura}/>
                     <Link className="link" to="./panel"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></Link> 
@@ -186,6 +307,9 @@ class PanelDeControl extends Component{
                           labelPlacement="bottom"
                       />*/}
                       {interruptor}
+                    </div>
+                    <div style={{visibility: this.state.visible}} className="boton-firebase-movile" >
+                        Probar notificaciones
                     </div>
                 </div>
             )

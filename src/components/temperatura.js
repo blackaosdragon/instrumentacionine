@@ -118,9 +118,9 @@ class Temperature extends Component{
                 
                 this.setState({
                     ...this.state,
-                    [this.state.estuctura_De_tabla[1]]:{
+                    [this.state.estuctura_De_tabla[0]]:{
                         ...this.state.estuctura_De_tabla,
-                        lugar: this.state.estuctura_De_tabla[1],
+                        lugar: this.state.estuctura_De_tabla[0],
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
@@ -139,8 +139,8 @@ class Temperature extends Component{
             if(data[0]=='2'){
                 this.setState({
                     ...this.state,
-                    [this.state.estuctura_De_tabla[0]]:{
-                        ...[this.state.estuctura_De_tabla[0]],
+                    [this.state.estuctura_De_tabla[1]]:{
+                        ...[this.state.estuctura_De_tabla[1]],
                         valor: float_temp,
                         actualizacion: `${hora.getHours()} : ${hora.getMinutes()}`
                     }
@@ -173,7 +173,7 @@ class Temperature extends Component{
                 //console.log(element);
                 //console.log(this.state);
                 let temp = parseFloat(this.state[element].valor);
-                if(temp>=0 && temp<=24.9){
+                if(temp>=0 && temp<=5.9){
                     return (
                         <TableRow id={id} style={{backgroundColor: "#00284d"}} key={element}>
                             <TableCell> <p className="tablaDatos2"> {element} </p></TableCell>
@@ -182,7 +182,7 @@ class Temperature extends Component{
                             <TableCell> <p className="tablaDatos2"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow>
                     )
-                } else if(temp>=25.0 && temp<=29.9){
+                } else if(temp>=6.0 && temp<=7.9){
                     return (
                         <TableRow style={{backgroundColor: "#ffff1a"}} key={element}>
                             <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
@@ -191,7 +191,7 @@ class Temperature extends Component{
                             <TableCell> <p className="tablaDatos"> {this.state[element].actualizacion} </p></TableCell>
                         </TableRow>
                     )
-                } else if(temp>=30.0){
+                } else if(temp>=8.0){
                     return (
                         <TableRow style={{backgroundColor: "#ff3300"}} key={element}>
                             <TableCell> <p className="tablaDatos"> {element} </p></TableCell>
