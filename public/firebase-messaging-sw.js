@@ -30,6 +30,7 @@ messaging.setBackgroundMessageHandler(function(payload){
     }
 })
 messaging.onMessage( payload => {
+    console.log("Notificacion en primer plano");
     console.log(payload);
     if(payload.data.tipo==="Bienvenida"){
         self.registration.showNotification(payload.data.titulo,{
@@ -39,6 +40,15 @@ messaging.onMessage( payload => {
             badge: '/termometro192x192.png',
             icon: '/logo.png',
         })
-    }    
+    }
+    if(payload.data.tipo==="Test"){
+        self.registration.showNotification(payload.data.titulo,{
+            body: payload.data.contenido,
+            vibrate: [1000,500,1000],
+            requireInteraction: true,
+            badge: '/instr192.png',
+            icon: '/logo.png',
+        })
+    }
 })
 

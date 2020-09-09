@@ -54,20 +54,21 @@ class PanelDeControl extends Component{
             }).then( response => {return response.json();})
             .then( response => {
                 if(response.actualizado === false){
-                    
                     this.setState({
                         cargando: false,
                         visible: "collapse"
                     });
-                    
                 } else if (response.actualizado === true){
                     this.setState({
                         cargando: false,
                         visible: "visible"
-                    });
-                    
+                    });  
                 } else {
                     alert("Problema al conectarse con el servidor, intente más tarde");
+                    this.setState({
+                        cargando: false,
+                        visible: "collapse"
+                    })
                 }
                 console.log(response);
             }).catch( error => {
