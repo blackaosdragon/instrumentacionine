@@ -167,7 +167,7 @@ class PanelDeControl extends Component{
             })
         } else if(Notification.permission==='granted'){
             messaging.getToken().then( token => {
-                alert(`Comprobando el token ${tooken}`)
+                alert(`Comprobando el token ${token}`)
                 console.log(token);
                 let payload = {
                     activo: 2,
@@ -210,7 +210,7 @@ class PanelDeControl extends Component{
                     this.setState({
                         cargando: false
                     })
-                    console.log(err)
+                    console.log(error)
                 console.log(error);
             })
             /*
