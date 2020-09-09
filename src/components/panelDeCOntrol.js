@@ -40,10 +40,10 @@ class PanelDeControl extends Component{
     obtener_token = () => {
         //console.log("token");
         messaging.getToken().then( token => {
+            alert(`El token es: ${token} solicitando a la base de datos`);
             let payload = {
                 token: token,
                 activo: this.state.notificaciones,
-                
             }
             fetch(`${end_point}`,{
                 method: 'POST',
@@ -51,7 +51,9 @@ class PanelDeControl extends Component{
                 headers:{
                     'Content-Type': 'application/json' 
                 },
-            }).then( response => {return response.json();})
+            }).then( response => {
+                return response.json();
+            })
             .then( response => {
                 if(response.actualizado === false){
                     this.setState({

@@ -27,7 +27,17 @@ messaging.setBackgroundMessageHandler(function(payload){
             badge: '/instr192.png',
             icon: '/logo.png',
         })
-    }/*
+    } else if(payload.data.tipo=="Test"){
+        self.registration.showNotification(payload.data.titulo,{
+            body: payload.data.contenido,
+            vibrate: [500,200,500],
+            requireInteraction: true,
+            badge: '/instr192.png',
+            icon: '/logo.png',
+        })
+    }
+
+    /*
     if(payload.data.tipo==="Test"){
         self.registration.showNotification(payload.data.titulo,{
             body: payload.data.contenido,
