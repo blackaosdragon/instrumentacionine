@@ -308,7 +308,7 @@ class PanelDeControl extends Component{
                       />*/}
                       {interruptor}
                     </div>
-                    <div style={{visibility: this.state.visible}} className="boton-firebase-movile" >
+                    <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase-movile" >
                         Probar notificaciones
                     </div>
                 </div>
