@@ -101,12 +101,17 @@ class PanelDeControl extends Component{
                     if(respuesta=='denied'){
                         //alert('No se ha otorgado notificaciones, contacte con el administrador');
                     } else if ( respuesta == 'granted'){
+                        alert("Se acepto los permisos se pedira el token")
                         this.obtener_token();
                         //console.log("Respuesta granted")
                     }
                 })
                 .catch( error => {
                     console.log(error);
+                    alert("Error al comunicarse con la base de datos");
+                    this.setState({
+                        cargando: false,
+                    })
                 })
             } else if(Notification.permission==='granted' && this.state.notificaciones===false){
                 //console.log("Se van a desactivar las notificaciones");
