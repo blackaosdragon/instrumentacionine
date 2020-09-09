@@ -84,6 +84,7 @@ class PanelDeControl extends Component{
     }
     componentDidUpdate = (prevProps,prevState) => {
         if(prevState.notificaciones!=this.state.notificaciones){
+            /*
             if(this.state.notificaciones==true){
                 console.log("Mostrar");
                 this.setState({
@@ -95,6 +96,7 @@ class PanelDeControl extends Component{
                     visible: "collapse"
                 })
             }
+            */
             if( Notification.permission === 'default' && this.state.notificaciones===true){
                 //console.log("Se pedira permiso de notificaciones");
                 Notification.requestPermission().then( respuesta => {
