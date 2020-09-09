@@ -206,11 +206,11 @@ class PanelDeControl extends Component{
                 });
 
             }).catch( error => {
-                alert("No se pudo obtener el token, intente mas tarde");
+                alert(`${error}`);
                     this.setState({
                         cargando: false
                     })
-                    console.log(error)
+                    
                 console.log(error);
             })
             /*
