@@ -139,6 +139,7 @@ class PanelDeControl extends Component{
         })
         */
         //console.log(Notification.permission);
+        /*
         if(this.state.notificaciones==true){
             this.setState({
                 visible: "visible"
@@ -148,6 +149,7 @@ class PanelDeControl extends Component{
                 visible: "collapse"
             })
         }
+        */
         if(Notification.permission==='default'){
             this.setState({
                 notificaciones: false,
