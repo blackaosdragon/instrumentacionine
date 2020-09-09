@@ -24,7 +24,7 @@ messaging.setBackgroundMessageHandler(function(payload){
             body: payload.data.contenido,
             vibrate: [500,200,500],
             requireInteraction: true,
-            badge: '/termometro192x192.png',
+            badge: '/insre192.png',
             icon: '/logo.png',
         })
     } 
