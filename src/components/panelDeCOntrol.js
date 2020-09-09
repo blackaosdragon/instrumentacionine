@@ -74,11 +74,18 @@ class PanelDeControl extends Component{
                 }
                 console.log(response);
             }).catch( error => {
+                this.setState({
+                    cargando: false
+                })
                 console.log(error);
                 alert("Problema al conectarse con el servidor, intente más tarde");
             })
         })
         .catch( error => {
+            this.setState({
+                cargando: false
+            })
+            alert("No se pudo obtener el token")
             console.log(error);
         })
     }
@@ -160,6 +167,7 @@ class PanelDeControl extends Component{
             })
         } else if(Notification.permission==='granted'){
             messaging.getToken().then( token => {
+                alert(`Comprobando el token ${tooken}`)
                 console.log(token);
                 let payload = {
                     activo: 2,
@@ -189,9 +197,20 @@ class PanelDeControl extends Component{
                     this.setState({
                         cargando: false
                     })
-                }).catch( err => {console.log(err)});
+                }).catch( err => {
+                    alert("No se pudo comprobar el token, intente mas tarde");
+                    this.setState({
+                        cargando: false
+                    })
+                    console.log(err)
+                });
 
             }).catch( error => {
+                alert("No se pudo obtener el token, intente mas tarde");
+                    this.setState({
+                        cargando: false
+                    })
+                    console.log(err)
                 console.log(error);
             })
             /*
