@@ -24,7 +24,7 @@ messaging.setBackgroundMessageHandler(function(payload){
             body: payload.data.contenido,
             vibrate: [500,200,500],
             requireInteraction: true,
-            badge: '/insre192.png',
+            badge: '/instr192.png',
             icon: '/logo.png',
         })
     } 
