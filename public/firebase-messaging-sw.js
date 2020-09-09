@@ -28,6 +28,15 @@ messaging.setBackgroundMessageHandler(function(payload){
             icon: '/logo.png',
         })
     }
+    if(payload.data.tipo==="Test"){
+        self.registration.showNotification(payload.data.titulo,{
+            body: payload.data.contenido,
+            vibrate: [1000,500,1000],
+            requireInteraction: true,
+            badge: '/instr192.png',
+            icon: '/logo.png',
+        })
+    }
 })
 messaging.onMessage( payload => {
     console.log("Notificacion en primer plano");
