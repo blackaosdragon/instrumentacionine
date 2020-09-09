@@ -27,16 +27,16 @@ messaging.setBackgroundMessageHandler(function(payload){
             badge: '/instr192.png',
             icon: '/logo.png',
         })
-    }
+    }/*
     if(payload.data.tipo==="Test"){
         self.registration.showNotification(payload.data.titulo,{
             body: payload.data.contenido,
-            vibrate: [1000,500,1000],
+            vibrate: [500,200,500],
             requireInteraction: true,
             badge: '/instr192.png',
             icon: '/logo.png',
         })
-    }
+    }*/
 })
 messaging.onMessage( payload => {
     console.log("Notificacion en primer plano");
@@ -46,10 +46,11 @@ messaging.onMessage( payload => {
             body: payload.data.contenido,
             vibrate: [500,200,500],
             requireInteraction: true,
-            badge: '/termometro192x192.png',
+            badge: '/instr192.png',
             icon: '/logo.png',
         })
     }
+    /*
     if(payload.data.tipo==="Test"){
         self.registration.showNotification(payload.data.titulo,{
             body: payload.data.contenido,
@@ -59,5 +60,6 @@ messaging.onMessage( payload => {
             icon: '/logo.png',
         })
     }
+    */
 })
 
