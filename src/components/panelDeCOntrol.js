@@ -253,7 +253,8 @@ class PanelDeControl extends Component{
     test_notifi = () => {
         navigator.serviceWorker.ready.then( function(registration){
             registration.showNotification('Probando notificaciones',{
-                body: 'Testeo de nofitificaciones satisfactorio'
+                body: 'Testeo de nofitificaciones satisfactorio',
+                badge: '../../termometro192x192.png',
             })
         })
         fetch(`${end_point_send_test_notifi}`).then( response => {return response.json()})
