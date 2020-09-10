@@ -40,7 +40,7 @@ class PanelDeControl extends Component{
     obtener_token = () => {
         //console.log("token");
         messaging.getToken().then( token => {
-            alert(`El token es: ${token} solicitando a la base de datos`);
+            //alert(`El token es: ${token} solicitando a la base de datos`);
             let payload = {
                 token: token,
                 activo: this.state.notificaciones,
@@ -66,7 +66,7 @@ class PanelDeControl extends Component{
                         visible: "visible"
                     });  
                 } else {
-                    alert("Problema al conectarse con el servidor, intente más tarde");
+                    //alert("Problema al conectarse con el servidor, intente más tarde");
                     this.setState({
                         cargando: false,
                         visible: "collapse"
@@ -110,7 +110,7 @@ class PanelDeControl extends Component{
                     if(respuesta=='denied'){
                         //alert('No se ha otorgado notificaciones, contacte con el administrador');
                     } else if ( respuesta == 'granted'){
-                        alert("Se acepto los permisos se pedira el token")
+                        
                         this.obtener_token();
                         //console.log("Respuesta granted")
                     }

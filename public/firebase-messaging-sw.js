@@ -27,6 +27,15 @@ messaging.setBackgroundMessageHandler(function(payload){
             badge: '/termometro192x192.png',
             icon: '/logo.png',
         })
+    }
+    if(payload.data.tipo==="Test"){
+        self.registration.showNotification(payload.data.titulo,{
+            body: payload.data.contenido,
+            vibrate: [500,200,500],
+            requireInteraction: true,
+            badge: '/icono192x192.png',
+            icon: '/logo.png',
+        })
     } 
 })
 
