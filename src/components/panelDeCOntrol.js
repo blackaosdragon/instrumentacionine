@@ -255,19 +255,12 @@ class PanelDeControl extends Component{
             registration.showNotification('Probando notificaciones',{
                 body: 'Testeo de nofitificaciones satisfactorio'
             })
-        })/*
-
-        let notifi = new Notification('Probando notifis',{
-            body: 'Testeo de nofitificaciones satisfactorio'
         })
-        */
-        
-        /*
         fetch(`${end_point_send_test_notifi}`).then( response => {return response.json()})
         .then( response => {
             console.log(response)
         }).catch( err => {console.log(err)});
-        */
+        
     }
     botonNotifis = () => {
         this.setState({
