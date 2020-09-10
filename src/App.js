@@ -109,7 +109,7 @@ class App extends Component{
     navigator.serviceWorker.addEventListener("message", data => {
       console.log("Datos recibidos: ",data);
 
-      /*navigator.serviceWorker.ready.then( mensaje => {
+      navigator.serviceWorker.ready.then( mensaje => {
         mensaje.showNotification(
           'Alerta',{
             body: 'Notificacion en primer plano',
@@ -118,7 +118,7 @@ class App extends Component{
           }
         )
       })
-    })*/
+    })
     /*
     window.addEventListener('beforeinstallprompt', e => {
       e.userChoice.then((eleccion)=>{

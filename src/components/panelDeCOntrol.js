@@ -108,7 +108,7 @@ class PanelDeControl extends Component{
                 //console.log("Se pedira permiso de notificaciones");
                 Notification.requestPermission().then( respuesta => {
                     if(respuesta=='denied'){
-                        //alert('No se ha otorgado notificaciones, contacte con el administrador');
+                        alert('No se ha otorgado notificaciones, contacte con el administrador');
                     } else if ( respuesta == 'granted'){
                         
                         this.obtener_token();
@@ -251,10 +251,23 @@ class PanelDeControl extends Component{
         
     }
     test_notifi = () => {
+        navigator.serviceWorker.ready.then( function(registration){
+            registration.showNotification('Probando notificaciones',{
+                body: 'Testeo de nofitificaciones satisfactorio'
+            })
+        })/*
+
+        let notifi = new Notification('Probando notifis',{
+            body: 'Testeo de nofitificaciones satisfactorio'
+        })
+        */
+        
+        /*
         fetch(`${end_point_send_test_notifi}`).then( response => {return response.json()})
         .then( response => {
             console.log(response)
         }).catch( err => {console.log(err)});
+        */
     }
     botonNotifis = () => {
         this.setState({
@@ -267,6 +280,8 @@ class PanelDeControl extends Component{
     }
     
     render(){
+        
+        
         let interruptor = ''
         if (Notification.permission==='denied'){
             interruptor = <FormControlLabel onClick={()=>{alert("Para activar las notificaciones borre el caché y los permisos de la página y al solicitar el permiso acepte el recibir notificaciones")}} disabled control={<Switch />} label="No se otorgo permiso" />

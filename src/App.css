@@ -612,6 +612,7 @@
   position: absolute;
   top: 65%;
   left: 12%;
+  word-wrap: break-word;
 }
 .boton-firebase{
   color: #000000;
