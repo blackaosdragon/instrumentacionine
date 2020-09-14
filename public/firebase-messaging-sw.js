@@ -16,9 +16,10 @@ firebase.initializeApp({
 
 
 const messaging = firebase.messaging();
-self.addEventListener('notificationclick',()=>{
+self.addEventListener('notificationclick',function(event){
     window.open('https://instrumentaciononline.com.mx');
 })
+self.clients
 
 messaging.setBackgroundMessageHandler(function(payload){
     console.log(payload);
@@ -29,6 +30,7 @@ messaging.setBackgroundMessageHandler(function(payload){
             requireInteraction: true,
             badge: '/termometro192x192.png',
             icon: '/logo.png',
+            click_action: "https://instrumentaciononline.com.mx"
         })
     }
     if(payload.data.tipo==="Test"){
