@@ -41,6 +41,7 @@ class App extends Component{
     this.setState({width: window.innerWidth});
     //actualiza el tamaño de la ventana
   }*/
+  
   componentDidUpdate(prevProps, prevState){
     //console.log("Movido")
     if(this.state.width!==prevState.width){
@@ -65,6 +66,7 @@ class App extends Component{
     })
   }
   componentDidMount(){
+    
     this.setState(
       {
         width: window.innerWidth

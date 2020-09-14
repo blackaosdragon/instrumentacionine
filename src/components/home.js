@@ -121,7 +121,7 @@ class Home extends Component{
             </GridListTile>
             
             <GridListTile className="cuadriculaImagen" key="TarjetaLog.jpg">
-            <Link to="/monitor">
+            
             <div className="imgHome">
               <img src={TarjetaLog} alt="Tarjetas" />
               
@@ -134,7 +134,7 @@ class Home extends Component{
               
               
               </div>  
-              </Link>
+            
             </GridListTile>
             
             
@@ -177,14 +177,14 @@ class Home extends Component{
             </GridListTile>
             
             <GridListTile className="cuadriculaImagen" key="lcd.jpg">
-            <Link to="/sensor" >
+            
               <img className="contenedorImagen" src={Aire} alt="AiresAcondicionados" />
               <GridListTileBar
                 className="letrasHome"
                 title={<h1 className="title">Aires acondicionados</h1>}
                 subtitle={<h2 className="textosBlancos">Instalacion y mantenimiento</h2>}
               />
-              </Link>
+              
             </GridListTile>
             
 
@@ -310,13 +310,13 @@ class Home extends Component{
             <GridListTile className="cuadriculaImagen" key="lcd.jpg">
               
               <img className="contenedorImagen" src={Aire} alt="Autoclaves" />
-              <Link to="/sensor" >
+              
               <GridListTileBar
                 
                 title={<h1 className="title">fria</h1>}
                 subtitle={<h2 className="textosBlancos"></h2>}
               />
-              </Link>
+             
             </GridListTile>
 
 

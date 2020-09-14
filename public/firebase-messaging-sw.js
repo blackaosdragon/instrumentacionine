@@ -16,6 +16,9 @@ firebase.initializeApp({
 
 
 const messaging = firebase.messaging();
+self.addEventListener('notificationclick',()=>{
+    window.open('https://instrumentaciononline.com.mx');
+})
 
 messaging.setBackgroundMessageHandler(function(payload){
     console.log(payload);
@@ -36,7 +39,8 @@ messaging.setBackgroundMessageHandler(function(payload){
             badge: '/icono192x192.png',
             icon: '/logo.png',
         })
-    } 
+    }
+    
 })
 
 
