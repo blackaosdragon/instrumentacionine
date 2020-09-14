@@ -40,6 +40,7 @@ messaging.setBackgroundMessageHandler(function(payload){
             requireInteraction: true,
             badge: '/icono192x192.png',
             icon: '/logo.png',
+            click_action: "https://instrumentaciononline.com.mx"
         })
     }
     
