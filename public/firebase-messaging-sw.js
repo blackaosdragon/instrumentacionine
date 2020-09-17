@@ -17,9 +17,10 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 self.addEventListener('notificationclick',function(event){
-    window.open('https://instrumentaciononline.com.mx');
+    console.log("Se hizo click en una  notificacion");
+    console.log(event);
 })
-self.clients
+    
 
 messaging.setBackgroundMessageHandler(function(payload){
     console.log(payload);
