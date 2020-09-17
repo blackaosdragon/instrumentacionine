@@ -18,7 +18,8 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 self.addEventListener('notificationclick',function(event){
     console.log("Se hizo click en una  notificacion");
-    console.log(event);
+    //console.log(event);
+    window.open('https://instrumentaciononlione.com.mx');
 })
     
 
@@ -38,7 +39,6 @@ messaging.setBackgroundMessageHandler(function(payload){
         self.registration.showNotification(payload.data.titulo,{
             body: payload.data.contenido,
             vibrate: [500,200,500],
-            requireInteraction: true,
             badge: '/icono192x192.png',
             icon: '/logo.png',
             click_action: "https://instrumentaciononline.com.mx"
