@@ -18,9 +18,21 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 self.addEventListener('notificationclick',function(event){
     console.log("Se hizo click en una  notificacion");
-    //console.log(event);
-    window.open('https://instrumentaciononlione.com.mx');
+    event.notification.close();
+    event.waitUntil(clients.matchAll({
+        type: "window"
+      }).then(function(clientList) {
+        for (var i = 0; i < clientList.length; i++) {
+          var client = clientList[i];
+          if (client.url == '/' && 'focus' in client)
+            return client.focus();
+        }
+        if (clients.openWindow)
+          return clients.openWindow('/');
+      }));
+    
 })
+
     
 
 messaging.setBackgroundMessageHandler(function(payload){
