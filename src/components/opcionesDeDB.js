@@ -19,6 +19,7 @@ const end_point_años = 'years';
 const end_point_meses = 'mes';
 const end_point_dias = 'days';
 const end_point_consulta = 'buscar';
+const end_point_consulta_mes = 'consulta_mes';
 const end_point_descarga = 'descarga_consulta'
 const end_point_consulta_y_descarga = 'csv'
 let estilos = ["carga","cargaInvisible"];
@@ -117,6 +118,7 @@ class Opciones extends Component{
                 meses: data,
                 month: "visible",
                 cargando: false,
+                
             })
         })
         .catch( err => {
@@ -152,6 +154,7 @@ class Opciones extends Component{
                 dias: data,
                 days: "visible",
                 cargando: false,
+                boton: "visible"
             })
         })
         .catch( err => {
@@ -186,13 +189,37 @@ class Opciones extends Component{
         if(
             this.state.año === "" ||
             this.state.mes === ""||
-            this.state.dia === ""||
+            //this.state.dia === ""||
             this.state.ubicacion === ""
         ) {
             alert("Falta completar algunos datos");
+            this.setState({
+                cargando: false
+            })
         } else{
-            //console.log(payload);
-            fetch(`${protocolo}://${server}/${end_point_consulta}`,{
+            if(this.state.dia===""){
+                fetch(`${protocolo}://${server}/${end_point_consulta_mes}`,{
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers:{
+                        'Content-Type': 'application/json' 
+                    }
+                }).then( response => { return response.json()})
+                .then( data => {
+                    this.setState({
+                        consulta: data,
+                        cargando: false,
+                        boton_descarga: true
+                    })
+                    console.log(data)
+                }).catch( err => {
+                    console.log(err);
+                    this.setState({
+                        cargando: false
+                    })
+                })
+            } else {
+                fetch(`${protocolo}://${server}/${end_point_consulta}`,{
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers:{
@@ -214,6 +241,7 @@ class Opciones extends Component{
                    cargando: false
                 })
             })
+            }
         }
     }
     descargar_consulta = (e) =>{

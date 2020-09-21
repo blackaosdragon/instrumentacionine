@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import {Table, TableRow, TableCell, TableHead, TableBody} from '@material-ui/core'
-import { green } from '@material-ui/core/colors';
 let datos = ''
 let fecha = ''
+let por_meses = ''
 
 class TableFromDataBase extends Component{
     constructor(props){
         super(props);
         this.state = {
             visible : "collapse",
-            data: []
         }
     }
     componentDidMount(){
-        //console.log(this.props);
-        this.setState((state,props)=>{
-            return{data: props.data}
-        })
-        this.setState({
-            data: this.props.data
-        })
+        
     }
     componentDidUpdate(prevProps,prevState){
         if(this.props.data!==prevProps.data){
@@ -30,53 +23,46 @@ class TableFromDataBase extends Component{
             })
         }
     }
-    asignarFecha = (data) => {
-        //console.log(data);
-        for(let i=0; data.length>i;i++){
-            fecha = fecha + data[i];
-        }
-    }
 
     render(){
-        datos = this.props.data.map( (element,id) => {
+        
+        por_meses = this.props.data.map( (element,id) => {
             if(this.props.anchura>970){
                 if(id%2==0){
-                    return(
+                    return(                        
                         <TableRow >
-                            <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
-                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                            {console.log(element.Lugar)}
+                            <TableCell><p className="tablaDatos">{element.Lugar}</p></TableCell>
+                            <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
+                                {element.Dia} / {element.Mes} / {element.Año} - {element.Hora} : {element.Minuto} hrs
                             </p></TableCell>
                         </TableRow>
                     )
-                } else{
+                } else {
                     return(
-                        <TableRow style={{backgroundColor: '#cccccc'}}>
-                            <TableCell><p className="tablaDatos">{element.ubicacion}</p></TableCell>
-                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                        <TableRow tyle={{backgroundColor: '#cccccc'}}>
+                            <TableCell><p className="tablaDatos">{element.Lugar}</p></TableCell>
+                            <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.dia} / {element.mes} / {element.año} - {element.hora} : {element.minuto} hrs
+                                {element.Dia} / {element.Mes} / {element.Año} - {element.Hora} : {element.Minuto} hrs
                             </p></TableCell>
-                        </TableRow> 
+                        </TableRow>
                     )
                 }
- 
             } else {
                 if(id%2==0){
                     return(
-                        <TableRow >
-                            
+                        <TableRow>
                             <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
                                 {element.hora} : {element.minuto} hrs
                             </p></TableCell>
                         </TableRow>
                     )
-                } else{
+                } else {
                     return(
                         <TableRow style={{backgroundColor: '#cccccc'}}>
-                            
                             <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
                                 {element.hora} : {element.minuto} hrs
@@ -84,11 +70,8 @@ class TableFromDataBase extends Component{
                         </TableRow> 
                     )
                 }
-
             }
-            
-        })  
-        //console.log(this.props.anchura);
+        })
         if(this.props.anchura>970){
             return (
                 <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
@@ -104,7 +87,8 @@ class TableFromDataBase extends Component{
                             </TableRow>
                             </TableHead>
                             <TableBody>
-                                {datos}
+                                {por_meses}
+                                {/*datos*/}
                             </TableBody>
                         </Table>
                         
