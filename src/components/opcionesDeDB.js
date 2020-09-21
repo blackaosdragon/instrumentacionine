@@ -209,7 +209,7 @@ class Opciones extends Component{
                     this.setState({
                         consulta: data,
                         cargando: false,
-                        boton_descarga: true
+                        /*boton_descarga: true*/
                     })
                     console.log(data)
                 }).catch( err => {
@@ -232,7 +232,7 @@ class Opciones extends Component{
                 this.setState({
                     consulta: data,
                     cargando: false,
-                    boton_descarga: true
+                    /*boton_descarga: true*/
                 })
             }).catch( err => {
                 alert("Error al comunicarse ocn la base de datos");
@@ -280,7 +280,7 @@ class Opciones extends Component{
             .then( data => {
                 this.setState({
                     cargando: false,
-                    boton_descarga: true
+                    /*boton_descarga: true*/
                 })
             }).catch(error=>{
                 alert('Problema con el servidor, intente más tarde o contacte a soporte técnico')
@@ -371,7 +371,8 @@ class Opciones extends Component{
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
             </div>
               <div style={{visibility: this.state.boton_descarga}}>
-                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>
+                  {/*<a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>*/}
+                  <a href="https://instrumentacionline.ddns.net/descarga_archivo_csv/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>
               </div>
               
             

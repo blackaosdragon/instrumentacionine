@@ -51,21 +51,22 @@ class TableFromDataBase extends Component{
                     )
                 }
             } else {
+                
                 if(id%2==0){
                     return(
                         <TableRow>
-                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                            <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.hora} : {element.minuto} hrs
+                                {element.Dia}/{element.Mes} - {element.Hora}:{element.Minuto} h
                             </p></TableCell>
                         </TableRow>
                     )
                 } else {
                     return(
                         <TableRow style={{backgroundColor: '#cccccc'}}>
-                            <TableCell><p className="tablaDatos">{element.temperatura}°C</p></TableCell>
+                            <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.hora} : {element.minuto} hrs
+                                {element.Dia}/{element.Mes} - {element.Hora}:{element.Minuto} h
                             </p></TableCell>
                         </TableRow> 
                     )
@@ -75,8 +76,6 @@ class TableFromDataBase extends Component{
         if(this.props.anchura>970){
             return (
                 <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
-                    
-                    
                     <TableContainer>
                         <Table>
                             <TableHead>
@@ -90,29 +89,26 @@ class TableFromDataBase extends Component{
                                 {por_meses}
                                 {/*datos*/}
                             </TableBody>
-                        </Table>
-                        
+                        </Table>   
                     </TableContainer>
                 </div>
                 )
         } else {
             return (
                 <div style={{visibility: this.state.visible}} className="contenedorCardTabla">
-                    
                     <TableContainer>
                         <Table>
                             <TableHead>
                             <TableRow className="tabla">
                                 
-                                <TableCell><p className="tablaTitulos">Temperatura</p></TableCell>
+                                <TableCell><p className="tablaTitulos">Temp °C</p></TableCell>
                                 <TableCell><p className="tablaTitulos">Fecha</p></TableCell>
                             </TableRow>
                             </TableHead>
                             <TableBody>
-                                {datos}
+                            {por_meses}
                             </TableBody>
-                        </Table>
-                        
+                        </Table>  
                     </TableContainer>
                 </div>
                 )            
@@ -121,3 +117,5 @@ class TableFromDataBase extends Component{
     }
 }
 export default TableFromDataBase
+
+
