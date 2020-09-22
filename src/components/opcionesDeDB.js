@@ -209,7 +209,7 @@ class Opciones extends Component{
                     this.setState({
                         consulta: data,
                         cargando: false,
-                        /*boton_descarga: true*/
+                        boton_descarga: true
                     })
                     console.log(data)
                 }).catch( err => {
@@ -232,7 +232,7 @@ class Opciones extends Component{
                 this.setState({
                     consulta: data,
                     cargando: false,
-                    /*boton_descarga: true*/
+                    boton_descarga: true
                 })
             }).catch( err => {
                 alert("Error al comunicarse ocn la base de datos");
@@ -280,7 +280,7 @@ class Opciones extends Component{
             .then( data => {
                 this.setState({
                     cargando: false,
-                    /*boton_descarga: true*/
+                    boton_descarga: true
                 })
             }).catch(error=>{
                 alert('Problema con el servidor, intente más tarde o contacte a soporte técnico')
@@ -319,6 +319,29 @@ class Opciones extends Component{
                 cargando: false
             })
             alert("Error al comunicarse a la base de datos")
+        })
+    }
+    handleDownload = () => {
+        window.open('https://instrumentacionline.ddns.net/descarga_archivo_csv');
+        let payload = {
+            year: this.state.año,
+            mes: this.state.mes,
+            dia: this.state.dia,
+            lugar: this.state.ubicacion
+        }
+        console.log(payload);
+        fetch(`${protocolo}://${server}/descarga_archivo_csv`,{
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers:{
+                'Content-Type': 'application/json' 
+            }              
+        }).then( response => {
+            return response.json();
+        }).then( data => {
+            console.log(data)
+        }).catch( err => {
+            console.log(err);
         })
     }
     render(){
@@ -371,8 +394,9 @@ class Opciones extends Component{
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
             </div>
               <div style={{visibility: this.state.boton_descarga}}>
-                  {/*<a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>*/}
-                  <a href="https://instrumentacionline.ddns.net/descarga_archivo_csv/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>
+                   {/*<div className="boton" onClick={this.handleDownload}>Download</div>*/}
+                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>
+                  {/*<a href="https://instrumentacionline.ddns.net/descarga_archivo_csv/" className="boton" onClick={this.handleDownload}>Descargar Resultado</a>*/}
               </div>
               
             
@@ -428,7 +452,8 @@ class Opciones extends Component{
             </div>
               <Tabla anchura={this.props.anchura} data={this.state.consulta} />
               <div className="boton-movile" style={{visibility: this.state.boton_descarga}}>
-                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="noSub">Descargar consulta</a>
+                  {/*<div className="boton-movile" onClick={this.handleDownload}>Download</div>*/}
+                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" onClick={this.ocultar} className="noSub">Descargar consulta</a>
               </div>
         </div>
         )
