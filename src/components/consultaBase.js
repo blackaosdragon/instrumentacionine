@@ -22,16 +22,7 @@ class Consulta extends Component{
             estilos: "opciones"
         }
     }
-    componentDidMount(){/*
-        fetch('http://192.168.0.13:5000/ubicaciones')
-        .then( response => {return response.json()})
-        .then( data => {
-            this.setState({
-                visibleUbicacion: 'true',
-                ubicaciones: data,
-            })
-        })
-        */
+    componentDidMount(){
     }
     handleChange = e => {
         //console.log(e.target);

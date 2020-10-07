@@ -250,6 +250,15 @@ class PanelDeControl extends Component{
         handleNotifis(!notifis);
         
     }
+    ultima_data = () => {
+        fetch("https://instrumentacionline.ddns.net/socket").then((response)=>{
+            return response.json()
+        }).then((respuesta)=>{
+            console.log(respuesta);
+        }).catch( err => {
+            console.log(err)
+        })
+    }
     test_notifi = () => {
         navigator.serviceWorker.ready.then( function(registration){
             registration.showNotification('Probando notificaciones',{
@@ -330,6 +339,7 @@ class PanelDeControl extends Component{
                         {interruptor}
                 </FormGroup>
                 <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>
+                <button onClick={this.ultima_data}>Pedir ultimo dato</button>
                 </div>
             )
         } else {
@@ -351,6 +361,7 @@ class PanelDeControl extends Component{
                     <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase-movile" >
                         Probar notificaciones
                     </div>
+                    <button >Pedir ultimo dato</button>
                 </div>
             )
         }

@@ -16,16 +16,7 @@ firebase.initializeApp({
 
 
 const messaging = firebase.messaging();
-self.addEventListener('notificationclick',function(event){   
-    console.log("Se hizo click en una  notificacion");
-    event.notification.close();
-    let abrir = new Promise( (resolve,reject) => {
-        setTimeout(resolve,3000);
-    }).then( () => {
-        return clients.openWindow('https://instrumentaciononline.com.mx');
-    });
-    event.waitUntil(abrir);
-})
+
 
     
 

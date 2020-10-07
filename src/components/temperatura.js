@@ -35,38 +35,7 @@ class Temperature extends Component{
     componentWillMount(){    
     }
     componentDidMount(){
-        /*
-        fetch(`${ioSocket}/${ubicaciones_endPoint}`)
-        .then(response=>{
-            return response.json()
-        })
-        .then(data=>{
-            //console.log(data);
-            data.forEach(element=>{
-                this.setState({
-                    ...this.state,
-                    estuctura_De_tabla: [
-                        ...this.state.estuctura_De_tabla,
-                        element
-                    ]
-                })
-                this.setState({
-                    [element]:{
-                        name: element,
-                        valor: "",
-                        actualizacion: ""
-                    }
-                })
-            })
-            //console.log(this.state);
-            cargando = 0;
-        })
-        .catch(err=>{
-            alert("Error al cominucarse a la base de datos");
-            console.log(err);
-            //cargando = 0;
-        })
-        */
+        
         fetch(`${ioSocket}/${ubicaciones_endPoint2}`)
         .then( response => {return response.json()})
         .then ( data => {
@@ -100,6 +69,43 @@ class Temperature extends Component{
         .catch( error => {
             console.log(error);
         })
+        fetch("https://instrumentacionline.ddns.net/socket").then((response)=>{
+            return response.json()
+        }).then((data)=>{
+            console.log(data);
+            console.log(data.sensor2.length);
+            ///*
+            this.setState({
+                ...this.state,
+                [this.state.estuctura_De_tabla[0]]:{
+                    ...this.state.estuctura_De_tabla,
+                    lugar: this.state.estuctura_De_tabla[0],
+                    valor: data.sensor1[0].Temperatura,
+                    actualizacion: `${data.sensor1[0].Hora}:${data.sensor1[0].Minuto}`
+                }
+
+            })
+            
+            if(data.sensor2.length<=0){
+                console.log("Sensor farmacia esta vacio")
+            } else {
+                this.setState({
+                    ...this.state,
+                    [this.state.estuctura_De_tabla[1]]:{
+                        ...this.state.estuctura_De_tabla,
+                        lugar: this.state.estuctura_De_tabla[1],
+                        valor: data.sensor2[0].Temperatura,
+                        actualizacion: `${data.sensor2[0].Hora}:${data.sensor2[0].Minuto}`
+                    }
+    
+                })
+            }
+            
+            
+            //*/
+        }).catch( err => {
+            console.log(err)
+        })        
         
         
         socket.on('temp', data => {
@@ -107,6 +113,7 @@ class Temperature extends Component{
             let hora = new Date();
             let float_temp = 0;
             let string_temp = "";
+            //console.log(data)
             for( let i = 1 ; i < data.length ; i++){
                 string_temp = string_temp+data[i];
             }

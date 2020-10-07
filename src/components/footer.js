@@ -7,7 +7,7 @@ class Footer extends Component{
         return(
           <div class="row">
               <div class="col-xs">
-                <p class="box" className="titulos">Nuestras oficinas se encuentran en la calle de Tamagno #43 en la colonia Peralvillo </p>
+                <p class="box" className="titulos">Nuestras oficinas se encuentran en la calle de Tamagno #43 en la Colonia Peralvillo </p>
               </div>
                 <div class="col-xs">
                 <p class="box" className="titulos">Si tiene alguna duda, sugerencia o tiene algún mal funcionamiento de la página favor de mandar un correo a contacto@intrumentaciononline.com.mx</p>

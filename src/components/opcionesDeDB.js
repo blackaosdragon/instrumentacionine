@@ -56,6 +56,30 @@ class Opciones extends Component{
 
         }
     }
+    componentDidMount(){
+        fetch(`${protocolo}://${server}:${puerto}/${this.props.ubicaciones}`)
+        .then( response => {
+            this.setState({
+                cargando: false
+            })
+            return response.json();
+        })
+        .then( data => {
+            this.setState({
+                localizaciones: data,
+                ubicaciones: "visible",
+                cargando: false,
+
+            })
+        })
+        .catch( err => {
+            console.log(err);
+            this.setState({
+                cargando: false
+            })
+            alert("Error al comunicarse a la base de datos")
+        })
+    }
     componentDidUpdate = (prevProps, prevState) => {
         if(this.state!==prevState){
         }
@@ -84,6 +108,7 @@ class Opciones extends Component{
                 años: data,
                 years: "visible",
                 cargando: false,
+                boton: "visible"
             })
             //console.log(this.state);
         })
@@ -172,6 +197,15 @@ class Opciones extends Component{
             boton: "visible"
         })
         
+    }
+    consulta_General = () => {
+        let payload = {
+            lugar: this.state.ubicacion,
+            yearInicio: this.state.years,
+            yearFin: "",
+            
+
+        }
     }
     consultar_datos = () => {
         //console.log(`Ubicacion ${this.state.ubicacion} Año: ${this.state.año}, Mes: ${this.state.mes}, Dia: ${this.state.dia}, Desde: ${this.state.horaInicio}:${this.state.minutoInicio}, hasta: ${this.state.horaFinal}:${this.state.minutoFinal}`)
@@ -296,31 +330,7 @@ class Opciones extends Component{
         })
     }
     
-    componentDidMount(){
-        fetch(`${protocolo}://${server}:${puerto}/${this.props.ubicaciones}`)
-        .then( response => {
-            this.setState({
-                cargando: false
-            })
-            return response.json();
-
-        })
-        .then( data => {
-            this.setState({
-                localizaciones: data,
-                ubicaciones: "visible",
-                cargando: false,
-
-            })
-        })
-        .catch( err => {
-            console.log(err);
-            this.setState({
-                cargando: false
-            })
-            alert("Error al comunicarse a la base de datos")
-        })
-    }
+    
     handleDownload = () => {
         window.open('https://instrumentacionline.ddns.net/descarga_archivo_csv');
         let payload = {
