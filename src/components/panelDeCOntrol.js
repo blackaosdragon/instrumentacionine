@@ -184,7 +184,7 @@ class PanelDeControl extends Component{
                 })
                 .then( respuesta => {
                     alert(`${respuesta}`);
-                    console.log(`${respuesta}`);
+                    console.log(respuesta);
                     
                     if(respuesta[0].activo===0){
                         this.setState({
