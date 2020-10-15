@@ -184,7 +184,7 @@ class PanelDeControl extends Component{
                 })
                 .then( respuesta => {
                     
-                    
+                    console.log("Respuesta: ",respuesta)
                     if(respuesta[0].insertado===1){
                         alert("Respues undefained");
                         console.log("Respuesta: ",respuesta)
