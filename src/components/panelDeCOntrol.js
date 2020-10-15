@@ -184,6 +184,7 @@ class PanelDeControl extends Component{
                     return respuesta.json()
                 })
                 .then( respuesta => {
+                    alert("Procesa la resuesta")
                     if(respuesta[0].activo===0){
                         this.setState({
                             visible: "collapse"
@@ -202,6 +203,7 @@ class PanelDeControl extends Component{
                     })
                 }).catch( err => {
                     alert("No se pudo comprobar el token, intente mas tarde");
+                    alert(err);
                     this.setState({
                         cargando: false
                     })
