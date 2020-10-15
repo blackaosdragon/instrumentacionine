@@ -210,7 +210,7 @@ class PanelDeControl extends Component{
                 });
 
             }).catch( error => {
-                alert(`${error}`);
+                alert(`Error: ${error}`);
                     this.setState({
                         cargando: false
                     })
