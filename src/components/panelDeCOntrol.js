@@ -184,9 +184,14 @@ class PanelDeControl extends Component{
                 })
                 .then( respuesta => {
                     
-                    console.log(respuesta);
+                    
                     if(respuesta[0]===undefined){
                         console.log("Respuesta: ",respuesta)
+                        if(respuesta[0].insertado===1){
+                            this.setState({
+                                notificaciones: true,
+                            })
+                        }
                     } else {        
                         if(respuesta[0].activo===0){
                             this.setState({
@@ -197,10 +202,11 @@ class PanelDeControl extends Component{
                                 visible: "visible"
                             })
                         }
+                        this.setState({
+                            notificaciones: respuesta[0].activo,
+                        })
                     }
-                    this.setState({
-                        notificaciones: respuesta[0].activo,
-                    })
+                    
                     //console.log(respuesta[0].activo);
                     this.setState({
                         cargando: false
