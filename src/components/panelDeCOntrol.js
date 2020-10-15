@@ -180,11 +180,10 @@ class PanelDeControl extends Component{
                         'Content-Type': 'application/json' 
                     },
                 }).then( respuesta => {
-                    alert("Hubo respuesta");
                     return respuesta.json()
                 })
                 .then( respuesta => {
-                    alert("Procesa la resuesta")
+                    alert(respuesta);
                     if(respuesta[0].activo===0){
                         this.setState({
                             visible: "collapse"
