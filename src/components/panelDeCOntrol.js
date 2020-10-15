@@ -184,10 +184,15 @@ class PanelDeControl extends Component{
                 })
                 .then( respuesta => {
                     if(respuesta===undefined){
-                        console.log("Salio indefinido")
+                        console.log("Respuesta idnefinida");
                     }
                     console.log(respuesta);
-                    
+                    if(respuesta[0]===undefined){
+                        console.log("Respuesta[0] es undefined");
+                    }
+                    if(respuesta[0].activo===undefined){
+                        console.log("Activo undefined");
+                    }
                     if(respuesta[0].activo===0){
                         this.setState({
                             visible: "collapse"
@@ -196,8 +201,6 @@ class PanelDeControl extends Component{
                         this.setState({
                             visible: "visible"
                         })
-                    } else if(respuesta[0].activo===undefined){
-                        console.log("Salio undefined");
                     }
                     this.setState({
                         notificaciones: respuesta[0].activo,
