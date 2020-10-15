@@ -183,11 +183,9 @@ class PanelDeControl extends Component{
                     return respuesta.json()
                 })
                 .then( respuesta => {
-                    
-                    console.log("Respuesta: ",respuesta)
+                    //console.log("Respuesta: ",respuesta)
                     if(respuesta.insertado===1){
-                        alert("Respues undefained");
-                        console.log("Respuesta: ",respuesta)
+                        //console.log("Respuesta: ",respuesta)
                         if(respuesta.insertado===1){
                             this.setState({
                                 notificaciones: true,
