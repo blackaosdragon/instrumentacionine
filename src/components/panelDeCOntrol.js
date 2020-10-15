@@ -183,7 +183,9 @@ class PanelDeControl extends Component{
                     return respuesta.json()
                 })
                 .then( respuesta => {
-                    alert(`${respuesta}`);
+                    if(respuesta===undefined){
+                        console.log("Salio indefinido")
+                    }
                     console.log(respuesta);
                     
                     if(respuesta[0].activo===0){
