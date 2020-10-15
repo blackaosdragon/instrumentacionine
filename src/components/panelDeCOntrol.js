@@ -183,7 +183,7 @@ class PanelDeControl extends Component{
                     return respuesta.json()
                 })
                 .then( respuesta => {
-                    alert(respuesta);
+                    alert(`${respuesta}`);
                     if(respuesta[0].activo===0){
                         this.setState({
                             visible: "collapse"
