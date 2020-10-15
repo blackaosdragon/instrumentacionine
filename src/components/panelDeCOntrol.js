@@ -194,8 +194,8 @@ class PanelDeControl extends Component{
                         this.setState({
                             visible: "visible"
                         })
-                    } else if(respuesta===undefined){
-                        console.log("porque?");
+                    } else if(respuesta[0].activo===undefined){
+                        console.log("Salio undefined");
                     }
                     this.setState({
                         notificaciones: respuesta[0].activo,
