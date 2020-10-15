@@ -184,6 +184,8 @@ class PanelDeControl extends Component{
                 })
                 .then( respuesta => {
                     alert(`${respuesta}`);
+                    console.log(`${respuesta}`);
+                    
                     if(respuesta[0].activo===0){
                         this.setState({
                             visible: "collapse"
@@ -192,6 +194,8 @@ class PanelDeControl extends Component{
                         this.setState({
                             visible: "visible"
                         })
+                    } else if(respuesta===undefined){
+                        console.log("porque?");
                     }
                     this.setState({
                         notificaciones: respuesta[0].activo,
