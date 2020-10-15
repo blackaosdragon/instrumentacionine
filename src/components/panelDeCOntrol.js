@@ -140,10 +140,11 @@ class PanelDeControl extends Component{
         }
     }
     componentDidMount = () => {
-        /*
+        
         this.setState({
             cargando: false
         })
+        /*
         */
         //console.log(Notification.permission);
         /*
@@ -178,7 +179,10 @@ class PanelDeControl extends Component{
                     headers:{
                         'Content-Type': 'application/json' 
                     },
-                }).then( respuesta => {return respuesta.json()})
+                }).then( respuesta => {
+                    alert("Hubo respuesta");
+                    return respuesta.json()
+                })
                 .then( respuesta => {
                     if(respuesta[0].activo===0){
                         this.setState({

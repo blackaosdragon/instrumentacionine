@@ -9,7 +9,7 @@ import ModalDeCarga from "./carga.js"
 
 let estado_campo = 'blue'
 
-const login = 'https://instrumentacionline.ddns.net/login'
+const login = 'http://instrumentacionline.ddns.net/login'
 
 const theme = createMuiTheme({
     palette: {
@@ -209,7 +209,7 @@ class ControlUsers extends Component{
             user: this.state.oirausu,
             pass: this.state.hasch
         }
-        //console.log(data);
+        console.log(data);
         fetch(`${login}`,{
             method: 'POST',
             body: JSON.stringify(data),
@@ -254,8 +254,8 @@ class ControlUsers extends Component{
         let data = {
             user: this.state.oirausu,
             pass: this.state.hasch
-        
         }
+        console.log(data);
         handleName(this.state.usuario);        
         fetch(`${login}`,{
             method: 'POST',

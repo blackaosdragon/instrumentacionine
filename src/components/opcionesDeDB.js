@@ -87,8 +87,16 @@ class Opciones extends Component{
     handleChange = (event) =>{
        this.setState({
            [event.target.name]: event.target.value,
+           año: "",
+           mes:"",
+           dia:"",
+           month: "collapse",
+           days: "collapse",
+           boton: "collapse",
+           boton_descarga: "collapse",
            cargando: true,
        })
+
         //console.log(this.state);
         let consulta = {
             ubicacion: event.target.value,
@@ -108,7 +116,6 @@ class Opciones extends Component{
                 años: data,
                 years: "visible",
                 cargando: false,
-                boton: "visible"
             })
             //console.log(this.state);
         })
@@ -126,6 +133,12 @@ class Opciones extends Component{
         this.setState({
             [event.target.name]: event.target.value,
             cargando: true,
+            mes: "",
+            dia:"",
+            month: "collapse",
+            days: "collapse",
+            boton: "collapse",
+            boton_descarga: "collapse", 
         })
         let meses = {
             year: event.target.value
@@ -159,7 +172,10 @@ class Opciones extends Component{
     selection_month = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
+            dia: "",
+            days: "collapse",
             cargando: true,
+            
         })
         let dias = {
             year: this.state.año,
