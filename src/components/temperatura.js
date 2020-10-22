@@ -143,7 +143,7 @@ class Temperature extends Component{
                 })*/
             }
             //console.log(this.state.estuctura_De_tabla);
-            if(data[0]=='1'){
+            if(data[0]=='1  '){
                 this.setState({
                     ...this.state,
                     [this.state.estuctura_De_tabla[1]]:{
