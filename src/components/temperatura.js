@@ -120,7 +120,7 @@ class Temperature extends Component{
             if(parseFloat(string_temp)){
                 float_temp = parseFloat(string_temp);
             } else {}
-            if(data[0]=='1'){ 
+            if(data[0]=='2'){ 
                 //console.log(this.state.estuctura_De_tabla[1]);
                 
                 this.setState({
@@ -143,7 +143,7 @@ class Temperature extends Component{
                 })*/
             }
             //console.log(this.state.estuctura_De_tabla);
-            if(data[0]=='2'){
+            if(data[0]=='1'){
                 this.setState({
                     ...this.state,
                     [this.state.estuctura_De_tabla[1]]:{
