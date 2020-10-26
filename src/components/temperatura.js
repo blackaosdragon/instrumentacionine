@@ -77,7 +77,7 @@ class Temperature extends Component{
             ///*
             this.setState({
                 ...this.state,
-                [this.state.estuctura_De_tabla[0]]:{
+                [this.state.estuctura_De_tabla[1]]:{
                     ...this.state.estuctura_De_tabla,
                     lugar: this.state.estuctura_De_tabla[0],
                     valor: data.sensor1[0].Temperatura,
@@ -91,7 +91,7 @@ class Temperature extends Component{
             } else {
                 this.setState({
                     ...this.state,
-                    [this.state.estuctura_De_tabla[1]]:{
+                    [this.state.estuctura_De_tabla[0]]:{
                         ...this.state.estuctura_De_tabla,
                         lugar: this.state.estuctura_De_tabla[1],
                         valor: data.sensor2[0].Temperatura,
@@ -109,7 +109,7 @@ class Temperature extends Component{
         
         
         socket.on('temp', data => {
-            //console.log("A partir de aqui se actualiza el estado");
+            console.log(data);
             let hora = new Date();
             let float_temp = 0;
             let string_temp = "";
@@ -120,7 +120,7 @@ class Temperature extends Component{
             if(parseFloat(string_temp)){
                 float_temp = parseFloat(string_temp);
             } else {}
-            if(data[0]=='2'){ 
+            if(data[0]=='1'){ 
                 //console.log(this.state.estuctura_De_tabla[1]);
                 
                 this.setState({
@@ -143,11 +143,7 @@ class Temperature extends Component{
                 })*/
             }
             //console.log(this.state.estuctura_De_tabla);
-<<<<<<< HEAD
-            if(data[0]=='1'){
-=======
-            if(data[0]=='1  '){
->>>>>>> 09d991ddd35e816585ff787842927b93f55e1a8f
+            if(data[0]=='2'){
                 this.setState({
                     ...this.state,
                     [this.state.estuctura_De_tabla[1]]:{
