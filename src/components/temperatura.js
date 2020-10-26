@@ -113,7 +113,7 @@ class Temperature extends Component{
             let hora = new Date();
             let float_temp = 0;
             let string_temp = "";
-            //console.log(data)
+            console.log(data)
             for( let i = 1 ; i < data.length ; i++){
                 string_temp = string_temp+data[i];
             }
@@ -143,7 +143,11 @@ class Temperature extends Component{
                 })*/
             }
             //console.log(this.state.estuctura_De_tabla);
+<<<<<<< HEAD
             if(data[0]=='1'){
+=======
+            if(data[0]=='1  '){
+>>>>>>> 09d991ddd35e816585ff787842927b93f55e1a8f
                 this.setState({
                     ...this.state,
                     [this.state.estuctura_De_tabla[1]]:{
