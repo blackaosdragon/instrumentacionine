@@ -429,7 +429,7 @@ class Opciones extends Component{
               </div>
               */}
               <div style={{visibility: this.state.boton_descarga}}>
-              <a href="https://instrumentacionline.ddns.net/descarga/" classname = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
+              <a href="https://instrumentacionline.ddns.net/descarga/" className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
               </div>
             
             <Tabla anchura={this.props.anchura} data={this.state.consulta} />
@@ -485,7 +485,8 @@ class Opciones extends Component{
               <Tabla anchura={this.props.anchura} data={this.state.consulta} />
               <div className="boton-movile" style={{visibility: this.state.boton_descarga}}>
                   {/*<div className="boton-movile" onClick={this.handleDownload}>Download</div>*/}
-                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" onClick={this.ocultar} className="noSub">Descargar consulta</a>
+                  {/*<a href="https://instrumentacionline.ddns.net/descarga_consulta/" onClick={this.ocultar} className="noSub">Descargar consulta</a>*/}
+                  <a href="https://instrumentacionline.ddns.net/descarga/" className = "noSub" onClick={this.ocultar}> Descargar Recurso</a>
               </div>
         </div>
         )
