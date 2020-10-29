@@ -13,8 +13,8 @@ import ModalDeCarga from "./carga.js";
 //const server = "192.168.1.65"; server para probar desde red local
 const server = "instrumentacionline.ddns.net"
 //const puerto = "5000"; puerto de prueba
-//const puerto = "443";
-const puerto = "5002"; //puerto para probar local
+const puerto = "443"; //puerto real
+//const puerto = "5002"; //puerto para probar local
 const protocolo = "https";
 const end_point_años = 'years';
 const end_point_meses = 'mes';
@@ -429,7 +429,7 @@ class Opciones extends Component{
               </div>
               */}
               <div style={{visibility: this.state.boton_descarga}}>
-              <a href="https://instrumentacionline.ddns.net:5002/descarga/" classname = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
+              <a href="https://instrumentacionline.ddns.net/descarga/" classname = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
               </div>
             
             <Tabla anchura={this.props.anchura} data={this.state.consulta} />

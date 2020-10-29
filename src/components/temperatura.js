@@ -9,7 +9,7 @@ import socketIOClient from "socket.io-client"
 import { Link } from "react-router-dom";
 
 //const ioSocket="http://192.168.0.10:5000"
-const ioSocket = "https://instrumentacionline.ddns.net:5002"
+const ioSocket = "https://instrumentacionline.ddns.net"
 //const dominio = "192.168.0.10";
 //const port = "5001";
 const ubicaciones_endPoint = "ubicaciones";
@@ -69,7 +69,7 @@ class Temperature extends Component{
         .catch( error => {
             console.log(error);
         })
-        fetch("https://instrumentacionline.ddns.net:5002/socket").then((response)=>{
+        fetch("https://instrumentacionline.ddns.net/socket").then((response)=>{
             return response.json()
         }).then((data)=>{
             console.log(data);
