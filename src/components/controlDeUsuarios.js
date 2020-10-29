@@ -9,7 +9,8 @@ import ModalDeCarga from "./carga.js"
 
 let estado_campo = 'blue'
 
-const login = 'https://instrumentacionline.ddns.net/login'
+//const login = 'https://instrumentacionline.ddns.net/login'
+const login = 'https://instrumentacionline.ddns.net:5002/login'
 
 const theme = createMuiTheme({
     palette: {

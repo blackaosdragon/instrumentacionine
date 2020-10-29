@@ -6,9 +6,9 @@ import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 import Cargando from './carga.js';
 
-const end_point = 'https://instrumentacionline.ddns.net/insertar_token';
-const end_point_notifis = 'https://instrumentacionline.ddns.net/consultar_notifis';
-const end_point_send_test_notifi = 'https://instrumentacionline.ddns.net/test_notificacion'
+const end_point = 'https://instrumentacionline.ddns.net:5002/insertar_token';
+const end_point_notifis = 'https://instrumentacionline.ddns.net:5002/consultar_notifis';
+const end_point_send_test_notifi = 'https://instrumentacionline.ddns.net:5002/test_notificacion'
 
 let messaging = null;
 const inicializarFirebase = firebase.initializeApp({

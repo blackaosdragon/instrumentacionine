@@ -13,7 +13,8 @@ import ModalDeCarga from "./carga.js";
 //const server = "192.168.1.65"; server para probar desde red local
 const server = "instrumentacionline.ddns.net"
 //const puerto = "5000"; puerto de prueba
-const puerto = "443";
+//const puerto = "443";
+const puerto = "5002"; //puerto para probar local
 const protocolo = "https";
 const end_point_años = 'years';
 const end_point_meses = 'mes';
@@ -248,7 +249,7 @@ class Opciones extends Component{
             })
         } else{
             if(this.state.dia===""){
-                fetch(`${protocolo}://${server}/${end_point_consulta_mes}`,{
+                fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta_mes}`,{
                     method: 'POST',
                     body: JSON.stringify(payload),
                     headers:{
@@ -269,7 +270,7 @@ class Opciones extends Component{
                     })
                 })
             } else {
-                fetch(`${protocolo}://${server}/${end_point_consulta}`,{
+                fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta}`,{
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers:{
@@ -320,7 +321,7 @@ class Opciones extends Component{
         ) {
             alert("Falta completar algunos datos");
         } else (
-            fetch(`${protocolo}://${server}/${end_point_consulta_y_descarga}`,{
+            fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta_y_descarga}`,{
               method: 'POST',
                   body: JSON.stringify(payload),
                   headers:{
@@ -419,12 +420,17 @@ class Opciones extends Component{
         <div style={{visibility: this.state.boton}}>
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
             </div>
+            {/*
               <div style={{visibility: this.state.boton_descarga}}>
-                   {/*<div className="boton" onClick={this.handleDownload}>Download</div>*/}
+                   {/*<div className="boton" onClick={this.handleDownload}>Download</div>}
                   <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>
-                  {/*<a href="https://instrumentacionline.ddns.net/descarga_archivo_csv/" className="boton" onClick={this.handleDownload}>Descargar Resultado</a>*/}
+                  
+                  {/*<a href="https://instrumentacionline.ddns.net/descarga_archivo_csv/" className="boton" onClick={this.handleDownload}>Descargar Resultado</a>}
               </div>
-              
+              */}
+              <div style={{visibility: this.state.boton_descarga}}>
+              <a href="https://instrumentacionline.ddns.net:5002/descarga/" classname = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
+              </div>
             
             <Tabla anchura={this.props.anchura} data={this.state.consulta} />
         </div>
