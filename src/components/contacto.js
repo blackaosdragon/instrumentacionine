@@ -5,6 +5,16 @@ import Mail from "@material-ui/icons/Mail"
 
 
 class Contacto extends Component{
+
+  copiar = (event) => {
+    this.textArea.select();
+    document.execCommand('copy');
+    event.target.focus();
+    //event.preventDefault();
+    //event.clipboardData.setData('text/plain','hola mundo')
+    console.log("copiado")
+
+  }
     render(){
       if (this.props.anchura>970){
         return(
@@ -13,29 +23,35 @@ class Contacto extends Component{
                 <div class="row center-xs">
                 <CardContent>
                 <div>
-                  <ListItem button>
+                  <ListItem >
                     <ListItemAvatar>
                       <Avatar>
                         <Call />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
+                    
                       primary="Teléfono oficina"
                       secondary="(55) 55-83-91-82"
+
                     />
                   </ListItem>
                 </div>
 
-                <div>
-                  <ListItem button>
+                <div onClick={()=>{
+                  document.execCommand('copy',false,"instrumentacion_@hotmail.com");
+                }}>
+                  <ListItem >
                     <ListItemAvatar>
                       <Avatar>
                         <Mail />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
+                   
                       primary="Correo electrónico"
                       secondary="instrumentacion_@hotmail.com"
+                      value="instrumentacion_@hotmail.com"
                     />
                   </ListItem>
                 </div>
@@ -50,10 +66,13 @@ class Contacto extends Component{
       } else {
         return(
           <div>
-          <div className="contenedorCardMovilContacto">
-            <div>Datos de contacto</div>
+            <div className="margenSup">.</div>
+            <div className="contenedorCardMovil">
+              <h1 className="titulos">Datos de contacto</h1>                    
+            </div>
+            <div className="contenedorCardMovilContacto">
             <div>
-            <ListItem button>
+            <ListItem >
               <ListItemAvatar>
                 <Avatar>
                   <Call />
@@ -65,11 +84,13 @@ class Contacto extends Component{
               />
             </ListItem>
             </div>
-            <div>
-            <ListItem button>
+            <div onClick={(e)=>{
+              document.execCommand('copy',false,"instrumentacion_@hotmail.com");
+            }}>
+            <ListItem >
               <ListItemAvatar>
                 <Avatar>
-                  <Call />
+                  <Mail />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -79,10 +100,10 @@ class Contacto extends Component{
             </ListItem>
             </div>
             <div>
-            <ListItem button>
+            <ListItem >
               <ListItemAvatar>
                 <Avatar>
-                  <Call />
+                  <Mail />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText

@@ -110,17 +110,24 @@ class Temperature extends Component{
         
         socket.on('temp', data => {
             console.log(data);
+            console.log(this.state.estuctura_De_tabla)
+            if(this.state.estuctura_De_tabla[0]==='Cámara dieto'){
+                console.log("Primer dato recibido cámara dieto")
+            } else {
+                console.log("El primer elemento recibido fue: ",this.state.estuctura_De_tabla[0]);
+            }
+            
             let hora = new Date();
             let float_temp = 0;
             let string_temp = "";
-            console.log(data)
+            
             for( let i = 1 ; i < data.length ; i++){
                 string_temp = string_temp+data[i];
             }
             if(parseFloat(string_temp)){
                 float_temp = parseFloat(string_temp);
             } else {}
-            if(data[0]=='2'){ 
+            if(data[0]=='1'){ 
                 //console.log(this.state.estuctura_De_tabla[1]);
                 
                 this.setState({
@@ -143,7 +150,7 @@ class Temperature extends Component{
                 })*/
             }
             //console.log(this.state.estuctura_De_tabla);
-            if(data[0]=='1'){
+            if(data[0]=='2'){
                 this.setState({
                     ...this.state,
                     [this.state.estuctura_De_tabla[1]]:{
@@ -164,6 +171,7 @@ class Temperature extends Component{
                     }
                 })
             }
+            
         })
         //console.log('ComponentDidMount:');
         //console.log(this.state);

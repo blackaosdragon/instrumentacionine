@@ -35,7 +35,7 @@ class TableFromDataBase extends Component{
                             <TableCell><p className="tablaDatos">{element.Lugar}</p></TableCell>
                             <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.Dia} / {element.Mes} / {element.Año} - {element.Hora} : {element.Minuto} hrs
+                                {element.Dia} / {element.Mes} / {element.Año} - {element.Hora} hrs
                             </p></TableCell>
                         </TableRow>
                     )
@@ -45,7 +45,7 @@ class TableFromDataBase extends Component{
                             <TableCell><p className="tablaDatos">{element.Lugar}</p></TableCell>
                             <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.Dia} / {element.Mes} / {element.Año} - {element.Hora} : {element.Minuto} hrs
+                                {element.Dia} / {element.Mes} / {element.Año} - {element.Hora} hrs
                             </p></TableCell>
                         </TableRow>
                     )
@@ -57,7 +57,7 @@ class TableFromDataBase extends Component{
                         <TableRow>
                             <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.Dia}/{element.Mes} - {element.Hora}:{element.Minuto} h
+                                {element.Dia}/{element.Mes} - {element.Hora} hrs
                             </p></TableCell>
                         </TableRow>
                     )
@@ -66,7 +66,7 @@ class TableFromDataBase extends Component{
                         <TableRow style={{backgroundColor: '#cccccc'}}>
                             <TableCell><p className="tablaDatos">{element.Temperatura}°C</p></TableCell>
                             <TableCell><p className="tablaDatos">
-                                {element.Dia}/{element.Mes} - {element.Hora}:{element.Minuto} h
+                                {element.Dia}/{element.Mes} - {element.Hora} hrs
                             </p></TableCell>
                         </TableRow> 
                     )
