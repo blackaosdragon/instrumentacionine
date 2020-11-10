@@ -429,11 +429,7 @@ class Opciones extends Component{
               </div>
               */}
               <div style={{visibility: this.state.boton_descarga}}>
-<<<<<<< HEAD
               <a href="https://instrumentacionline.ddns.net/descarga/" className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
-=======
-              <a href="https://instrumentacionline.ddns.net:5002/descarga/" className="boton" onClick={this.ocultar}> Descargar Recurso</a>                  
->>>>>>> develop
               </div>
             
             <Tabla anchura={this.props.anchura} data={this.state.consulta} />
