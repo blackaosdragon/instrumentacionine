@@ -266,7 +266,7 @@ class Temperature extends Component{
     
                         </TableContainer>
                     </div>
-                    <Link to="./consulta" className="enlace"><div className="boton-movile">Consultar Base</div> </Link>
+                   <div><div className="boton"><Link to="./consulta" className="enlace"><h2 className="titulos">Consultar Base </h2></Link></div></div>
                 </div>
             );
 

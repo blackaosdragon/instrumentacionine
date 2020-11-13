@@ -313,44 +313,14 @@ class PanelDeControl extends Component{
         if(this.props.anchura>970){
             return(
                 
-                <div>{/*
-                <div className="contenedor">
-                    <div className="contenedor-item item1">{this.props.name}</div>
-                    
-                    <div className="contenedor-item item2">
-                    2
-                    </div>
-                    <div className="contenedor-item item3"> 3 </div>
-                    <div className="contenedor-item item4"> 4 </div>
-                    <div className="contenedor-item item5"> 5 </div>
-                    
-                </div> */}
+                <div>
                 <Cargando cargando={this.state.cargando}/>
-                <FormControl className="contenedorCard">
-                    {/*
-                    <FormGroup>
-                        <FormControlLabel 
-                          value="top"
-                          control={<Switch onClick={this.notifis} color="primary" checked={this.props.notificaciones}/>}
-                          label="Notificaciones"
-                          labelPlacement="top"
-                        />
-                        
-                    </FormGroup>
-                    */}
-                    
-                </FormControl>
+                
                 <Monitor anchura={this.props.anchura} />
                 
-                <Link className="link" to="./panel"><div className="boton" onClick={this.session}>Cerrar sesión</div></Link> 
+                <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
                 
                 <FormGroup className="switchFirebase">
-                        {/*<FormControlLabel 
-                          value="bottom"
-                          control={<Switch onClick={this.botonNotifis} color="primary" checked={this.state.notificaciones}/>}
-                          label="Notificaciones"
-                          labelPlacement="bottom"
-                        />*/}
                         {interruptor}
                 </FormGroup>
                 <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>
@@ -365,12 +335,6 @@ class PanelDeControl extends Component{
                     <Monitor anchura={this.props.anchura}/>
                     <Link className="link" to="./panel"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></Link> 
                     <div className="boton-movile">
-                      {/*<FormControlLabel 
-                          value="bottom"
-                          control={<Switch onClick={this.botonNotifis} color="primary" checked={this.props.notificaciones}/>}
-                          label="Notificaciones"
-                          labelPlacement="bottom"
-                      />*/}
                       {interruptor}
                     </div>
                     <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase-movile" >

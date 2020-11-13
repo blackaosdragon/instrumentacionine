@@ -57,13 +57,15 @@ class Home extends Component{
     if (this.props.anchura>970){
       return(
         <div>
-          <Link className="enlace" to="/panel">
+          
             <div className="contenedorCardPrincipal">
+            <Link className="enlace" to="/panel">
               <h1 className="titulos">Instrumentación y Electromecánica</h1>
               <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
+              </Link>
               <div onClick={this.a2hs}></div>
             </div>
-          </Link>
+         
 
           <div className="fondoBlanco">
             <h2 className="titulos">Estos son algunos de los equipos que nos dedicamos: </h2>

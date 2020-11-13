@@ -414,11 +414,17 @@ class Opciones extends Component{
                 </Select>
                 <FormHelperText>Seleccione el dia</FormHelperText>
             </FormControl>
-            <Link to="/panelDeControl" className="enlace">
-            <div className="boton" > Volver al monitor de temperaturas </div>    
-            </Link>
+            
+            
+            
+            <div className="boton"><Link to="/panelDeControl" className="enlace"> <h3 className="titulos">Volver al monitor de temperaturas  </h3></Link></div>   
+            
+            
+            
         <div style={{visibility: this.state.boton}}>
+            <h4 className="titulos">
             <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
+            </h4>
             </div>
             {/*
               <div style={{visibility: this.state.boton_descarga}}>
@@ -477,7 +483,9 @@ class Opciones extends Component{
                 <FormHelperText>Seleccione el dia</FormHelperText>
             </FormControl>
             <Link to="/panelDeControl" className="enlace">
+                <h3 className="titulos">
             <div className="boton-movile" > Volver al monitor de temperaturas </div>  
+            </h3>
             </Link>  
         <div style={{visibility: this.state.boton}}>
             <div className="boton-movile" onClick={this.consultar_datos}> Realizar consulta </div>
