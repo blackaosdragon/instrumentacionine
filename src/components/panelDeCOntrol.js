@@ -5,6 +5,8 @@ import { FormControl, FormControlLabel,FormGroup,Switch } from '@material-ui/cor
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 import Cargando from './carga.js';
+import termometro from "../images/termometro.jpg"
+import Sensor from './sensor.js';
 
 const end_point = 'https://instrumentacionline.ddns.net:5002/insertar_token';
 const end_point_notifis = 'https://instrumentacionline.ddns.net:5002/consultar_notifis';
@@ -298,9 +300,7 @@ class PanelDeControl extends Component{
         
     }
     
-    render(){
-        
-        
+    render(){        
         let interruptor = ''
         if (Notification.permission==='denied'){
             interruptor = <FormControlLabel onClick={()=>{alert("Para activar las notificaciones borre el caché y los permisos de la página y al solicitar el permiso acepte el recibir notificaciones")}} disabled control={<Switch />} label="No se otorgo permiso" />
@@ -309,13 +309,22 @@ class PanelDeControl extends Component{
         } else if ( Notification.permission === 'default'){
             interruptor = <FormControlLabel control={<Switch onClick={this.botonNotifis} color="primary" checked={this.state.notificaciones}/>} label="Notificaciones" />            
         }
-        //console.log("Panel");
+        //console.log(this.props);
         if(this.props.anchura>970){
             return(
                 
                 <div>
                 <Cargando cargando={this.state.cargando}/>
-                
+                <div className="grid-container">
+                    <div className="contenedorCard-boton">
+                    <img src={termometro} alt="sensor" className="imagenCard"/>
+                       <h1>Sensores</h1>  
+                    </div>
+                    <div className="contenedorCard-boton"> 
+                        <h1>Equipos </h1>
+                    </div>
+                </div>
+                {/*
                 <Monitor anchura={this.props.anchura} />
                 
                 <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
@@ -324,7 +333,7 @@ class PanelDeControl extends Component{
                         {interruptor}
                 </FormGroup>
                 <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>
-                
+                */}
                 </div>
             )
         } else {
@@ -332,6 +341,7 @@ class PanelDeControl extends Component{
                 <div>
                     <Cargando cargando={this.state.cargando}/>
                     <div className="margenMovilSuperior">.</div>
+                    
                     <Monitor anchura={this.props.anchura}/>
                     <Link className="link" to="./panel"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></Link> 
                     <div className="boton-movile">
@@ -339,8 +349,7 @@ class PanelDeControl extends Component{
                     </div>
                     <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase-movile" >
                         Probar notificaciones
-                    </div>
-                    
+                    </div>                    
                 </div>
             )
         }

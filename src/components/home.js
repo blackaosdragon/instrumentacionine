@@ -26,34 +26,8 @@ class Home extends Component{
       carrusel: LamparaLimpiesa
     }
   }
-  /*
-  a2hs = (e) => {
-    deferredPrompt = e;
-    
-  }
-  */
 
   render(){
-
-/*
-    let swRegistration = null;
-
-    if('serviceWorker' in navigator && 'PushManager' in window){
-      console.log('Service Worker y notificaciones push son soportadas');
-
-      navigator.serviceWorker.register('sw.js')
-      .then(function(swReg){
-        console.log('Service Worker esta registrado',swReg);
-        swRegistration = swReg;
-        console.log(swRegistration);
-      })
-      .catch(function(error){
-        console.log('Service Worker error',error);
-      });
-    }  else {
-      console.warn('Mensajes Push no son p}soportados por tu navegador');
-    }
-    */
     if (this.props.anchura>970){
       return(
         <div>

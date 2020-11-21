@@ -643,3 +643,27 @@
 textarea{
   margin: 1% 0% 0% 0%;
 }
+.grid-container{
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 1% 10% 1% 10%;
+  
+}
+.imagenCard{
+  width: 130px;
+  margin: 3% 0% 0% 0%;
+ 
+  
+}
+.contenedorCard-boton{
+  background-color: #ffffff;
+  margin: 0% 5% 0% 5%;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px #222;
+  transition: background-color 0.3s;
+}
+.contenedorCard-boton:hover{
+  transition: background-color 0.3s;
+  background-color: #0059b3;
+  cursor: pointer;
+}

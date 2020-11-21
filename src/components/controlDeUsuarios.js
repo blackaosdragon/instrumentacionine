@@ -210,7 +210,7 @@ class ControlUsers extends Component{
             user: this.state.oirausu,
             pass: this.state.hasch
         }
-        console.log(data);
+        //console.log(data);
         fetch(`${login}`,{
             method: 'POST',
             body: JSON.stringify(data),
@@ -219,6 +219,7 @@ class ControlUsers extends Component{
               },
         }).then(response=>{return response.json();})
         .then( response => {
+            console.log(data);
             if(response.data==1){
                 handleLogin(1);
                 this.setState({
@@ -240,65 +241,7 @@ class ControlUsers extends Component{
             })
             alert(error);
         })
-    }
-    enviar = () => {
-        const { handleLogin, handleName } = this.props;
-        this.setState({
-            cargando: true
-        })
-        //console.log(this.state.cargando);
-            
-        //console.log(this.state.oirausu);
-        //console.log(this.state.hasch);
-        //console.log(this.state.oirausu.length);
-        //console.log(this.state.hasch.length);
-        let data = {
-            user: this.state.oirausu,
-            pass: this.state.hasch
-        }
-        console.log(data);
-        handleName(this.state.usuario);        
-        fetch(`${login}`,{
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers:{
-                'Content-Type': 'application/json' 
-              },
-        }).then(response=>{return response.json();})
-        .then( data => {
-            //console.log("La respuesta es: ");            
-            //console.log(data);
-            if(data.data==1){
-                handleLogin(1);
-                this.setState({
-                    key: 1,
-                    cargando: false                   
-                })
-                //console.log(this.state.cargando);
-            } else if (data.data==0){
-                
-                this.setState({
-                    cargando: false
-                })
-                //console.log(this.state.cargando);
-
-                alert("Verifique su usuario y contraseña");
-            }
-
-        }).catch((err)=>{
-            //console.log("Error:");
-            //console.log(err);
-            alert("Problemas de comunicación con el servidor, intente más tarde");
-            //console.log(this.state.cargando);
-        })
-        this.setState({
-            usuario: '',
-            contraseña: '',
-            cargando: 1
-        })
-    }
-
-    
+    }   
 
     render(){
         //this.props.onChange();
