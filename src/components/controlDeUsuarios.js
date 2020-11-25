@@ -219,9 +219,9 @@ class ControlUsers extends Component{
               },
         }).then(response=>{return response.json();})
         .then( response => {
-            console.log(data);
+            console.log(response);
             if(response.data==1){
-                handleLogin(1);
+                handleLogin(1,response.level);
                 this.setState({
                     key: 1,
                 })

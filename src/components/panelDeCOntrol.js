@@ -7,6 +7,7 @@ import 'firebase/messaging'
 import Cargando from './carga.js';
 import termometro from "../images/termometro.jpg"
 import Sensor from './sensor.js';
+import {Nivel0,Nivel1, Nivel2, Nivel3} from './vistas/nivel0.js';
 
 const end_point = 'https://instrumentacionline.ddns.net:5002/insertar_token';
 const end_point_notifis = 'https://instrumentacionline.ddns.net:5002/consultar_notifis';
@@ -31,12 +32,13 @@ if(firebase.messaging.isSupported()){
 
 
 class PanelDeControl extends Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
             notificaciones: false,
             cargando: true,
-            visible: "collapse"
+            visible: "collapse",
+            nivel: 3
         }
     }
     obtener_token = () => {
@@ -142,31 +144,14 @@ class PanelDeControl extends Component{
         }
     }
     componentDidMount = () => {
-        
+        //console.log(this.props);
         this.setState({
-            cargando: false
+            nivel: this.props.level,
         })
-        /*
-        */
-        //console.log(Notification.permission);
-        /*
-        if(this.state.notificaciones==true){
-            this.setState({
-                visible: "visible"
-            })
-        } else if (this.state.notificaciones==false){
-            this.setState({
-                visible: "collapse"
-            })
-        }
-        */
         if(Notification.permission==='default'){
             this.setState({
                 notificaciones: false,
                 visible: "collapse"
-            })
-            this.setState({
-                cargando: false
             })
         } else if(Notification.permission==='granted'){
             messaging.getToken().then( token => {
@@ -209,24 +194,14 @@ class PanelDeControl extends Component{
                     }
                     
                     //console.log(respuesta[0].activo);
-                    this.setState({
-                        cargando: false
-                    })
                 }).catch( err => {
                     alert("No se pudo comprobar el token, intente mas tarde");
                     alert(err);
-                    this.setState({
-                        cargando: false
-                    })
                     console.log(err)
                 });
 
             }).catch( error => {
-                alert(`Error: ${error}`);
-                    this.setState({
-                        cargando: false
-                    })
-                    
+                alert(`Error: ${error}`);                    
                 console.log(error);
             })
             /*
@@ -253,8 +228,8 @@ class PanelDeControl extends Component{
 
         } else if(Notification.permission==='denied'){
             this.setState({
-                cargando: false,
-                visible: "collapse"
+                visible: "collapse",
+                cargando: false
             })
         }
     }
@@ -300,7 +275,42 @@ class PanelDeControl extends Component{
         
     }
     
-    render(){        
+    render(){
+        if(this.state.nivel===0){
+                return(
+                    <div>
+                        <Nivel0 anchura={this.props.anchura}/>
+                        <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
+                    </div>
+                )            
+        } else if (this.state.nivel===1){
+            return(
+                <div>
+                    <Nivel1 anchura={this.props.anchura}/>
+                    <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
+                </div>
+            )
+        } else if (this.state.nivel === 2){
+            return(
+                <div> 
+                    <Nivel2 anchura={this.props.anchura}/> 
+                    <Link className="link" to="./panel"><h3 className="titulos"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></h3></Link> 
+                </div>
+            )
+        } else if(this.state.nivel===3){
+            return(
+                <div> 
+                    <Nivel3 anchura={this.props.anchura}/> 
+                    <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link>                     
+                </div>
+            )
+        }
+        else {
+            return(
+                <div>Algo malo ocurrio</div>
+            )
+        }
+        /*
         let interruptor = ''
         if (Notification.permission==='denied'){
             interruptor = <FormControlLabel onClick={()=>{alert("Para activar las notificaciones borre el caché y los permisos de la página y al solicitar el permiso acepte el recibir notificaciones")}} disabled control={<Switch />} label="No se otorgo permiso" />
@@ -333,7 +343,7 @@ class PanelDeControl extends Component{
                         {interruptor}
                 </FormGroup>
                 <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>
-                */}
+                *//*}*//*
                 </div>
             )
         } else {
@@ -353,7 +363,8 @@ class PanelDeControl extends Component{
                 </div>
             )
         }
-        
+     */   
     }
+    
 }
 export default PanelDeControl;

@@ -29,6 +29,7 @@ class App extends Component{
       name: "",
       logeado: 0,
       notificaciones: 1,
+      nivel: 3
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
       //token: ""
@@ -55,10 +56,11 @@ class App extends Component{
       name: name
     })
   }
-  handleStatus = (status) => {
+  handleStatus = (status,nivel) => {
     localStorage.setItem('SessionActiva',status);
     this.setState({
-      logeado: status
+      logeado: status,
+      nivel: nivel,
     })
   }
   handleNotifis = (active) => {
@@ -94,10 +96,11 @@ class App extends Component{
           <Route path="/sensor" component={() => <Sensor anchura={this.state.width} />} />
           <Route path="/monitor" component={()=> <Temperature anchura={this.state.width}/> }/>
           <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
-          <Route path="/panelDeControl" component={()=> <ConsolaDeControl notifis={this.state.notificaciones}handleNotifis={this.handleNotifis} handleStatus={this.handleStatus} name={this.state.name} anchura={this.state.width} />} />
+          <Route path="/panelDeControl" component={()=> <ConsolaDeControl level={this.state.nivel} notifis={this.state.notificaciones} handleNotifis={this.handleNotifis} handleStatus={this.handleStatus} name={this.state.name} anchura={this.state.width} />} />
           <Route path="/panel" component={()=> <Panel logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
           <Route path="/login" component={()=> <Login  anchura={this.state.width} />} />
           <Route path="/registro" component={()=> <Registro  anchura={this.state.width} />} />
+          
 
           
 
