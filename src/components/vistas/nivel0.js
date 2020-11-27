@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 import termometro from '../../images/sensores.jpeg'
 import equipos from '../../images/equipos.jpeg'
 import { Link } from "react-router-dom";
+import BuildIcon from '@material-ui/icons/Build';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import SettingsIcon from '@material-ui/icons/Settings';
+import sensor from '../../images/sensor.svg'
+import copo from '../../images/copo.svg'
 
 
 export class Nivel0 extends Component{
@@ -11,10 +16,10 @@ export class Nivel0 extends Component{
             return(
                 <div>
                     <div className="grid-container">
-                        <div className="contenedorCard-boton">
+                        <Link to="/panelDeControl" className="contenedorCard-boton">
                             <img src={termometro} alt="sensor" className="imagenCard"/>
                             <h1>Sensores</h1>  
-                        </div>
+                        </Link>
                         <div className="contenedorCard-boton"> 
                             <img src={equipos} alt="sensor" className="imagenExperimento"/>
                             <h1>Equipos </h1>
@@ -75,8 +80,8 @@ export  class Nivel2 extends Component{
             return(
                 <div>
                     <div className="contenedor-grid-2">
-                        <div className="grid-item-1"><Link to="./temperatura" className="enlace"><p className="centrar-parrafo">Sensores</p></Link></div>
-                        <div className="grid-item-2"><Link to="./equipos" className="enlace"><div><p className="centrar-parrafo">Equipos</p></div></Link></div>
+                        <Link to="/panelDeControl" className="grid-item-1"><img className="imagen-sensor" src={sensor} alt="Sensor"/><p className="centrar-parrafo">Sensores</p></Link>
+                        <Link to="/equipos" className="grid-item-2"><div><img className="imagen-sensor" src={copo} alt="Sensor"/><p className="centrar-parrafo">Equipos</p></div></Link>
                     </div>
                 </div>
             )
@@ -84,10 +89,9 @@ export  class Nivel2 extends Component{
             return(
                 <div>
                     <div className="margenMovilSuperior">.</div>
-                    
-                        <div className="contenedorCardMovil-otro"><Link to="/temperatura" className="enlace"><p className="parrafo-movil">Sensores</p></Link></div>
-                        <div className="contenedorCardMovil-otro"><Link to="/equipos" className="enlace"><p className="parrafo-movil">Equipos</p></Link></div>
-                                      
+                    <div className="contenedorCardMovil-otro"> <p className="subtitleCuadricula"> Elija al lugar donde quiere accesar</p></div>
+                    <div className="contenedorCardMovil-otro"><Link to="/panelDeControl" className="enlace"><img className="imagen-sensor-movile" src={sensor} alt="Sensor"/><p className="parrafo-movil">Sensores</p></Link></div>
+                    <div className="contenedorCardMovil-otro"><Link to="/equipos" className="enlace"><img className="imagen-sensor-movile" src={copo} alt="Sensor"/><p className="parrafo-movil">Equipos</p></Link></div>
                 </div>
             )
         }

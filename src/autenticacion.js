@@ -23,7 +23,7 @@ class Auth  extends Component{
         //console.log(this.props.logeado);
         return(
             <Route>
-                {this.props.logeado ? <Redirect to="/panelDeControl" /> : <Login handleLogin={this.props.handleLogin} handleName={this.props.handleName} onChange={this.change} anchura={this.props.anchura} />}
+                {this.props.logeado ? <Redirect to="/temperatura" /> : <Login handleLogin={this.props.handleLogin} handleName={this.props.handleName} onChange={this.change} anchura={this.props.anchura} />}
             </Route>
         )
     }

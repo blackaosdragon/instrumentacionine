@@ -20,6 +20,7 @@ import Login from './components/controlDeUsuarios.js';
 import ConsolaDeControl from './components/panelDeCOntrol.js';
 import Panel from './autenticacion.js';
 import Registro from './components/registro.js';
+import {MonitorTemp} from './components/vistas/sensoresTemperatura.js';
 
 class App extends Component{
   constructor(){
@@ -100,6 +101,7 @@ class App extends Component{
           <Route path="/panel" component={()=> <Panel logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
           <Route path="/login" component={()=> <Login  anchura={this.state.width} />} />
           <Route path="/registro" component={()=> <Registro  anchura={this.state.width} />} />
+          <Route path="/temperatura" component={()=> <MonitorTemp  anchura={this.state.width} status={this.handleStatus} level={this.state.nivel}/>} />
           
 
           

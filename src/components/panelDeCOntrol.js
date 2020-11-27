@@ -148,6 +148,9 @@ class PanelDeControl extends Component{
         this.setState({
             nivel: this.props.level,
         })
+        this.setState({
+            cargando: false,
+        })
         if(Notification.permission==='default'){
             this.setState({
                 notificaciones: false,
@@ -276,41 +279,8 @@ class PanelDeControl extends Component{
     }
     
     render(){
-        if(this.state.nivel===0){
-                return(
-                    <div>
-                        <Nivel0 anchura={this.props.anchura}/>
-                        <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
-                    </div>
-                )            
-        } else if (this.state.nivel===1){
-            return(
-                <div>
-                    <Nivel1 anchura={this.props.anchura}/>
-                    <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
-                </div>
-            )
-        } else if (this.state.nivel === 2){
-            return(
-                <div> 
-                    <Nivel2 anchura={this.props.anchura}/> 
-                    <Link className="link" to="./panel"><h3 className="titulos"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></h3></Link> 
-                </div>
-            )
-        } else if(this.state.nivel===3){
-            return(
-                <div> 
-                    <Nivel3 anchura={this.props.anchura}/> 
-                    <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link>                     
-                </div>
-            )
-        }
-        else {
-            return(
-                <div>Algo malo ocurrio</div>
-            )
-        }
-        /*
+        
+        
         let interruptor = ''
         if (Notification.permission==='denied'){
             interruptor = <FormControlLabel onClick={()=>{alert("Para activar las notificaciones borre el caché y los permisos de la página y al solicitar el permiso acepte el recibir notificaciones")}} disabled control={<Switch />} label="No se otorgo permiso" />
@@ -325,16 +295,8 @@ class PanelDeControl extends Component{
                 
                 <div>
                 <Cargando cargando={this.state.cargando}/>
-                <div className="grid-container">
-                    <div className="contenedorCard-boton">
-                    <img src={termometro} alt="sensor" className="imagenCard"/>
-                       <h1>Sensores</h1>  
-                    </div>
-                    <div className="contenedorCard-boton"> 
-                        <h1>Equipos </h1>
-                    </div>
-                </div>
-                {/*
+                
+                
                 <Monitor anchura={this.props.anchura} />
                 
                 <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
@@ -343,7 +305,7 @@ class PanelDeControl extends Component{
                         {interruptor}
                 </FormGroup>
                 <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>
-                *//*}*//*
+                
                 </div>
             )
         } else {
@@ -363,7 +325,7 @@ class PanelDeControl extends Component{
                 </div>
             )
         }
-     */   
+     
     }
     
 }

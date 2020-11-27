@@ -720,6 +720,8 @@ textarea{
   align-items: center;
   box-shadow:  0 10px 15px #222;
   transition: background-color 0.3s;
+  text-decoration: none;
+  font-family: 'Znric-Regular'
 }
 .grid-item-1:hover{
   background-color: #0059b3;
@@ -733,6 +735,8 @@ textarea{
   border-radius: 10px;
   box-shadow:  0 10px 15px #222;
   align-items: center;
+  text-decoration: none;
+  font-family: 'Znric-Regular'
 }
 .grid-item-2:hover{
   background-color: #0059b3;
@@ -758,6 +762,10 @@ textarea{
   color: #ffffff;
   transition: color 0.3s;
 }
+.grid-item-1:hover .imagen-sensor{
+  filter: invert(1.0);
+  transition: invert 0.3;
+}
 .grid-item-2:hover .centrar-parrafo{
   color: #ffffff;
   transition: color 0.3s;  
@@ -777,4 +785,20 @@ textarea{
   box-shadow: 0 3px 30px #222;
   word-wrap: break-word;
 
+}
+.grid-item-2:hover .imagen-sensor{
+  filter: invert(1.0);
+  transition: invert 0.3;
+}
+.imagen-sensor{
+  height: 30%;
+  margin: 10% 0% -20% 0%;
+  filter: invert(0.0);
+  transition: invert 0.3;
+}
+.imagen-sensor-movile{
+  height: 20%;
+  margin: 10% 0% 0% 0%;
+  
+  
 }
