@@ -20,7 +20,8 @@ import Login from './components/controlDeUsuarios.js';
 import ConsolaDeControl from './components/panelDeCOntrol.js';
 import Panel from './autenticacion.js';
 import Registro from './components/registro.js';
-import {MonitorTemp} from './components/vistas/sensoresTemperatura.js';
+import { MonitorTemp } from './components/vistas/sensoresTemperatura.js';
+import Equipos from './components/vistas/equipos.js';
 
 class App extends Component{
   constructor(){
@@ -43,14 +44,6 @@ class App extends Component{
     //actualiza el tamaño de la ventana
   }*/
   
-  componentDidUpdate(prevProps, prevState){
-    //console.log("Movido")
-    if(this.state.width!==prevState.width){
-      //console.log("Cambio de dimensiones");
-      //console.log(this.state);
-    }
-
-  }
   handleName = (name) => {
     localStorage.setItem('userName',name);
     this.setState({
@@ -69,16 +62,14 @@ class App extends Component{
       notificaciones: active
     })
   }
-  componentDidMount(){
-    
+  componentDidMount(){  
     this.setState(
       {
         width: window.innerWidth
       }
     );
   }
-  
-  
+
   render(){
     return(
       <div className="App">
@@ -102,7 +93,7 @@ class App extends Component{
           <Route path="/login" component={()=> <Login  anchura={this.state.width} />} />
           <Route path="/registro" component={()=> <Registro  anchura={this.state.width} />} />
           <Route path="/temperatura" component={()=> <MonitorTemp  anchura={this.state.width} status={this.handleStatus} level={this.state.nivel}/>} />
-          
+          <Route path="/equipos" component={ () => <Equipos anchura={this.state.width} level={this.state.nivel}/>} />
 
           
 

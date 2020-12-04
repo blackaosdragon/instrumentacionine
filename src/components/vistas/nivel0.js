@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import termometro from '../../images/sensores.jpeg'
 import equipos from '../../images/equipos.jpeg'
 import { Link } from "react-router-dom";
-import BuildIcon from '@material-ui/icons/Build';
-import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-import SettingsIcon from '@material-ui/icons/Settings';
+
 import sensor from '../../images/sensor.svg'
 import copo from '../../images/copo.svg'
 

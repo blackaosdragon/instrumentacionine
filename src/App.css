@@ -466,6 +466,7 @@
   font-family: 'Znric-Regular';
   font-size: 250%;
   color: #ffffff;
+  padding: 5% 5% 5% 5%;
 }
 .tablaDatos{
   font-family: 'Znric-Regular';
@@ -799,6 +800,11 @@ textarea{
 .imagen-sensor-movile{
   height: 20%;
   margin: 10% 0% 0% 0%;
-  
-  
+}
+.tablaEquipos{
+  background-color: #fff;
+  padding: 1% 0 1% 0;
+  border-radius: 20px;
+  margin: 0% 2.5% 0% 2.5%;
+  box-shadow: 0px 0px 15px 5px #222;
 }
