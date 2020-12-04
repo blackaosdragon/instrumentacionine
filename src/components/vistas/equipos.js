@@ -78,9 +78,9 @@ class VistaEquipos extends Component{
                 console.log(data)
                 return(
                         <TableRow>
-                            <TableCell> <p className="tablaDatos"> {data.Nombre} </p></TableCell>
-                            <TableCell> <p className="tablaDatos"> {data.Unidad} </p></TableCell>
-                            <TableCell> <p className="tablaDatos"> {data.Ubicacion} </p></TableCell>
+                            <TableCell align="left"> <p className="tablaDatos"> {data.Nombre} </p></TableCell>
+                            <TableCell > <p className="tablaDatos"> {data.Unidad} </p></TableCell>
+                            <TableCell align="center"> <p className="tablaDatos"> {data.Ubicacion} </p></TableCell>
                         </TableRow>
                     
                 )
@@ -99,8 +99,8 @@ class VistaEquipos extends Component{
                         <TableHead>
                             <TableRow className="tabla">
                                 <TableCell ><p className="tablaTitulos">Equipo</p></TableCell>
-                                <TableCell ><p className="tablaTitulos">Unidad</p></TableCell>
-                                <TableCell ><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                <TableCell align="center"><p className="tablaTitulos">Unidad</p></TableCell>
+                                <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
                             </TableRow>
                         </TableHead>
                             <TableBody>
