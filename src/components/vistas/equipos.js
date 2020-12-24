@@ -4,12 +4,23 @@ import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { TableBody } from '@material-ui/core';
+import { TableBody, Collapse, Box } from '@material-ui/core';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import Typography from '@material-ui/core/Typography';
+import {withStyles} from '@material-ui/styles';
+import { styled } from '@material-ui/core/styles';
+import TablaDatos from './equiposFull.js';
 
 import Cargando from "../carga.js";
 
 const consulta_equipos = 'https://instrumentacionline.ddns.net:5002/equipos'
 //const consulta_equipos = "https://instrumentacionline.ddns.net:5002/insertar_token"
+
+const styles = {
+    root: {
+        minWidth: 480
+    }
+};
 
 class VistaEquipos extends Component{
     constructor(props){
@@ -18,13 +29,53 @@ class VistaEquipos extends Component{
             nivel: this.props.level,
             cargando: true,
             llave: 99,
+            mostrar: false
         }
     }
+    
+    
     componentDidUpdate(prevProps, prevState){
         if(prevState.llave!==this.state.llave){
             console.log("Cambia la llave a: ",this.state.llave);
             this.peticion_de_equipos(this.state.llave);
         }
+        
+    }
+    manejadorClick = (e) => {
+        
+        let palabra = e.target.textContent
+        let asignar = "";
+        //console.log(palabra)
+        for(let i = 0; i<palabra.length; i++){
+            //console.log(palabra[i]);
+            if(palabra[i]==" " && i>=5 && i<=12){
+                //console.log("Espacio");
+                asignar+=palabra[i]
+            } else if(palabra[i]==" "){
+                //console.log("Espacio en blanco inecesario")
+            } else {
+                //console.log("Se agregará: ",palabra[i]);
+                asignar+=palabra[i]
+            }
+            
+        }
+        //console.log(asignar);
+        //console.log(asignar.length);
+        
+        this.setState({
+            [asignar]: !this.state[asignar]
+        })
+        console.log(palabra)
+        console.log(this.state[asignar])
+        console.log(this.state);
+        //console.log(this.state);
+        
+        /*
+        this.setState({
+            mostrar: !this.state.mostrar
+        })
+        */
+
     }
     peticion_de_equipos = (llave) => {
         let payload = {
@@ -40,9 +91,20 @@ class VistaEquipos extends Component{
             return response.json()
         })
         .then( data => {
+            console.log(data);
+            data.map( (equipo) => {
+                console.log(equipo);
+                //console.log(equipo.Nombre.length);
+                this.setState({
+                    [equipo.Nombre]: false
+                })
+            })
+            //console.log(this.state);
             this.setState({
                 equipos: data
             })
+            console.log(this.state);
+            
         }).catch( err => {
             console.log(err);
         })        
@@ -65,29 +127,54 @@ class VistaEquipos extends Component{
             
         } else if (this.props.level==3){
             //console.log("No puede ver equipos")
-        }
-        
+        }        
         console.log("State: ",this.state);
+        this.setState({
+
+        })
     }
     render(){
+        const {classes} = this.props;
+        
         let equipos = ''
         if(this.state.equipos===undefined){
 
         } else {
             equipos = this.state.equipos.map( (data,id)=>{
-                console.log(data)
                 return(
-                        <TableRow>
-                            <TableCell align="left"> <p className="tablaDatos"> {data.Nombre} </p></TableCell>
-                            <TableCell > <p className="tablaDatos"> {data.Unidad} </p></TableCell>
-                            <TableCell align="center"> <p className="tablaDatos"> {data.Ubicacion} </p></TableCell>
-                        </TableRow>
+                    <React.Fragment>
+                        <Table >
+                        <TableRow className="campo" onClick={this.manejadorClick} >
+                            {/*<TableCell align="center"><KeyboardArrowDownIcon className="desplegable" /></TableCell>*/}
+                            <TableCell align="center" name={data.Nombre}> <p className="tablaDatos" name={data.Nombre}> {data.Nombre} </p></TableCell>
+                            {/*<TableCell > <p className="tablaDatos"> {data.Unidad} </p></TableCell>*/}
+                            {/*<TableCell align="center"> <p className="tablaDatos"> {data.Ubicacion} </p></TableCell>*/}
+                        </TableRow>     
+                            <div >
+                            <Collapse in={this.state[data.Nombre]}>
+                                <Table>
+                                <TableHead className="tablaDetalles">
+                                    <TableCell > <p className="BarraTitulo">Ubicacion</p></TableCell>
+                                    <TableCell > <p className="BarraTitulo"> Unidad </p> </TableCell>
+                                    <TableCell> <p className="BarraTitulo"> Equipo </p></TableCell>
+                                </TableHead>
+                                <TableRow>
+                                    <TableCell> <p className="descripciones"> {data.Ubicacion} </p> </TableCell>
+                                    <TableCell> <p className="descripciones"> {data.Unidad} </p></TableCell>
+                                    <TableCell> <p className="descripciones"> {data.General} </p></TableCell>
+                                </TableRow>
+                                </Table>
+                            </Collapse>
+                            </div>
+                                        
+                            </Table>              
+                    </React.Fragment>
                     
                 )
                 
             })
         }
-        console.log(this.props)
+        //console.log(this.props)
         if(this.props.anchura>970){
             return(
                 <div> 
@@ -98,20 +185,21 @@ class VistaEquipos extends Component{
                         <Table >
                         <TableHead>
                             <TableRow className="tabla">
-                                <TableCell ><p className="tablaTitulos">Equipo</p></TableCell>
-                                <TableCell align="center"><p className="tablaTitulos">Unidad</p></TableCell>
-                                <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                {/*<TableCell />*/}
+                                <TableCell  align="center" ><p className="tablaTitulos">Equipo</p></TableCell>
+                                {/*<TableCell align="center"><p className="tablaTitulos">Unidad</p></TableCell>*/}
+                                {/*<TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>*/}
                             </TableRow>
                         </TableHead>
                             <TableBody>
                                     {equipos}
+                                    
                             </TableBody>
                         </Table>
                     </TableContainer>
                     </div>
                     
-                    
-                    
+                    <TablaDatos data={this.state.equipos} />
                 </div>
             )
             
@@ -126,4 +214,4 @@ class VistaEquipos extends Component{
         }
     }
 }
-export default VistaEquipos;
+export default withStyles(styles)(VistaEquipos);

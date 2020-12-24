@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import sensor from '../../images/sensor.svg'
 import copo from '../../images/copo.svg'
+import quirofano from '../../images/quirofano.svg'
 
 
 export class Nivel0 extends Component{
@@ -14,14 +15,9 @@ export class Nivel0 extends Component{
             return(
                 <div>
                     <div className="grid-container">
-                        <Link to="/panelDeControl" className="contenedorCard-boton">
-                            <img src={termometro} alt="sensor" className="imagenCard"/>
-                            <h1>Sensores</h1>  
-                        </Link>
-                        <div className="contenedorCard-boton"> 
-                            <img src={equipos} alt="sensor" className="imagenExperimento"/>
-                            <h1>Equipos </h1>
-                        </div>
+                        
+                        <Link to="/panelDeControl" className="grid-item-level0"><div><img className="imagen-sensor" src={sensor} alt="Sensor"/><p className="centrar-parrafo">Sensores</p></div></Link>
+                        <Link to="/equipos" className="grid-item-level0"><div><img className="imagen-sensor" src={quirofano} alt="Sensor"/><p className="centrar-parrafo">Equipos</p></div></Link>
                     </div>
                 </div>
             )

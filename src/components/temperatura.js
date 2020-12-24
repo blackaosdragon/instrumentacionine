@@ -181,6 +181,16 @@ class Temperature extends Component{
         //console.log("Estado: ")
         //console.log(this.state);        
         let carga = '';
+        let expandible = ''
+        expandible = <TableContainer>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        
+                    </TableRow>
+                </TableHead>
+            </Table>
+        </TableContainer>
         if(cargando){
             carga = <div className="cargando"></div>
         } else {
@@ -191,7 +201,7 @@ class Temperature extends Component{
                 if(temp>=0 && temp<=5.9){
                     return (
                         <TableRow id={id} style={{backgroundColor: "#00284d"}} key={element}>
-                            <TableCell> <p className="tablaDatos2"> {element} </p></TableCell>
+                            <TableCell > <p className="tablaDatos2"> {element} </p></TableCell>
                             <TableCell> <p className="tablaDatos2">{this.state[element].valor}°C</p></TableCell>
                             <TableCell> <p className="tablaDatos2"> {this.state.ubicaciones} </p></TableCell>
                             <TableCell> <p className="tablaDatos2"> {this.state[element].actualizacion} </p></TableCell>
