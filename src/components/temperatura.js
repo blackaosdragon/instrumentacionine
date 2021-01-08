@@ -80,8 +80,8 @@ class Temperature extends Component{
                 [this.state.estuctura_De_tabla[1]]:{
                     ...this.state.estuctura_De_tabla,
                     lugar: this.state.estuctura_De_tabla[0],
-                    valor: data.sensor1[0].Temperatura,
-                    actualizacion: `${data.sensor1[0].Hora}:${data.sensor1[0].Minuto}`
+                    valor: data.sensor2[0].Temperatura,
+                    actualizacion: `${data.sensor2[0].Hora}:${data.sensor2[0].Minuto}`
                 }
 
             })
@@ -94,8 +94,8 @@ class Temperature extends Component{
                     [this.state.estuctura_De_tabla[0]]:{
                         ...this.state.estuctura_De_tabla,
                         lugar: this.state.estuctura_De_tabla[1],
-                        valor: data.sensor2[0].Temperatura,
-                        actualizacion: `${data.sensor2[0].Hora}:${data.sensor2[0].Minuto}`
+                        valor: data.sensor1[0].Temperatura,
+                        actualizacion: `${data.sensor1[0].Hora}:${data.sensor1[0].Minuto}`
                     }
     
                 })
