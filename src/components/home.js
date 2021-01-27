@@ -59,11 +59,15 @@ class Home extends Component{
         <div>
           
             <div className="contenedorCardPrincipal">
-            <Link className="enlace" to="/panel">
+            {/**/}
               <h1 className="titulos">Instrumentación y Electromecánica</h1>
               <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
-              </Link>
+            
               <div onClick={this.a2hs}></div>
+            </div>
+            <div className="sector-home">
+              <Link className="home-item-1" to="/panel"><h3 className="textosBotones">Sensores</h3></Link>
+              <Link className="home-item-2" to="/empresa"><h3>Equipos</h3> </Link>
             </div>
          
 

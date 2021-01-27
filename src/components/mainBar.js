@@ -40,14 +40,14 @@ class MainBar extends Component {
             <div class="col-xs-6">
               <div class="row center-xs">
                 <div class="col-xs-2" className="boton-link">
-                  <Link className="enlace" to="/empresa">
+                  {/*<Link className="enlace" to="/empresa">
                       <p className="principalButton">Empresa</p>                  
-                  </Link>
+      </Link>*/}
                 </div>
                 <div class="col-xs-2" className="boton-link">
-                  <Link className="enlace" to="/contacto">          
+                  {<Link className="enlace" to="/contacto">          
                     <p className="principalButton">Contacto</p>
-                  </Link>
+                  </Link>}
                 </div>
               </div>
             </div>

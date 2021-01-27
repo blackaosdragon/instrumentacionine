@@ -187,18 +187,20 @@
   margin: 0% 5% 5% 5%;
 
 }
-
+/*
 .contenedorCardPrincipal:hover{
   transition: background-color 0.3s;
   background-color: #0059b3;
   cursor: pointer;
 }
+*/
 
-
+/*
 .contenedorCardPrincipal:hover .titulos{
   transition: color 0.5s;
   color: #ffffff;
 }
+*/
 .margenSup{
   margin: 0% 0% 25% 0%;  
 }
@@ -333,7 +335,7 @@
   border-radius: 5px;
   box-shadow: 1px 1px 10px gray;
   text-align: center;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 .hospitalSurface:hover {
   padding: 0px;
@@ -430,9 +432,6 @@
   font-size: 150%;
   color: #000000;
   padding: 10px 10px 10px 10px;
-}
-.principalButton:hover {
-  
 }
 .reparacion {
   height: 300px;
@@ -643,3 +642,128 @@
 textarea{
   margin: 1% 0% 0% 0%;
 }
+.helperText{
+  align-items: center;
+}
+.boton-largo{
+  color: #000000;
+  border-radius: 5px;
+  margin: 5% 30% 5% 30%;
+  padding: 1% 0% 1% 0%;
+  background-color: #ffffff;
+  box-shadow: 0px 15px 25px #222;
+  transition: 0.3s;
+  text-decoration: none; 
+  /*grid-column-start: 1;
+  grid-column-end: 3; 
+  grid-row-start: 1;
+  grid-row-start: 2;
+  */
+}
+.grid-item-1{
+  
+  background-color: #ffffff;
+  border-radius: 10px;
+  grid-area: Boton2;
+  text-decoration: none; 
+  box-shadow: 0px 15px 25px #222;
+  transition: 0.3s;
+  
+}
+.grid-item-1:hover {
+  box-shadow: 0 30px 40px #222;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.grid-item-2{
+
+  background-color: #ffffff;
+  padding: 0 0 0 0;
+  border-radius: 10px;
+  grid-area: Boton4;
+  text-decoration: none; 
+  transition: 0.3s;
+  box-shadow: 0px 15px 25px #222;
+
+}
+.grid-item-2:hover{
+  box-shadow: 0 30px 40px #222;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.contenedor-botones{
+  margin: 1% 0% 0% 0%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 100%;
+  grid-template-areas: 
+    "Boton1 Boton2 Boton3 Boton4 Boton5" 
+  ;
+  /*Background-color: #80e5ff;*/
+}
+.textoBoton{
+  
+  /*font-family: "Znric-Regular";*/
+  
+  font-size: 110%;
+  word-wrap: break-word;
+  font-family: "Znric-Regular";
+  color: #000000;
+  
+}
+.sector-home{
+  margin: -2% 0% 3% 0%;
+  font-family: "Znric-Regular";
+  display: grid;
+  
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 50px;
+  grid-template-areas: 
+    "Boton1 Boton2 Boton3 Boton4 Boton5" 
+  ;
+  
+  align-items: center;
+  
+  
+}
+.home-item-1{
+  color:#000;
+  grid-area: Boton2;
+  background-color: #fff;
+  border-radius: 10px;
+  transition: 0.3s;
+  box-shadow: 0px 15px 25px #222;
+  text-decoration: none;
+  
+}
+.home-item-1:hover{
+  color: #fff;
+  background-color: #0059b3;
+  /*box-shadow: 0 30px 40px #222;*/
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.home-item-2{
+  grid-area: Boton4;
+  background-color: #fff;  
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.3s;
+  box-shadow: 0px 15px 25px #222;
+  text-decoration: none;
+  color:#000;
+}
+.home-item-2:hover{ 
+  background-color: #0059b3;
+  color: #fff;
+  /*box-shadow: 0 30px 40px #222;*/
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+

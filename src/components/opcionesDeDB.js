@@ -13,8 +13,8 @@ import ModalDeCarga from "./carga.js";
 //const server = "192.168.1.65"; server para probar desde red local
 const server = "instrumentacionline.ddns.net"
 //const puerto = "5000"; puerto de prueba
-const puerto = "443"; //puerto real
-//const puerto = "5002"; //puerto para probar local
+//const puerto = "443"; //puerto real
+const puerto = "5002"; //puerto para probar local
 const protocolo = "https";
 const end_point_años = 'years';
 const end_point_meses = 'mes';
@@ -24,10 +24,6 @@ const end_point_consulta_mes = 'consulta_mes';
 const end_point_descarga = 'descarga_consulta'
 const end_point_consulta_y_descarga = 'csv'
 let estilos = ["carga","cargaInvisible"];
-
-
-const horas_dia = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
-const arreglo_0_60 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59];
 
 class Opciones extends Component{
     constructor(props){
@@ -58,6 +54,30 @@ class Opciones extends Component{
         }
     }
     componentDidMount(){
+        let fecha = new Date();
+        let mes = fecha.getMonth() + 1;
+        console.log(`Dia: ${fecha.getDate()} mes: ${mes} año: ${fecha.getFullYear()}`);
+        this.setState({
+            año: fecha.getFullYear(),
+            mes: mes,
+            dia: fecha.getDate(),
+            ubicacion: "Cámara farmacia"
+        })
+        this.setState({
+            ubicaciones: "visible",
+            years: "visible",
+            month: "visible",
+            days: "visible",
+            boton: "visible",
+            boton_descarga: "visible",
+        })
+        let payload = {
+            year: this.state.año,
+            mes: this.state.mes,
+            dia: this.state.dia,
+            lugar: this.state.ubicacion
+        }
+
         fetch(`${protocolo}://${server}:${puerto}/${this.props.ubicaciones}`)
         .then( response => {
             this.setState({
@@ -80,6 +100,84 @@ class Opciones extends Component{
             })
             alert("Error al comunicarse a la base de datos")
         })
+/////////////////////////////////////// Lectura de los años //////////////////////////////////////////////
+        let consulta = {
+            ubicacion: "Cámara farmacia",
+            year: fecha.getFullYear(),
+            mes: mes,
+        }
+        fetch(`https://${server}:${puerto}/${end_point_años}`,{
+            method: 'POST',
+            body: JSON.stringify(consulta),
+            headers:{
+                'Content-Type': 'application/json' 
+              },
+        }).then( response => {            
+            return response.json()
+        })
+        .then( data => {
+            this.setState({
+                años: data,
+                years: "visible",
+                cargando: false,
+            })
+        })
+        .catch( err => {
+            console.log(err);
+            this.setState({
+                cargando: false
+            })
+            alert("Error al comunicarse a la base de datos")
+        })
+//////////////////////////////////////////Lectura de Meses////////////////////////////////////////////        
+fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
+            method: 'POST',
+            body: JSON.stringify(consulta),
+            headers:{
+                'Content-Type': 'application/json' 
+              },
+        }).then( response => {return response.json()})
+        .then( data => {
+            //console.log(data);
+            this.setState({
+                meses: data,
+                month: "visible",
+                cargando: false,
+                
+            })
+        })
+        .catch( err => {
+            console.log(err);
+            this.setState({
+                cargando: false
+            })
+            alert("Error al comunicarse a la base de datos")
+        })
+///////////////////////////////////////////Consulta de los dias//////////////////////////////////////////        
+        fetch(`${protocolo}://${server}:${puerto}/${end_point_dias}`,{
+            method: 'POST',
+            body: JSON.stringify(consulta),
+            headers:{
+                'Content-Type': 'application/json' 
+              },
+        }).then( response => {return response.json()})
+        .then( data => {
+            //console.log(data);
+            this.setState({
+                dias: data,
+                days: "visible",
+                cargando: false,
+                boton: "visible"
+            })
+        })
+        .catch( err => {
+            console.log(err);
+            this.setState({
+                cargando: false
+            })
+            alert("Error al comunicarse a la base de datos")
+        })
+        this.consultar_datos(fecha.getFullYear(),mes,fecha.getDate(),"Cámara farmacia");
     }
     componentDidUpdate = (prevProps, prevState) => {
         if(this.state!==prevState){
@@ -224,31 +322,47 @@ class Opciones extends Component{
 
         }
     }
-    consultar_datos = () => {
+    consultar_datos = (year,mes,dia,ubicacion) => {
         //console.log(`Ubicacion ${this.state.ubicacion} Año: ${this.state.año}, Mes: ${this.state.mes}, Dia: ${this.state.dia}, Desde: ${this.state.horaInicio}:${this.state.minutoInicio}, hasta: ${this.state.horaFinal}:${this.state.minutoFinal}`)
         this.setState({
             cargando: true
         })
         //console.log(`Lugar: ${this.state.ubicacion} ${this.state.dia}/${this.state.mes}/${this.state.año} ${this.state.horaInicio}:${this.state.minutoInicio} - ${this.state.horaFinal}:${this.state.minutoInicio}`)
-        let payload = {
-            year: this.state.año,
-            mes: this.state.mes,
-            dia: this.state.dia,
-            lugar: this.state.ubicacion
-        }
-        
+        let payload;
+
         if(
             this.state.año === "" ||
             this.state.mes === ""||
-            //this.state.dia === ""||
             this.state.ubicacion === ""
+        ){
+            payload = {
+                year: year,
+                mes: mes,
+                dia: dia,
+                lugar: ubicacion
+            }
+        } else {
+            payload = {
+                year: this.state.año,
+                mes: this.state.mes,
+                dia: this.state.dia,
+                lugar: this.state.ubicacion
+            }
+        }
+         
+        
+        if(
+            payload.year === "" ||
+            payload.mes === ""||
+            //this.state.dia === ""||
+            payload.lugar === ""
         ) {
             alert("Falta completar algunos datos");
             this.setState({
                 cargando: false
             })
         } else{
-            if(this.state.dia===""){
+            if(payload.dia===""){
                 fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta_mes}`,{
                     method: 'POST',
                     body: JSON.stringify(payload),
@@ -384,7 +498,7 @@ class Opciones extends Component{
                 <MenuItem key={option} value={option}> {option}</MenuItem>
             ))}
             </Select>
-            <FormHelperText>Seleccione la ubicacion</FormHelperText>
+            <FormHelperText>Ubicacion</FormHelperText>
             </FormControl>
             
 
@@ -394,7 +508,7 @@ class Opciones extends Component{
                         <MenuItem key={option} value={option}> {option}</MenuItem>
                     ))}
                 </Select>
-                <FormHelperText>Seleccione el año</FormHelperText>
+                <FormHelperText > Año</FormHelperText>
             </FormControl>
 
             <FormControl style={{visibility: this.state.month, margin: "0% 1% 0% 1%"}}>
@@ -403,7 +517,7 @@ class Opciones extends Component{
                         <MenuItem key={option} value={option}> {option}</MenuItem>
                     ))}
                 </Select>
-                <FormHelperText>Seleccione el mes</FormHelperText>
+                <FormHelperText>  Mes</FormHelperText>
             </FormControl>
 
             <FormControl style={{visibility: this.state.days, margin: "0% 1% 0% 1%"}}>
@@ -412,33 +526,30 @@ class Opciones extends Component{
                         <MenuItem key={option} value={option}> {option}</MenuItem>
                     ))}
                 </Select>
-                <FormHelperText>Seleccione el dia</FormHelperText>
+                <FormHelperText>  Día</FormHelperText>
             </FormControl>
             
             
             
-            <div className="boton"><Link to="/panelDeControl" className="enlace"> <h3 className="titulos">Volver al monitor de temperaturas  </h3></Link></div>   
-            
-            
-            
-        <div style={{visibility: this.state.boton}}>
-            <h4 className="titulos">
-            <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
-            </h4>
-            </div>
+        
             {/*
-              <div style={{visibility: this.state.boton_descarga}}>
-                   {/*<div className="boton" onClick={this.handleDownload}>Download</div>}
-                  <a href="https://instrumentacionline.ddns.net/descarga_consulta/" className="boton" onClick={this.ocultar}>Descargar Resultado</a>
-                  
-                  {/*<a href="https://instrumentacionline.ddns.net/descarga_archivo_csv/" className="boton" onClick={this.handleDownload}>Descargar Resultado</a>}
-              </div>
-              */}
-              <div style={{visibility: this.state.boton_descarga}}>
-              <a href="https://instrumentacionline.ddns.net/descarga/" className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
-              </div>
-            
-            <Tabla anchura={this.props.anchura} data={this.state.consulta} />
+            <div style={{visibility: this.state.boton}}>
+                <h4 className="titulos">
+                    <div className="boton" onClick={this.consultar_datos}> Realizar consulta </div>
+                </h4>
+            </div>
+            */}
+        <div className="contenedor-botones">
+        <Link to="/panelDeControl" className="grid-item-1"><h3 className="textoBoton">Monitor remperaturas</h3></Link>
+            <div className="grid-item-2" onClick={this.consultar_datos}><h3 className="textoBoton">Buscar</h3></div>
+        </div>    
+        
+        
+          
+        <Tabla anchura={this.props.anchura} data={this.state.consulta} />
+        <div style={{visibility: this.state.boton_descarga}}>
+            <a href="https://instrumentacionline.ddns.net/descarga/" className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
+        </div>
         </div>
     )} else {
         return(

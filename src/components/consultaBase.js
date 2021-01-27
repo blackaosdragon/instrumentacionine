@@ -40,9 +40,11 @@ class Consulta extends Component{
                     <div className="contenedorCard">
                         <h1 className="Titulos"> Consultas </h1>
                     </div>
+                    {/*
                     <div className="contenedorCard">
                         <h6 className="subtitleCuadricula"> Porfavor seleccione los datos que se solicitan a continuacion </h6>
                     </div>
+                    */}
                     <Opciones anchura={this.props.anchura} ubicaciones={end_point_ubicaciones}/>
                 </div>
             )
@@ -55,9 +57,11 @@ class Consulta extends Component{
                     <div className="contenedorCard">
                         <h1 className="Titulos"> Consultas </h1>
                     </div>
+                    {/*
                     <div className="contenedorCard">
                         <h6 className="subtitleCuadricula"> Porfavor seleccione los datos que se solicitan a continuacion </h6>
                     </div>
+                    */}
                     <Opciones anchura={this.props.anchura} ubicaciones={end_point_ubicaciones}/>
                 </div>
             )
