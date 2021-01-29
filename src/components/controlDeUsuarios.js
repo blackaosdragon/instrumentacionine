@@ -9,8 +9,8 @@ import ModalDeCarga from "./carga.js"
 
 let estado_campo = 'blue'
 
-//const login = 'https://instrumentacionline.ddns.net/login'
-const login = 'https://instrumentacionline.ddns.net:5002/login'
+const login = 'https://instrumentacionline.ddns.net/login'
+//const login = 'https://instrumentacionline.ddns.net:5002/login'
 
 const theme = createMuiTheme({
     palette: {
@@ -189,8 +189,8 @@ class ControlUsers extends Component{
         })
         */
         //console.log("Fetch hacia socket");
-        //fetch('https://instrumentacionline.ddns.net/socket')
-        fetch('https://instrumentacionline.ddns.net:5002/socket')
+        fetch('https://instrumentacionline.ddns.net/socket')
+        //fetch('https://instrumentacionline.ddns.net:5002/socket')
         .then( response => {
             return response.json();
         }).then( data=> {
