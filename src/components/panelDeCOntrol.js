@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 import Cargando from './carga.js';
 
+
 //const end_point = 'https://instrumentacionline.ddns.net/insertar_token';
 //const end_point_notifis = 'https://instrumentacionline.ddns.net/consultar_notifis';
 //const end_point_send_test_notifi = 'https://instrumentacionline.ddns.net/test_notificacion';
@@ -323,6 +324,9 @@ class PanelDeControl extends Component{
                 <Cargando cargando={this.state.cargando}/>
                 
                 <Monitor anchura={this.props.anchura} />
+                
+
+                <Link to="./consulta" className="link"><h2 className="botonBase">Consultar Base </h2></Link>
                 
                 <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
                 

@@ -7,6 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { TableBody } from '@material-ui/core';
 import socketIOClient from "socket.io-client"
 import { Link } from "react-router-dom";
+import Visortemp from "./readSocket.js"
 
 //const ioSocket="http://192.168.0.10:5000"
 //const ioSocket = "https://instrumentacionline.ddns.net"
@@ -113,6 +114,9 @@ class Temperature extends Component{
         
         socket.on('temp', data => {
             console.log(data);
+            this.setState({
+                data: data
+            })
             //console.log(this.state.estuctura_De_tabla)
             if(this.state.estuctura_De_tabla[0]==='Cámara dieto'){
                 //console.log("Primer dato recibido cámara dieto")
@@ -268,8 +272,10 @@ class Temperature extends Component{
                             </Table>
     
                         </TableContainer>
+                        
                     </div>
-                   <div><div className="boton"><Link to="./consulta" className="enlace"><h2 className="titulos">Consultar Base </h2></Link></div></div>
+                    <Visortemp data={this.state.data}/>
+                   {/*<div><div className="boton"><Link to="./consulta" className="enlace"><h2 className="titulos">Consultar Base </h2></Link></div></div>*/}
                 </div>
             );
 
