@@ -205,12 +205,16 @@ class Home extends Component{
       return(
         <div >
           <div className="margenSup">.</div>
-          <Link className="enlace" to="/panel">
+          {/*<Link className="enlace" to="/panel">*/}
           <div className="contenedorCardMovil">
           <h1 className="titulos">Instrumentación y Electromecánica</h1>
-          <h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>
+          {/*<h2 className="titulos">Reparación de equipo médico y de laboratorio</h2>*/}
           </div>
-          </Link>
+          <div className="sector-home-movile">
+              <Link className="home-item-1-movil" to="/panel"><h3 className="textosBotones">Sensores</h3></Link>
+              <Link className="home-item-2-movil" to="/empresa"><h3>Equipos</h3> </Link>
+            </div>
+          
           <div className="fondoBlanco">
             <h2 className="titulos">Estos son algunos de los equipos que nos dedicamos: </h2>
             <GridList  cellHeight={420}>
@@ -298,7 +302,7 @@ class Home extends Component{
               <img src={ControlAutoclave} alt="Autoclaves" />
               <GridListTileBar
                 
-                title={<h1 className="title">Autoclaves</h1>}
+                title={<h1 className="title">Esterilización</h1>}
                 subtitle={<h2 className="textosBlancos"></h2>}
               />
             </GridListTile>

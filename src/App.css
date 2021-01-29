@@ -766,4 +766,36 @@ textarea{
   text-decoration: none;
   cursor: pointer;
 }
+.sector-home-movile{
+  margin: 5% 0% 5% 0%;
+  font-family: "Znric-Regular";
+  display: grid;
+  
+  grid-template-columns: 10% 35% 10% 35% ;
+  grid-template-rows: 50px;
+  grid-template-areas: 
+    "Espacio Boton1 Lugar Boton2 " 
+  ;
+  /*align-items: center;*/
+}
 
+.home-item-2-movil{
+  grid-area: Boton2;
+  background-color: #fff;  
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.3s;
+  box-shadow: 0px 15px 25px #222;
+  text-decoration: none;
+  color:#000;
+}
+.home-item-1-movil{
+  grid-area: Boton1;
+  background-color: #fff;  
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.3s;
+  box-shadow: 0px 15px 25px #222;
+  text-decoration: none;
+  color:#000;
+}

@@ -39,7 +39,7 @@ class MainBar extends Component {
             </div>
             <div class="col-xs-6">
               <div class="row center-xs">
-                <div class="col-xs-2" className="boton-link">
+                <div class="col-xs-2" >
                   {/*<Link className="enlace" to="/empresa">
                       <p className="principalButton">Empresa</p>                  
       </Link>*/}

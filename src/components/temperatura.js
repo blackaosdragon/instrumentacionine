@@ -113,11 +113,11 @@ class Temperature extends Component{
         
         socket.on('temp', data => {
             console.log(data);
-            console.log(this.state.estuctura_De_tabla)
+            //console.log(this.state.estuctura_De_tabla)
             if(this.state.estuctura_De_tabla[0]==='Cámara dieto'){
-                console.log("Primer dato recibido cámara dieto")
+                //console.log("Primer dato recibido cámara dieto")
             } else {
-                console.log("El primer elemento recibido fue: ",this.state.estuctura_De_tabla[0]);
+                //console.log("El primer elemento recibido fue: ",this.state.estuctura_De_tabla[0]);
             }
             
             let hora = new Date();
