@@ -76,7 +76,7 @@ class Temperature extends Component{
         .then((response)=>{
             return response.json()
         }).then((data)=>{
-            console.log(data);
+            //console.log(data);
             console.log(data.sensor2.length);
             ///*
             this.setState({
@@ -113,7 +113,7 @@ class Temperature extends Component{
         
         
         socket.on('temp', data => {
-            console.log(data);
+            //console.log(data);
             this.setState({
                 data: data
             })
@@ -193,7 +193,9 @@ class Temperature extends Component{
         } else {
             carga = this.state.estuctura_De_tabla.map((element,id)=>{
                 //console.log(element);
-                //console.log(this.state);
+                console.log(this.state.estuctura_De_tabla);
+                console.log(element);
+
                 let temp = parseFloat(this.state[element].valor);
                 if(temp>=0 && temp<=5.9){
                     return (
@@ -244,6 +246,7 @@ class Temperature extends Component{
 
             })            
         }
+        console.log(this.state.estuctura_De_tabla)
         //console.log(this.props.anchura);
         if(this.props.anchura>970){
             return(
@@ -274,7 +277,7 @@ class Temperature extends Component{
                         </TableContainer>
                         
                     </div>
-                    <Visortemp data={this.state.data}/>
+                    {/*<Visortemp data={this.state.data}/>*/}
                    {/*<div><div className="boton"><Link to="./consulta" className="enlace"><h2 className="titulos">Consultar Base </h2></Link></div></div>*/}
                 </div>
             );

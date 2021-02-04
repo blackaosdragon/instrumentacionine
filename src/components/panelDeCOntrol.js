@@ -5,6 +5,7 @@ import { FormControl, FormControlLabel,FormGroup,Switch } from '@material-ui/cor
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 import Cargando from './carga.js';
+import Visortemp from "./readSocket.js"
 
 
 //const end_point = 'https://instrumentacionline.ddns.net/insertar_token';
@@ -323,7 +324,8 @@ class PanelDeControl extends Component{
                 <div>
                 <Cargando cargando={this.state.cargando}/>
                 
-                <Monitor anchura={this.props.anchura} />
+                {/*<Monitor anchura={this.props.anchura} />*/}
+                <Visortemp></Visortemp>
                 
 
                 <Link to="./consulta" className="link"><h2 className="botonBase">Consultar Base </h2></Link>
