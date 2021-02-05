@@ -17,12 +17,6 @@ let body;
 let recursos = 'https://instrumentacionline.ddns.net:5002/sensores'
 let obtener_datos = 'https://instrumentacionline.ddns.net:5002/socket'
 
-function coincidir(dato){
-    //console.log(id);
-    //console.log(`Dato: ${dato.id} id:${id}`)
-    return dato.id === id
-}
-
 class Visor extends Component{
     constructor(props){
         super(props);
@@ -32,73 +26,83 @@ class Visor extends Component{
     }
     
     componentDidMount(){
+        fetch(recursos).then( response => { return response.json()})
+        .then( data => {
+            console.log(data)
+        }).catch( err => {
+            console.log(err)
+        })
         fetch(obtener_datos).then( response => { return response.json()})
         .then( data => {
-            
+            console.log(data)            
             let arreglo = [
                 {
                     lugar: data.sensor1[0].Lugar,
                     temp: data.sensor1[0].Temperatura,
-                    ubicacion: data.sensor1[0].Ubicacion
+                    ubicacion: data.sensor1[0].Ubicacion,
+                    id: data.sensor1[0].ID
+                    
                 },
                 {
                     lugar: data.sensor2[0].Lugar,
                     temp: data.sensor2[0].Temperatura,
-                    ubicacion: data.sensor1[0].Ubicacion
+                    ubicacion: data.sensor2[0].Ubicacion,
+                    id: data.sensor2[0].ID
                 }
             ]
             this.setState({
                 tabla: arreglo
             })
             arreglo.forEach( (element,i)=>{
-                console.log(element)
                 this.setState({
                     [element.lugar]: element
                 })
             })
+            
         }).catch( err => {
             console.log(err);
         })
         socket.on('temp', data => {
             let id_s
-            let temp_s;
+            let temp_s = '';
+            let id_int;
+            let temp_float
             for(let i=0;i<data.length;i++){
                 if(i==0){
                     id_s = data[i];
                 }
                 if(i>0){
-                    id_s+=data[i]
+                    temp_s+=data[i]
+                    
                 }
             }
-            console.log(this.state.tabla)
-            if(id===1){
-                
+            if(Number.isNaN(id_s) && Number.isNaN(temp_s)){
+                console.log("No se pueden trasnformar")
+            } else {
+                id_int = parseInt(id_s);
+                temp_float = parseFloat(temp_s);
+            }
 
-                // let arreglo = [
-                //     {
-                //         lugar: data.sensor1[0].Lugar,
-                //         temp: data.sensor1[0].Temperatura,
-                //         ubicacion: data.sensor1[0].Ubicacion
-                //     },
-                //     {
-                //         lugar: data.sensor2[0].Lugar,
-                //         temp: data.sensor2[0].Temperatura,
-                //         ubicacion: data.sensor1[0].Ubicacion
-                //     }
-                // ]
-                this.setState({
-                    ...this.state,
-                    tabla: []
+            if(this.state.tabla == undefined){
+                ///console.log("No esta entrando donde debería")                
+            } else {
+
+                this.state.tabla.map( element => {
+                    if(element.id===id_int){
+                        this.setState({
+                            [element.lugar]: {
+                                lugar: element.lugar,
+                                temp: temp_float,
+                                ubicacion: element.ubicacion,
+                                id: element.id                                
+                            }
+                        })
+                    } 
+                    
+                    
                 })
-            } else if(id===2){
-
-            } else if(id===5){
-
             }
             
-            
-            //this.lectura_data(data);
-            console.log(this.state)
         })
         
 
@@ -106,10 +110,8 @@ class Visor extends Component{
     lectura_data = (data) => {        
         let id_string;
         let temp_string ='';
-        //let id = 0;
-        //let temp = 0.0;
         if(data===undefined){
-            console.log("no se ha recibido data")
+            //console.log("no se ha recibido data")
         } else {
             for(let i=0;i<data.length;i++){
                 if(i==0){
@@ -120,31 +122,67 @@ class Visor extends Component{
                 }
             }
             if(Number.isNaN(temp_string) || Number.isNaN(id_string)){
-                console.log("No se puede convertir a valor float")
+                //console.log("No se puede convertir a valor float")
             } else {
                 id = parseInt(id_string);
                 temp = parseFloat(temp_string);
             }
         }
-        cargando=0;
+        
     }
     render(){
         let reloj = new Date();
         body = '';
-        if(cargando==1){
+        cargando=0;
+        if(this.state.tabla===undefined){
             body = <div className="cargando"></div>
-        } else  {
-            body = this.state.tabla.map( (element,turno)=>{
-                console.log(this.state)
+        } else if(this.state.tabla) {
+            body = this.state.tabla.map( (element,turno)=>{  
+                if(this.state[element.lugar]){
+                    console.log(this.state[element.lugar])
+                } else {
+                   console.log("aiñ estba al revez xDD")
+                }
                 
-                return(                    
-                    <TableRow id={turno} style={{backgroundColor: "#00284d"}} key={element}>
-                        <TableCell> <p className="tablaDatos2"> {element.lugar} </p></TableCell>
-                        <TableCell> <p className="tablaDatos2">{element.temp}°C</p></TableCell>
-                        <TableCell> <p className="tablaDatos2"> {element.ubicacion} </p></TableCell>
-                        <TableCell> <p className="tablaDatos2"> {reloj.getHours()} : {reloj.getMinutes()} </p></TableCell>
-                    </TableRow>
-                )
+                if(this.state[element.lugar]){
+                    let temp = 0;
+                    let color = '#99ffff'
+                    if(isNaN(this.state[element.lugar].temp)){
+                    } else {
+                        temp = parseFloat(this.state[element.lugar].temp)
+                    }
+                    if(temp<3.5){
+                        color = '#99ffff'                        
+                    } else if (temp >= 3.6 && temp<7){
+                        color ='#000099'
+
+                    } else if (temp>=7 && temp < 8){
+                        color = '#ffd11a'
+                    } else if (temp>=8){
+                        color = '#ff3300'
+                    }
+                    
+                    return(                    
+                        <TableRow id={turno} style={{backgroundColor: `${color}`}} key={element.lugar}>
+                            <TableCell> <p className="tablaDatos2"> {element.lugar} </p></TableCell>
+                            <TableCell> <p className="tablaDatos2">{this.state[element.lugar].temp}°C</p></TableCell>
+                            <TableCell> <p className="tablaDatos2"> {element.ubicacion} </p></TableCell>
+                            <TableCell> <p className="tablaDatos2"> {reloj.getHours()} : {reloj.getMinutes()} </p></TableCell>
+                        </TableRow>
+                    )
+                    
+                } else {
+                    //console.log("entra en state")
+                    return(                    
+                        <TableRow id={turno} style={{backgroundColor: "#00284d"}} key={element.lugar}>
+                            <TableCell> <p className="tablaDatos2"> {element.lugar} </p></TableCell>
+                            <TableCell> <p className="tablaDatos2">{element.temp}°C</p></TableCell>
+                            <TableCell> <p className="tablaDatos2"> {element.ubicacion} </p></TableCell>
+                            <TableCell> <p className="tablaDatos2"> {reloj.getHours()} : {reloj.getMinutes()} </p></TableCell>
+                        </TableRow>
+                    )
+                }
+                
 
             })
             /*
