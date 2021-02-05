@@ -26,38 +26,53 @@ class Visor extends Component{
     }
     
     componentDidMount(){
-        fetch(recursos).then( response => { return response.json()})
-        .then( data => {
-            console.log(data)
-        }).catch( err => {
-            console.log(err)
-        })
+        
         fetch(obtener_datos).then( response => { return response.json()})
         .then( data => {
-            console.log(data)            
-            let arreglo = [
-                {
-                    lugar: data.sensor1[0].Lugar,
-                    temp: data.sensor1[0].Temperatura,
-                    ubicacion: data.sensor1[0].Ubicacion,
-                    id: data.sensor1[0].ID
+            console.log(data) 
+            fetch(recursos).then( response => { return response.json()})
+            .then( info => {
+                //console.log(info)
+                let sensores = []
+                info.map( elemento => {
                     
-                },
-                {
-                    lugar: data.sensor2[0].Lugar,
-                    temp: data.sensor2[0].Temperatura,
-                    ubicacion: data.sensor2[0].Ubicacion,
-                    id: data.sensor2[0].ID
-                }
-            ]
-            this.setState({
-                tabla: arreglo
-            })
-            arreglo.forEach( (element,i)=>{
-                this.setState({
-                    [element.lugar]: element
+                    sensores = {
+                        lugar: elemento.lugar,
+                        id: elemento.id,
+                        ubicacion: elemento.ubicacion,
+                        temp: data.sensor1[0].Temperatura
+                    } 
+                    console.log(sensores)
                 })
-            })
+
+                let arreglo = [
+                    {
+                        lugar: data.sensor1[0].Lugar,
+                        temp: data.sensor1[0].Temperatura,
+                        ubicacion: data.sensor1[0].Ubicacion,
+                        id: data.sensor1[0].ID
+                        
+                    },
+                    {
+                        lugar: data.sensor2[0].Lugar,
+                        temp: data.sensor2[0].Temperatura,
+                        ubicacion: data.sensor2[0].Ubicacion,
+                        id: data.sensor2[0].ID
+                    }
+                ]
+                this.setState({
+                    tabla: arreglo
+                })
+                arreglo.forEach( (element,i)=>{
+                    this.setState({
+                        [element.lugar]: element
+                    })
+                })
+                
+
+            }).catch( err => {
+                console.log(err)
+            })           
             
         }).catch( err => {
             console.log(err);
