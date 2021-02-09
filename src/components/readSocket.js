@@ -14,8 +14,10 @@ let cargando = 1
 let id;
 let temp;
 let body;
+let cuerpo;
 let recursos = 'https://instrumentacionline.ddns.net:5002/sensores'
 let obtener_datos = 'https://instrumentacionline.ddns.net:5002/socket'
+let datosNuevos = 'https://instrumentacionline.ddns.net:5002/obtener_sensores'
 
 class Visor extends Component{
     constructor(props){
@@ -29,23 +31,47 @@ class Visor extends Component{
         
         fetch(obtener_datos).then( response => { return response.json()})
         .then( data => {
-            console.log(data) 
+            //console.log(data) 
             fetch(recursos).then( response => { return response.json()})
             .then( info => {
                 //console.log(info)
                 let sensores = []
+                let arreglo = []
                 info.map( elemento => {
-                    
+                    sensores = [
+                        ...sensores,{
+                            lugar: elemento.lugar,
+                            id: elemento.id,
+                            ubicacion: elemento.ubicacion,
+                        }
+                    ]
+                    /*
                     sensores = {
                         lugar: elemento.lugar,
                         id: elemento.id,
                         ubicacion: elemento.ubicacion,
                         temp: data.sensor1[0].Temperatura
                     } 
-                    console.log(sensores)
+                    */
+                })
+                //console.log(sensores)
+                fetch(datosNuevos,{
+                    method: 'POST',
+                    body: JSON.stringify(sensores),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then( response => {return response.json()})
+                .then( payload => {
+                    //console.log(payload)
+                    this.setState({
+                        listado: payload
+                    })
+                }).catch( err => {
+                    console.log(err)
                 })
 
-                let arreglo = [
+                arreglo = [
                     {
                         lugar: data.sensor1[0].Lugar,
                         temp: data.sensor1[0].Temperatura,
@@ -101,7 +127,25 @@ class Visor extends Component{
             if(this.state.tabla == undefined){
                 ///console.log("No esta entrando donde debería")                
             } else {
-
+                this.state.listado.map(element=>{
+                    if(element===undefined || element===null){
+                        //console.log("No hay registro del dato")
+                    } else {
+                        //if(element.id === id_int){
+                        //console.log(element.ID===id_int)
+                        if(element.ID===id_int){
+                            this.setState({
+                                [element.ID]: {
+                                    lugar: element.Lugar,
+                                    temp: temp_float,
+                                    ubicacion: element.Ubicacion,
+                                    id: element.ID
+                                }
+                            })
+                        }
+                        //console.log(`${element.Lugar} ${temp_float} ${element.Ubicacion} ${element.ID}`)
+                    }
+                })
                 this.state.tabla.map( element => {
                     if(element.id===id_int){
                         this.setState({
@@ -117,10 +161,8 @@ class Visor extends Component{
                     
                 })
             }
-            
+            //console.log(this.state)            
         })
-        
-
     }
     lectura_data = (data) => {        
         let id_string;
@@ -148,17 +190,65 @@ class Visor extends Component{
     render(){
         let reloj = new Date();
         body = '';
+        cuerpo = ''
         cargando=0;
-        if(this.state.tabla===undefined){
-            body = <div className="cargando"></div>
-        } else if(this.state.tabla) {
+        if(this.state.listado===undefined){
+            cuerpo = <div className="cargando"></div>
+        } else if(this.state.listado) {
+            //console.log(this.state.listado)
+            //console.log(this.state.tabla)
+            cuerpo = this.state.listado.map( (element,turno)=>{
+                if(element===undefined || element===null){
+                } else {
+                    let temp;
+                    let color = '#99ffff'
+                    if(this.state[element.ID]===undefined){
+                        
+                        if(element.Temperatura<3.5){
+                            color = '#99ffff'                        
+                        } else if (element.Temperatura >= 3.6 && element.Temperatura<7){
+                            color ='#000099'    
+                        } else if (element.Temperatura>=7 && element.Temperatura < 8){
+                            color = '#ffd11a'
+                        } else if (element.Temperatura>=8){
+                            color = '#ff3300'
+                        }
+                        return(
+                            <TableRow id={turno} style={{backgroundColor: `${color}`}} key={element.Lugar}>
+                                <TableCell> <p className="tablaDatos2"> {element.Lugar} </p></TableCell>
+                                <TableCell> <p className="tablaDatos2">{element.Temperatura}°C</p></TableCell>
+                                <TableCell> <p className="tablaDatos2"> {element.Ubicacion} </p></TableCell>
+                                <TableCell> <p className="tablaDatos2"> {reloj.getHours()} : {reloj.getMinutes()} </p></TableCell>
+                            </TableRow>
+                        )
+                    } else {
+                        temp = this.state[element.ID].temp
+                        if(temp<3.5){
+                            color = '#99ffff'                        
+                        } else if (temp >= 3.6 && temp<7){
+                            color ='#000099'    
+                        } else if (temp>=7 && temp < 8){
+                            color = '#ffd11a'
+                        } else if (temp>=8){
+                            color = '#ff3300'
+                        }
+                        return(                    
+                            <TableRow id={turno} style={{backgroundColor: `${color}`}} key={element.Lugar}>
+                                <TableCell> <p className="tablaDatos2"> {element.Lugar} </p></TableCell>
+                                <TableCell> <p className="tablaDatos2">{this.state[element.ID].temp}°C</p></TableCell>
+                                <TableCell> <p className="tablaDatos2"> {element.Ubicacion} </p></TableCell>
+                                <TableCell> <p className="tablaDatos2"> {reloj.getHours()} : {reloj.getMinutes()} </p></TableCell>
+                            </TableRow>
+                        )
+                    }
+                }
+            })
             body = this.state.tabla.map( (element,turno)=>{  
                 if(this.state[element.lugar]){
-                    console.log(this.state[element.lugar])
+                    //console.log(this.state[element.lugar])
                 } else {
-                   console.log("aiñ estba al revez xDD")
+                   //console.log("aiñ estba al revez xDD")
                 }
-                
                 if(this.state[element.lugar]){
                     let temp = 0;
                     let color = '#99ffff'
@@ -200,27 +290,10 @@ class Visor extends Component{
                 
 
             })
-            /*
-            body = this.state.lugares.map( (element,cuenta) => {
-
-                if(this.state.tabla===undefined){
-
-                } else {                    
-                    return(                    
-                        <TableRow id={cuenta} style={{backgroundColor: "#00284d"}} key={element}>
-                            <TableCell> <p className="tablaDatos2"> {element} </p></TableCell>
-                            <TableCell> <p className="tablaDatos2">{this.state.tabla[cuenta].temp}°C</p></TableCell>
-                            <TableCell> <p className="tablaDatos2"> {this.state.tabla[cuenta].ubicacion} </p></TableCell>
-                            <TableCell> <p className="tablaDatos2"> {reloj.getHours()} : {reloj.getMinutes()} </p></TableCell>
-                        </TableRow>
-                    )
-                }
-                
-                
-            })*/
         }
         return(
             <div>
+                <div className="contenedorCardPrincipal"><h1 className="titulos">Monitor de temperaturas</h1></div>
                 <div className="contenedorCardTabla">
     
     <TableContainer>
@@ -234,7 +307,7 @@ class Visor extends Component{
                 </TableRow>
             </TableHead>
             <TableBody>
-                {body}
+                {cuerpo }
             </TableBody>
         </Table>
 

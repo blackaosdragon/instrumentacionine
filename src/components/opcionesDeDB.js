@@ -548,7 +548,7 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
           
         <Tabla anchura={this.props.anchura} data={this.state.consulta} />
         <div style={{visibility: this.state.boton_descarga}}>
-            <a href="https://instrumentacionline.ddns.net/descarga/" className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
+            <a href="https://instrumentacionline.ddns.net:5002/descarga/" className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
         </div>
         </div>
     )} else {
