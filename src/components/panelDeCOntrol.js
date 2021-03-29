@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Monitor from './temperatura.js';
+//import Monitor from './temperatura.js';
 import { FormControl, FormControlLabel,FormGroup,Switch } from '@material-ui/core';
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
@@ -344,7 +344,7 @@ class PanelDeControl extends Component{
                 <div>
                     <Cargando cargando={this.state.cargando}/>
                     <div className="margenMovilSuperior">.</div>
-                    <Monitor anchura={this.props.anchura}/>
+                    {/*<Monitor anchura={this.props.anchura}/>*/ }
                     <Link className="link" to="./panel"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></Link> 
                     <div className="boton-movile">
                       {interruptor}

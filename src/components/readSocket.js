@@ -28,10 +28,6 @@ class Visor extends Component{
     }
     
     componentDidMount(){
-        
-        fetch(obtener_datos).then( response => { return response.json()})
-        .then( data => {
-            //console.log(data) 
             fetch(recursos).then( response => { return response.json()})
             .then( info => {
                 //console.log(info)
@@ -45,16 +41,8 @@ class Visor extends Component{
                             ubicacion: elemento.ubicacion,
                         }
                     ]
-                    /*
-                    sensores = {
-                        lugar: elemento.lugar,
-                        id: elemento.id,
-                        ubicacion: elemento.ubicacion,
-                        temp: data.sensor1[0].Temperatura
-                    } 
-                    */
                 })
-                //console.log(sensores)
+                console.log(sensores)
                 fetch(datosNuevos,{
                     method: 'POST',
                     body: JSON.stringify(sensores),
@@ -70,22 +58,6 @@ class Visor extends Component{
                 }).catch( err => {
                     console.log(err)
                 })
-
-                arreglo = [
-                    {
-                        lugar: data.sensor1[0].Lugar,
-                        temp: data.sensor1[0].Temperatura,
-                        ubicacion: data.sensor1[0].Ubicacion,
-                        id: data.sensor1[0].ID
-                        
-                    },
-                    {
-                        lugar: data.sensor2[0].Lugar,
-                        temp: data.sensor2[0].Temperatura,
-                        ubicacion: data.sensor2[0].Ubicacion,
-                        id: data.sensor2[0].ID
-                    }
-                ]
                 this.setState({
                     tabla: arreglo
                 })
@@ -94,15 +66,11 @@ class Visor extends Component{
                         [element.lugar]: element
                     })
                 })
-                
+               
 
             }).catch( err => {
                 console.log(err)
-            })           
-            
-        }).catch( err => {
-            console.log(err);
-        })
+            }) 
         socket.on('temp', data => {
             let id_s
             let temp_s = '';
@@ -124,15 +92,11 @@ class Visor extends Component{
                 temp_float = parseFloat(temp_s);
             }
 
-            if(this.state.tabla == undefined){
-                ///console.log("No esta entrando donde debería")                
+            if(this.state.tabla == undefined){                            
             } else {
                 this.state.listado.map(element=>{
-                    if(element===undefined || element===null){
-                        //console.log("No hay registro del dato")
-                    } else {
-                        //if(element.id === id_int){
-                        //console.log(element.ID===id_int)
+                    if(element===undefined || element===null){                        
+                    } else {                        
                         if(element.ID===id_int){
                             this.setState({
                                 [element.ID]: {
@@ -143,7 +107,6 @@ class Visor extends Component{
                                 }
                             })
                         }
-                        //console.log(`${element.Lugar} ${temp_float} ${element.Ubicacion} ${element.ID}`)
                     }
                 })
                 this.state.tabla.map( element => {
@@ -161,7 +124,6 @@ class Visor extends Component{
                     
                 })
             }
-            //console.log(this.state)            
         })
     }
     lectura_data = (data) => {        
