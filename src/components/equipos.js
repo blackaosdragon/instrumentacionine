@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import config from '../config.js'
 
 class Equipos extends Component{
     constructor(){
@@ -6,6 +7,19 @@ class Equipos extends Component{
         this.state = {
 
         }
+    }
+    componentDidMount(){
+        let data = {
+            usuario: 'isaac',
+            equipos: 'mesas'
+        }
+        fetch(`${config.API_URL}/ginecologia/3a/mesas`,{
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers:{
+                'Content-Type': 'application/json' 
+              },
+        })
     }
     render(){
         console.log(this.props);
