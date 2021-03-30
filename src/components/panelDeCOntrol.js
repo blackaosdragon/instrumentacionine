@@ -5,10 +5,12 @@ import { FormControl, FormControlLabel,FormGroup,Switch } from '@material-ui/cor
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 import Cargando from './carga.js';
+import config from '../config.js'
 
-const end_point = 'https://instrumentacionline.ddns.net/insertar_token';
+const end_point = `${config.API_URL}/insertar_token`;
 const end_point_notifis = 'https://instrumentacionline.ddns.net/consultar_notifis';
-const end_point_send_test_notifi = 'https://instrumentacionline.ddns.net/test_notificacion';
+const end_point_send_test_notifi = `${config.API_URL}test_notificacion`;
+const socket = `${config.API_URL}/socket`
 
 //const end_point = 'https://instrumentacionline.ddns.net:5002/insertar_token';
 //const end_point_notifis = 'https://instrumentacionline.ddns.net:5002/consultar_notifis';
@@ -270,7 +272,7 @@ class PanelDeControl extends Component{
         
     }
     ultima_data = () => {
-        fetch("https://instrumentacionline.ddns.net/socket")
+        fetch(socket)
         //fetch("https://instrumentacionline.ddns.net:5002/socket")
         .then((response)=>{
             return response.json()

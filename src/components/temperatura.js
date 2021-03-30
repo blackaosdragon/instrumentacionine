@@ -7,9 +7,11 @@ import TableRow from '@material-ui/core/TableRow';
 import { TableBody } from '@material-ui/core';
 import socketIOClient from "socket.io-client"
 import { Link } from "react-router-dom";
+import config from '../config.js'
 
-//const ioSocket="http://192.168.0.10:5000"
-const ioSocket = "https://instrumentacionline.ddns.net"
+const ioSocket = `${config.API_URL}`;
+const api_socket = `${config.API_URL}/socket`;
+//const ioSocket = "https://instrumentacionline.ddns.net"
 //const ioSocket = "https://instrumentacionline.ddns.net:5002"
 //const dominio = "192.168.0.10";
 //const port = "5001";
@@ -70,7 +72,7 @@ class Temperature extends Component{
         .catch( error => {
             console.log(error);
         })
-        fetch("https://instrumentacionline.ddns.net/socket")
+        fetch(api_socket)
         //fetch("https://instrumentacionline.ddns.net:5002/socket")
         .then((response)=>{
             return response.json()

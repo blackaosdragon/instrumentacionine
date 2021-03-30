@@ -67,7 +67,7 @@ class Home extends Component{
             </div>
             <div className="sector-home">
               <Link className="home-item-1" to="/panel"><h3 className="textosBotones">Sensores</h3></Link>
-              <Link className="home-item-2" to="/empresa"><h3>Equipos</h3> </Link>
+              <Link className="home-item-2" to="/control"><h3>Equipos</h3> </Link>
             </div>
          
 
@@ -212,7 +212,7 @@ class Home extends Component{
           </div>
           <div className="sector-home-movile">
               <Link className="home-item-1-movil" to="/panel"><h3 className="textosBotones">Sensores</h3></Link>
-              <Link className="home-item-2-movil" to="/empresa"><h3>Equipos</h3> </Link>
+              <Link className="home-item-2-movil" to="/control"><h3>Equipos</h3> </Link>
             </div>
           
           <div className="fondoBlanco">

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import {withStyles,createMuiTheme} from '@material-ui/core/styles';
 import { Route,Redirect } from 'react-router-dom';
 import ModalDeCarga from "./carga.js"
+import config from '../config.js'
 
 
 let estado_campo = 'blue'
@@ -189,7 +190,8 @@ class ControlUsers extends Component{
         })
         */
         //console.log("Fetch hacia socket");
-        fetch('https://instrumentacionline.ddns.net/socket')
+        //fetch('https://instrumentacionline.ddns.net/socket')
+        fetch(`${config.develop.API_URL}/socket`)
         //fetch('https://instrumentacionline.ddns.net:5002/socket')
         .then( response => {
             return response.json();
@@ -212,13 +214,22 @@ class ControlUsers extends Component{
             pass: this.state.hasch
         }
         console.log(data);
-        fetch(`${login}`,{
+        console.log(config.API_URL)
+        fetch(`${config.API_URL}/login`,{
             method: 'POST',
             body: JSON.stringify(data),
             headers:{
                 'Content-Type': 'application/json' 
               },
-        }).then(response=>{return response.json();})
+        })
+        // fetch(`${config.develop.API_URL}`,{
+        //     method: 'POST',
+        //     body: JSON.stringify(data),
+        //     headers:{
+        //         'Content-Type': 'application/json' 
+        //       },
+        // })
+        .then(response=>{return response.json();})
         .then( response => {
             if(response.data==1){
                 handleLogin(1);
@@ -259,7 +270,7 @@ class ControlUsers extends Component{
         }
         console.log(data);
         handleName(this.state.usuario);        
-        fetch(`${login}`,{
+        fetch(`${config.API_URL}/login`,{
             method: 'POST',
             body: JSON.stringify(data),
             headers:{

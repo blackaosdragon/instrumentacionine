@@ -19,7 +19,9 @@ import Consulta from './components/consultaBase.js';
 import Login from './components/controlDeUsuarios.js';
 import ConsolaDeControl from './components/panelDeCOntrol.js';
 import Panel from './autenticacion.js';
+import Control from './authentication2.js'
 import Registro from './components/registro.js';
+import Equipos from './components/equipos.js';
 
 class App extends Component{
   constructor(){
@@ -96,8 +98,10 @@ class App extends Component{
           <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
           <Route path="/panelDeControl" component={()=> <ConsolaDeControl notifis={this.state.notificaciones}handleNotifis={this.handleNotifis} handleStatus={this.handleStatus} name={this.state.name} anchura={this.state.width} />} />
           <Route path="/panel" component={()=> <Panel logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
+          <Route path="/control" component={()=> <Control logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
           <Route path="/login" component={()=> <Login  anchura={this.state.width} />} />
           <Route path="/registro" component={()=> <Registro  anchura={this.state.width} />} />
+          <Route path="/equipos" component={()=><Equipos anchura={this.state.width} />} />
 
           
 

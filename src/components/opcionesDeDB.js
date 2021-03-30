@@ -6,10 +6,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Modal from '@material-ui/core/Modal';
 import Consulta from './consultaBase';
 import Tabla from './tabladeDatos.js';
+import config from '../config.js';
 
 import {Link} from 'react-router-dom'
 
 import ModalDeCarga from "./carga.js";
+const api_db = config.API_URL
 //const server = "192.168.1.65"; server para probar desde red local
 const server = "instrumentacionline.ddns.net"
 //const puerto = "5000"; puerto de prueba
@@ -78,7 +80,8 @@ class Opciones extends Component{
             lugar: this.state.ubicacion
         }
 
-        fetch(`${protocolo}://${server}:${puerto}/${this.props.ubicaciones}`)
+        //fetch(`${protocolo}://${server}:${puerto}/${this.props.ubicaciones}`)
+        fetch(`${api_db}/${this.props.ubicaciones}`)
         .then( response => {
             this.setState({
                 cargando: false
@@ -106,7 +109,9 @@ class Opciones extends Component{
             year: fecha.getFullYear(),
             mes: mes,
         }
-        fetch(`https://${server}:${puerto}/${end_point_años}`,{
+        //fetch(`https://${server}:${puerto}/${end_point_años}`
+        fetch(`${api_db}/${end_point_años}`
+        ,{
             method: 'POST',
             body: JSON.stringify(consulta),
             headers:{
@@ -130,7 +135,9 @@ class Opciones extends Component{
             alert("Error al comunicarse a la base de datos")
         })
 //////////////////////////////////////////Lectura de Meses////////////////////////////////////////////        
-fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
+//fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`
+fetch(`${api_db}/${end_point_meses}`
+,{
             method: 'POST',
             body: JSON.stringify(consulta),
             headers:{
@@ -154,7 +161,9 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
             alert("Error al comunicarse a la base de datos")
         })
 ///////////////////////////////////////////Consulta de los dias//////////////////////////////////////////        
-        fetch(`${protocolo}://${server}:${puerto}/${end_point_dias}`,{
+        //fetch(`${protocolo}://${server}:${puerto}/${end_point_dias}`
+        fetch(`${api_db}/${end_point_dias}`
+        ,{
             method: 'POST',
             body: JSON.stringify(consulta),
             headers:{
@@ -202,7 +211,9 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
         }
         //console.log(consulta);
         
-        fetch(`https://${server}:${puerto}/${end_point_años}`,{
+        //fetch(`https://${server}:${puerto}/${end_point_años}`
+        fetch(`${api_db}/${end_point_años}`
+        ,{
             method: 'POST',
             body: JSON.stringify(consulta),
             headers:{
@@ -242,7 +253,9 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
         let meses = {
             year: event.target.value
         }
-        fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
+        //fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`
+        fetch(`${api_db}/${end_point_meses}`
+        ,{
             method: 'POST',
             body: JSON.stringify(meses),
             headers:{
@@ -281,7 +294,9 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
             mes: event.target.value,
             ubicacion: this.state.ubicacion
         }
-        fetch(`${protocolo}://${server}:${puerto}/${end_point_dias}`,{
+        //fetch(`${protocolo}://${server}:${puerto}/${end_point_dias}`
+        fetch(`${api_db}/${end_point_dias}`
+        ,{
             method: 'POST',
             body: JSON.stringify(dias),
             headers:{
@@ -363,7 +378,9 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
             })
         } else{
             if(payload.dia===""){
-                fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta_mes}`,{
+                //fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta_mes}`
+                fetch(`${api_db}/${end_point_consulta_mes}`
+                ,{
                     method: 'POST',
                     body: JSON.stringify(payload),
                     headers:{
@@ -384,7 +401,9 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
                     })
                 })
             } else {
-                fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta}`,{
+                //fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta}`
+                fetch(`${api_db}/${end_point_consulta}`
+                ,{
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers:{
@@ -435,7 +454,9 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
         ) {
             alert("Falta completar algunos datos");
         } else (
-            fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta_y_descarga}`,{
+            //fetch(`${protocolo}://${server}:${puerto}/${end_point_consulta_y_descarga}`
+            fetch(`${api_db}/${end_point_consulta_y_descarga}`
+            ,{
               method: 'POST',
                   body: JSON.stringify(payload),
                   headers:{
@@ -462,29 +483,7 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
     }
     
     
-    handleDownload = () => {
-        window.open('https://instrumentacionline.ddns.net/descarga_archivo_csv');
-        let payload = {
-            year: this.state.año,
-            mes: this.state.mes,
-            dia: this.state.dia,
-            lugar: this.state.ubicacion
-        }
-        console.log(payload);
-        fetch(`${protocolo}://${server}/descarga_archivo_csv`,{
-            method: 'POST',
-            body: JSON.stringify(payload),
-            headers:{
-                'Content-Type': 'application/json' 
-            }              
-        }).then( response => {
-            return response.json();
-        }).then( data => {
-            console.log(data)
-        }).catch( err => {
-            console.log(err);
-        })
-    }
+    
     render(){
         
         if(this.props.anchura>970){
@@ -548,7 +547,7 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
           
         <Tabla anchura={this.props.anchura} data={this.state.consulta} />
         <div style={{visibility: this.state.boton_descarga}}>
-            <a href="https://instrumentacionline.ddns.net/descarga/" className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
+            <a href={`${api_db}/descarga/`} className = "boton" onClick={this.ocultar}> Descargar Recurso</a>                  
         </div>
         </div>
     )} else {
@@ -605,7 +604,8 @@ fetch(`${protocolo}://${server}:${puerto}/${end_point_meses}`,{
               <div className="boton-movile" style={{visibility: this.state.boton_descarga}}>
                   {/*<div className="boton-movile" onClick={this.handleDownload}>Download</div>*/}
                   {/*<a href="https://instrumentacionline.ddns.net/descarga_consulta/" onClick={this.ocultar} className="noSub">Descargar consulta</a>*/}
-                  <a href="https://instrumentacionline.ddns.net/descarga/" className = "noSub" onClick={this.ocultar}> Descargar Recurso</a>
+                  {/*<a href="https://instrumentacionline.ddns.net/descarga/" className = "noSub" onClick={this.ocultar}> Descargar Recurso</a>*/}
+                  <a href={`${api_db}/descarga/`} className = "noSub" onClick={this.ocultar}> Descargar Recurso</a>
               </div>
         </div>
         )
