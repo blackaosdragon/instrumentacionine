@@ -38,6 +38,9 @@ class Equipos extends Component{
             alert("Error del servidor intente mas tarde");
         })
     }
+    manejadorClick = (e) => {
+
+    }
     render(){
         console.log(this.state);
 
@@ -49,7 +52,7 @@ class Equipos extends Component{
                 data = this.state.tabla.map( (element,counter)=>{
                     if(counter%2==0){
                         return(
-                            <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element}>
+                            <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element} onClick={this.manejadorClick}>
                                 <TableCell> <p className="tablaDatos"> {element.id} </p></TableCell>
                                 <TableCell> <p className="tablaDatos"> {element.equipo} </p></TableCell>
                                 <TableCell> <p className="tablaDatos"> {element.inventario} </p></TableCell>
