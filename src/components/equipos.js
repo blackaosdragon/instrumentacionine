@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import config from '../config.js'
-import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody} from '@material-ui/core'
+import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody,Collapse,Box,Modal} from '@material-ui/core'
+import mesa from "../images/mesa_pintada.jpg"
+import mesa1 from '../images/mesas/mesa1.jpg'
 
 class Equipos extends Component{
     constructor(){
         super();
         this.state = {
-            cargando: 1
+            cargando: 1,
+            galeria: false
         }
     }
     componentDidMount(){
@@ -23,10 +26,15 @@ class Equipos extends Component{
         }).then( response => {
             return response.json();
         }).then( info => {
-            console.log(info);
+            //console.log(info);
             this.setState({
-                tabla: info.data
-            })            
+                tabla: info.data,
+            })
+            info.data.map( element => {
+                this.setState({
+                    [element.id]: false
+                })
+            })
         }).then( () => {
             this.setState({
                 cargando: 0
@@ -36,39 +44,125 @@ class Equipos extends Component{
         .catch( err => {
             console.log(err);
             alert("Error del servidor intente mas tarde");
+        })        
+    }
+    manejadorClick = (e) => {  
+        console.log(e.currentTarget.id);
+        let id=parseInt(e.currentTarget.id) + 1;
+        this.setState({
+            [id]: !this.state[id]
         })
     }
-    manejadorClick = (e) => {
-
+    galeriaClick = () => {
+        console.log("Abrir galeria");
+        this.setState({
+            galeria: true
+        })
+    }
+    cerrarGaleria = () => {
+        this.setState({
+            galeria: false
+        })
+        console.log("Cerrar imagenes");
     }
     render(){
         console.log(this.state);
-
+        
+        
         let data = '';
         if (this.state.cargando==1){
             data = <div className="cargando"></div>
         } else {
             if(this.props.anchura>970){
                 data = this.state.tabla.map( (element,counter)=>{
+                    //console.log(this.state[counter+1]);
                     if(counter%2==0){
                         return(
-                            <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element} onClick={this.manejadorClick}>
-                                <TableCell> <p className="tablaDatos"> {element.id} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.equipo} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.inventario} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.unidad} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.estado} </p></TableCell>
-                            </TableRow>
+                            <React.Fragment >
+                                <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element}  className="desplegable" onClick={this.manejadorClick}>
+                                    <TableCell align="center" > <p className="tablaDatos"> {element.id} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.equipo} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.unidad} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                    <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                        <Box margin={1}>
+                                            {/*<Table size="small" aria-label="purchases">
+                                            <TableRow align="center">
+                                            <p className="tablaDatos">{element.inventario}</p>
+                                            </TableRow>
+                                            </Table>*/}
+                                            <Table size="small" aria-label="purchases">
+                                                <TableHead>
+                                                    <TableRow className="tabla">
+                                                        <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Galería</p></TableCell>
+                                                        
+                                                    </TableRow>
+                                                </TableHead>
+                                            <TableBody>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                                
+                                            </TableBody>
+                                            </Table>
+                                        </Box>
+                                    </Collapse>
+                                </TableCell>
+                                </TableRow>
+                                <Modal open={this.state.galeria} onClick={this.cerrarGaleria}>
+                                        <React.Fragment>
+                                             <img src={mesa1} className="vistaMesas"/>
+                                        </React.Fragment>
+                                    </Modal>
+                            </React.Fragment>
                         )
                     } else {
                         return(
-                            <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element}>
-                                <TableCell> <p className="tablaDatos"> {element.id} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.equipo} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.inventario} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.unidad} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                            <React.Fragment>
+                            <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element} className="desplegable" onClick={this.manejadorClick}>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.id} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.equipo} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.unidad} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
                             </TableRow>
+                            <TableRow style={{backgroundColor: "#b3b3b3"}}>
+                                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                    <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                        <Box margin={1}>
+                                            <Table size="small" aria-label="purchases">
+                                                <TableHead className="tabla">
+                                                    <TableRow>
+                                                        <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Galería</p></TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                            <TableBody>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                            </TableBody>
+                                            </Table>
+                                        </Box>
+                                    </Collapse>
+                                </TableCell>
+                                </TableRow>
+                        </React.Fragment>
                         )
                     }
                 })                
@@ -76,23 +170,85 @@ class Equipos extends Component{
                 data = this.state.tabla.map( (element,counter)=>{
                     if(counter%2==0){
                         return(
-                            <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element}>
-                                <TableCell> <p className="tablaDatos"> {element.id} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.equipo_abrev} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.inventario} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.unidad_abrev} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                            <React.Fragment>
+                            <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element} className="desplegable" onClick={this.manejadorClick}>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.id} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.equipo_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.unidad_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
                             </TableRow>
+                            <TableRow>
+                                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                    <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                        <Box margin={1}>
+                                            <Table size="small" aria-label="purchases">
+                                                <TableHead >
+                                                    <TableRow className="tabla">
+                                                        <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos" >Galería</p></TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                            <TableBody>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                            </TableBody>
+                                            </Table>
+                                        </Box>
+                                    </Collapse>
+                                </TableCell>
+                                </TableRow> 
+                                                              
+                            </React.Fragment>
                         )
                     } else {
                         return(
-                            <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element}>
-                                <TableCell> <p className="tablaDatos"> {element.id} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.equipo_abrev} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.inventario} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.unidad_abrev} </p></TableCell>
-                                <TableCell> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                            <React.Fragment>
+                            <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element} className="desplegable" onClick={this.manejadorClick}>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.id} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.equipo_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.unidad_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
                             </TableRow>
+                            <TableRow style={{backgroundColor: "#b3b3b3"}}>
+                                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                    <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                        <Box margin={1}>
+                                            <Table size="small" aria-label="purchases">
+                                                <TableHead >
+                                                    <TableRow className="tabla">
+                                                        <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Galería</p></TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                            <TableBody>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                            </TableBody>
+                                            </Table>
+                                        </Box>
+                                    </Collapse>
+                                </TableCell>
+                                </TableRow>
+                                <Modal open={this.state.galeria} onClick={this.cerrarGaleria}>
+                                    <React.Fragment>
+                                        <img src={mesa} className="vistaMesasMovil"/>
+                                    </React.Fragment>
+                                </Modal>
+                            </React.Fragment>
                         )
                     }
                 })
@@ -111,13 +267,13 @@ class Equipos extends Component{
                                 <TableHead>
                                     <TableRow className="tabla">
                                     <TableCell ><p className="tablaTitulos">ID </p></TableCell>
-                                        <TableCell ><p className="tablaTitulos">Equipo</p></TableCell>                                
-                                        <TableCell ><p className="tablaTitulos"> Inventario</p></TableCell>                                
-                                        <TableCell ><p className="tablaTitulos">Unidad</p></TableCell>
-                                        <TableCell ><p className="tablaTitulos">Estado</p></TableCell>
+                                        <TableCell align="center"><p className="tablaTitulos">Equipo</p></TableCell>                                
+                                        <TableCell align="center"><p className="tablaTitulos"> Inventario</p></TableCell>                                
+                                        <TableCell align="center"><p className="tablaTitulos">Unidad</p></TableCell>
+                                        <TableCell align="center"><p className="tablaTitulos">Estado</p></TableCell>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody>
+                                <TableBody >
                                 {data}
                                 </TableBody>
                             </Table>
@@ -155,9 +311,6 @@ class Equipos extends Component{
     
                         </TableContainer>
                         </div>
-                    
-                   
-                    
                 </div>
             )
 
