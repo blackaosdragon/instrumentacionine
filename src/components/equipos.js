@@ -3,18 +3,19 @@ import config from '../config.js'
 import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody,Collapse,Box,Modal} from '@material-ui/core'
 import mesa from "../images/mesa_pintada.jpg"
 import mesa1 from '../images/mesas/mesa1.jpg'
-//import mesa2 from '../images/mesas/mesa2.jpg'
-//import mesa3 from '../images/mesas/mesa3.jpg'
-//import mesa4 from '../images/mesas/mesa4.jpg'
-//import mesa5 from '../images/mesas/mesa5.jpg'
-//import mesa6 from '../images/mesas/mesa6.jpg'
-//import mesa7 from '../images/mesas/mesa7.jpg'
-import {SkipPreviousIcon,ArrowBackIosIcon,ArrowForwardIosIcon,SkipNextIcon} from '@material-ui/icons/';
+import mesa2 from '../images/mesas/mesa2.jpg'
+import mesa3 from '../images/mesas/mesa3.jpg'
+import mesa4 from '../images/mesas/mesa4.jpg'
+import mesa5 from '../images/mesas/mesa5.jpg'
+import mesa6 from '../images/mesas/mesa6.jpg'
+
+import {SkipPrevious,ArrowBackIos,ArrowForwardIos,SkipNext} from '@material-ui/icons';
+
 
 
 
 const imagenes = [
-    mesa1
+    mesa1,mesa2,mesa3,mesa4,mesa5,mesa6
 ]
 
 class Equipos extends Component{
@@ -138,13 +139,11 @@ class Equipos extends Component{
                                 </TableCell>
                                 </TableRow>
                                 <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
-                                        
-                                        
                                         <React.Fragment>
                                         <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
-                                        <div className="botonFlotanteAtras"></div>
+                                        <div className="botonFlotanteAtras">Anterior </div>
                                              <img src={imagenes[counter]} className="vistaMesas"/>
-                                            <div className="botonFlotanteAdelante"></div>
+                                            <div className="botonFlotanteAdelante">Siguiente</div>
                                         </React.Fragment>
                                     </Modal>
                             </React.Fragment>
@@ -190,9 +189,9 @@ class Equipos extends Component{
                                         
                                         <React.Fragment>
                                         <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
-                                        <div className="botonFlotanteAtras"></div>
+                                        <div className="botonFlotanteAtras">Anterior </div>
                                              <img src={imagenes[counter]} className="vistaMesas"/>
-                                            <div className="botonFlotanteAdelante"></div>
+                                             <div className="botonFlotanteAdelante">Siguinte</div>
                                         </React.Fragment>
                                     </Modal>
                                 
@@ -240,7 +239,9 @@ class Equipos extends Component{
                                 </TableRow> 
                                 <Modal open={this.state[`${element.equipo_abrev}${counter}`]} onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}>
                                     <React.Fragment>
+                                    <div className="botonFlotanteAtras">Anterior </div>
                                         <img src={imagenes[counter]} className="vistaMesasMovil"/>
+                                        <div className="botonFlotanteAdelante">Siguiente</div>
                                     </React.Fragment>
                                 </Modal>                                
                                                               
@@ -284,7 +285,9 @@ class Equipos extends Component{
                                 </TableRow>
                                 <Modal open={this.state[`${element.equipo_abrev}${counter}`]} onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}>
                                     <React.Fragment>
+                                    <div className="botonFlotanteAtras">Anterior </div>
                                         <img src={imagenes[counter]} className="vistaMesasMovil"/>
+                                        <div className="botonFlotanteAdelante">Siguiente</div>
                                     </React.Fragment>
                                 </Modal>
                             </React.Fragment>
