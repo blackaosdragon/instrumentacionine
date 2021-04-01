@@ -22,7 +22,8 @@ class Equipos extends Component{
         super();
         this.state = {
             cargando: 1,
-            galeria: false
+            galeria: false,
+            foto: 0
         }
     }
     componentDidMount(){
@@ -45,7 +46,8 @@ class Equipos extends Component{
             })
             info.data.map( element => {
                 this.setState({
-                    [element.id]: false
+                    [element.id]: false,
+                    [`${element.equipo_abrev}${element.id}`]: false
                 })
             })
         }).then( () => {
@@ -61,20 +63,23 @@ class Equipos extends Component{
     }
     manejadorClick = (e) => {  
         console.log(e.currentTarget.id);
+        console.log(e.currentTarget);
         let id=parseInt(e.currentTarget.id) + 1;
         this.setState({
             [id]: !this.state[id]
         })
     }
-    galeriaClick = () => {
-        console.log("Abrir galeria");
+    galeriaClick = (e) => {
+        console.log(e.currentTarget);
+        console.log(e.currentTarget.textContent);
+        console.log(e.currentTarget.data);
         this.setState({
-            galeria: true
+            [e.currentTarget.textContent]: true
         })
     }
-    cerrarGaleria = () => {
+    cerrarGaleria = (nombre) => {
         this.setState({
-            galeria: false
+            [nombre]: false
         })
         console.log("Cerrar imagenes");
     }
@@ -115,7 +120,7 @@ class Equipos extends Component{
                                                         <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
-                                                        <TableCell align="center"><p className="tablaTitulos">Galería</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Fotos</p></TableCell>
                                                         
                                                     </TableRow>
                                                 </TableHead>
@@ -124,7 +129,7 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
                                                 
                                             </TableBody>
                                             </Table>
@@ -132,13 +137,13 @@ class Equipos extends Component{
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
-                                <Modal open={this.state.galeria} >
+                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
                                         
                                         
                                         <React.Fragment>
-                                        <div className="botonFlotante" onClick={this.cerrarGaleria}> X </div>
+                                        <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
                                         <div className="botonFlotanteAtras"></div>
-                                             <img src={mesa1} className="vistaMesas"/>
+                                             <img src={imagenes[counter]} className="vistaMesas"/>
                                             <div className="botonFlotanteAdelante"></div>
                                         </React.Fragment>
                                     </Modal>
@@ -165,7 +170,7 @@ class Equipos extends Component{
                                                         <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
-                                                        <TableCell align="center"><p className="tablaTitulos">Galería</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Fotos</p></TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                             <TableBody>
@@ -173,13 +178,24 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
                                             </TableBody>
                                             </Table>
                                         </Box>
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
+                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
+                                        
+                                        
+                                        <React.Fragment>
+                                        <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
+                                        <div className="botonFlotanteAtras"></div>
+                                             <img src={imagenes[counter]} className="vistaMesas"/>
+                                            <div className="botonFlotanteAdelante"></div>
+                                        </React.Fragment>
+                                    </Modal>
+                                
                         </React.Fragment>
                         )
                     }
@@ -207,7 +223,7 @@ class Equipos extends Component{
                                                         <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
-                                                        <TableCell align="center"><p className="tablaTitulos" >Galería</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos" >Fotos</p></TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                             <TableBody>
@@ -215,13 +231,18 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
                                             </TableBody>
                                             </Table>
                                         </Box>
                                     </Collapse>
                                 </TableCell>
                                 </TableRow> 
+                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}>
+                                    <React.Fragment>
+                                        <img src={imagenes[counter]} className="vistaMesasMovil"/>
+                                    </React.Fragment>
+                                </Modal>                                
                                                               
                             </React.Fragment>
                         )
@@ -246,7 +267,7 @@ class Equipos extends Component{
                                                         <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
                                                         <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
-                                                        <TableCell align="center"><p className="tablaTitulos">Galería</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Fotos</p></TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                             <TableBody>
@@ -254,16 +275,16 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" onClick={this.galeriaClick}>Fotos</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
                                             </TableBody>
                                             </Table>
                                         </Box>
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
-                                <Modal open={this.state.galeria} onClick={this.cerrarGaleria}>
+                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}>
                                     <React.Fragment>
-                                        <img src={mesa} className="vistaMesasMovil"/>
+                                        <img src={imagenes[counter]} className="vistaMesasMovil"/>
                                     </React.Fragment>
                                 </Modal>
                             </React.Fragment>
