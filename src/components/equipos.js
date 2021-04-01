@@ -3,6 +3,19 @@ import config from '../config.js'
 import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody,Collapse,Box,Modal} from '@material-ui/core'
 import mesa from "../images/mesa_pintada.jpg"
 import mesa1 from '../images/mesas/mesa1.jpg'
+import mesa2 from '../images/mesas/mesa2.jpg'
+import mesa3 from '../images/mesas/mesa3.jpg'
+import mesa4 from '../images/mesas/mesa4.jpg'
+import mesa5 from '../images/mesas/mesa5.jpg'
+import mesa6 from '../images/mesas/mesa6.jpg'
+import mesa7 from '../images/mesas/mesa7.jpg'
+import {SkipPreviousIcon,ArrowBackIosIcon,ArrowForwardIosIcon,SkipNextIcon} from '@material-ui/icons/';
+
+
+
+const imagenes = [
+    mesa1,mesa2,mesa3,mesa4,mesa5,mesa6,mesa7
+]
 
 class Equipos extends Component{
     constructor(){
@@ -119,9 +132,14 @@ class Equipos extends Component{
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
-                                <Modal open={this.state.galeria} onClick={this.cerrarGaleria}>
+                                <Modal open={this.state.galeria} >
+                                        
+                                        
                                         <React.Fragment>
+                                        <div className="botonFlotante" onClick={this.cerrarGaleria}> X </div>
+                                        <div className="botonFlotanteAtras"></div>
                                              <img src={mesa1} className="vistaMesas"/>
+                                            <div className="botonFlotanteAdelante"></div>
                                         </React.Fragment>
                                     </Modal>
                             </React.Fragment>
