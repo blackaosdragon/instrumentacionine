@@ -205,7 +205,8 @@ class ControlUsers extends Component{
 
     }
     carga_de_Data = () => {
-        const { handleLogin, handleName } = this.props;
+        const { handleLogin, handleName, handleLevel } = this.props;
+        console.log(handleLevel);
         this.setState({
             cargando: true
         })
@@ -231,6 +232,11 @@ class ControlUsers extends Component{
         // })
         .then(response=>{return response.json();})
         .then( response => {
+            if(isNaN(response.level)){
+                alert("Error al autorizar usuario");
+            } else {
+                handleLevel(response.level);
+            }
             if(response.data==1){
                 handleLogin(1);
                 this.setState({

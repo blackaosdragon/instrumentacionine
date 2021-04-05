@@ -22,6 +22,7 @@ import Panel from './autenticacion.js';
 import Control from './authentication2.js'
 import Registro from './components/registro.js';
 import Equipos from './components/equipos.js';
+import Prohibido from './components/vistas/prohibido.js';
 
 class App extends Component{
   constructor(){
@@ -31,6 +32,7 @@ class App extends Component{
       name: "",
       logeado: 0,
       notificaciones: 1,
+      nivel: 5
       //cada vez que la altura cambia(width) en la ventana (window) va a actualizarse el estado
       //para mandarlo a los componentes que lo necesiten
       //token: ""
@@ -56,12 +58,21 @@ class App extends Component{
     this.setState({
       name: name
     })
+    
+  }
+  handleLevel = level => {
+    this.setState({
+      nivel: level
+    })
+    console.log(`Nivel actualizado a ${level}`)
   }
   handleStatus = (status) => {
     localStorage.setItem('SessionActiva',status);
     this.setState({
       logeado: status
     })
+    console.log("Status: ");
+    console.log(status)
   }
   handleNotifis = (active) => {
     this.setState({
@@ -97,11 +108,12 @@ class App extends Component{
           <Route path="/monitor" component={()=> <Temperature anchura={this.state.width}/> }/>
           <Route path="/consulta" component={()=> <Consulta anchura={this.state.width} />} />
           <Route path="/panelDeControl" component={()=> <ConsolaDeControl notifis={this.state.notificaciones}handleNotifis={this.handleNotifis} handleStatus={this.handleStatus} name={this.state.name} anchura={this.state.width} />} />
-          <Route path="/panel" component={()=> <Panel logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
-          <Route path="/control" component={()=> <Control logeado={this.state.logeado} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} />} />
+          <Route path="/panel" component={()=> <Panel logeado={this.state.logeado} handleLevel={this.handleLevel} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} level={this.state.nivel}/>} />
+          <Route path="/control" component={()=> <Control logeado={this.state.logeado} handleLevel={this.handleLevel} handleLogin={this.handleStatus} handleName={this.handleName} anchura={this.state.width} level={this.state.nivel} />} />
           <Route path="/login" component={()=> <Login  anchura={this.state.width} />} />
           <Route path="/registro" component={()=> <Registro  anchura={this.state.width} />} />
           <Route path="/equipos" component={()=><Equipos anchura={this.state.width} />} />
+          <Route path='/prohibido' component={()=><Prohibido anchura={this.state.width} />} />
 
           
 
