@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import config from '../config.js'
+import mesas from '../recursos.js'
 import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody,Collapse,Box,Modal} from '@material-ui/core'
 import mesa from "../images/mesa_pintada.jpg"
 import mesa1 from '../images/mesas/mesa1.jpg'
@@ -16,6 +17,10 @@ import {SkipPrevious,ArrowBackIos,ArrowForwardIos,SkipNext} from '@material-ui/i
 
 const imagenes = [
     mesa1,mesa2,mesa3,mesa4,mesa5,mesa6
+]
+const recursos = [
+    'https://instrumentacionline.ddns.net:5002/imagenes/mesas1.jpg',
+    'https://instrumentacionline.ddns.net:5002/imagenes/mesas2.jpg',
 ]
 
 class Equipos extends Component{
@@ -60,7 +65,12 @@ class Equipos extends Component{
         .catch( err => {
             console.log(err);
             alert("Error del servidor intente mas tarde");
-        })        
+        }) 
+        /*       
+        fetch(`${config.API_URL}/imagenes/mesas1`)
+        .then(response => {
+            response.arrayBuffer().then(buffer => )
+        })*/
     }
     manejadorClick = (e) => {  
         console.log(e.currentTarget.id);
@@ -70,6 +80,19 @@ class Equipos extends Component{
             [id]: !this.state[id]
         })
     }
+    handleImages = () => {
+        
+        
+        this.setState({
+            foto: this.state.foto+1
+        })
+        if(this.state.foto>2){
+            this.setState({
+                foto: 0
+            })
+        }
+    }
+    
     galeriaClick = (e) => {
         console.log(e.currentTarget);
         console.log(e.currentTarget.textContent);
@@ -86,6 +109,7 @@ class Equipos extends Component{
     }
     render(){
         console.log(this.state);
+        let imagen = ''
         
         
         let data = '';
@@ -239,9 +263,11 @@ class Equipos extends Component{
                                 </TableRow> 
                                 <Modal open={this.state[`${element.equipo_abrev}${counter}`]} onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}>
                                     <React.Fragment>
-                                    <div className="botonFlotanteAtras">Anterior </div>
+                                        {}
+                                        <div>Click</div>
+                                    
                                         <img src={imagenes[counter]} className="vistaMesasMovil"/>
-                                        <div className="botonFlotanteAdelante">Siguiente</div>
+                                        
                                     </React.Fragment>
                                 </Modal>                                
                                                               
@@ -283,11 +309,12 @@ class Equipos extends Component{
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
-                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}>
+                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
                                     <React.Fragment>
-                                    <div className="botonFlotanteAtras">Anterior </div>
-                                        <img src={imagenes[counter]} className="vistaMesasMovil"/>
-                                        <div className="botonFlotanteAdelante">Siguiente</div>
+                                        
+                                        <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
+                                        <img onClick={this.handleImages} src={mesas[`mesa${counter}`][this.state.foto]} className="vistaMesasMovil"/>
+                                        {/*<img onClick={()=>{this.setState({foto: this.state.foto+1})}} src={recursos[this.state.foto]} className="vistaMesasMovil"/>*/}
                                     </React.Fragment>
                                 </Modal>
                             </React.Fragment>
