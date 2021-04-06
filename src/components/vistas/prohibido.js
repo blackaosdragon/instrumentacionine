@@ -7,7 +7,7 @@ class Prohibido extends Component{
             return(
                 <React.Fragment>
                     <div className="contenedorCardPrincipal">
-                        <h1 className="titulos">Prohibido</h1>
+                        <h1 className="titulos">No disponible</h1>
                     </div>
                 </React.Fragment>
             )
@@ -16,7 +16,7 @@ class Prohibido extends Component{
             <React.Fragment>
                 <div className="margenSup">.</div>
                     <div className="contenedorCardMovil">
-                        <h1 className="titulos">Prohibido</h1>
+                        <h1 className="titulos">No disponible</h1>
                     </div>
                 </React.Fragment>
                 )
