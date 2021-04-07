@@ -2,30 +2,22 @@ import React, { Component,Fragment} from 'react';
 
 class CargaImagen extends Component{
     render(){
+        console.log(this.props.direccion)
         if(this.props.anchura>970){
             return(
                 <Fragment>
-                    Imagen escritorio
+                    <img src={`${this.props.direccion}`} className="vistaMesas"/>
                 </Fragment>
             )
 
         } else {
             return(
                 <Fragment>
-                    Imagen movil
+                    <img src={`${this.props.direccion}`} className="vistaMesas"/>
                 </Fragment>
             )
 
         }
-    return(
-        
-        <React.Fragment>
-            {console.log(direccion)}
-            <div>
-                Imagen
-            </div>
-        </React.Fragment>
-    )
     }
 }
 export default CargaImagen;

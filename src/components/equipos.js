@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import config from '../config.js'
-import mesas from '../recursos.js'
+import config from '../config.js';
+import mesas from '../recursos.js';
+import Imagen from './cargaImagen.js';
 import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody,Collapse,Box,Modal} from '@material-ui/core'
 import mesa from "../images/mesa_pintada.jpg"
 import mesa1 from '../images/mesas/mesa1.jpg'
@@ -168,7 +169,8 @@ class Equipos extends Component{
                                         <React.Fragment>
                                         <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
                                         <div onClick={this.handleRetroceso} className="botonFlotanteAtras">Anterior </div>
-                                             <img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>
+                                        <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                             {/*<img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>*/}
                                             <div onClick={this.handleImages} className="botonFlotanteAdelante">Siguiente</div>
                                         </React.Fragment>
                                     </Modal>
@@ -216,8 +218,9 @@ class Equipos extends Component{
                                         <React.Fragment>
                                         <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
                                         <div onClick={this.handleRetroceso} className="botonFlotanteAtras">Anterior </div>
-                                             <img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>
-                                             <div onClick={this.handleImages} className="botonFlotanteAdelante">Siguiente</div>
+                                             {/*<img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>*/}
+                                             <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                             {<div onClick={this.handleImages} className="botonFlotanteAdelante">Siguiente</div>}
                                         </React.Fragment>
                                     </Modal>
                                 
@@ -267,7 +270,8 @@ class Equipos extends Component{
                                     <React.Fragment>
                                         
                                         <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
-                                        <img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>
+                                        <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}
                                         
                                     </React.Fragment>
                                 </Modal>                                
@@ -314,7 +318,8 @@ class Equipos extends Component{
                                     <React.Fragment>
                                         
                                         <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
-                                        <img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>
+                                        <Imagen onClick={} direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}
                                         {/*<img onClick={()=>{this.setState({foto: this.state.foto+1})}} src={recursos[this.state.foto]} className="vistaMesasMovil"/>*/}
                                     </React.Fragment>
                                 </Modal>
