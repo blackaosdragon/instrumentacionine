@@ -18,11 +18,6 @@ import {SkipPrevious,ArrowBackIos,ArrowForwardIos,SkipNext} from '@material-ui/i
 const imagenes = [
     mesa1,mesa2,mesa3,mesa4,mesa5,mesa6
 ]
-const recursos = [
-    'https://instrumentacionline.ddns.net:5002/imagenes/mesas1.jpg',
-    'https://instrumentacionline.ddns.net:5002/imagenes/mesas2.jpg',
-]
-
 class Equipos extends Component{
     constructor(){
         super();
@@ -73,16 +68,15 @@ class Equipos extends Component{
         })*/
     }
     manejadorClick = (e) => {  
-        console.log(e.currentTarget.id);
-        console.log(e.currentTarget);
+        //console.log(e.currentTarget.id);
+        //console.log(e.currentTarget);
         let id=parseInt(e.currentTarget.id) + 1;
         this.setState({
             [id]: !this.state[id]
         })
     }
+    
     handleImages = () => {
-        
-        
         this.setState({
             foto: this.state.foto+1
         })
@@ -92,11 +86,21 @@ class Equipos extends Component{
             })
         }
     }
+    handleRetroceso = () => {
+        this.setState({
+            foto: this.state.foto -1
+        })
+        if(this.state.foto<=0){
+            this.setState({
+                foto: 3
+            })
+        }
+    }
     
     galeriaClick = (e) => {
-        console.log(e.currentTarget);
-        console.log(e.currentTarget.textContent);
-        console.log(e.currentTarget.data);
+        //console.log(e.currentTarget);
+        //console.log(e.currentTarget.textContent);
+        //console.log(e.currentTarget.data);
         this.setState({
             [e.currentTarget.textContent]: true
         })
@@ -105,12 +109,10 @@ class Equipos extends Component{
         this.setState({
             [nombre]: false
         })
-        console.log("Cerrar imagenes");
+        //console.log("Cerrar imagenes");
     }
     render(){
-        console.log(this.state);
-        let imagen = ''
-        
+        //console.log(this.state);
         
         let data = '';
         if (this.state.cargando==1){
@@ -165,9 +167,9 @@ class Equipos extends Component{
                                 <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
                                         <React.Fragment>
                                         <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
-                                        <div className="botonFlotanteAtras">Anterior </div>
-                                             <img src={imagenes[counter]} className="vistaMesas"/>
-                                            <div className="botonFlotanteAdelante">Siguiente</div>
+                                        <div onClick={this.handleRetroceso} className="botonFlotanteAtras">Anterior </div>
+                                             <img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>
+                                            <div onClick={this.handleImages} className="botonFlotanteAdelante">Siguiente</div>
                                         </React.Fragment>
                                     </Modal>
                             </React.Fragment>
@@ -213,9 +215,9 @@ class Equipos extends Component{
                                         
                                         <React.Fragment>
                                         <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
-                                        <div className="botonFlotanteAtras">Anterior </div>
-                                             <img src={imagenes[counter]} className="vistaMesas"/>
-                                             <div className="botonFlotanteAdelante">Siguinte</div>
+                                        <div onClick={this.handleRetroceso} className="botonFlotanteAtras">Anterior </div>
+                                             <img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>
+                                             <div onClick={this.handleImages} className="botonFlotanteAdelante">Siguiente</div>
                                         </React.Fragment>
                                     </Modal>
                                 
@@ -261,12 +263,11 @@ class Equipos extends Component{
                                     </Collapse>
                                 </TableCell>
                                 </TableRow> 
-                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}>
+                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
                                     <React.Fragment>
-                                        {}
-                                        <div>Click</div>
-                                    
-                                        <img src={imagenes[counter]} className="vistaMesasMovil"/>
+                                        
+                                        <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
+                                        <img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>
                                         
                                     </React.Fragment>
                                 </Modal>                                
@@ -313,7 +314,7 @@ class Equipos extends Component{
                                     <React.Fragment>
                                         
                                         <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
-                                        <img onClick={this.handleImages} src={mesas[`mesa${counter}`][this.state.foto]} className="vistaMesasMovil"/>
+                                        <img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>
                                         {/*<img onClick={()=>{this.setState({foto: this.state.foto+1})}} src={recursos[this.state.foto]} className="vistaMesasMovil"/>*/}
                                     </React.Fragment>
                                 </Modal>
