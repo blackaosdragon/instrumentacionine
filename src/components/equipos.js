@@ -270,7 +270,9 @@ class Equipos extends Component{
                                     <React.Fragment>
                                         
                                         <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
+                                        <div onClick={this.handleImages}>
                                         <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        </div>
                                         {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}
                                         
                                     </React.Fragment>
@@ -318,7 +320,9 @@ class Equipos extends Component{
                                     <React.Fragment>
                                         
                                         <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
-                                        <Imagen onClick={} direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        <div onClick={this.handleImages}>
+                                        <Imagen  direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        </div>
                                         {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}
                                         {/*<img onClick={()=>{this.setState({foto: this.state.foto+1})}} src={recursos[this.state.foto]} className="vistaMesasMovil"/>*/}
                                     </React.Fragment>
