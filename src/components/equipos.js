@@ -25,7 +25,10 @@ class Equipos extends Component{
         this.state = {
             cargando: 1,
             galeria: false,
-            foto: 0
+            foto: 0,
+            movX: null,
+            movY: null,
+            mov: null
         }
     }
     componentDidMount(){
@@ -68,6 +71,25 @@ class Equipos extends Component{
             response.arrayBuffer().then(buffer => )
         })*/
     }
+    componentDidUpdate(prevProps,prevState){
+        if(prevState.movX !== this.state.movX){
+            //console.log("Se movio el touch");
+            //console.log(this.props)
+            if(prevState.movX < this.state.movX){
+                //console.log("Se movio a la izquierda");
+                //handleImages('left');
+                this.setState({
+                    mov: 'left'
+                })
+            } else {
+                //handleImages('right');
+                //console.log("Se movio a la derecha");
+                this.setState({
+                    mov: 'right'
+                })
+            }
+        }        
+    }
     manejadorClick = (e) => {  
         //console.log(e.currentTarget.id);
         //console.log(e.currentTarget);
@@ -77,7 +99,17 @@ class Equipos extends Component{
         })
     }
     
-    handleImages = () => {
+    handleImages = movimiento => {
+        if(movimiento==='right'){
+            this.setState({
+                foto: this.state.foto + 1
+            })
+        }
+        if(movimiento==='left'){
+            this.setState({
+                foto: this.state.foto - 1
+            })
+        }
         this.setState({
             foto: this.state.foto+1
         })
@@ -86,6 +118,7 @@ class Equipos extends Component{
                 foto: 0
             })
         }
+        
     }
     handleRetroceso = () => {
         this.setState({
@@ -96,6 +129,20 @@ class Equipos extends Component{
                 foto: 3
             })
         }
+    }
+    hadlerMove = e => {
+        //console.log(e.touches)
+        if(e.touches===undefined){
+            console.log("No se detecto movimiento")
+        } else {
+            this.setState({
+                movX: e.touches[0].clientX,
+                movY: e.touches[0].clientY
+            })
+        }
+    }
+    handlerEnd = () => {
+        this.handleImages(this.state.mov)
     }
     
     galeriaClick = (e) => {
@@ -270,8 +317,8 @@ class Equipos extends Component{
                                     <React.Fragment>
                                         
                                         <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
-                                        <div onClick={this.handleImages}>
-                                        <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        <div onTouchMove={this.hadlerMove} onTouchEnd={this.handlerEnd}>
+                                        <Imagen handleImages={this.handleImages} direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
                                         </div>
                                         {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}
                                         
@@ -320,9 +367,10 @@ class Equipos extends Component{
                                     <React.Fragment>
                                         
                                         <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
-                                        <div onClick={this.handleImages}>
-                                        <Imagen  direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        <div onTouchMove={this.hadlerMove} onTouchEnd={this.handlerEnd}>
+                                        <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
                                         </div>
+                                        
                                         {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}
                                         {/*<img onClick={()=>{this.setState({foto: this.state.foto+1})}} src={recursos[this.state.foto]} className="vistaMesasMovil"/>*/}
                                     </React.Fragment>
