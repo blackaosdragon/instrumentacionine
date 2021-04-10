@@ -818,6 +818,12 @@ textarea{
   top: 10%;
   left: 10%;
 }
+.vistaMesasDesktop{
+  height: 80%;
+  position: absolute;
+  top: 10%;
+  left: 35%;
+}
 .botonFlotante{
   color: #000000;
   border-radius: 5px;
