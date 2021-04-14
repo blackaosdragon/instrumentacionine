@@ -232,10 +232,11 @@ class ControlUsers extends Component{
         // })
         .then(response=>{return response.json();})
         .then( response => {
+            console.log(response)
             if(isNaN(response.level)){
                 alert("Error al autorizar usuario");
             } else {
-                handleLevel(response.level);
+                handleLevel(response.level,response.unidad);
             }
             if(response.data==1){
                 handleLogin(1);
@@ -320,6 +321,8 @@ class ControlUsers extends Component{
 
     render(){
         //this.props.onChange();
+        console.log(this.state)
+        
         
         if(this.props.anchura>970){
             return(

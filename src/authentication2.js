@@ -35,7 +35,7 @@ class Control  extends Component{
         } else if(this.props.logeado===0){
             console.log("Necesita autenticarse")
             return(
-            <Login handleLevel={this.props.handleLevel} handleLogin={this.props.handleLogin} handleName={this.props.handleName} onChange={this.change} anchura={this.props.anchura} />
+            <Login handleLevel={this.props.handleLevel} handleLogin={this.props.handleLogin} handleName={this.props.handleName} onChange={this.change} anchura={this.props.anchura} unidad={this.props.unidad}/>
             )
             
         } else {

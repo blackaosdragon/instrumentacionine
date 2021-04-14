@@ -34,9 +34,26 @@ class Equipos extends Component{
     componentDidMount(){
         let data = {
             usuario: 'isaac',
-            equipos: 'mesas'
+            equipos: 'mesas',
+            unidad: this.props.unidad
         }
-        fetch(`${config.API_URL}/ginecologia/3a/mesas`,{
+        console.log(this.props)
+        
+        // fetch(`${config.API_URL}/ginecologia/3a/mesas`,{
+        //     method: 'POST',
+        //     body: JSON.stringify(data),
+        //     headers:{
+        //         'Content-Type': 'application/json' 
+        //       },
+        // }).then( response => {
+        //     return response.json();
+        // }).then( data => {
+        //     console.log(data);
+        // }).catch( err => {
+        //     console.log(err)
+        // })
+
+        fetch(`${config.API_URL}/equipos/mesas`,{
             method: 'POST',
             body: JSON.stringify(data),
             headers:{
@@ -46,6 +63,7 @@ class Equipos extends Component{
             return response.json();
         }).then( info => {
             //console.log(info);
+            console.log(info)
             this.setState({
                 tabla: info.data,
             })
@@ -160,7 +178,7 @@ class Equipos extends Component{
         //console.log("Cerrar imagenes");
     }
     render(){
-        //console.log(this.state);
+        console.log(this.state);
         
         let data = '';
         if (this.state.cargando==1){
