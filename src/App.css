@@ -900,3 +900,9 @@ textarea{
   top: 0%;
   left: 0%;
 }
+.noData{
+  font-family: 'Znric-Regular';
+  font-size: 150%;
+  color: #000000;
+  cursor: not-allowed;
+}

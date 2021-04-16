@@ -201,6 +201,50 @@ class Equipos extends Component{
                 data = this.state.tabla.map( (element,counter)=>{
                     //console.log(this.state[counter+1]);
                     if(counter%2==0){
+                        if(mesas[`mesa${element.id}`] == undefined){
+                            return(
+                            <React.Fragment >
+                                <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element}  className="desplegable" onClick={this.manejadorClick}>
+                                    
+                                    <TableCell align="center" > <p className="tablaDatos"> {element.id} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.equipo} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.unidad} </p></TableCell>
+                                    <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                                </TableRow>
+                                <TableRow>
+                                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                    <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                        <Box margin={1}>
+                                            <Table size="small" aria-label="purchases">
+                                                <TableHead>
+                                                    <TableRow className="tabla">
+                                                        <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Fotos</p></TableCell>
+                                                        
+                                                    </TableRow>
+                                                </TableHead>
+                                            <TableBody>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                <TableCell align="center" ><p className="noData">No disponible</p></TableCell>
+                                                
+                                            </TableBody>
+                                            </Table>
+                                        </Box>
+                                    </Collapse>
+                                </TableCell>
+                                </TableRow>
+                                
+                            </React.Fragment>
+                            )
+
+                        } else {
                         return(
                             <React.Fragment >
                                 <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element}  className="desplegable" onClick={this.manejadorClick}>
@@ -256,7 +300,52 @@ class Equipos extends Component{
                                     </Modal>
                             </React.Fragment>
                         )
+                                        }
                     } else {
+                        if(mesas[`mesa${element.id}`] == undefined){
+                            return(
+                                <React.Fragment >
+                                    <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element}  className="desplegable" onClick={this.manejadorClick}>
+                                        
+                                        <TableCell align="center" > <p className="tablaDatos"> {element.id} </p></TableCell>
+                                        <TableCell align="center"> <p className="tablaDatos"> {element.equipo} </p></TableCell>
+                                        <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                        <TableCell align="center"> <p className="tablaDatos"> {element.unidad} </p></TableCell>
+                                        <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                        <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                            <Box margin={1}>
+                                                <Table size="small" aria-label="purchases">
+                                                    <TableHead>
+                                                        <TableRow className="tabla">
+                                                            <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                            <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                            <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                            <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                            <TableCell align="center"><p className="tablaTitulos">Fotos</p></TableCell>
+                                                            
+                                                        </TableRow>
+                                                    </TableHead>
+                                                <TableBody>
+                                                    <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                    <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                    <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                    <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                    <TableCell align="center" ><p className="noData">No disponible</p></TableCell>
+                                                    
+                                                </TableBody>
+                                                </Table>
+                                            </Box>
+                                        </Collapse>
+                                    </TableCell>
+                                    </TableRow>
+                                    
+                                </React.Fragment>
+                                )
+
+                        } else {
                         return(
                             <React.Fragment>
                             <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element} className="desplegable" onClick={this.manejadorClick}>
@@ -306,11 +395,51 @@ class Equipos extends Component{
                                 
                         </React.Fragment>
                         )
+                        }
                     }
                 })                
             } else {
                 data = this.state.tabla.map( (element,counter)=>{
                     if(counter%2==0){
+                        if(mesas[`mesa${element.id}`] == undefined){
+                            return(
+                            <React.Fragment>
+                            <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element} className="desplegable" onClick={this.manejadorClick}>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.id} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.equipo_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.unidad_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                    <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                        <Box margin={1}>
+                                            <Table size="small" aria-label="purchases">
+                                                <TableHead >
+                                                    <TableRow className="tabla">
+                                                        <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos" >Fotos</p></TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                            <TableBody>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                <TableCell align="center"> <p className="noData">Sin imagenes</p> </TableCell>
+                                            </TableBody>
+                                            </Table>
+                                        </Box>
+                                    </Collapse>
+                                </TableCell>
+                                </TableRow> 
+                            </React.Fragment>
+                            )
+                        } else {
                         return(
                             <React.Fragment>
                             <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element} className="desplegable" onClick={this.manejadorClick}>
@@ -360,7 +489,48 @@ class Equipos extends Component{
                                                               
                             </React.Fragment>
                         )
+                        }
                     } else {
+                        if(mesas[`mesa${element.id}`] == undefined){
+                            return(
+                            <React.Fragment>
+                            <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element} className="desplegable" onClick={this.manejadorClick}>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.id} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.equipo_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.unidad_abrev} </p></TableCell>
+                                <TableCell align="center"> <p className="tablaDatos"> {element.estado} </p></TableCell>
+                            </TableRow>
+                            <TableRow style={{backgroundColor: "#b3b3b3"}}>
+                                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                    <Collapse in={this.state[counter+1]} timeout="auto" unmountOnExit>
+                                        <Box margin={1}>
+                                            <Table size="small" aria-label="purchases">
+                                                <TableHead >
+                                                    <TableRow className="tabla">
+                                                        <TableCell align="center"><p className="tablaTitulos">Marca</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Modelo</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Ubicacion</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">No Serie</p></TableCell>
+                                                        <TableCell align="center"><p className="tablaTitulos">Fotos</p></TableCell>
+                                                    </TableRow>
+                                                </TableHead>
+                                            <TableBody>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.marca}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
+                                                <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
+                                                <TableCell align="center" > <p className="noData"> Sin imagenes</p> </TableCell>
+                                            </TableBody>
+                                            </Table>
+                                        </Box>
+                                    </Collapse>
+                                </TableCell>
+                                </TableRow>
+                            </React.Fragment>
+                            )
+
+                        } else {
                         return(
                             <React.Fragment>
                             <TableRow id={counter} style={{backgroundColor: "#b3b3b3"}} key={element} className="desplegable" onClick={this.manejadorClick}>
@@ -414,6 +584,7 @@ class Equipos extends Component{
                                 </Modal>
                             </React.Fragment>
                         )
+                        }
                     }
                 })
             }
