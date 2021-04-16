@@ -89,13 +89,13 @@ class MainBar extends Component {
                 horizontal: "right"
               }}
               >
-                <Link
+                {/* {<Link
                     className="link"
                     onClick={this.handleClick}
                     to="./empresa"
                   >
                     <div className="principalButton">Empresa</div>
-                  </Link>
+                  </Link>} */}
                   <Link
                     className="link"
                     onClick={this.handleClick}
