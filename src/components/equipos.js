@@ -12,6 +12,7 @@ import mesa5 from '../images/mesas/mesa5.jpg'
 import mesa6 from '../images/mesas/mesa6.jpg'
 
 import {SkipPrevious,ArrowBackIos,ArrowForwardIos,SkipNext} from '@material-ui/icons';
+import recursos from '../recursos.js';
 
 
 
@@ -28,10 +29,12 @@ class Equipos extends Component{
             foto: 0,
             movX: null,
             movY: null,
-            mov: null
+            mov: null,
+            limiteSuperior: 2
         }
     }
     componentDidMount(){
+        
         let data = {
             usuario: 'isaac',
             equipos: 'mesas',
@@ -117,7 +120,8 @@ class Equipos extends Component{
         })
     }
     
-    handleImages = movimiento => {
+    handleImages = (movimiento) => {
+        
         if(movimiento==='right'){
             this.setState({
                 foto: this.state.foto + 1
@@ -131,7 +135,7 @@ class Equipos extends Component{
         this.setState({
             foto: this.state.foto+1
         })
-        if(this.state.foto>2){
+        if(this.state.foto>this.state.limiteSuperior-2){
             this.setState({
                 foto: 0
             })
@@ -164,8 +168,11 @@ class Equipos extends Component{
     }
     
     galeriaClick = (e) => {
+        
+
+
         //console.log(e.currentTarget);
-        //console.log(e.currentTarget.textContent);
+        console.log(e.currentTarget.textContent);
         //console.log(e.currentTarget.data);
         this.setState({
             [e.currentTarget.textContent]: true
@@ -177,8 +184,14 @@ class Equipos extends Component{
         })
         //console.log("Cerrar imagenes");
     }
+    solicitarRecursos = (recursos) => {
+        this.setState({
+            limiteSuperior: recursos.length
+        })
+        //console.log(recursos.length)
+    }
     render(){
-        console.log(this.state);
+        //console.log(this.state);
         
         let data = '';
         if (this.state.cargando==1){
@@ -191,6 +204,7 @@ class Equipos extends Component{
                         return(
                             <React.Fragment >
                                 <TableRow id={counter} style={{backgroundColor: "#ffffff"}} key={element}  className="desplegable" onClick={this.manejadorClick}>
+                                    
                                     <TableCell align="center" > <p className="tablaDatos"> {element.id} </p></TableCell>
                                     <TableCell align="center"> <p className="tablaDatos"> {element.equipo} </p></TableCell>
                                     <TableCell align="center"> <p className="tablaDatos"> {element.inventario} </p></TableCell>
@@ -222,7 +236,7 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
+                                                <TableCell align="center" onClick={()=>{this.solicitarRecursos(mesas[`mesa${element.id}`])}}> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{element.id}</p> </TableCell>
                                                 
                                             </TableBody>
                                             </Table>
@@ -230,13 +244,14 @@ class Equipos extends Component{
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
-                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
+                                <Modal open={this.state[`${element.equipo_abrev}${element.id}`]} >
                                         <React.Fragment>
-                                        <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
+                                        <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${element.id}`)}> X </div>
                                         <div onClick={this.handleRetroceso} className="botonFlotanteAtras">Anterior </div>
-                                        <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        
+                                        <Imagen direccion={mesas[`mesa${element.id}`][this.state.foto]} anchura={this.props.anchura}/>
                                              {/*<img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>*/}
-                                            <div onClick={this.handleImages} className="botonFlotanteAdelante">Siguiente</div>
+                                            <div onClick={()=>{this.handleImages()}} className="botonFlotanteAdelante">Siguiente</div>
                                         </React.Fragment>
                                     </Modal>
                             </React.Fragment>
@@ -270,21 +285,21 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
+                                                <TableCell align="center" onClick={()=>{this.solicitarRecursos(mesas[`mesa${element.id}`])}}> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{element.id}</p> </TableCell>
                                             </TableBody>
                                             </Table>
                                         </Box>
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
-                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
+                                <Modal open={this.state[`${element.equipo_abrev}${element.id}`]} >
                                         
                                         
                                         <React.Fragment>
-                                        <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)}> X </div>
+                                        <div className="botonFlotante" onClick={() => this.cerrarGaleria(`${element.equipo_abrev}${element.id}`)}> X </div>
                                         <div onClick={this.handleRetroceso} className="botonFlotanteAtras">Anterior </div>
                                              {/*<img src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesas"/>*/}
-                                             <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                             <Imagen direccion={mesas[`mesa${element.id}`][this.state.foto]} anchura={this.props.anchura}/>
                                              {<div onClick={this.handleImages} className="botonFlotanteAdelante">Siguiente</div>}
                                         </React.Fragment>
                                     </Modal>
@@ -324,19 +339,19 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
+                                                <TableCell align="center" onClick={()=>{this.solicitarRecursos(mesas[`mesa${element.id}`])}}> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{element.id}</p> </TableCell>
                                             </TableBody>
                                             </Table>
                                         </Box>
                                     </Collapse>
                                 </TableCell>
                                 </TableRow> 
-                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
+                                <Modal open={this.state[`${element.equipo_abrev}${element.id}`]} >
                                     <React.Fragment>
                                         
-                                        <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
+                                        <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${element.id}`)} className="cerrar">Cerrar </div>
                                         <div onTouchMove={this.hadlerMove} onTouchEnd={this.handlerEnd}>
-                                        <Imagen handleImages={this.handleImages} direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                        <Imagen handleImages={this.handleImages} direccion={mesas[`mesa${element.id}`][this.state.foto]} anchura={this.props.anchura}/>
                                         </div>
                                         {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}
                                         
@@ -374,19 +389,23 @@ class Equipos extends Component{
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.modelo} </p></TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.ubicacion}</p> </TableCell>
                                                 <TableCell align="center"> <p className="tablaDatosTexto">{element.serie}</p> </TableCell>
-                                                <TableCell align="center"> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{counter}</p> </TableCell>
+                                                <TableCell align="center" onClick={()=>{this.solicitarRecursos(mesas[`mesa${element.id}`])}}> <p className="tablaDatosTextoGaleria" data={`${element.equipo_abrev}${counter}`} name={`${element.equipo_abrev}${counter}`} onClick={this.galeriaClick}>{element.equipo_abrev}{element.id}</p> </TableCell>
                                             </TableBody>
                                             </Table>
                                         </Box>
                                     </Collapse>
                                 </TableCell>
                                 </TableRow>
-                                <Modal open={this.state[`${element.equipo_abrev}${counter}`]} >
+                                {console.log("La mesa es")}
+                                
+                                {console.log(mesas[`mesa${element.id}`][this.state.foto])}
+                                <Modal open={this.state[`${element.equipo_abrev}${element.id}`]} >
                                     <React.Fragment>
                                         
-                                        <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${counter}`)} className="cerrar">Cerrar </div>
+                                        <div onClick={ () => this.cerrarGaleria(`${element.equipo_abrev}${element.id}`)} className="cerrar">Cerrar </div>
                                         <div onTouchMove={this.hadlerMove} onTouchEnd={this.handlerEnd}>
-                                        <Imagen direccion={mesas[`mesa${counter+1}`][this.state.foto]} anchura={this.props.anchura}/>
+                                            
+                                        <Imagen direccion={mesas[`mesa${element.id}`][this.state.foto]} anchura={this.props.anchura}/>
                                         </div>
                                         
                                         {/*<img onClick={this.handleImages} src={mesas[`mesa${counter+1}`][this.state.foto]} className="vistaMesasMovil"/>*/}

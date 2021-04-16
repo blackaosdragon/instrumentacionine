@@ -10,8 +10,6 @@ import config from '../config.js'
 
 let estado_campo = 'blue'
 
-const login = 'https://instrumentacionline.ddns.net/login'
-//const login = 'https://instrumentacionline.ddns.net:5002/login'
 
 const theme = createMuiTheme({
     palette: {
@@ -206,7 +204,7 @@ class ControlUsers extends Component{
     }
     carga_de_Data = () => {
         const { handleLogin, handleName, handleLevel } = this.props;
-        console.log(handleLevel);
+        //console.log(handleLevel);
         this.setState({
             cargando: true
         })
@@ -215,7 +213,7 @@ class ControlUsers extends Component{
             pass: this.state.hasch
         }
         console.log(data);
-        console.log(config.API_URL)
+        //console.log(config.API_URL)
         fetch(`${config.API_URL}/login`,{
             method: 'POST',
             body: JSON.stringify(data),
@@ -232,9 +230,9 @@ class ControlUsers extends Component{
         // })
         .then(response=>{return response.json();})
         .then( response => {
-            console.log(response)
+            //console.log(response)
             if(isNaN(response.level)){
-                alert("Error al autorizar usuario");
+                //alert("Error al autorizar usuario");
             } else {
                 handleLevel(response.level,response.unidad);
             }
@@ -275,7 +273,7 @@ class ControlUsers extends Component{
             user: this.state.oirausu,
             pass: this.state.hasch
         }
-        console.log(data);
+        //console.log(data);
         handleName(this.state.usuario);        
         fetch(`${config.API_URL}/login`,{
             method: 'POST',
@@ -301,7 +299,7 @@ class ControlUsers extends Component{
                 })
                 //console.log(this.state.cargando);
 
-                alert("Verifique su usuario y contraseña");
+                //alert("Verifique su usuario y contraseña");
             }
 
         }).catch((err)=>{
@@ -321,7 +319,7 @@ class ControlUsers extends Component{
 
     render(){
         //this.props.onChange();
-        console.log(this.state)
+        //console.log(this.state)
         
         
         if(this.props.anchura>970){

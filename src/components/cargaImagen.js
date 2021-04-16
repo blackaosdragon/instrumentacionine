@@ -33,6 +33,7 @@ class CargaImagen extends Component{
                         <Carga cargando={this.state.cargando} />
                     }
                     <img onLoad={()=>{this.setState({cargando: 1})}} src={`${this.props.direccion}`} className="vistaMesasDesktop"/>
+                    {console.log(this.props.direccion)}
                 </Fragment>
             )
         } else {
@@ -44,6 +45,7 @@ class CargaImagen extends Component{
                         <Carga cargando={this.state.cargando} />
                     }
                     <img onLoad={()=>{this.setState({cargando: 1})}} src={`${this.props.direccion}`} className="vistaMesas"/>
+                    {console.log(this.props.direccion)}
                     
                 </Fragment>
                 

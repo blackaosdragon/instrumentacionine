@@ -38,12 +38,36 @@ export default imagenes = {
         `${config.API_URL}/imagenes/mesas24.jpg`,
     ],
     mesa7: [
+        `${config.API_URL}/imagenes/mesas25.jpg`,
+        `${config.API_URL}/imagenes/mesas26.jpg`,
+        `${config.API_URL}/imagenes/mesas27.jpg`,
+        `${config.API_URL}/imagenes/mesas28.jpg`,
+    ],
+    mesa8: [
+        `${config.API_URL}/imagenes/mesas29.jpg`,
+        `${config.API_URL}/imagenes/mesas30.jpg`,
+        `${config.API_URL}/imagenes/mesas31.jpg`,
+        `${config.API_URL}/imagenes/mesas32.jpg`,
+    ],
+    mesa9: [
+        `${config.API_URL}/imagenes/mesas33.jpg`,
+        `${config.API_URL}/imagenes/mesas34.jpg`,
+        `${config.API_URL}/imagenes/mesas35.jpg`,
+        `${config.API_URL}/imagenes/mesas36.jpg`,
+    ],
+    mesa10: [
+        `${config.API_URL}/imagenes/mesas37.jpg`,
+        `${config.API_URL}/imagenes/mesas38.jpg`,
+        `${config.API_URL}/imagenes/mesas39.jpg`,
+        `${config.API_URL}/imagenes/mesas40.jpg`,
+    ],
+    mesa11: [
         `${config.API_URL}/imagenes/mesas21.jpg`,
         `${config.API_URL}/imagenes/mesas22.jpg`,
         `${config.API_URL}/imagenes/mesas23.jpg`,
         `${config.API_URL}/imagenes/mesas24.jpg`,
     ],
-    mesa8: [
+    mesa12: [
         `${config.API_URL}/imagenes/mesas21.jpg`,
         `${config.API_URL}/imagenes/mesas22.jpg`,
         `${config.API_URL}/imagenes/mesas23.jpg`,

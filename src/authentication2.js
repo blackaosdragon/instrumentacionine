@@ -20,7 +20,7 @@ class Control  extends Component{
     }
     
     render(){
-        console.log(this.props);
+        //console.log(this.props);
         if(this.props.logeado===1 && (this.props.level<=1 || this.props.level===4)){
             console.log("Se muestran equipos");
             return(
