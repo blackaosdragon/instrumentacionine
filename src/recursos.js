@@ -43,4 +43,10 @@ export default imagenes = {
         `${config.API_URL}/imagenes/mesas27.jpg`,
         `${config.API_URL}/imagenes/mesas28.jpg`,
     ],
+    mesa8: [
+        `${config.API_URL}/imagenes/mesas29.jpg`,
+        `${config.API_URL}/imagenes/mesas30.jpg`,
+        `${config.API_URL}/imagenes/mesas31.jpg`,
+        `${config.API_URL}/imagenes/mesas32.jpg`,
+    ],
 }

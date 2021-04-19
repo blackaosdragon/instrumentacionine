@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import config from '../config.js';
 import mesas from '../recursos.js';
 import Imagen from './cargaImagen.js';
-import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody,Collapse,Box,Modal} from '@material-ui/core'
+import {TableContainer,Table,TableHead,TableRow,TableCell,TableBody,Collapse,Box,Modal, TextField} from '@material-ui/core'
 import mesa from "../images/mesa_pintada.jpg"
 import mesa1 from '../images/mesas/mesa1.jpg'
 import mesa2 from '../images/mesas/mesa2.jpg'
@@ -30,7 +30,8 @@ class Equipos extends Component{
             movX: null,
             movY: null,
             mov: null,
-            limiteSuperior: 2
+            limiteSuperior: 2,
+            datos: ""
         }
     }
     componentDidMount(){
@@ -190,6 +191,76 @@ class Equipos extends Component{
         })
         //console.log(recursos.length)
     }
+    capturarEnter = e => {
+        
+        if(e.keyCode === 13 ){
+            this.setState({
+                cargando: 1
+            })
+            console.log("Enter captado");
+            console.log(this.props.unidad);
+            console.log(this.state.datos);
+            console.log(this.state.tabla);
+            // this.setState({
+            //     tabla: [
+            //         {
+            //             id: 1,
+            //             equipo: "cama",
+            //             registro: "asdasd",
+            //             marca: "Isac",
+            //             codigo_unidad: "Inst",
+            //             cotrado: 1,
+            //             equipo_abrev: "camita",
+            //             estado: "listo",
+            //             inventario: "4574954154",
+            //             modelo: "20010",
+            //             serie: "S/N",
+            //             ubicacion: "PB",
+            //             unidad: "gINECO 3-S",
+            //             unidad_abrev: "3A"
+            //         }
+            //     ]
+            // })
+            let payload = {
+                payload: this.state.datos,
+                unidad: this.props.unidad,
+            }
+            fetch(`${config.API_URL}/busqueda`,{
+                method: 'POST',
+                body: JSON.stringify(payload),
+                headers:{
+                    'Content-Type': 'application/json' 
+                  },
+            }).then( response => {
+                return response.json();
+            }).then( info => {
+                console.log(info)
+                console.log(info.length);
+                this.setState({
+                    tabla: info.data,
+                })
+                info.data.map( element => {
+                    this.setState({
+                        [element.id]: false,
+                        [`${element.equipo_abrev}${element.id}`]: false
+                    })
+                })
+            }).then( ()=> {
+                this.setState({
+                    cargando: 0
+                })
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }
+    onChange = e => {
+        
+        this.setState({
+            datos: [e.target.value]
+        })
+    }
+    
     render(){
         //console.log(this.state);
         
@@ -594,8 +665,10 @@ class Equipos extends Component{
             return(
                 <div>
                     <div className="contenedorCardPrincipal">
+                        
                     <h1 className="titulos">Equipos</h1>
                     </div>
+                    <TextField variant="outlined" label="Buscar" onChange={this.onChange} onKeyUp={this.capturarEnter} value={this.state.datos}/>
                     <div className="contenedorCardTabla">
                     <TableContainer>
                             <Table className="monitorTemperaturas">
