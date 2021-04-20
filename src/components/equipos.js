@@ -235,22 +235,32 @@ class Equipos extends Component{
                 return response.json();
             }).then( info => {
                 console.log(info)
-                console.log(info.length);
-                this.setState({
-                    tabla: info.data,
-                })
-                info.data.map( element => {
+                if(info.status===500){
+                    alert('Error del servidor');
+                } else {
                     this.setState({
-                        [element.id]: false,
-                        [`${element.equipo_abrev}${element.id}`]: false
+                        tabla: info.data,
                     })
-                })
+                    info.data.map( element => {
+                        this.setState({
+                            [element.id]: false,
+                            [`${element.equipo_abrev}${element.id}`]: false
+                        })
+                    })
+                }
+                if(info.data===undefined){
+                    alert("Su búsqueda no coincide con ningun equipo");
+                    this.setState({
+                        cargando: 0
+                    })
+                }
             }).then( ()=> {
                 this.setState({
                     cargando: 0
                 })
             }).catch(err => {
-                console.log(err);
+                console.log("Error en la búsqueda",err);
+
             })
         }
     }
@@ -699,7 +709,9 @@ class Equipos extends Component{
                     <div className="contenedorCardMovil">
                     <h1 className="titulos">Equipos</h1>
                     </div>
+                    <TextField variant="outlined" label="Buscar" onChange={this.onChange} onKeyUp={this.capturarEnter} value={this.state.datos}/>
                     <div className="contenedorCardTabla">
+                    
                     
                     <TableContainer>
                             <Table className="monitorTemperaturas">
