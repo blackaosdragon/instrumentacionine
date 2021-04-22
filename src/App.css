@@ -906,3 +906,19 @@ textarea{
   color: #000000;
   cursor: not-allowed;
 }
+.contenedorCardBuscador{
+  background-color: #ffffff;
+  margin: 0% 10% 1% 70%;
+  padding: 1% 1% 1% 1%;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px #222;
+  transition: background-color 0.3s;
+}
+.contenedorCardBuscadorMovil{
+  background-color: #ffffff;
+  margin: 0% 25% 0% 25%;
+  padding: 3% 3% 3% 3%;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px #222;
+  transition: background-color 0.3s;
+}

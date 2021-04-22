@@ -77,6 +77,10 @@ class ControlUsers extends Component{
     }
     componentDidUpdate = (prevProps, prevState) => {
         const {onChange} = this.props;
+        if(prevState!==this.state){
+            console.log("cambiando el estado");
+            console.log(this.state);
+        }
 //        console.log(handleName)
         ///console.log(onChange);
         //console.log(anchura);
@@ -92,11 +96,29 @@ class ControlUsers extends Component{
     //     })
     // }
     onChange = (event) => {
+        //console.log(this.state)
         this.setState({
             [event.target.name]: event.target.value
         })
         //console.log(event.target.name);
         //console.log(event.target.value.length);
+        let cadena = [];
+               for(let i = 0; event.target.value.length>i;i++){
+                   cadena[i] = event.target.value[event.target.value.length-(i+1)]
+                   //console.log(event.target.value.length)
+               }
+               let segundaCadena = cadena.join('');
+               if(event.target.name==="usuario"){
+                   this.setState({
+                       oirausu: CryptoJS.SHA3(segundaCadena).toString(CryptoJS.enc.Base64)
+                   })
+                   //console.log(this.state);
+               }
+               if(event.target.name==="contraseña"){
+                   this.setState({
+                       hasch: CryptoJS.SHA3(segundaCadena).toString(CryptoJS.enc.Base64)
+                   })
+               }
     }
     onBlur = (event) => {    
         //console.log(this.props);    
@@ -119,21 +141,6 @@ class ControlUsers extends Component{
             //console.log(this.state);
         }
         
-        //console.log(segundaCadena);
-        //console.log(CryptoJS.SHA3(event.target.value).toString(CryptoJS.enc.Hex));
-        //console.log(CryptoJS.SHA3(event.target.value).toString(CryptoJS.enc.Base64));
-        //console.log(CryptoJS.SHA3(segundaCadena).toString(CryptoJS.enc.Hex));
-        //console.log(CryptoJS.SHA3(segundaCadena).toString(CryptoJS.enc.Base64));
-        /*
-        let autenticacion = {
-            data: CryptoJS.SHA3(segundaCadena).toString(CryptoJS.enc.Base64),
-            requisito: 
-        }
-        */
-
-        
-
-        //console.log(cadena);
         
     }
     onBlurHandle = (event) => {
@@ -314,6 +321,14 @@ class ControlUsers extends Component{
             cargando: 1
         })
     }
+    capturarEnter = event => {
+            //console.log(event.target.name)
+            //console.log(this.state.contraseña);
+            if(event.keyCode===13){               
+               this.carga_de_Data()
+            }
+         
+    }
 
     
 
@@ -351,11 +366,10 @@ class ControlUsers extends Component{
                              
                              type='password'
                              fullWidth
+                             onKeyUp={this.capturarEnter}
                            />
-                        </div>
-                        
-                         </div>
-                         
+                        </div>                        
+                         </div>                         
                     </div>
                     
                     <div className="boton" onClick={this.carga_de_Data}>Enviar</div>
@@ -387,6 +401,7 @@ class ControlUsers extends Component{
                              value={this.state.contraseña}
                              onChange={this.onChange}
                              type='password'
+                             onKeyUp={this.capturarEnter}
                            />
                            
                     </div>
