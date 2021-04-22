@@ -197,30 +197,11 @@ class Equipos extends Component{
             this.setState({
                 cargando: 1
             })
-            console.log("Enter captado");
-            console.log(this.props.unidad);
-            console.log(this.state.datos);
-            console.log(this.state.tabla);
-            // this.setState({
-            //     tabla: [
-            //         {
-            //             id: 1,
-            //             equipo: "cama",
-            //             registro: "asdasd",
-            //             marca: "Isac",
-            //             codigo_unidad: "Inst",
-            //             cotrado: 1,
-            //             equipo_abrev: "camita",
-            //             estado: "listo",
-            //             inventario: "4574954154",
-            //             modelo: "20010",
-            //             serie: "S/N",
-            //             ubicacion: "PB",
-            //             unidad: "gINECO 3-S",
-            //             unidad_abrev: "3A"
-            //         }
-            //     ]
-            // })
+            //console.log("Enter captado");
+            //console.log(this.props.unidad);
+            //console.log(this.state.datos);
+            //console.log(this.state.tabla);
+            
             let payload = {
                 payload: this.state.datos,
                 unidad: this.props.unidad,
@@ -234,13 +215,14 @@ class Equipos extends Component{
             }).then( response => {
                 return response.json();
             }).then( info => {
-                console.log(info)
+                console.log(info.data)
                 if(info.status===500){
                     alert('Error del servidor');
                 } else {
                     this.setState({
                         tabla: info.data,
                     })
+                    
                     info.data.map( element => {
                         this.setState({
                             [element.id]: false,
@@ -248,17 +230,13 @@ class Equipos extends Component{
                         })
                     })
                 }
-                if(info.data===undefined){
-                    alert("Su búsqueda no coincide con ningun equipo");
-                    this.setState({
-                        cargando: 0
-                    })
-                }
+                
             }).then( ()=> {
                 this.setState({
                     cargando: 0
                 })
             }).catch(err => {
+                alert("Error en la busqueda")
                 console.log("Error en la búsqueda",err);
 
             })
@@ -678,7 +656,9 @@ class Equipos extends Component{
                         
                     <h1 className="titulos">Equipos</h1>
                     </div>
+                    <div className="contenedorCardBuscador">
                     <TextField variant="outlined" label="Buscar" onChange={this.onChange} onKeyUp={this.capturarEnter} value={this.state.datos}/>
+                    </div>
                     <div className="contenedorCardTabla">
                     <TableContainer>
                             <Table className="monitorTemperaturas">
@@ -709,7 +689,9 @@ class Equipos extends Component{
                     <div className="contenedorCardMovil">
                     <h1 className="titulos">Equipos</h1>
                     </div>
+                    <div className="contenedorCardBuscadorMovil">
                     <TextField variant="outlined" label="Buscar" onChange={this.onChange} onKeyUp={this.capturarEnter} value={this.state.datos}/>
+                    </div>
                     <div className="contenedorCardTabla">
                     
                     
