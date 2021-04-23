@@ -194,6 +194,9 @@ class Equipos extends Component{
     capturarEnter = e => {
         
         if(e.keyCode === 13 ){
+            // if(this.state.datos.length<1){
+            //     alert("No puede hacer una busqueda vacía")
+            // }
             this.setState({
                 cargando: 1
             })
