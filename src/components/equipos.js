@@ -236,7 +236,7 @@ class Equipos extends Component{
                     cargando: 0
                 })
             }).catch(err => {
-                alert("Error en la busqueda")
+                alert("Su búsqueda no arrojo ningún resultado")
                 console.log("Error en la búsqueda",err);
 
             })
