@@ -201,6 +201,7 @@ class Equipos extends Component{
                 cargando: 1
             })
             //console.log("Enter captado");
+            
             //console.log(this.props.unidad);
             //console.log(this.state.datos);
             //console.log(this.state.tabla);
