@@ -5,7 +5,8 @@ import { FormControl, FormControlLabel,FormGroup,Switch } from '@material-ui/cor
 import * as firebase from 'firebase/app'
 import 'firebase/messaging'
 import Cargando from './carga.js';
-import config from '../config.js'
+import config from '../config.js';
+import Notifis from './notifications.js';
 
 const end_point = `${config.API_URL}/insertar_token`;
 const end_point_notifis = 'https://instrumentacionline.ddns.net/consultar_notifis';
@@ -26,7 +27,7 @@ const inicializarFirebase = firebase.initializeApp({
     messagingSenderId: "441591788565",
     appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
     measurementId: "G-10C166HQ2R"
-});
+});7
 
 if(firebase.messaging.isSupported()){
     messaging = inicializarFirebase.messaging();
@@ -319,15 +320,13 @@ class PanelDeControl extends Component{
         }
         //console.log("Panel");
         if(this.props.anchura>970){
-            return(
-                
+            return(                
                 <div>
-                <Cargando cargando={this.state.cargando}/>
-                
-                <Monitor anchura={this.props.anchura} />
-                
+                <Cargando cargando={this.state.cargando}/>                
+                <Monitor anchura={this.props.anchura} />                
                 <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
                 
+                <Notifis />
                 <FormGroup className="switchFirebase">
                         {interruptor}
                 </FormGroup>
@@ -345,6 +344,7 @@ class PanelDeControl extends Component{
                     <div className="boton-movile">
                       {interruptor}
                     </div>
+                    <Notifis />
                     <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase-movile" >
                         Probar notificaciones
                     </div>
