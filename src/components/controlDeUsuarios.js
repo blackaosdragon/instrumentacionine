@@ -78,8 +78,8 @@ class ControlUsers extends Component{
     componentDidUpdate = (prevProps, prevState) => {
         const {onChange} = this.props;
         if(prevState!==this.state){
-            console.log("cambiando el estado");
-            console.log(this.state);
+            //console.log("cambiando el estado");
+            //console.log(this.state);
         }
 //        console.log(handleName)
         ///console.log(onChange);
@@ -140,6 +140,8 @@ class ControlUsers extends Component{
             })
             //console.log(this.state);
         }
+        console.log("Usuario: ",this.state.oirausu);
+        console.log("Contraseña: ",this.state.hasch);
         
         
     }
