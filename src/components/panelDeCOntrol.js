@@ -18,21 +18,8 @@ const socket = `${config.API_URL}/socket`
 //const end_point_send_test_notifi = 'https://instrumentacionline.ddns.net:5002/test_notificacion';
 
 let messaging = null;
-const inicializarFirebase = firebase.initializeApp({
-    apiKey: "AIzaSyCT0s6Exqtbh5W9J-Aa5XJLXsQyepD4aUk",
-    authDomain: "home-8bea3.firebaseapp.com",
-    databaseURL: "https://home-8bea3.firebaseio.com",
-    projectId: "home-8bea3",
-    storageBucket: "home-8bea3.appspot.com",
-    messagingSenderId: "441591788565",
-    appId: "1:441591788565:web:c0d31b9846f53b3ccbca1c",
-    measurementId: "G-10C166HQ2R"
-});7
 
-if(firebase.messaging.isSupported()){
-    messaging = inicializarFirebase.messaging();
-    messaging.usePublicVapidKey('BCw81StElUUliyjpdiWSPTrGQw5L0Fq5tqMLHZWriMKYgN6abD-jy8tkhjnD2gdWj5mdeHE5UJcfyWhpaxzi-yo');
-}
+
 
 
 class PanelDeControl extends Component{
@@ -165,6 +152,8 @@ class PanelDeControl extends Component{
             })
         }
         */
+
+        /*
         if(Notification.permission==='default'){
             this.setState({
                 notificaciones: false,
@@ -234,6 +223,7 @@ class PanelDeControl extends Component{
                     
                 console.log(error);
             })
+            
             /*
             let payload = {}
             
@@ -255,13 +245,13 @@ class PanelDeControl extends Component{
             */
             //console.log("Respuesta granted")
             //this.obtener_token();
-
+/*
         } else if(Notification.permission==='denied'){
             this.setState({
                 cargando: false,
                 visible: "collapse"
             })
-        }
+        }*/
     }
     session = () => {
         const { handleStatus } = this.props;
@@ -297,28 +287,8 @@ class PanelDeControl extends Component{
         }).catch( err => {console.log(err)});
         
     }
-    botonNotifis = () => {
-        this.setState({
-            cargando: true
-        })
-        this.setState({
-            notificaciones: !this.state.notificaciones
-        })
-        
-    }
     
     render(){
-        
-        
-        let interruptor = ''
-        if (Notification.permission==='denied'){
-            interruptor = <FormControlLabel onClick={()=>{alert("Para activar las notificaciones borre el caché y los permisos de la página y al solicitar el permiso acepte el recibir notificaciones")}} disabled control={<Switch />} label="No se otorgo permiso" />
-        } else if( Notification.permission === 'granted' ){
-            interruptor = <FormControlLabel control={<Switch onClick={this.botonNotifis} color="primary" checked={this.state.notificaciones}/>} label="Notificaciones" />
-        } else if ( Notification.permission === 'default'){
-            interruptor = <FormControlLabel control={<Switch onClick={this.botonNotifis} color="primary" checked={this.state.notificaciones}/>} label="Notificaciones" />            
-        }
-        //console.log("Panel");
         if(this.props.anchura>970){
             return(                
                 <div>
@@ -326,11 +296,8 @@ class PanelDeControl extends Component{
                 <Monitor anchura={this.props.anchura} />                
                 <Link className="link" to="./panel"><h3 className="titulos"><div className="boton" onClick={this.session}>Cerrar sesión</div></h3></Link> 
                 
-                <Notifis />
-                <FormGroup className="switchFirebase">
-                        {interruptor}
-                </FormGroup>
-                <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>
+                <Notifis anchura={this.props.anchura}/>
+                {/*<div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase">Probar notificaciones</div>*/}
                 
                 </div>
             )
@@ -341,13 +308,12 @@ class PanelDeControl extends Component{
                     <div className="margenMovilSuperior">.</div>
                     <Monitor anchura={this.props.anchura}/>
                     <Link className="link" to="./panel"><div className="boton-movile" onClick={this.session}>Cerrar sesión</div></Link> 
-                    <div className="boton-movile">
-                      {interruptor}
-                    </div>
-                    <Notifis />
+                    <Notifis anchura={this.props.anchura}/>
+                    {/*
                     <div onClick={this.test_notifi} style={{visibility: this.state.visible}} className="boton-firebase-movile" >
                         Probar notificaciones
                     </div>
+                    */}
                     
                 </div>
             )
