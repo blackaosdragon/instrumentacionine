@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {Card, CardContent,ListItem,Avatar,ListItemAvatar,ListItemText} from "@material-ui/core"
-import Call from "@material-ui/icons/Call"
-import Mail from "@material-ui/icons/Mail"
+import Call from "@material-ui/icons/Call";
+import Mail from "@material-ui/icons/Mail";
+import Whats from "@material-ui/icons/WhatsApp";
 
 
 class Contacto extends Component{
@@ -37,10 +38,23 @@ class Contacto extends Component{
                     />
                   </ListItem>
                 </div>
+                <div>
+                  <ListItem >
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Whats />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                    
+                      primary="WhatsApp"
+                      secondary="55-55-83-91-82"
 
-                <div onClick={()=>{
-                  document.execCommand('copy',false,"instrumentacion_@hotmail.com");
-                }}>
+                    />
+                  </ListItem>
+                </div>
+
+                <div >
                   <ListItem >
                     <ListItemAvatar>
                       <Avatar>
@@ -52,6 +66,20 @@ class Contacto extends Component{
                       primary="Correo electrónico"
                       secondary="instrumentacion_@hotmail.com"
                       value="instrumentacion_@hotmail.com"
+                    />
+                  </ListItem>
+                </div>
+                <div >
+                  <ListItem >
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Mail />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                   
+                      primary="Correo electrónico"
+                      secondary="contacto@instrumentaciononline.com.mx"                      
                     />
                   </ListItem>
                 </div>
