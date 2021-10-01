@@ -112,9 +112,22 @@ class Contacto extends Component{
               />
             </ListItem>
             </div>
-            <div onClick={(e)=>{
-              document.execCommand('copy',false,"instrumentacion_@hotmail.com");
-            }}>
+            <div>
+                  <ListItem >
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Whats />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                    
+                      primary="WhatsApp"
+                      secondary="(+52) 55-55-83-91-82"
+
+                    />
+                  </ListItem>
+                </div>
+            <div >
             <ListItem >
               <ListItemAvatar>
                 <Avatar>
@@ -136,7 +149,7 @@ class Contacto extends Component{
               </ListItemAvatar>
               <ListItemText
               primary="Correo electrónico"
-              secondary="instrumentaciononline.com.mx"
+              secondary="contacto@instrumentaciononline.com.mx"
               />
             </ListItem>
             </div>
