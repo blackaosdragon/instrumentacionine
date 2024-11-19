@@ -11,7 +11,7 @@
     "aws-sdk": "^2.719.0",
     "bcrypt": "^5.0.0",
     "crypto-js": "^4.0.0",
-    "firebase": "^7.17.1",
+    "firebase": "^10.9.0",
     "flexboxgrid": "^6.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
